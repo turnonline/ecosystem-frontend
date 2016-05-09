@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.ctoolkit.maven</groupId>
+        <artifactId>ctoolkit-parent</artifactId>
+        <version>2</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
+    <artifactId>turnonline-archetype-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>TurnOnline Archetype Parent</name>
+    <description>Comvai TurnOnline Business Platform CtoolkiT Archetype</description>
+    <url>https://www.turnonline.biz</url>
+
+    <modules>
+        <module>library</module>
+        <module>microservices</module>
+        <module>modules</module>
+    </modules>
+
+    <scm>
+        <connection>scm:git:[fetch=]git@github.com:turnonline/turnonline-archetype.git</connection>
+        <developerConnection>scm:git:[push=]git@github.com:turnonline/turnonline-archetype.git</developerConnection>
+        <url>https://github.com/turnonline/turnonline-archetype</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/turnonline/turnonline-archetype/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <name>Aurel Medvegy</name>
+            <id>medvegy</id>
+            <email>aurel.medvegy@ctoolkit.org</email>
+        </developer>
+    </developers>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-maven-plugin</artifactId>
+                    <version>${appengine.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.surefire</groupId>
+                            <artifactId>surefire-junit4</artifactId>
+                            <version>${maven-surefire-plugin.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <argLine>-Xmx256m ${jmockit.setting}</argLine>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- AppEngine dependencies -->
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-1.0-sdk</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-labs</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-jsr107cache</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.jsr107cache</groupId>
+                <artifactId>jsr107cache</artifactId>
+                <version>${jsr107cache.version}</version>
+            </dependency>
+            <!-- AppEngine test scope -->
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-testing</artifactId>
+                <version>${appengine.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-stubs</artifactId>
+                <version>${appengine.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Test scope -->
+            <dependency>
+                <groupId>org.jmockit</groupId>
+                <artifactId>jmockit</artifactId>
+                <version>${jmockit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ctoolkit.test</groupId>
+                <artifactId>ctoolkit-test</artifactId>
+                <version>${ctoolkit-test.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <servlet-api.version>2.5</servlet-api.version>
+        <appengine.version>1.9.36</appengine.version>
+        <jsr107cache.version>1.1</jsr107cache.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
+        <ctoolkit-agent.version>0.1</ctoolkit-agent.version>
+        <testng.version>6.9.10</testng.version>
+        <ctoolkit-test.version>1.0</ctoolkit-test.version>
+        <jmockit.version>1.23</jmockit.version>
+        <!-- jmockit settings for OpenJDK otherwise throws 'IllegalStateException: To run on OpenJDK 64-Bit Server VM use -javaagent..' -->
+        <jmockit.setting>-javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+        </jmockit.setting>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>jdk8</id>
+            <activation>
+                <jdk>1.8</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
