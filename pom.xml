@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.ctoolkit.maven</groupId>
-        <artifactId>ctoolkit-parent</artifactId>
+        <groupId>org.ctoolkit.turnonline</groupId>
+        <artifactId>turnonline-parent</artifactId>
         <version>2</version>
     </parent>
 
@@ -98,6 +98,11 @@
                 <artifactId>jsr107cache</artifactId>
                 <version>${jsr107cache.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-endpoints</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
             <!-- AppEngine test scope -->
             <dependency>
                 <groupId>com.google.appengine</groupId>
@@ -159,6 +164,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven-javadoc-plugin.version}</version>
                         <configuration>
                             <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
