@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>turnonline-archetype-core</artifactId>
     <packaging>jar</packaging>
-    <name>TurnOnline Archetype Core</name>
+    <name>TurnOnline Archetype Library Core</name>
 
     <dependencies>
         <!-- AppEngine dependencies -->
@@ -35,10 +35,12 @@
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-testing</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-stubs</artifactId>
+            <scope>test</scope>
         </dependency>
         <!-- Test scope -->
         <dependency>

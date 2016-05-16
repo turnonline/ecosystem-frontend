@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>turnonline-archetype-frontend</artifactId>
     <packaging>war</packaging>
-    <name>TurnOnline Archetype Frontend</name>
+    <name>TurnOnline Archetype Service Frontend</name>
 
     <dependencies>
         <dependency>
@@ -39,10 +39,12 @@
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-testing</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-stubs</artifactId>
+            <scope>test</scope>
         </dependency>
         <!-- Test scope -->
         <dependency>

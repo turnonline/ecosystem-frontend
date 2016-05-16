@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.ctoolkit.turnonline</groupId>
         <artifactId>turnonline-parent</artifactId>
-        <version>2</version>
+        <version>4</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -14,13 +14,13 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>TurnOnline Archetype Parent</name>
-    <description>Comvai TurnOnline Business Platform CtoolkiT Archetype</description>
+    <description>Comvai TurnOnline.biz Business Platform Archetype</description>
     <url>https://www.turnonline.biz</url>
 
     <modules>
         <module>library</module>
         <module>microservices</module>
-        <module>modules</module>
+        <module>deployment</module>
     </modules>
 
     <scm>
@@ -48,7 +48,12 @@
                 <plugin>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-maven-plugin</artifactId>
-                    <version>${appengine.version}</version>
+                    <version>${gae.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>${maven-ear-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -71,52 +76,29 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Bill Of Material -->
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>${servlet-api.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <!-- AppEngine dependencies -->
-            <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-api-1.0-sdk</artifactId>
-                <version>${appengine.version}</version>
+                <groupId>org.ctoolkit.maven</groupId>
+                <artifactId>ctoolkit-project-bom</artifactId>
+                <version>${ctoolkit-project-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-api-labs</artifactId>
-                <version>${appengine.version}</version>
+                <groupId>org.ctoolkit.maven</groupId>
+                <artifactId>ctoolkit-library-bom</artifactId>
+                <version>${ctoolkit-library-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-jsr107cache</artifactId>
-                <version>${appengine.version}</version>
+                <groupId>org.ctoolkit.maven</groupId>
+                <artifactId>wicket-bom</artifactId>
+                <version>6.19.0-20160515.090103-1</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>net.sf.jsr107cache</groupId>
-                <artifactId>jsr107cache</artifactId>
-                <version>${jsr107cache.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-endpoints</artifactId>
-                <version>${appengine.version}</version>
-            </dependency>
-            <!-- AppEngine test scope -->
-            <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-testing</artifactId>
-                <version>${appengine.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-api-stubs</artifactId>
-                <version>${appengine.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Test scope -->
+            <!-- Test scope dependencies -->
             <dependency>
                 <groupId>org.jmockit</groupId>
                 <artifactId>jmockit</artifactId>
@@ -129,21 +111,16 @@
                 <version>${testng.version}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>org.ctoolkit.test</groupId>
-                <artifactId>ctoolkit-test</artifactId>
-                <version>${ctoolkit-test.version}</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <properties>
-        <servlet-api.version>2.5</servlet-api.version>
-        <appengine.version>1.9.36</appengine.version>
-        <jsr107cache.version>1.1</jsr107cache.version>
+        <gae.version>1.9.36</gae.version>
+        <ctoolkit-project-bom.version>1.9.36</ctoolkit-project-bom.version>
+        <ctoolkit-library-bom.version>1</ctoolkit-library-bom.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
+        <wicket.version>6.19.0</wicket.version>
         <ctoolkit-agent.version>0.1</ctoolkit-agent.version>
         <testng.version>6.9.10</testng.version>
         <ctoolkit-test.version>1.0</ctoolkit-test.version>
