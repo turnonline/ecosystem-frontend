@@ -94,7 +94,7 @@
             <dependency>
                 <groupId>org.ctoolkit.maven</groupId>
                 <artifactId>wicket-bom</artifactId>
-                <version>6.19.0</version>
+                <version>${wicket-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -144,6 +144,7 @@
         <gae.version>1.9.38</gae.version>
         <ctoolkit-project-bom.version>1.9.38</ctoolkit-project-bom.version>
         <ctoolkit-library-bom.version>2</ctoolkit-library-bom.version>
+        <wicket-bom.version>6.19.0</wicket-bom.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
         <!-- library versions -->
