@@ -94,9 +94,35 @@
             <dependency>
                 <groupId>org.ctoolkit.maven</groupId>
                 <artifactId>wicket-bom</artifactId>
-                <version>6.19.0-20160515.090103-1</version>
+                <version>6.19.0</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ctoolkit.turnonline</groupId>
+                <artifactId>turnonline-resources</artifactId>
+                <version>${resources.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ctoolkit.turnonline</groupId>
+                <artifactId>turnonline-wicket</artifactId>
+                <version>0.5-SNAPSHOT</version>
+            </dependency>
+            <!-- TODO Once will be released move to ctoolkit-project-bom -->
+            <dependency>
+                <groupId>org.ctoolkit.services</groupId>
+                <artifactId>ctoolkit-services-identity</artifactId>
+                <version>0.5-20160712.211214-3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ctoolkit.services</groupId>
+                <artifactId>ctoolkit-services-common</artifactId>
+                <version>0.5-20160712.211155-1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ctoolkit.turnonline</groupId>
+                <artifactId>turnonline-client-appengine</artifactId>
+                <version>${turnonline-client-appengine.version}</version>
             </dependency>
             <!-- Test scope dependencies -->
             <dependency>
@@ -115,18 +141,23 @@
     </dependencyManagement>
 
     <properties>
-        <gae.version>1.9.36</gae.version>
-        <ctoolkit-project-bom.version>1.9.36</ctoolkit-project-bom.version>
-        <ctoolkit-library-bom.version>1</ctoolkit-library-bom.version>
+        <gae.version>1.9.38</gae.version>
+        <ctoolkit-project-bom.version>1.9.38</ctoolkit-project-bom.version>
+        <ctoolkit-library-bom.version>2</ctoolkit-library-bom.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
-        <wicket.version>6.19.0</wicket.version>
+        <!-- library versions -->
+        <resources.version>0.6-20160712.214235-75</resources.version>
+        <turnonline-client-appengine.version>0.5-20160615.224003-48</turnonline-client-appengine.version>
+        <!--ctoolkit agent-->
         <ctoolkit-agent.version>0.1</ctoolkit-agent.version>
+        <!--for testing-->
         <testng.version>6.9.10</testng.version>
-        <ctoolkit-test.version>1.0</ctoolkit-test.version>
-        <jmockit.version>1.23</jmockit.version>
+        <ctoolkit-test.version>1.2</ctoolkit-test.version>
+        <jmockit.version>1.24</jmockit.version>
         <!-- jmockit settings for OpenJDK otherwise throws 'IllegalStateException: To run on OpenJDK 64-Bit Server VM use -javaagent..' -->
-        <jmockit.setting>-javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+        <jmockit.setting>
+            -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
         </jmockit.setting>
     </properties>
 
