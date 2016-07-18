@@ -173,4 +173,69 @@
             <artifactId>ctoolkit-test</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>copy-images</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${project.build.directory}/generated-resources/images</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/webapp/images</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-styles</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${project.build.directory}/generated-resources/styles</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/webapp/styles</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.ctoolkit.maven.plugins</groupId>
+                <artifactId>maven-optimizer-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>optimize</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <cssPathToXml>${project.basedir}/src/main/resources/css-config.xml</cssPathToXml>
+                    <jsPathToXml>${project.basedir}/src/main/resources/js-config.xml</jsPathToXml>
+                    <cssOutputPath>${project.build.directory}/classes/org/ctoolkit/turnonline/wicket/theme/
+                    </cssOutputPath>
+                    <jsOutputPath>${project.build.directory}/classes/org/ctoolkit/turnonline/wicket/theme/
+                    </jsOutputPath>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
