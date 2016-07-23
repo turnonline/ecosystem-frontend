@@ -14,7 +14,7 @@
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>TurnOnline Parent</name>
-    <description>TurnOnline.biz Microservices Business Platform Archetype</description>
+    <description>TurnOnline.biz Microservices Platform Archetype</description>
     <url>https://www.turnonline.biz</url>
 
     <modules>
