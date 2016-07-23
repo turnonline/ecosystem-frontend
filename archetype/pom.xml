@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
+    <artifactId>turnonline-microservices-identity</artifactId>
+    <version>0.5-SNAPSHOT</version>
+    <packaging>maven-archetype</packaging>
+    <name>TurnOnline Microservices Identity Archetype</name>
+    <description>TurnOnline.biz Microservices Identity Archetype</description>
+    <url>https://www.turnonline.biz</url>
+
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.archetype</groupId>
+                <artifactId>archetype-packaging</artifactId>
+                <version>2.4</version>
+            </extension>
+        </extensions>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <developers>
+        <developer>
+            <id>medvegy</id>
+            <name>Aurel Medvegy</name>
+            <email>aurel.medvegy@ctoolkit.org</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:[fetch=]git@github.com:turnonline/turnonline-archetype.git</connection>
+        <developerConnection>scm:git:[push=]git@github.com:turnonline/turnonline-archetype.git</developerConnection>
+        <url>https://github.com/turnonline/turnonline-archetype</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>

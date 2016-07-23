@@ -3,4 +3,89 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
+    <listener>
+        <listener-class>org.ctoolkit.turnonline.frontend.GuiceServletConfig</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Filter for main application all requests go to WicketApplication-->
+    <filter>
+        <filter-name>wicket.app</filter-name>
+        <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+        <init-param>
+            <param-name>configuration</param-name>
+            <param-value>deployment</param-value>
+        </init-param>
+        <init-param>
+            <param-name>applicationClassName</param-name>
+            <param-value>org.ctoolkit.turnonline.frontend.FrontendApplication</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignorePaths</param-name>
+            <param-value>/styles,/scripts,/images,/favicon.ico,/appstats</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>wicket.app</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404</location>
+    </error-page>
+    <!-- End Wicket config -->
+
+    <!-- security constrains -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Queue constraint</web-resource-name>
+            <url-pattern>/_ah/queue/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Cron constraint</web-resource-name>
+            <url-pattern>/cron/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!--<security-constraint>-->
+    <!--<web-resource-collection>-->
+    <!--<web-resource-name>Appstats constraint</web-resource-name>-->
+    <!--<url-pattern>/appstats/*</url-pattern>-->
+    <!--</web-resource-collection>-->
+    <!--<auth-constraint>-->
+    <!--<role-name>admin</role-name>-->
+    <!--</auth-constraint>-->
+    <!--</security-constraint>-->
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>C-shop Admin constraint</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 </web-app>

@@ -5,18 +5,131 @@
     <parent>
         <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
         <artifactId>turnonline-archetype-microservices</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>turnonline-archetype-frontend</artifactId>
     <packaging>war</packaging>
-    <name>TurnOnline Archetype Service Frontend</name>
+    <name>TurnOnline Service Frontend</name>
 
     <dependencies>
         <dependency>
+            <groupId>org.ctoolkit.turnonline</groupId>
+            <artifactId>turnonline-resources</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.turnonline</groupId>
+            <artifactId>turnonline-wicket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.restapi</groupId>
+            <artifactId>ctoolkit-rest-facade-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.restapi</groupId>
+            <artifactId>ctoolkit-rest-facade-appengine</artifactId>
+        </dependency>
+        <!-- In order to make orika work on AppEngine javassist and paranamer has been downgraded. -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.paranamer</groupId>
+            <artifactId>paranamer</artifactId>
+        </dependency>
+        <!-- Remove javassist and paranamer here once fixed in rest-client-facade -->
+        <dependency>
+            <groupId>org.ctoolkit.restapi</groupId>
+            <artifactId>ctoolkit-client-identity-toolkit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.services</groupId>
+            <artifactId>ctoolkit-services-identity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.services</groupId>
+            <artifactId>ctoolkit-services-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.turnonline</groupId>
+            <artifactId>turnonline-client-appengine</artifactId>
+        </dependency>
+        <!-- Guice dependencies -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-multibindings</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+        <!-- Java Servlet API -->
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
+        </dependency>
+        <!-- Wicket dependencies -->
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-ioc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-auth-roles</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>wicketstuff-gae-initializer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>wicketstuff-gmap3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-jquery-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-jquery-ui-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-jquery-ui-plugins</artifactId>
         </dependency>
         <!-- AppEngine dependencies -->
         <dependency>
@@ -60,4 +173,68 @@
             <artifactId>ctoolkit-test</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-images</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${project.build.directory}/generated-resources/images</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/webapp/images</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-styles</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${project.build.directory}/generated-resources/styles</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/webapp/styles</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.ctoolkit.maven.plugins</groupId>
+                <artifactId>maven-optimizer-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>optimize</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <cssPathToXml>${project.basedir}/src/main/resources/css-config.xml</cssPathToXml>
+                    <jsPathToXml>${project.basedir}/src/main/resources/js-config.xml</jsPathToXml>
+                    <cssOutputPath>${project.build.directory}/classes/org/ctoolkit/turnonline/wicket/theme/
+                    </cssOutputPath>
+                    <jsOutputPath>${project.build.directory}/classes/org/ctoolkit/turnonline/wicket/theme/
+                    </jsOutputPath>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

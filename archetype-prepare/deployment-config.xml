@@ -1,0 +1,8 @@
+<processor>
+    <!-- in order to don't evaluate placeholder the configuration has been moved to standalone file -->
+    <!-- see replacePlaceholders -> false -->
+    <modify>
+        <name>/pom:project/pom:dependencies/pom:dependency/pom:groupId/text()</name>
+        <value>${groupId}</value>
+    </modify>
+</processor>

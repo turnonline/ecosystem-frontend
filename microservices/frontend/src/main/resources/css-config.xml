@@ -1,0 +1,18 @@
+<groups>
+    <group name="turnonline-ui.min.css">
+        <css>/target/generated-resources/styles/grid.css</css>
+        <css>/target/generated-resources/styles/layout.css</css>
+        <css>/target/generated-resources/styles/form.css</css>
+        <css>/target/generated-resources/styles/main.css</css>
+    </group>
+    <!--custom styling for platform subdomain adp-->
+    <group name="turnonline-ui-adp.min.css">
+        <css>/target/generated-resources/styles/grid.css</css>
+        <css>/target/generated-resources/styles/layout.css</css>
+        <css>/target/generated-resources/styles/form.css</css>
+        <css>/target/generated-resources/styles/main.css</css>
+        <css>/target/generated-resources/styles/adp/layout.css</css>
+        <css>/target/generated-resources/styles/adp/form.css</css>
+        <css>/target/generated-resources/styles/adp/main.css</css>
+    </group>
+</groups>
