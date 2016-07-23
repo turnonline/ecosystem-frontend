@@ -11,10 +11,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
     <artifactId>turnonline-archetype-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>TurnOnline Archetype Parent</name>
-    <description>Comvai TurnOnline.biz Business Platform Archetype</description>
+    <name>TurnOnline Parent</name>
+    <description>TurnOnline.biz Microservices Business Platform Archetype</description>
     <url>https://www.turnonline.biz</url>
 
     <modules>
@@ -70,6 +70,21 @@
                         <argLine>-Xmx256m ${jmockit.setting}</argLine>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -106,7 +121,7 @@
             <dependency>
                 <groupId>org.ctoolkit.turnonline</groupId>
                 <artifactId>turnonline-wicket</artifactId>
-                <version>0.5-SNAPSHOT</version>
+                <version>0.5-20160718.081037-4</version>
             </dependency>
             <!-- TODO Once will be released move to ctoolkit-project-bom -->
             <dependency>
@@ -177,6 +192,34 @@
                         <configuration>
                             <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- the profile to create archetype from the project -->
+            <id>archetype</id>
+            <modules>
+                <module>archetype-prepare</module>
+                <module>archetype</module>
+            </modules>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-archetype-plugin</artifactId>
+                        <version>2.4</version>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <configuration>
+                                    <propertyFile>archetype-prepare/archetype.properties</propertyFile>
+                                </configuration>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>create-from-project</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

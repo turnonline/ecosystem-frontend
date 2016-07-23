@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
         <artifactId>turnonline-archetype-microservices</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>turnonline-archetype-frontend</artifactId>
     <packaging>war</packaging>
-    <name>TurnOnline Archetype Service Frontend</name>
+    <name>TurnOnline Service Frontend</name>
 
     <dependencies>
         <dependency>

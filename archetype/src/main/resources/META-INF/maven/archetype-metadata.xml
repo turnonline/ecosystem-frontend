@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+        name="turnonline-archetype-parent"
+        xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0">
+
+    <requiredProperties>
+        <requiredProperty key="appEngineId"/>
+    </requiredProperties>
+
+    <modules>
+        <module id="turnonline-archetype-library" dir="library" name="turnonline-archetype-library">
+            <modules>
+                <module id="turnonline-archetype-core" dir="core" name="turnonline-archetype-core"/>
+            </modules>
+        </module>
+        <module id="turnonline-archetype-microservices" dir="microservices" name="turnonline-archetype-microservices">
+            <modules>
+                <module id="turnonline-archetype-frontend" dir="frontend" name="turnonline-archetype-frontend">
+                    <fileSets>
+                        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+                            <directory>src/main/java</directory>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/main/resources</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                                <include>**/*.html</include>
+                                <include>**/*.properties</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet encoding="UTF-8">
+                            <directory>src/main/resources</directory>
+                            <excludes>
+                                <exclude>**/*.p12</exclude>
+                            </excludes>
+                        </fileSet>
+                        <fileSet encoding="UTF-8">
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>**/*.jpg</include>
+                                <include>**/*.css</include>
+                                <include>**/*.ico</include>
+                                <include>**/*.gif</include>
+                                <include>**/*.svg</include>
+                                <include>**/*.ttf</include>
+                                <include>**/*.png</include>
+                                <include>**/*.js</include>
+                                <include>**/*.eot</include>
+                                <include>**/*.woff</include>
+                                <include>**/*.yaml</include>
+                            </includes>
+                        </fileSet>
+                    </fileSets>
+                </module>
+            </modules>
+        </module>
+        <module id="turnonline-archetype-deployment" dir="deployment" name="turnonline-archetype-deployment">
+            <fileSets>
+                <fileSet filtered="true" encoding="UTF-8">
+                    <directory>src/main/application</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                    </includes>
+                </fileSet>
+            </fileSets>
+        </module>
+    </modules>
+</archetype-descriptor>
