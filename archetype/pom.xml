@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
-    <artifactId>turnonline-microservices-skeleton</artifactId>
+    <artifactId>turnonline-microservices-identity</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
-    <name>TurnOnline Microservices Skeleton Archetype</name>
-    <description>TurnOnline.biz Microservices Skeleton Archetype</description>
+    <name>TurnOnline Microservices Identity Archetype</name>
+    <description>TurnOnline.biz Microservices Identity Archetype</description>
     <url>https://www.turnonline.biz</url>
 
 

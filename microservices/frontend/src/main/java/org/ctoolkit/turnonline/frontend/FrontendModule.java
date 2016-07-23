@@ -56,8 +56,6 @@ public class FrontendModule
         install( new CommonServicesModule() );
         install( new CtoolkitServicesAppEngineModule() );
         // REST API Facade modules
-//        install( new FacadeAppEngineModule() );
-//        install( new DefaultOrikaMapperFactoryModule() );
         install( new GoogleApiIdentityToolkitModule() );
         // TurnOnline REST API modules
         install( new TurnOnlineRestApiClientModule() );
