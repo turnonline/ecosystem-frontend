@@ -53,8 +53,31 @@
         <url>https://github.com/turnonline/turnonline-archetype</url>
     </scm>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>comvai-snapshots</id>
+            <name>Comvai TurnOnline private snapshots repository</name>
+            <url>https://maven.turnonline.biz/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>for-release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <maven.deploy.skip>false</maven.deploy.skip>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

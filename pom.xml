@@ -175,6 +175,7 @@
         <jmockit.setting>
             -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
         </jmockit.setting>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <profiles>
@@ -199,6 +200,12 @@
         <profile>
             <!-- the profile to create archetype from the project -->
             <id>archetype</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
             <modules>
                 <module>archetype-prepare</module>
                 <module>archetype</module>
