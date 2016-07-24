@@ -4,12 +4,12 @@
 
     <parent>
         <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
-        <artifactId>turnonline-archetype-parent</artifactId>
+        <artifactId>turnonline-parent</artifactId>
         <version>0.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>turnonline-archetype-deployment</artifactId>
+    <artifactId>turnonline-deployment</artifactId>
     <packaging>ear</packaging>
     <name>TurnOnline Deployment</name>
     <description>Deployment - Modules to be uploaded to AppEngine</description>
@@ -26,9 +26,9 @@
                     <modules>
                         <webModule>
                             <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
-                            <artifactId>turnonline-archetype-frontend</artifactId>
+                            <artifactId>turnonline-frontend</artifactId>
                             <!--bundleFileName given to cut off version marker-->
-                            <bundleFileName>turnonline-archetype-frontend.war</bundleFileName>
+                            <bundleFileName>turnonline-frontend.war</bundleFileName>
                             <unpack>true</unpack>
                         </webModule>
                     </modules>
@@ -48,7 +48,7 @@
     <dependencies>
         <dependency>
             <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
-            <artifactId>turnonline-archetype-frontend</artifactId>
+            <artifactId>turnonline-frontend</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>

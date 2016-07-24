@@ -2,7 +2,7 @@
 <archetype-descriptor
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
-        name="turnonline-archetype-parent"
+        name="turnonline-parent"
         xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0">
 
     <requiredProperties>
@@ -10,14 +10,14 @@
     </requiredProperties>
 
     <modules>
-        <module id="turnonline-archetype-library" dir="library" name="turnonline-archetype-library">
+        <module id="turnonline-library" dir="library" name="turnonline-library">
             <modules>
-                <module id="turnonline-archetype-core" dir="core" name="turnonline-archetype-core"/>
+                <module id="turnonline-core" dir="core" name="turnonline-core"/>
             </modules>
         </module>
-        <module id="turnonline-archetype-microservices" dir="microservices" name="turnonline-archetype-microservices">
+        <module id="turnonline-microservices" dir="microservices" name="turnonline-microservices">
             <modules>
-                <module id="turnonline-archetype-frontend" dir="frontend" name="turnonline-archetype-frontend">
+                <module id="turnonline-frontend" dir="frontend" name="turnonline-frontend">
                     <fileSets>
                         <fileSet filtered="true" packaged="true" encoding="UTF-8">
                             <directory>src/main/java</directory>
@@ -40,12 +40,6 @@
                             </includes>
                         </fileSet>
                         <fileSet encoding="UTF-8">
-                            <directory>src/main/resources</directory>
-                            <excludes>
-                                <exclude>**/*.p12</exclude>
-                            </excludes>
-                        </fileSet>
-                        <fileSet encoding="UTF-8">
                             <directory>src/main/webapp</directory>
                             <includes>
                                 <include>**/*.jpg</include>
@@ -65,7 +59,7 @@
                 </module>
             </modules>
         </module>
-        <module id="turnonline-archetype-deployment" dir="deployment" name="turnonline-archetype-deployment">
+        <module id="turnonline-deployment" dir="deployment" name="turnonline-deployment">
             <fileSets>
                 <fileSet filtered="true" encoding="UTF-8">
                     <directory>src/main/application</directory>

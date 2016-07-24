@@ -2,11 +2,11 @@
 <application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
              version="5">
-    <display-name>turnonline-archetype-deployment</display-name>
+    <display-name>turnonline-deployment</display-name>
     <!-- The default module should be listed first -->
     <module>
         <web>
-            <web-uri>turnonline-archetype-frontend.war</web-uri>
+            <web-uri>turnonline-frontend.war</web-uri>
             <context-root>/</context-root>
         </web>
     </module>
