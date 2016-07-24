@@ -40,12 +40,6 @@
                             </includes>
                         </fileSet>
                         <fileSet encoding="UTF-8">
-                            <directory>src/main/resources</directory>
-                            <excludes>
-                                <exclude>**/*.p12</exclude>
-                            </excludes>
-                        </fileSet>
-                        <fileSet encoding="UTF-8">
                             <directory>src/main/webapp</directory>
                             <includes>
                                 <include>**/*.jpg</include>

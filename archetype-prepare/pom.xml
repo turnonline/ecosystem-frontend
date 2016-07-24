@@ -35,6 +35,9 @@
                                             <directory>
                                                 ../target/generated-sources/archetype/src/main/resources/archetype-resources
                                             </directory>
+                                            <excludes>
+                                                <exclude>**/*.p12</exclude>
+                                            </excludes>
                                         </resource>
                                     </resources>
                                 </configuration>
