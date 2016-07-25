@@ -59,13 +59,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.surefire</groupId>
-                            <artifactId>surefire-junit4</artifactId>
-                            <version>${maven-surefire-plugin.version}</version>
-                        </dependency>
-                    </dependencies>
                     <configuration>
                         <argLine>-Xmx256m ${jmockit.setting}</argLine>
                     </configuration>
@@ -115,11 +108,6 @@
             </dependency>
             <dependency>
                 <groupId>org.ctoolkit.turnonline</groupId>
-                <artifactId>turnonline-resources</artifactId>
-                <version>${resources.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ctoolkit.turnonline</groupId>
                 <artifactId>turnonline-wicket</artifactId>
                 <version>0.5-20160718.081037-4</version>
             </dependency>
@@ -133,11 +121,6 @@
                 <groupId>org.ctoolkit.services</groupId>
                 <artifactId>ctoolkit-services-common</artifactId>
                 <version>0.5-20160712.211155-1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ctoolkit.turnonline</groupId>
-                <artifactId>turnonline-client-appengine</artifactId>
-                <version>${turnonline-client-appengine.version}</version>
             </dependency>
             <!-- Test scope dependencies -->
             <dependency>
