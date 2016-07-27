@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
+        <groupId>org.ctoolkit.turnonline.archetype</groupId>
         <artifactId>turnonline-parent</artifactId>
         <version>0.5-SNAPSHOT</version>
     </parent>
@@ -25,7 +25,7 @@
                     <unpackTypes>war</unpackTypes>
                     <modules>
                         <webModule>
-                            <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
+                            <groupId>org.ctoolkit.turnonline.archetype</groupId>
                             <artifactId>turnonline-frontend</artifactId>
                             <!--bundleFileName given to cut off version marker-->
                             <bundleFileName>turnonline-frontend.war</bundleFileName>
@@ -47,7 +47,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.ctoolkit.maven.archetype.turnonline</groupId>
+            <groupId>org.ctoolkit.turnonline.archetype</groupId>
             <artifactId>turnonline-frontend</artifactId>
             <version>${project.version}</version>
             <type>war</type>
