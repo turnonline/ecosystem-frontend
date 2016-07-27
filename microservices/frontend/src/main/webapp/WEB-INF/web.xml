@@ -4,7 +4,7 @@
          version="2.5">
 
     <listener>
-        <listener-class>org.ctoolkit.turnonline.frontend.GuiceServletConfig</listener-class>
+        <listener-class>org.ctoolkit.turnonline.origin.frontend.GuiceServletConfig</listener-class>
     </listener>
 
     <filter>
@@ -27,7 +27,7 @@
         </init-param>
         <init-param>
             <param-name>applicationClassName</param-name>
-            <param-value>org.ctoolkit.turnonline.frontend.FrontendApplication</param-value>
+            <param-value>org.ctoolkit.turnonline.origin.frontend.FrontendApplication</param-value>
         </init-param>
         <init-param>
             <param-name>ignorePaths</param-name>
@@ -81,7 +81,7 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>C-shop Admin constraint</web-resource-name>
+            <web-resource-name>Admin constraint</web-resource-name>
             <url-pattern>/admin/*</url-pattern>
         </web-resource-collection>
         <user-data-constraint>
