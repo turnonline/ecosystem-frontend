@@ -10,10 +10,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-parent</artifactId>
+    <artifactId>turnonline-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>TurnOnline Parent</name>
+    <name>Project Parent</name>
     <description>TurnOnline.biz Microservices Platform Archetype</description>
     <url>https://www.turnonline.biz</url>
 
