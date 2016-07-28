@@ -8,7 +8,7 @@
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
     <name>TurnOnline Microservices Identity Archetype</name>
-    <description>TurnOnline.biz Microservices Identity Archetype</description>
+    <description>TurnOnline.biz Microservices Archetype with built-in Google Identity Toolkit</description>
     <url>https://www.turnonline.biz</url>
 
 
