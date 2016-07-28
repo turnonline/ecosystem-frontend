@@ -6,18 +6,18 @@
         xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0">
 
     <requiredProperties>
-        <requiredProperty key="appEngineId"/>
+        <requiredProperty key="AppEngineId"/>
     </requiredProperties>
 
     <modules>
-        <module id="turnonline-library" dir="library" name="turnonline-library">
+        <module id="${rootArtifactId}-library" dir="library" name="${rootArtifactId}-library">
             <modules>
-                <module id="turnonline-core" dir="core" name="turnonline-core"/>
+                <module id="${rootArtifactId}-core" dir="core" name="${rootArtifactId}-core"/>
             </modules>
         </module>
-        <module id="turnonline-microservices" dir="microservices" name="turnonline-microservices">
+        <module id="${rootArtifactId}-microservices" dir="microservices" name="${rootArtifactId}-microservices">
             <modules>
-                <module id="turnonline-frontend" dir="frontend" name="turnonline-frontend">
+                <module id="${rootArtifactId}-frontend" dir="frontend" name="${rootArtifactId}-frontend">
                     <fileSets>
                         <fileSet filtered="true" packaged="true" encoding="UTF-8">
                             <directory>src/main/java</directory>
@@ -59,7 +59,7 @@
                 </module>
             </modules>
         </module>
-        <module id="turnonline-deployment" dir="deployment" name="turnonline-deployment">
+        <module id="${rootArtifactId}-deployment" dir="deployment" name="${rootArtifactId}-deployment">
             <fileSets>
                 <fileSet filtered="true" encoding="UTF-8">
                     <directory>src/main/application</directory>

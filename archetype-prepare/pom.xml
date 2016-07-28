@@ -4,14 +4,14 @@
 
     <parent>
         <groupId>org.ctoolkit.turnonline.archetype</groupId>
-        <artifactId>turnonline-parent</artifactId>
+        <artifactId>turnonline-archetype</artifactId>
         <version>0.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>turnonline-archetype-prepare</artifactId>
     <packaging>pom</packaging>
-    <name>TurnOnline Prepare Archetype Resources</name>
+    <name>Prepare Archetype Resources</name>
 
     <profiles>
         <profile>
@@ -73,12 +73,21 @@
                                     <input>${archetype-resources-path}/deployment/pom.xml</input>
                                     <config>deployment-config.xml</config>
                                 </transformation>
-                                <!-- Remove profile that's handling archetype, not needed for final project -->
+                                <!-- Remove profile that's handling archetype + elements not needed for final project-->
                                 <transformation>
                                     <input>${archetype-resources-path}/pom.xml</input>
                                     <rules>
                                         <remove>
                                             <name>/pom:project/pom:profiles/pom:profile[pom:id='archetype']</name>
+                                        </remove>
+                                        <remove>
+                                            <name>/pom:project/pom:scm</name>
+                                        </remove>
+                                        <remove>
+                                            <name>/pom:project/pom:issueManagement</name>
+                                        </remove>
+                                        <remove>
+                                            <name>/pom:project/pom:developers</name>
                                         </remove>
                                     </rules>
                                 </transformation>
@@ -95,7 +104,7 @@
                                         <modify>
                                             <name>/app:appengine-web-app/app:application/text()</name>
                                             <!--suppress MavenModelInspection -->
-                                            <value>${appEngineId}</value>
+                                            <value>${AppEngineId}</value>
                                         </modify>
                                     </rules>
                                 </transformation>
@@ -111,7 +120,7 @@
                                         <modify>
                                             <name>/app:appengine-application/app:application/text()</name>
                                             <!--suppress MavenModelInspection -->
-                                            <value>${appEngineId}</value>
+                                            <value>${AppEngineId}</value>
                                         </modify>
                                     </rules>
                                 </transformation>
