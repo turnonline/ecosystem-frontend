@@ -6,7 +6,6 @@ import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.Url;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.request.resource.UrlResourceReference;
@@ -217,9 +216,10 @@ class DefaultModelFactory
         if ( modelObject instanceof IPageProperties )
         {
             IPageProperties props = ( IPageProperties ) modelObject;
-            if ( props.getSellerLocale() != null )
+            if ( !Strings.isEmpty( props.getSellerLocale() ) )
             {
-                model = new PropertyModel<>( modelObject, "sellerLocale" );
+                Locale locale = new Locale( props.getSellerLocale() );
+                model = new Model<>( locale );
             }
         }
         return model;
