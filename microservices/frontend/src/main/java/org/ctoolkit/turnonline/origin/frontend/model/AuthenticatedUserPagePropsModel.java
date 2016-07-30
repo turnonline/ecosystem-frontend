@@ -42,6 +42,7 @@ public class AuthenticatedUserPagePropsModel
         MyAccountProps.Builder builder = new MyAccountProps.Builder();
 
         builder.setAccount( account );
+        builder.setGateways( account.getPaymentGateways() );
         builder.setCurrentCountry( originRequest );
 
         return new MyAccountProps( builder );

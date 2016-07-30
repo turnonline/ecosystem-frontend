@@ -179,6 +179,12 @@ class DefaultModelFactory
             PageProperties properties = ( PageProperties ) modelObject;
             termsUrl = properties.getTermsUrl();
         }
+//        TODO finish getTermsUrl for shopping mall
+//        else if ( modelObject instanceof ShoppingMall )
+//        {
+//            ShoppingMall mall = ( ShoppingMall ) modelObject;
+//            termsUrl = mall.getTermsUrl();
+//        }
 
         return termsUrl == null ? null : new Model<>( termsUrl );
     }

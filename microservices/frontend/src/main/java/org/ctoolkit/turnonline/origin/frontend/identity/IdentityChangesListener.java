@@ -1,7 +1,9 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
+import org.ctoolkit.restapi.client.Identifier;
 import org.ctoolkit.restapi.client.ResourceFacade;
 import org.ctoolkit.services.identity.IdentityTroubleListener;
+import org.ctoolkit.turnonline.shared.resource.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,8 +32,8 @@ public class IdentityChangesListener
     @Override
     public void resetPassword( String email, String resetLink )
     {
-        // not implemented yet
-        logger.error( "resetPassword not implemented yet! Email: " + email + ", resetLink: " + resetLink );
+        User.Password password = new User.Password( resetLink );
+        resources.patch( password, new Identifier( email ) ).execute();
     }
 
     @Override

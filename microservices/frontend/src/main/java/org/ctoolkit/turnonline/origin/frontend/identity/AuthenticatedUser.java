@@ -1,6 +1,12 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
+import org.ctoolkit.turnonline.shared.resource.AccountConfig;
+import org.ctoolkit.turnonline.shared.resource.IPayment.Gate;
 import org.ctoolkit.turnonline.shared.resource.User;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Authenticated user instance.
@@ -19,5 +25,32 @@ public class AuthenticatedUser
     public AuthenticatedUser( User user )
     {
         super( user );
+    }
+
+    public List<Gate> getPaymentGateways()
+    {
+        AccountConfig config = this.getConfig();
+
+        if ( config == null )
+        {
+            return Collections.emptyList();
+        }
+
+        String gateways = config.getPaymentGateways();
+
+        if ( gateways == null || "".equals( gateways ) )
+        {
+            return Collections.emptyList();
+        }
+
+        String[] split = gateways.split( ";" );
+        List<Gate> list = new ArrayList<>();
+
+        for ( String s : split )
+        {
+            list.add( Gate.valueOf( s ) );
+        }
+
+        return list;
     }
 }

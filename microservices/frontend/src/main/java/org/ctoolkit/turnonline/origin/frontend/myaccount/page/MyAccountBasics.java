@@ -16,6 +16,9 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.string.Strings;
+import org.ctoolkit.restapi.client.Identifier;
+import org.ctoolkit.restapi.client.ResourceFacade;
+import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
 import org.ctoolkit.turnonline.origin.frontend.identity.Role;
 import org.ctoolkit.turnonline.origin.frontend.model.AuthenticatedUserPagePropsModel;
 import org.ctoolkit.turnonline.origin.frontend.model.CodeBookRenderer;
@@ -34,6 +37,7 @@ import org.ctoolkit.turnonline.wicket.markup.html.form.ajax.IndicatingAjaxButton
 import org.ctoolkit.turnonline.wicket.markup.html.form.ajax.IndicatingAjaxDropDown;
 import org.ctoolkit.turnonline.wicket.markup.html.page.DecoratedPage;
 import org.ctoolkit.turnonline.wicket.model.I18NResourceModel;
+import org.ctoolkit.turnonline.wicket.model.IModelFactory;
 import org.ctoolkit.turnonline.wicket.myaccount.event.ToggleCompanyPersonChangeEvent;
 import org.ctoolkit.turnonline.wicket.myaccount.panel.CompanyAddressPanel;
 import org.ctoolkit.turnonline.wicket.myaccount.panel.CompanyBasicInfo;
@@ -42,7 +46,10 @@ import org.ctoolkit.turnonline.wicket.myaccount.panel.PersonalAddressPanel;
 import org.ctoolkit.turnonline.wicket.myaccount.panel.PersonalDataPanel;
 import org.ctoolkit.turnonline.wicket.myaccount.panel.PostalAddressPanel;
 import org.ctoolkit.turnonline.wicket.myaccount.panel.SimplifiedContactFieldSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 /**
@@ -55,6 +62,14 @@ public class MyAccountBasics
         extends DecoratedPage<MyAccountProps>
 {
     private static final long serialVersionUID = -1303189991396080065L;
+
+    private static Logger logger = LoggerFactory.getLogger( MyAccountBasics.class );
+
+    @Inject
+    private ResourceFacade resources;
+
+    @Inject
+    private IModelFactory factory;
 
     private I18NResourceModel titleModel = new I18NResourceModel( "title.my-account" );
 
@@ -285,7 +300,7 @@ public class MyAccountBasics
 
         form.add( new SimplifiedContactFieldSet<>( "contact", accountModel ) );
         // save button
-        form.add( new IndicatingAjaxButton( "save", form ) );
+        form.add( new IndicatingAjaxButton( "save", new I18NResourceModel( "button.save" ), form ) );
     }
 
     @Override
@@ -299,6 +314,26 @@ public class MyAccountBasics
             Component form = get( "form" );
             payload.getTarget().add( form );
         }
+        else if ( event.getPayload() instanceof AccountUpdateEvent )
+        {
+            AccountUpdateEvent payload = ( AccountUpdateEvent ) event.getPayload();
+            User account = payload.getAccount();
+
+            if ( FrontendSession.get().isLoggedIn( account ) )
+            {
+                User updated = resources.update( new User( account ), new Identifier( account.getId() ) ).execute();
+
+                FrontendSession.get().updateLoggedInUser( updated );
+// FIXME        factory.updateMallCustomerFromSession( WicketUtil.getHttpServletRequest() );
+
+                success( getString( "info.savedSuccessfully" ) );
+            }
+            else
+            {
+                logger.warn( "Something wrong happens ..." );
+            }
+        }
+
     }
 
     @Override

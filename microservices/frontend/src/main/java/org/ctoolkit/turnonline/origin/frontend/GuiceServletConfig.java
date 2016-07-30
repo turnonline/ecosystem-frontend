@@ -21,6 +21,7 @@ public class GuiceServletConfig
     private Injector getProductionInjector()
     {
         return Guice.createInjector( Stage.PRODUCTION,
+//                new AppstatsServletModule(),
                 new FrontendModule(),
                 new FrontendServletModule() );
     }
