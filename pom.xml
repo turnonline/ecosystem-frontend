@@ -139,8 +139,8 @@
     </dependencyManagement>
 
     <properties>
-        <gae.version>1.9.38</gae.version>
-        <ctoolkit-project-bom.version>1.9.38</ctoolkit-project-bom.version>
+        <gae.version>1.9.40</gae.version>
+        <ctoolkit-project-bom.version>1.9.40</ctoolkit-project-bom.version>
         <ctoolkit-library-bom.version>2</ctoolkit-library-bom.version>
         <wicket-bom.version>6.19.0</wicket-bom.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
