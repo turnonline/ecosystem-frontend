@@ -8,17 +8,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
-import org.ctoolkit.restapi.client.googleapis.ApiKey;
-import org.ctoolkit.restapi.client.googleapis.ClientId;
-import org.ctoolkit.restapi.client.googleapis.DevelopmentEnvironment;
-import org.ctoolkit.restapi.client.googleapis.EndpointUrl;
-import org.ctoolkit.restapi.client.googleapis.P12FileName;
-import org.ctoolkit.restapi.client.googleapis.ProjectId;
-import org.ctoolkit.restapi.client.googleapis.ServiceAccountEmail;
+import org.ctoolkit.restapi.client.ApiCredential;
 import org.ctoolkit.restapi.client.identity.GoogleApiIdentityToolkitModule;
 import org.ctoolkit.services.common.CommonServicesModule;
+import org.ctoolkit.services.common.PropertyConfig;
 import org.ctoolkit.services.common.PropertyService;
-import org.ctoolkit.services.guice.appengine.CtoolkitServicesAppEngineModule;
+import org.ctoolkit.services.guice.CtoolkitServicesAppEngineModule;
 import org.ctoolkit.services.identity.IdentityLoginListener;
 import org.ctoolkit.services.identity.IdentityTroubleListener;
 import org.ctoolkit.turnonline.client.appengine.TurnOnlineRestApiClientModule;
@@ -26,7 +21,7 @@ import org.ctoolkit.turnonline.origin.frontend.identity.IdentityChangesListener;
 import org.ctoolkit.turnonline.origin.frontend.identity.IdentitySessionUserListener;
 import org.ctoolkit.turnonline.origin.frontend.server.ServerModule;
 import org.ctoolkit.turnonline.shared.feprops.NoPageProps;
-import org.ctoolkit.turnonline.wicket.identity.IdentityOptions;
+import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,8 +55,10 @@ public class FrontendModule
         // TurnOnline REST API modules
         install( new TurnOnlineRestApiClientModule() );
 
-        bind( String.class ).annotatedWith( Names.named( PropertyService.PRODUCTION_APP_ID ) ).toInstance( "c-shop" );
-        bind( String.class ).annotatedWith( Names.named( PropertyService.TEST_APP_ID ) ).toInstance( "turn-online" );
+        PropertyConfig config = new PropertyConfig();
+        config.setProductionAppI( "turn-online" );
+        config.setTestAppI( "turn-online" );
+        Names.bindProperties( binder(), config );
 
         Multibinder<IdentityLoginListener> identityListener;
         identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
@@ -77,22 +74,24 @@ public class FrontendModule
         boolean isDevelopmentEnvironment = SystemProperty.environment.value()
                 == SystemProperty.Environment.Value.Development;
 
+        ApiCredential credential = new ApiCredential();
         // The OAuth 2.0 client ID (type - web application)
         String clientId = "";
         String serviceAccount = "";
 
         // needed for local development
-        bind( String.class ).annotatedWith( P12FileName.class ).toInstance( "/" );
-        bind( String.class ).annotatedWith( ServiceAccountEmail.class ).toInstance( serviceAccount );
-        bind( String.class ).annotatedWith( ApiKey.class ).toInstance( "" );
-        bind( Boolean.class ).annotatedWith( DevelopmentEnvironment.class ).toInstance( isDevelopmentEnvironment );
+        credential.setFileName( "/" );
+        credential.setServiceAccountEmail( serviceAccount );
+        credential.setApiKey( "" );
+        credential.setCredentialOn( isDevelopmentEnvironment );
 
         // common config
-        bind( String.class ).annotatedWith( ProjectId.class ).toInstance( appId );
-        bind( String.class ).annotatedWith( ClientId.class ).toInstance( clientId );
+        credential.setProjectId( appId );
+        credential.setClientId( clientId );
         //FIXME EndpointUrl hardcoded
-        bind( String.class ).annotatedWith( EndpointUrl.class ).toInstance( "http://localhost:8990/_ah/api/" );
+        credential.setEndpointUrl( "http://localhost:8990/_ah/api/" );
 
+        Names.bindProperties( binder(), credential );
     }
 
     @Provides

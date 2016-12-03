@@ -3,7 +3,7 @@ package org.ctoolkit.turnonline.origin.frontend.myaccount.model;
 import org.apache.wicket.model.IModel;
 import org.ctoolkit.turnonline.shared.resource.Country;
 import org.ctoolkit.turnonline.shared.resource.User;
-import org.ctoolkit.turnonline.wicket.model.DropDownBridgeModel;
+import org.ctoolkit.wicket.standard.model.DropDownBridgeModel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

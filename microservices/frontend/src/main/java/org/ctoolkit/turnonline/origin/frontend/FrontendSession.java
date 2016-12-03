@@ -8,7 +8,7 @@ import org.ctoolkit.turnonline.origin.frontend.identity.AuthenticatedUser;
 import org.ctoolkit.turnonline.shared.resource.Domicile;
 import org.ctoolkit.turnonline.shared.resource.Locale;
 import org.ctoolkit.turnonline.shared.resource.User;
-import org.ctoolkit.turnonline.wicket.util.WicketUtil;
+import org.ctoolkit.wicket.standard.util.WicketUtil;
 
 import javax.servlet.http.HttpSession;
 

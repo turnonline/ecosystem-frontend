@@ -19,8 +19,8 @@
             <artifactId>turnonline-resources</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.ctoolkit.turnonline</groupId>
-            <artifactId>turnonline-wicket</artifactId>
+            <groupId>org.ctoolkit.wicket</groupId>
+            <artifactId>ctoolkit-wicket</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>

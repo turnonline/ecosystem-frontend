@@ -5,8 +5,8 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
 import org.ctoolkit.turnonline.origin.frontend.identity.AuthenticatedUser;
 import org.ctoolkit.turnonline.shared.feprops.MyAccountProps;
-import org.ctoolkit.turnonline.wicket.model.IModelFactory;
-import org.ctoolkit.turnonline.wicket.util.WicketUtil;
+import org.ctoolkit.wicket.standard.util.WicketUtil;
+import org.ctoolkit.wicket.turnonline.model.IModelFactory;
 
 import javax.inject.Inject;
 

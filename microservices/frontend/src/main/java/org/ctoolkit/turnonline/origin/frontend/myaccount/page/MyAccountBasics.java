@@ -30,18 +30,18 @@ import org.ctoolkit.turnonline.shared.feprops.MyAccountProps;
 import org.ctoolkit.turnonline.shared.resource.Country;
 import org.ctoolkit.turnonline.shared.resource.LegalForm;
 import org.ctoolkit.turnonline.shared.resource.User;
-import org.ctoolkit.turnonline.wicket.markup.html.form.ajax.IndicatingAjaxButton;
-import org.ctoolkit.turnonline.wicket.markup.html.form.ajax.IndicatingAjaxDropDown;
-import org.ctoolkit.turnonline.wicket.markup.html.page.DecoratedPage;
-import org.ctoolkit.turnonline.wicket.model.I18NResourceModel;
-import org.ctoolkit.turnonline.wicket.myaccount.event.ToggleCompanyPersonChangeEvent;
-import org.ctoolkit.turnonline.wicket.myaccount.panel.CompanyAddressPanel;
-import org.ctoolkit.turnonline.wicket.myaccount.panel.CompanyBasicInfo;
-import org.ctoolkit.turnonline.wicket.myaccount.panel.CompanyPersonSwitcher;
-import org.ctoolkit.turnonline.wicket.myaccount.panel.PersonalAddressPanel;
-import org.ctoolkit.turnonline.wicket.myaccount.panel.PersonalDataPanel;
-import org.ctoolkit.turnonline.wicket.myaccount.panel.PostalAddressPanel;
-import org.ctoolkit.turnonline.wicket.myaccount.panel.SimplifiedContactFieldSet;
+import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxButton;
+import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxDropDown;
+import org.ctoolkit.wicket.standard.model.I18NResourceModel;
+import org.ctoolkit.wicket.turnonline.markup.html.page.DecoratedPage;
+import org.ctoolkit.wicket.turnonline.myaccount.event.ToggleCompanyPersonChangeEvent;
+import org.ctoolkit.wicket.turnonline.myaccount.panel.CompanyAddressPanel;
+import org.ctoolkit.wicket.turnonline.myaccount.panel.CompanyBasicInfo;
+import org.ctoolkit.wicket.turnonline.myaccount.panel.CompanyPersonSwitcher;
+import org.ctoolkit.wicket.turnonline.myaccount.panel.PersonalAddressPanel;
+import org.ctoolkit.wicket.turnonline.myaccount.panel.PersonalDataPanel;
+import org.ctoolkit.wicket.turnonline.myaccount.panel.PostalAddressPanel;
+import org.ctoolkit.wicket.turnonline.myaccount.panel.SimplifiedContactFieldSet;
 
 import java.util.Map;
 
@@ -285,7 +285,7 @@ public class MyAccountBasics
 
         form.add( new SimplifiedContactFieldSet<>( "contact", accountModel ) );
         // save button
-        form.add( new IndicatingAjaxButton( "save", form ) );
+        form.add( new IndicatingAjaxButton( "save", new I18NResourceModel( "button.save" ), form ) );
     }
 
     @Override
