@@ -14,9 +14,9 @@ import org.ctoolkit.turnonline.origin.frontend.myaccount.page.MyAccountBasics;
 import org.ctoolkit.turnonline.origin.frontend.page.Robots;
 import org.ctoolkit.turnonline.origin.frontend.page.ShoppingCart;
 import org.ctoolkit.turnonline.origin.frontend.page.SiteMap;
-import org.ctoolkit.turnonline.wicket.AppEngineApplication;
-import org.ctoolkit.turnonline.wicket.identity.page.IdentityLogin;
-import org.ctoolkit.turnonline.wicket.identity.page.SignUp;
+import org.ctoolkit.wicket.turnonline.AppEngineApplication;
+import org.ctoolkit.wicket.turnonline.identity.page.IdentityLogin;
+import org.ctoolkit.wicket.turnonline.identity.page.SignUp;
 
 import java.util.HashSet;
 import java.util.Set;

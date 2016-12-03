@@ -1,7 +1,7 @@
 package org.ctoolkit.turnonline.origin.frontend.server;
 
 import com.google.inject.AbstractModule;
-import org.ctoolkit.turnonline.wicket.model.IModelFactory;
+import org.ctoolkit.wicket.turnonline.model.IModelFactory;
 
 /**
  * The frontend server module to configure Guice.

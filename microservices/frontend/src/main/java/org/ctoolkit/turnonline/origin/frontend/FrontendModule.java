@@ -26,7 +26,7 @@ import org.ctoolkit.turnonline.origin.frontend.identity.IdentityChangesListener;
 import org.ctoolkit.turnonline.origin.frontend.identity.IdentitySessionUserListener;
 import org.ctoolkit.turnonline.origin.frontend.server.ServerModule;
 import org.ctoolkit.turnonline.shared.feprops.NoPageProps;
-import org.ctoolkit.turnonline.wicket.identity.IdentityOptions;
+import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

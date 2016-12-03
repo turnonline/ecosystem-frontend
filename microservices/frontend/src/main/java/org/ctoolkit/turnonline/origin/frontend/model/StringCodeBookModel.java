@@ -2,7 +2,7 @@ package org.ctoolkit.turnonline.origin.frontend.model;
 
 import org.apache.wicket.model.IModel;
 import org.ctoolkit.turnonline.shared.resource.BaseCodeBook;
-import org.ctoolkit.turnonline.wicket.model.DropDownListBridgeModel;
+import org.ctoolkit.wicket.standard.model.DropDownListBridgeModel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

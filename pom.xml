@@ -112,9 +112,9 @@
                 <version>${resources.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ctoolkit.turnonline</groupId>
-                <artifactId>turnonline-wicket</artifactId>
-                <version>0.5-20160718.081037-4</version>
+                <groupId>org.ctoolkit.wicket</groupId>
+                <artifactId>ctoolkit-wicket</artifactId>
+                <version>0.5-20161203.091539-1</version>
             </dependency>
             <!-- TODO Once will be released move to ctoolkit-project-bom -->
             <dependency>

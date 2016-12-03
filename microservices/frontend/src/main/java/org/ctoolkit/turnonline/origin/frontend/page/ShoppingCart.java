@@ -1,8 +1,8 @@
 package org.ctoolkit.turnonline.origin.frontend.page;
 
 import org.apache.wicket.model.IModel;
-import org.ctoolkit.turnonline.wicket.markup.html.page.DecoratedPage;
-import org.ctoolkit.turnonline.wicket.model.I18NResourceModel;
+import org.ctoolkit.wicket.standard.model.I18NResourceModel;
+import org.ctoolkit.wicket.turnonline.markup.html.page.DecoratedPage;
 
 /**
  * The default shopping cart page.

@@ -1,7 +1,7 @@
 package org.ctoolkit.turnonline.origin.frontend.page;
 
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
-import org.ctoolkit.turnonline.wicket.markup.html.page.BaseRobots;
+import org.ctoolkit.wicket.turnonline.markup.html.page.BaseRobots;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
