@@ -12,8 +12,8 @@
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
     <artifactId>turnonline-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>Frontend Service - Identity</name>
+    <packaging>${packaging.type}</packaging>
+    <name>Frontend Microservice - Identity</name>
     <description>TurnOnline.biz Ecosystem Microservice Identity Archetype</description>
     <url>https://www.turnonline.biz</url>
 
@@ -267,6 +267,7 @@
             -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
         </jmockit.setting>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <packaging.type>war</packaging.type>
     </properties>
 
     <profiles>
@@ -291,6 +292,9 @@
         <profile>
             <!-- the profile to create archetype from the project -->
             <id>archetype</id>
+            <properties>
+                <packaging.type>pom</packaging.type>
+            </properties>
             <activation>
                 <property>
                     <name>performRelease</name>
