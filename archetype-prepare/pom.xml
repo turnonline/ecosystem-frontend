@@ -67,12 +67,6 @@
                         <configuration>
                             <lineWidth>120</lineWidth>
                             <transformations>
-                                <!-- groupId placeholder setting -->
-                                <transformation>
-                                    <replacePlaceholders>false</replacePlaceholders>
-                                    <input>${archetype-resources-path}/deployment/pom.xml</input>
-                                    <config>deployment-config.xml</config>
-                                </transformation>
                                 <!-- Remove profile that's handling archetype + elements not needed for final project-->
                                 <transformation>
                                     <input>${archetype-resources-path}/pom.xml</input>
@@ -94,31 +88,15 @@
                                 <!-- Placeholder configuration of the AppEngine project ID (AppId) -->
                                 <transformation>
                                     <input>
-                                        ../microservices/frontend/src/main/webapp/WEB-INF/appengine-web.xml
+                                        ../src/main/webapp/WEB-INF/appengine-web.xml
                                     </input>
                                     <output>
-                                        ../${archetype-resources-path}/microservices/frontend/src/main/webapp/WEB-INF/appengine-web.xml
+                                        ../${archetype-resources-path}/src/main/webapp/WEB-INF/appengine-web.xml
                                     </output>
                                     <replacePlaceholders>false</replacePlaceholders>
                                     <rules>
                                         <modify>
                                             <name>/app:appengine-web-app/app:application/text()</name>
-                                            <!--suppress MavenModelInspection -->
-                                            <value>${AppEngineId}</value>
-                                        </modify>
-                                    </rules>
-                                </transformation>
-                                <transformation>
-                                    <input>
-                                        ../deployment/src/main/application/META-INF/appengine-application.xml
-                                    </input>
-                                    <output>
-                                        ../${archetype-resources-path}/deployment/src/main/application/META-INF/appengine-application.xml
-                                    </output>
-                                    <replacePlaceholders>false</replacePlaceholders>
-                                    <rules>
-                                        <modify>
-                                            <name>/app:appengine-application/app:application/text()</name>
                                             <!--suppress MavenModelInspection -->
                                             <value>${AppEngineId}</value>
                                         </modify>
