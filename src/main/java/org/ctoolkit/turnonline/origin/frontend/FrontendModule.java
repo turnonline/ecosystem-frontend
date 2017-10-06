@@ -10,7 +10,7 @@ import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import org.ctoolkit.restapi.client.ApiCredential;
 import org.ctoolkit.restapi.client.identity.GoogleApiIdentityToolkitModule;
-import org.ctoolkit.services.common.CommonServicesModule;
+import org.ctoolkit.services.common.CtoolkitCommonServicesModule;
 import org.ctoolkit.services.common.PropertyConfig;
 import org.ctoolkit.services.common.PropertyService;
 import org.ctoolkit.services.guice.CtoolkitServicesAppEngineModule;
@@ -19,8 +19,8 @@ import org.ctoolkit.services.identity.IdentityTroubleListener;
 import org.ctoolkit.turnonline.client.appengine.TurnOnlineRestApiClientModule;
 import org.ctoolkit.turnonline.origin.frontend.identity.IdentityChangesListener;
 import org.ctoolkit.turnonline.origin.frontend.identity.IdentitySessionUserListener;
+import org.ctoolkit.turnonline.origin.frontend.model.NoContent;
 import org.ctoolkit.turnonline.origin.frontend.server.ServerModule;
-import org.ctoolkit.turnonline.shared.feprops.NoPageProps;
 import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class FrontendModule
     {
         install( new ServerModule() );
         // ctoolkit services module
-        install( new CommonServicesModule() );
+        install( new CtoolkitCommonServicesModule() );
         install( new CtoolkitServicesAppEngineModule() );
         // REST API Facade modules
         install( new GoogleApiIdentityToolkitModule() );
@@ -76,13 +76,13 @@ public class FrontendModule
 
         ApiCredential credential = new ApiCredential();
         // The OAuth 2.0 client ID (type - web application)
-        String clientId = "";
-        String serviceAccount = "";
+        String clientId = "437939156832-qis5tve5clnoolclqsar7ch989gknoon.apps.googleusercontent.com";
+        String serviceAccount = "437939156832-mt38v6i6nkrvauhag24dnis14la8s5n1@developer.gserviceaccount.com";
 
         // needed for local development
-        credential.setFileName( "/" );
+        credential.setFileName( "/987b562584e0.p12" );
         credential.setServiceAccountEmail( serviceAccount );
-        credential.setApiKey( "" );
+        credential.setApiKey( "AIzaSyB7F2F7eaH8YkS8eM2QMQgRlynxJcXRCDM" );
         credential.setCredentialOn( isDevelopmentEnvironment );
 
         // common config
@@ -104,10 +104,10 @@ public class FrontendModule
 
     @Provides
     @Singleton
-    public NoPageProps provideNoPageProps()
+    public NoContent provideNoContent()
     {
         // Note: this works for production only
-        return new NoPageProps( "", FrontendModule.JOKER_DOMAIN );
+        return new NoContent( "", FrontendModule.JOKER_DOMAIN );
     }
 
     @Provides

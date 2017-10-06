@@ -1,6 +1,6 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
-import org.ctoolkit.services.identity.IdentityResolver;
+import org.ctoolkit.restapi.client.identity.IdentityTokenResolver;
 import org.ctoolkit.turnonline.origin.frontend.FrontendApplication;
 
 import javax.inject.Inject;
@@ -22,10 +22,10 @@ public class Logout
 {
     private static final long serialVersionUID = -957674638895395920L;
 
-    private final IdentityResolver resolver;
+    private final IdentityTokenResolver resolver;
 
     @Inject
-    Logout( IdentityResolver resolver )
+    Logout( IdentityTokenResolver resolver )
     {
         this.resolver = resolver;
     }

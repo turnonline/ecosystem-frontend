@@ -12,9 +12,9 @@
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
     <artifactId>turnonline-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>Project Parent</name>
-    <description>TurnOnline.biz Ecosystem Microservice Archetype</description>
+    <packaging>war</packaging>
+    <name>Frontend Service - Identity</name>
+    <description>TurnOnline.biz Ecosystem Microservice Identity Archetype</description>
     <url>https://www.turnonline.biz</url>
 
     <scm>
@@ -115,7 +115,7 @@
         <dependency>
             <groupId>org.ctoolkit.wicket</groupId>
             <artifactId>ctoolkit-wicket</artifactId>
-            <version>0.5-20161203.091539-1</version>
+            <version>0.5-20171005.125957-13</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
@@ -180,6 +180,47 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
+        </dependency>
+        <!-- Wicket dependencies -->
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-ioc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-auth-roles</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>wicketstuff-gae-initializer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>wicketstuff-gmap3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-jquery-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-jquery-ui-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-jquery-ui-plugins</artifactId>
         </dependency>
         <!-- AppEngine dependencies -->
         <dependency>

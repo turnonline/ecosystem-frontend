@@ -2,7 +2,7 @@ package org.ctoolkit.turnonline.origin.frontend.model;
 
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.ctoolkit.restapi.client.ResourceFacade;
+import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
 import org.ctoolkit.turnonline.shared.resource.BaseCodeBook;
 import org.ctoolkit.turnonline.shared.resource.Domicile;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Abstract list model dedicated for all {@link BaseCodeBook}. It retrieves code book list via {@link ResourceFacade}.
+ * Abstract list model dedicated for all {@link BaseCodeBook}. It retrieves code book list via {@link RestFacade}.
  * The {@link Locale} and {@link Domicile} is being taken from the session.
  *
  * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
@@ -26,7 +26,7 @@ public abstract class CodeBookListModel<T extends BaseCodeBook>
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private ResourceFacade resources;
+    private RestFacade resources;
 
     public CodeBookListModel()
     {
@@ -45,6 +45,6 @@ public abstract class CodeBookListModel<T extends BaseCodeBook>
         criteria.put( "domicile", domicile );
 
         java.util.Locale locale = new java.util.Locale( l.getLanguage(), l.getCountry() );
-        return resources.list( type() ).execute( criteria, locale );
+        return resources.list( type() ).finish( criteria, locale );
     }
 }

@@ -17,16 +17,16 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.string.Strings;
 import org.ctoolkit.turnonline.origin.frontend.identity.Role;
-import org.ctoolkit.turnonline.origin.frontend.model.AuthenticatedUserPagePropsModel;
+import org.ctoolkit.turnonline.origin.frontend.model.AuthenticatedMyAccountContent;
 import org.ctoolkit.turnonline.origin.frontend.model.CodeBookRenderer;
 import org.ctoolkit.turnonline.origin.frontend.model.CountriesModel;
 import org.ctoolkit.turnonline.origin.frontend.model.LegalFormListModel;
+import org.ctoolkit.turnonline.origin.frontend.model.MyAccountContent;
 import org.ctoolkit.turnonline.origin.frontend.model.StringCodeBookModel;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.event.AccountUpdateEvent;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.model.CompanyAddressCountryModel;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.model.PersonalAddressCountryModel;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.model.PostalAddressCountryModel;
-import org.ctoolkit.turnonline.shared.feprops.MyAccountProps;
 import org.ctoolkit.turnonline.shared.resource.Country;
 import org.ctoolkit.turnonline.shared.resource.LegalForm;
 import org.ctoolkit.turnonline.shared.resource.User;
@@ -52,7 +52,7 @@ import java.util.Map;
  */
 @AuthorizeInstantiation( {Role.USER, Role.ACCOUNT} )
 public class MyAccountBasics
-        extends DecoratedPage<MyAccountProps>
+        extends DecoratedPage<MyAccountContent>
 {
     private static final long serialVersionUID = -1303189991396080065L;
 
@@ -60,7 +60,7 @@ public class MyAccountBasics
 
     public MyAccountBasics()
     {
-        final AuthenticatedUserPagePropsModel model = new AuthenticatedUserPagePropsModel();
+        final AuthenticatedMyAccountContent model = new AuthenticatedMyAccountContent();
         final IModel<Map<String, Country>> countriesModel = new CountriesModel();
         final IModel<User> accountModel = new PropertyModel<>( model, "account" );
 

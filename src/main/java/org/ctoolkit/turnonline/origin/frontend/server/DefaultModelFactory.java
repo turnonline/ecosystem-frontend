@@ -16,8 +16,9 @@ import org.ctoolkit.turnonline.origin.frontend.identity.AuthenticatedUser;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.page.AccountSettings;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.page.MyAccountBasics;
 import org.ctoolkit.turnonline.origin.frontend.page.ShoppingCart;
-import org.ctoolkit.turnonline.shared.feprops.IPageProperties;
-import org.ctoolkit.turnonline.shared.feprops.PageProperties;
+import org.ctoolkit.turnonline.shared.content.Public;
+import org.ctoolkit.turnonline.shared.content.PublicContent;
+import org.ctoolkit.turnonline.shared.content.Seller;
 import org.ctoolkit.turnonline.shared.resource.User;
 import org.ctoolkit.wicket.turnonline.identity.page.IdentityLogin;
 import org.ctoolkit.wicket.turnonline.identity.page.SignUp;
@@ -33,9 +34,6 @@ import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import static org.apache.wicket.ThreadContext.getSession;
 
 /**
  * Application specific model factory implementation.
@@ -65,17 +63,6 @@ class DefaultModelFactory
         public Long getObject()
         {
             return FrontendSession.get().getItemsCount();
-        }
-    };
-
-    private static final AbstractReadOnlyModel<Roles> rolesModel = new AbstractReadOnlyModel<Roles>()
-    {
-        private static final long serialVersionUID = -3967574798731825510L;
-
-        @Override
-        public Roles getObject()
-        {
-            return FrontendSession.get().getRoles();
         }
     };
 
@@ -122,7 +109,7 @@ class DefaultModelFactory
 
                 if ( !Strings.isEmpty( formattedName ) && formattedName.length() > LABEL_LENGTH )
                 {
-                    formattedName = formattedName.substring( 0, LABEL_LENGTH - 1 ) + "..";
+                    formattedName = formattedName.substring( 0, LABEL_LENGTH - 1 ) + "src/main";
                 }
 
                 return formattedName;
@@ -174,10 +161,10 @@ class DefaultModelFactory
         String termsUrl = null;
         Object modelObject = pageModel == null ? null : pageModel.getObject();
 
-        if ( modelObject instanceof PageProperties )
+        if ( modelObject instanceof Public && ( ( Public ) modelObject ).getSeller() != null )
         {
-            PageProperties properties = ( PageProperties ) modelObject;
-            termsUrl = properties.getTermsUrl();
+            Seller seller = ( ( Public ) modelObject ).getSeller();
+            termsUrl = seller.getTermsUrl();
         }
 
         return termsUrl == null ? null : new Model<>( termsUrl );
@@ -192,11 +179,12 @@ class DefaultModelFactory
         IModel<String> logoModel = null;
         Object modelObject = pageModel == null ? null : pageModel.getObject();
 
-        if ( modelObject instanceof IPageProperties
-                && !Strings.isEmpty( ( ( IPageProperties ) modelObject ).getSellerLogoUrl() ) )
+        if ( modelObject instanceof Public
+                && ( ( Public ) modelObject ).getSeller() != null
+                && ( ( Public ) modelObject ).getSeller().getLogoUrl() != null )
         {
-            IPageProperties properties = ( IPageProperties ) modelObject;
-            logoModel = new Model<>( properties.getSellerLogoUrl() );
+            Seller seller = ( ( Public ) modelObject ).getSeller();
+            logoModel = new Model<>( seller.getLogoUrl() );
         }
 
         if ( logoModel == null )
@@ -205,24 +193,6 @@ class DefaultModelFactory
         }
 
         return logoModel;
-    }
-
-    @Override
-    public IModel<Locale> getSessionLocaleModel( @Nullable IModel<?> pageModel )
-    {
-        IModel<Locale> model = null;
-        Object modelObject = pageModel == null ? null : pageModel.getObject();
-
-        if ( modelObject instanceof IPageProperties )
-        {
-            IPageProperties props = ( IPageProperties ) modelObject;
-            if ( !Strings.isEmpty( props.getSellerLocale() ) )
-            {
-                Locale locale = new Locale( props.getSellerLocale() );
-                model = new Model<>( locale );
-            }
-        }
-        return model;
     }
 
     @Override
@@ -238,9 +208,9 @@ class DefaultModelFactory
     }
 
     @Override
-    public IModel<Roles> getRolesModel()
+    public Roles getRoles()
     {
-        return rolesModel;
+        return FrontendSession.get().getRoles();
     }
 
     @Override
@@ -277,18 +247,7 @@ class DefaultModelFactory
         else
         {
             refs = new ResourceReference[1];
-
-            if ( modelObject instanceof IPageProperties
-                    && ( ( IPageProperties ) modelObject ).isCustomStyling() )
-            {
-                String style = getSession().getStyle();
-                String themeName = TurnOnlineThemeSettings.STANDARD + "-" + style;
-                refs[0] = TurnOnlineThemeSettings.get().getStylesheetReference( themeName );
-            }
-            else
-            {
-                refs[0] = TurnOnlineThemeSettings.get().getDefaultStylesheetReference();
-            }
+            refs[0] = TurnOnlineThemeSettings.get().getDefaultStylesheetReference();
         }
         return refs;
     }
@@ -299,9 +258,9 @@ class DefaultModelFactory
         String trackingId = null;
         Object modelObject = pageModel == null ? null : pageModel.getObject();
 
-        if ( modelObject instanceof IPageProperties )
+        if ( modelObject instanceof PublicContent )
         {
-            IPageProperties properties = ( IPageProperties ) modelObject;
+            PublicContent properties = ( PublicContent ) modelObject;
             trackingId = properties.getAnalyticsAccount();
         }
 
@@ -309,7 +268,7 @@ class DefaultModelFactory
     }
 
     @Override
-    public MenuSchema provideMenuSchema( @Nonnull Page context, @Nonnull IModel<Roles> roles )
+    public MenuSchema provideMenuSchema( @Nonnull Page context, @Nullable Roles roles )
     {
         return new DefaultSchema( roles );
     }

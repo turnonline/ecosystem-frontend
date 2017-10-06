@@ -1,6 +1,6 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
-import org.ctoolkit.restapi.client.ResourceFacade;
+import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.services.identity.IdentityTroubleListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +19,10 @@ public class IdentityChangesListener
 {
     private static final Logger logger = LoggerFactory.getLogger( IdentityChangesListener.class );
 
-    private final ResourceFacade resources;
+    private final RestFacade resources;
 
     @Inject
-    public IdentityChangesListener( ResourceFacade resources )
+    public IdentityChangesListener( RestFacade resources )
     {
         this.resources = resources;
     }

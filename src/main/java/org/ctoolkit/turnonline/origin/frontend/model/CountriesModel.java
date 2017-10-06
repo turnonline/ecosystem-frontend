@@ -2,7 +2,7 @@ package org.ctoolkit.turnonline.origin.frontend.model;
 
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.ctoolkit.restapi.client.ResourceFacade;
+import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
 import org.ctoolkit.turnonline.shared.resource.Country;
 import org.ctoolkit.turnonline.shared.resource.Locale;
@@ -23,7 +23,7 @@ public class CountriesModel
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private ResourceFacade resources;
+    private RestFacade resources;
 
     /**
      * Constructor.
@@ -41,7 +41,7 @@ public class CountriesModel
         Locale locale = FrontendSession.get().getSellerLocale();
 
         java.util.Locale utilLocale = new java.util.Locale( locale.getLanguage(), locale.getCountry() );
-        for ( Country item : resources.list( Country.class ).execute( utilLocale ) )
+        for ( Country item : resources.list( Country.class ).finish( utilLocale ) )
         {
             countries.put( item.getCode(), item );
         }
