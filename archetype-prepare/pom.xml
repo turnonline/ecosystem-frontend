@@ -46,7 +46,7 @@
                             <outputDirectory>${archetype-test-path}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../target/generated-sources/archetype/src/test</directory>
+                                    <directory>../microservice/target/generated-sources/archetype/src/test</directory>
                                 </resource>
                             </resources>
                         </configuration>
