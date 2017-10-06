@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-microservices-archetype</artifactId>
+    <artifactId>turnonline-microservice-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
     <name>TurnOnline.biz Microservice Archetype Build</name>
