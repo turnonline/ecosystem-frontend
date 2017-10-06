@@ -7,8 +7,8 @@
     <artifactId>turnonline-microservices-identity</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
-    <name>TurnOnline Microservices Identity Archetype</name>
-    <description>TurnOnline.biz Microservices Archetype with built-in Google Identity Toolkit</description>
+    <name>TurnOnline.biz Ecosystem Microservice Identity Archetype</name>
+    <description>TurnOnline.biz Ecosystem Microservice Archetype with built-in Google Identity Toolkit</description>
     <url>https://www.turnonline.biz</url>
 
 
@@ -56,7 +56,7 @@
     <distributionManagement>
         <snapshotRepository>
             <id>comvai-snapshots</id>
-            <name>Comvai TurnOnline private snapshots repository</name>
+            <name>Comvai TurnOnline.biz private snapshots repository</name>
             <url>https://maven.turnonline.biz/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>

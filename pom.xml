@@ -14,14 +14,8 @@
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Project Parent</name>
-    <description>TurnOnline.biz Microservices Platform Archetype</description>
+    <description>TurnOnline.biz Ecosystem Microservice Archetype</description>
     <url>https://www.turnonline.biz</url>
-
-    <modules>
-        <module>library</module>
-        <module>microservices</module>
-        <module>deployment</module>
-    </modules>
 
     <scm>
         <connection>scm:git:[fetch=]git@github.com:turnonline/turnonline-archetype.git</connection>
@@ -46,14 +40,12 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>com.google.appengine</groupId>
+                    <groupId>com.google.cloud.tools</groupId>
                     <artifactId>appengine-maven-plugin</artifactId>
-                    <version>${gae.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-ear-plugin</artifactId>
-                    <version>${maven-ear-plugin.version}</version>
+                    <version>${appengine.maven.plugin.version}</version>
+                    <configuration>
+                        <enableJarClasses>true</enableJarClasses>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -87,8 +79,8 @@
             <!-- Bill Of Material -->
             <dependency>
                 <groupId>org.ctoolkit.maven</groupId>
-                <artifactId>ctoolkit-project-bom</artifactId>
-                <version>${ctoolkit-project-bom.version}</version>
+                <artifactId>ctoolkit-microservice-bom</artifactId>
+                <version>${ctoolkit-microservice-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -106,64 +98,144 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.ctoolkit.turnonline</groupId>
-                <artifactId>turnonline-resources</artifactId>
-                <version>${resources.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ctoolkit.wicket</groupId>
-                <artifactId>ctoolkit-wicket</artifactId>
-                <version>0.5-20161203.091539-1</version>
-            </dependency>
-            <!-- TODO Once will be released move to ctoolkit-project-bom -->
-            <dependency>
-                <groupId>org.ctoolkit.services</groupId>
-                <artifactId>ctoolkit-services-identity</artifactId>
-                <version>0.5-20160712.211214-3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ctoolkit.services</groupId>
-                <artifactId>ctoolkit-services-common</artifactId>
-                <version>0.5-20160712.211155-1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ctoolkit.turnonline</groupId>
-                <artifactId>turnonline-client-appengine</artifactId>
-                <version>${turnonline-client-appengine.version}</version>
-            </dependency>
-            <!-- Test scope dependencies -->
-            <dependency>
-                <groupId>org.jmockit</groupId>
-                <artifactId>jmockit</artifactId>
-                <version>${jmockit.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>${testng.version}</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.ctoolkit.turnonline</groupId>
+            <artifactId>turnonline-resources</artifactId>
+            <version>${resources.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.turnonline</groupId>
+            <artifactId>turnonline-client-appengine</artifactId>
+            <version>${turnonline-client-appengine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.wicket</groupId>
+            <artifactId>ctoolkit-wicket</artifactId>
+            <version>0.5-20161203.091539-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.restapi</groupId>
+            <artifactId>ctoolkit-rest-facade-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.restapi</groupId>
+            <artifactId>ctoolkit-rest-facade-appengine</artifactId>
+        </dependency>
+        <!-- In order to make orika work on AppEngine javassist and paranamer has been downgraded. -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.paranamer</groupId>
+            <artifactId>paranamer</artifactId>
+        </dependency>
+        <!-- Remove javassist and paranamer here once fixed in rest-client-facade -->
+        <dependency>
+            <groupId>org.ctoolkit.restapi</groupId>
+            <artifactId>ctoolkit-client-identity-toolkit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.services</groupId>
+            <artifactId>ctoolkit-services-identity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.services</groupId>
+            <artifactId>ctoolkit-services-common</artifactId>
+        </dependency>
+        <!-- Guice dependencies -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-multibindings</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+        <!-- Java Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <!-- AppEngine dependencies -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-jsr107cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jsr107cache</groupId>
+            <artifactId>jsr107cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-stubs</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>${jmockit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <properties>
-        <gae.version>1.9.52</gae.version>
-        <ctoolkit-project-bom.version>1.9.52</ctoolkit-project-bom.version>
-        <ctoolkit-library-bom.version>4</ctoolkit-library-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.56</ctoolkit-microservice-bom.version>
+        <ctoolkit-library-bom.version>5</ctoolkit-library-bom.version>
         <wicket-bom.version>6.19.0</wicket-bom.version>
+        <appengine.maven.plugin.version>1.3.1</appengine.maven.plugin.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-        <maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
         <!-- library versions -->
-        <resources.version>0.6-20160712.214235-75</resources.version>
-        <turnonline-client-appengine.version>0.5-20160615.224003-48</turnonline-client-appengine.version>
+        <resources.version>0.6-20170828.070314-107</resources.version>
+        <turnonline-client-appengine.version>0.5-20170817.043058-66</turnonline-client-appengine.version>
         <!--ctoolkit agent-->
         <ctoolkit-agent.version>0.1</ctoolkit-agent.version>
         <!--for testing-->
         <testng.version>6.9.10</testng.version>
-        <ctoolkit-test.version>1.2</ctoolkit-test.version>
-        <jmockit.version>1.24</jmockit.version>
+        <jmockit.version>1.35</jmockit.version>
         <!-- jmockit settings for OpenJDK otherwise throws 'IllegalStateException: To run on OpenJDK 64-Bit Server VM use -javaagent..' -->
         <jmockit.setting>
             -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
