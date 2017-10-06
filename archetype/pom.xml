@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-microservice-identity-archetype</artifactId>
+    <artifactId>turnonline-frontend-identity-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
-    <name>TurnOnline.biz Ecosystem Microservice Identity Archetype</name>
-    <description>TurnOnline.biz Ecosystem Microservice Archetype with built-in Google Identity Toolkit</description>
-    <name>TurnOnline.biz Microservice Archetype Build</name>
-    <description>TurnOnline.biz Ecosystem: Google Endpoints Microservice Skeleton Archetype Build</description>
+    <name>TurnOnline.biz Frontend Identity Archetype Build</name>
+    <description>
+        TurnOnline.biz Ecosystem: Frontend Identity Archetype with built-in Google Identity Toolkit
+    </description>
     <url>https://www.turnonline.biz</url>
 
 

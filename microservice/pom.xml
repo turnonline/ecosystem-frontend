@@ -9,11 +9,11 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>turnonline-microservice</artifactId>
+    <artifactId>turnonline-frontend-identity</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>TurnOnline.biz Microservice Source</name>
-    <description>TurnOnline.biz Ecosystem: Google Endpoints Microservice Skeleton</description>
+    <name>TurnOnline.biz Frontend Identity Source</name>
+    <description>TurnOnline.biz Ecosystem: Frontend Identity with built-in Google Identity Toolkit</description>
 
     <dependencyManagement>
         <dependencies>

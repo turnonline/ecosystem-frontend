@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-microservice-archetype-prepare</artifactId>
+    <artifactId>turnonline-frontend-identity-archetype-prepare</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>TurnOnline.biz Prepare Archetype Resources</name>
