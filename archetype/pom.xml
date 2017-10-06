@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-microservices-skeleton</artifactId>
+    <artifactId>turnonline-microservices-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
-    <name>TurnOnline.biz Ecosystem Microservice Skeleton Archetype</name>
-    <description>TurnOnline.biz Ecosystem Microservice Skeleton Archetype</description>
+    <name>TurnOnline.biz Microservice Archetype Build</name>
+    <description>TurnOnline.biz Ecosystem: Google Endpoints Microservice Skeleton Archetype Build</description>
     <url>https://www.turnonline.biz</url>
 
 

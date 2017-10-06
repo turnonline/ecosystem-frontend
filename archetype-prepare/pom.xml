@@ -4,147 +4,131 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-archetype-prepare</artifactId>
+    <artifactId>turnonline-microservice-archetype-prepare</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Prepare Archetype Resources</name>
+    <name>TurnOnline.biz Prepare Archetype Resources</name>
 
-    <profiles>
-        <profile>
-            <id>archetype</id>
-            <build>
-                <plugins>
-                    <!-- Move generated archetype resources to archetype directory -->
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>3.0.2</version>
-                        <executions>
-                            <execution>
-                                <id>copy-archetype-resources</id>
-                                <phase>prepare-package</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${archetype-resources-path}</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>
-                                                ../target/generated-sources/archetype/src/main/resources/archetype-resources
-                                            </directory>
-                                            <excludes>
-                                                <exclude>**/*.p12</exclude>
-                                            </excludes>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>copy-archetype-test</id>
-                                <phase>prepare-package</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${archetype-test-path}</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>../target/generated-sources/archetype/src/test</directory>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- Additional configuration -->
-                    <plugin>
-                        <groupId>com.google.code.maven-config-processor-plugin</groupId>
-                        <artifactId>config-processor-maven-plugin</artifactId>
-                        <version>2.7</version>
+    <build>
+        <plugins>
+            <!-- Move generated archetype resources to archetype directory -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-archetype-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
                         <configuration>
-                            <lineWidth>120</lineWidth>
-                            <transformations>
-                                <!-- Remove profile that's handling archetype + elements not needed for final project-->
-                                <transformation>
-                                    <input>${archetype-resources-path}/pom.xml</input>
-                                    <rules>
-                                        <modify>
-                                            <name>/pom:project/pom:packaging/text()</name>
-                                            <value>war</value>
-                                        </modify>
-                                        <remove>
-                                            <name>/pom:project/pom:profiles/pom:profile[pom:id='archetype']</name>
-                                        </remove>
-                                        <remove>
-                                            <name>/pom:project/pom:scm</name>
-                                        </remove>
-                                        <remove>
-                                            <name>/pom:project/pom:issueManagement</name>
-                                        </remove>
-                                        <remove>
-                                            <name>/pom:project/pom:developers</name>
-                                        </remove>
-                                    </rules>
-                                </transformation>
-                                <!-- Placeholder configuration of the AppEngine project ID (AppId) -->
-                                <transformation>
-                                    <input>
-                                        ../src/main/webapp/WEB-INF/appengine-web.xml
-                                    </input>
-                                    <output>
-                                        ../${archetype-resources-path}/src/main/webapp/WEB-INF/appengine-web.xml
-                                    </output>
-                                    <replacePlaceholders>false</replacePlaceholders>
-                                    <rules>
-                                        <modify>
-                                            <name>/app:appengine-web-app/app:application/text()</name>
-                                            <!--suppress MavenModelInspection -->
-                                            <value>${AppEngineId}</value>
-                                        </modify>
-                                    </rules>
-                                </transformation>
-                            </transformations>
-                            <namespaceContexts>
-                                <pom>http://maven.apache.org/POM/4.0.0</pom>
-                                <app>http://appengine.google.com/ns/1.0</app>
-                            </namespaceContexts>
+                            <outputDirectory>${archetype-resources-path}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>
+                                        ../microservice/target/generated-sources/archetype/src/main/resources/archetype-resources
+                                    </directory>
+                                    <excludes>
+                                        <exclude>**/*.p12</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
                         </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>process</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- Clean up generated archetype resources from archetype directory -->
-                    <plugin>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>3.0.0</version>
+                    </execution>
+                    <execution>
+                        <id>copy-archetype-test</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
                         <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${archetype-resources-path}</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>${archetype-test-path}</directory>
-                                </fileset>
-                            </filesets>
+                            <outputDirectory>${archetype-test-path}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../target/generated-sources/archetype/src/test</directory>
+                                </resource>
+                            </resources>
                         </configuration>
-                    </plugin>
-                    <plugin>
-                        <!-- Skip this module as it is here only for configuration purpose -->
-                        <artifactId>maven-install-plugin</artifactId>
-                        <version>2.5.2</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Additional configuration -->
+            <plugin>
+                <groupId>com.google.code.maven-config-processor-plugin</groupId>
+                <artifactId>config-processor-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <lineWidth>120</lineWidth>
+                    <transformations>
+                        <!-- Remove profile that's handling archetype + elements not needed for final project-->
+                        <transformation>
+                            <input>${archetype-resources-path}/pom.xml</input>
+                            <rules>
+                                <remove>
+                                    <name>
+                                        /pom:project/pom:build/pom:plugins/pom:plugin[pom:artifactId='maven-archetype-plugin']
+                                    </name>
+                                </remove>
+                            </rules>
+                        </transformation>
+                        <!-- Placeholder configuration of the AppEngine project ID (AppId) -->
+                        <transformation>
+                            <input>
+                                ../microservice/src/main/webapp/WEB-INF/appengine-web.xml
+                            </input>
+                            <output>
+                                ../${archetype-resources-path}/src/main/webapp/WEB-INF/appengine-web.xml
+                            </output>
+                            <replacePlaceholders>false</replacePlaceholders>
+                            <rules>
+                                <modify>
+                                    <name>/app:appengine-web-app/app:application/text()</name>
+                                    <!--suppress MavenModelInspection -->
+                                    <value>${AppEngineId}</value>
+                                </modify>
+                            </rules>
+                        </transformation>
+                    </transformations>
+                    <namespaceContexts>
+                        <pom>http://maven.apache.org/POM/4.0.0</pom>
+                        <app>http://appengine.google.com/ns/1.0</app>
+                    </namespaceContexts>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Clean up generated archetype resources from archetype directory -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${archetype-resources-path}</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${archetype-test-path}</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Skip this module as it is here only for configuration purpose -->
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
