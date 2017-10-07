@@ -53,22 +53,6 @@
                     <argLine>-Xmx256m ${jmockit.setting}</argLine>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-archetype-plugin</artifactId>
-                <version>2.4</version>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <propertyFile>../archetype-prepare/archetype.properties</propertyFile>
-                        </configuration>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>create-from-project</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
