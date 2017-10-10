@@ -16,9 +16,14 @@
 
 package org.ctoolkit.turnonline.origin.frontend.model;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableList;
 import org.ctoolkit.turnonline.shared.content.PublicContent;
 import org.ctoolkit.turnonline.shared.content.SellerContent;
+import org.ctoolkit.turnonline.shared.resource.IPayment;
 import org.ctoolkit.turnonline.shared.resource.User;
+
+import java.util.List;
 
 /**
  * MyAccount page properties, in memory.
@@ -36,6 +41,8 @@ public class MyAccountContent
 
     private String currentCountry;
 
+    private List<IPayment.Gate> gateways;
+
     @SuppressWarnings( "UnusedDeclaration" )
     MyAccountContent()
     {
@@ -44,6 +51,7 @@ public class MyAccountContent
     public MyAccountContent( Builder builder )
     {
         this.account = builder.account;
+        this.gateways = builder.gateways;
         this.currentCountry = builder.currentCountry;
 
         SellerContent seller = new SellerContent();
@@ -67,15 +75,28 @@ public class MyAccountContent
         return currentCountry;
     }
 
+    public List<IPayment.Gate> getGateways()
+    {
+        return MoreObjects.firstNonNull( gateways, ImmutableList.<IPayment.Gate>of() );
+    }
+
     public static class Builder
     {
         private User account;
+
+        private List<IPayment.Gate> gateways;
 
         private String currentCountry;
 
         public Builder setAccount( User account )
         {
             this.account = account;
+            return this;
+        }
+
+        public Builder setGateways( List<IPayment.Gate> gateways )
+        {
+            this.gateways = gateways;
             return this;
         }
 

@@ -321,7 +321,8 @@ public class MyAccountBasics
 
             if ( FrontendSession.get().isLoggedIn( account ) )
             {
-                User updated = resources.update( new User( account ), new Identifier( account.getId() ) ).execute();
+                User updated = resources.update( new User( account ) )
+                        .identifiedBy( new Identifier( account.getId() ) ).finish();
 
                 FrontendSession.get().updateLoggedInUser( updated );
 // FIXME        factory.updateMallCustomerFromSession( WicketUtil.getHttpServletRequest() );

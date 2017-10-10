@@ -1,5 +1,6 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
+import org.ctoolkit.restapi.client.Identifier;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.services.identity.IdentityTroubleListener;
 import org.ctoolkit.turnonline.shared.resource.User;
@@ -32,7 +33,7 @@ public class IdentityChangesListener
     public void resetPassword( String email, String resetLink )
     {
         User.Password password = new User.Password( resetLink );
-        resources.patch( password, new Identifier( email ) ).execute();
+        resources.update( password ).identifiedBy( new Identifier( email ) ).finish();
     }
 
     @Override

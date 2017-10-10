@@ -55,6 +55,27 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.ctoolkit.maven.plugins</groupId>
+                <artifactId>maven-optimizer-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>optimize</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <cssPathToXml>${project.basedir}/src/main/resources/css-config.xml</cssPathToXml>
+                    <jsPathToXml>${project.basedir}/src/main/resources/js-config.xml</jsPathToXml>
+                    <cssOutputPath>${project.build.directory}/classes/org/ctoolkit/wicket/turnonline/theme/
+                    </cssOutputPath>
+                    <jsOutputPath>${project.build.directory}/classes/org/ctoolkit/wicket/turnonline/theme/
+                    </jsOutputPath>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-archetype-plugin</artifactId>
                 <version>3.0.1</version>
                 <inherited>false</inherited>
@@ -80,7 +101,8 @@
                     <transformations>
                         <!-- Remove elements not needed for final project-->
                         <transformation>
-                            <input>target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
+                            <input>
+                                ${project.build.directory}/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
                             </input>
                             <rules>
                                 <remove>
@@ -89,7 +111,8 @@
                             </rules>
                         </transformation>
                         <transformation>
-                            <input>target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
+                            <input>
+                                ${project.build.directory}/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
                             </input>
                             <rules>
                                 <remove>
@@ -98,7 +121,8 @@
                             </rules>
                         </transformation>
                         <transformation>
-                            <input>target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
+                            <input>
+                                ${project.build.directory}/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
                             </input>
                             <rules>
                                 <remove>
@@ -109,7 +133,8 @@
                             </rules>
                         </transformation>
                         <transformation>
-                            <input>target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
+                            <input>
+                                ${project.build.directory}/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
                             </input>
                             <rules>
                                 <remove>
@@ -121,7 +146,8 @@
                         </transformation>
                         <!-- Remove itself-->
                         <transformation>
-                            <input>target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
+                            <input>
+                                ${project.build.directory}/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
                             </input>
                             <rules>
                                 <remove>
@@ -175,7 +201,8 @@
                         </goals>
                         <configuration>
                             <overwrite>true</overwrite>
-                            <outputDirectory>target/generated-sources/archetype/src/main/resources/META-INF/maven
+                            <outputDirectory>
+                                ${project.build.directory}/generated-sources/archetype/src/main/resources/META-INF/maven
                             </outputDirectory>
                             <resources>
                                 <resource>

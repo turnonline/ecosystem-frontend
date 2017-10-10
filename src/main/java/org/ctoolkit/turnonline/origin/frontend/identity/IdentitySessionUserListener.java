@@ -2,8 +2,8 @@ package org.ctoolkit.turnonline.origin.frontend.identity;
 
 import biz.turnonline.api.turnonline.Turnonline;
 import org.ctoolkit.restapi.client.NotFoundException;
-import org.ctoolkit.restapi.client.ResourceFacade;
-import org.ctoolkit.restapi.client.SingleRequest;
+import org.ctoolkit.restapi.client.PayloadRequest;
+import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.restapi.client.UnauthorizedException;
 import org.ctoolkit.restapi.client.identity.Identity;
 import org.ctoolkit.services.identity.IdentityLoginListener;
@@ -32,10 +32,10 @@ public class IdentitySessionUserListener
 {
     private static final Logger logger = LoggerFactory.getLogger( IdentitySessionUserListener.class );
 
-    private final ResourceFacade resources;
+    private final RestFacade resources;
 
     @Inject
-    public IdentitySessionUserListener( ResourceFacade resources )
+    public IdentitySessionUserListener( RestFacade resources )
     {
         this.resources = resources;
     }
@@ -52,7 +52,7 @@ public class IdentitySessionUserListener
 
         try
         {
-            User user = resources.get( User.class, signedEmail ).execute();
+            User user = resources.get( User.class ).identifiedBy( signedEmail ).finish();
 
             authUser = new AuthenticatedUser( user );
             request.getSession().setAttribute( sessionAttribute, authUser );
@@ -63,13 +63,13 @@ public class IdentitySessionUserListener
             User user = new User();
             user.setEmail( signedEmail );
 
-            SingleRequest<User> query = resources.insert( user );
+            PayloadRequest<User> query = resources.insert( user );
 
-            Turnonline.Account.Insert insert = query.query( Turnonline.Account.Insert.class );
+            Turnonline.Account.Insert insert = query.underlying( Turnonline.Account.Insert.class );
             insert.setDisplayName( identity.getDisplayName() );
             insert.setProviderId( identity.getProviderId() );
 
-            user = query.execute();
+            user = query.finish();
             user = new AuthenticatedUser( user );
             request.getSession().setAttribute( sessionAttribute, user );
             response.sendRedirect( FrontendApplication.MY_ACCOUNT );
