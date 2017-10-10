@@ -4,11 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-microservices-platform</artifactId>
+    <artifactId>turnonline-frontend-app-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
-    <name>TurnOnline Microservices Platform Archetype</name>
-    <description>Complete TurnOnline.biz Microservices Platform Archetype</description>
+    <name>TurnOnline.biz Frontend App Archetype Build</name>
+    <description>
+        TurnOnline.biz Ecosystem: Frontend App Archetype with built-in Google Identity Toolkit
+    </description>
     <url>https://www.turnonline.biz</url>
 
 
@@ -56,7 +58,7 @@
     <distributionManagement>
         <snapshotRepository>
             <id>comvai-snapshots</id>
-            <name>Comvai TurnOnline private snapshots repository</name>
+            <name>Comvai TurnOnline.biz private snapshots repository</name>
             <url>https://maven.turnonline.biz/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
