@@ -76,13 +76,13 @@ public class FrontendModule
 
         ApiCredential credential = new ApiCredential();
         // The OAuth 2.0 client ID (type - web application)
-        String clientId = "437939156832-qis5tve5clnoolclqsar7ch989gknoon.apps.googleusercontent.com";
-        String serviceAccount = "437939156832-mt38v6i6nkrvauhag24dnis14la8s5n1@developer.gserviceaccount.com";
+        String clientId = "";
+        String serviceAccount = "";
 
         // needed for local development
-        credential.setFileName( "/987b562584e0.p12" );
+        credential.setFileName( "/" );
         credential.setServiceAccountEmail( serviceAccount );
-        credential.setApiKey( "AIzaSyB7F2F7eaH8YkS8eM2QMQgRlynxJcXRCDM" );
+        credential.setApiKey( "" );
         credential.setCredentialOn( isDevelopmentEnvironment );
 
         // common config
