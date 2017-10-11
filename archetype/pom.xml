@@ -9,7 +9,7 @@
     <packaging>maven-archetype</packaging>
     <name>TurnOnline.biz Frontend App Archetype Build</name>
     <description>
-        TurnOnline.biz Ecosystem: Frontend App Archetype with built-in Google Identity Toolkit
+        TurnOnline.biz Ecosystem: Frontend App Archetype
     </description>
     <url>https://www.turnonline.biz</url>
 

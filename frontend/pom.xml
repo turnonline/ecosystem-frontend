@@ -4,16 +4,16 @@
 
     <parent>
         <groupId>org.ctoolkit.turnonline.archetype</groupId>
-        <artifactId>turnonline-frontend-identity-parent</artifactId>
+        <artifactId>turnonline-frontend-app-parent</artifactId>
         <version>0.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>turnonline-frontend-identity</artifactId>
+    <artifactId>turnonline-frontend-app</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>TurnOnline.biz Frontend Identity</name>
-    <description>TurnOnline.biz Ecosystem: Frontend Identity with built-in Google Identity Toolkit</description>
+    <name>TurnOnline.biz Frontend App</name>
+    <description>TurnOnline.biz Ecosystem: Frontend App</description>
     <url>https://www.turnonline.biz</url>
 
     <build>
@@ -32,6 +32,27 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <argLine>-Xmx256m ${jmockit.setting}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.ctoolkit.maven.plugins</groupId>
+                <artifactId>maven-optimizer-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>optimize</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <cssPathToXml>${project.basedir}/src/main/resources/css-config.xml</cssPathToXml>
+                    <jsPathToXml>${project.basedir}/src/main/resources/js-config.xml</jsPathToXml>
+                    <cssOutputPath>${project.build.directory}/classes/org/ctoolkit/wicket/turnonline/theme/
+                    </cssOutputPath>
+                    <jsOutputPath>${project.build.directory}/classes/org/ctoolkit/wicket/turnonline/theme/
+                    </jsOutputPath>
                 </configuration>
             </plugin>
             <plugin>

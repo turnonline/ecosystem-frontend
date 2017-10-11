@@ -10,11 +10,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ctoolkit.turnonline.archetype</groupId>
-    <artifactId>turnonline-frontend-app</artifactId>
+    <artifactId>turnonline-frontend-app-parent</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>TurnOnline.biz Frontend App</name>
-    <description>TurnOnline.biz Ecosystem: Frontend App Source</description>
+    <description>TurnOnline.biz Ecosystem: Frontend App Parent</description>
     <url>https://www.turnonline.biz</url>
 
     <scm>

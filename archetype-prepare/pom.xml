@@ -20,12 +20,12 @@
 
     <parent>
         <groupId>org.ctoolkit.turnonline.archetype</groupId>
-        <artifactId>turnonline-frontend-identity-parent</artifactId>
+        <artifactId>turnonline-frontend-app-parent</artifactId>
         <version>0.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>turnonline-frontend-identity-archetype-prepare</artifactId>
+    <artifactId>turnonline-frontend-app-archetype-prepare</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>TurnOnline.biz Prepare Archetype Resources</name>
