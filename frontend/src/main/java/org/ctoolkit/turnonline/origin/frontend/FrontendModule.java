@@ -1,23 +1,18 @@
 package org.ctoolkit.turnonline.origin.frontend;
 
-import com.google.api.services.identitytoolkit.IdentityToolkit;
-import com.google.api.services.identitytoolkit.model.IdentitytoolkitRelyingpartyGetProjectConfigResponse;
-import com.google.api.services.identitytoolkit.model.IdpConfig;
 import com.google.appengine.api.utils.SystemProperty;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import org.ctoolkit.restapi.client.ApiCredential;
-import org.ctoolkit.restapi.client.identity.GoogleApiIdentityToolkitModule;
 import org.ctoolkit.services.common.CtoolkitCommonServicesModule;
 import org.ctoolkit.services.common.PropertyConfig;
 import org.ctoolkit.services.common.PropertyService;
 import org.ctoolkit.services.guice.CtoolkitServicesAppEngineModule;
+import org.ctoolkit.services.identity.CtoolkitServicesIdentityModule;
 import org.ctoolkit.services.identity.IdentityLoginListener;
-import org.ctoolkit.services.identity.IdentityTroubleListener;
 import org.ctoolkit.turnonline.client.appengine.TurnOnlineRestApiClientModule;
-import org.ctoolkit.turnonline.origin.frontend.identity.IdentityChangesListener;
 import org.ctoolkit.turnonline.origin.frontend.identity.IdentitySessionUserListener;
 import org.ctoolkit.turnonline.origin.frontend.model.NoContent;
 import org.ctoolkit.turnonline.origin.frontend.server.ServerModule;
@@ -27,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.io.IOException;
 
 /**
  * Frontend application high level guice module.
@@ -50,8 +44,8 @@ public class FrontendModule
         // ctoolkit services module
         install( new CtoolkitCommonServicesModule() );
         install( new CtoolkitServicesAppEngineModule() );
-        // REST API Facade modules
-        install( new GoogleApiIdentityToolkitModule() );
+        install( new CtoolkitServicesIdentityModule() );
+
         // TurnOnline REST API modules
         install( new TurnOnlineRestApiClientModule() );
 
@@ -64,31 +58,7 @@ public class FrontendModule
         identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
         identityListener.addBinding().to( IdentitySessionUserListener.class );
 
-        Multibinder<IdentityTroubleListener> troubleListener;
-        troubleListener = Multibinder.newSetBinder( binder(), IdentityTroubleListener.class );
-        troubleListener.addBinding().to( IdentityChangesListener.class );
-
-
-        //Google API initialization
-        String appId = SystemProperty.applicationId.get();
-        boolean isDevelopmentEnvironment = SystemProperty.environment.value()
-                == SystemProperty.Environment.Value.Development;
-
         ApiCredential credential = new ApiCredential();
-        // The OAuth 2.0 client ID (type - web application)
-        String clientId = "";
-        String serviceAccount = "";
-
-        // needed for local development
-        credential.setFileName( "/" );
-        credential.setServiceAccountEmail( serviceAccount );
-        credential.setApiKey( "" );
-        credential.setCredentialOn( isDevelopmentEnvironment );
-
-        // common config
-        credential.setProjectId( appId );
-        credential.setClientId( clientId );
-        //FIXME EndpointUrl hardcoded
         credential.setEndpointUrl( "http://localhost:8990/_ah/api/" );
 
         Names.bindProperties( binder(), credential );
@@ -112,38 +82,22 @@ public class FrontendModule
 
     @Provides
     @Singleton
-    public IdentityOptions provideIdentityOptions( IdentityToolkit it )
+    public IdentityOptions provideIdentityOptions()
     {
+        String appId = SystemProperty.applicationId.get();
         IdentityOptions options = new IdentityOptions();
 
         options.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
-        options.setSignOutUrl( FrontendApplication.LOGOUT );
-        options.setOobActionUrl( FrontendApplication.LOGIN_TROUBLE_HANDLER );
-        options.setSiteName( "ctoolkit.org" );
-        options.setDisplayMode( IdentityOptions.DisplayMode.PROVIDER_FIRST );
-        options.getSignInOptions().add( IdentityOptions.SignInOption.PASSWORD );
+        options.setTermsUrl( "terms" );
+        options.getSignInOptions().add( "firebase.auth.GoogleAuthProvider.PROVIDER_ID" );
+        options.getSignInOptions().add( "firebase.auth.EmailAuthProvider.PROVIDER_ID" );
+        options.getSignInOptions().add( "firebase.auth.FacebookAuthProvider.PROVIDER_ID" );
+        options.setApiKey( "" );
+        options.setProjectId( appId );
+        options.setDatabaseName( appId );
+        options.setBucketName( appId );
+        options.setSenderId( "437939156832" );
 
-        long start = System.currentTimeMillis();
-        try
-        {
-            IdentitytoolkitRelyingpartyGetProjectConfigResponse config = it.relyingparty().getProjectConfig().execute();
-            for ( IdpConfig idpConfig : config.getIdpConfig() )
-            {
-                if ( idpConfig.getEnabled() )
-                {
-                    options.getSignInOptions().add( IdentityOptions.SignInOption.valueOf( idpConfig.getProvider() ) );
-                }
-            }
-
-            options.setApiKey( config.getApiKey() );
-        }
-        catch ( IOException e )
-        {
-            log.error( "Error occur during loading identity config", e );
-        }
-
-        log.warn( "Duration: " + ( System.currentTimeMillis() - start ) );
-        System.out.println( "Duration: " + ( System.currentTimeMillis() - start ) );
         return options;
     }
 }

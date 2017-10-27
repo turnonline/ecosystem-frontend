@@ -1,8 +1,7 @@
 package org.ctoolkit.turnonline.origin.frontend;
 
 import com.google.inject.servlet.ServletModule;
-import org.ctoolkit.services.identity.IdentityToolkitCheckSessionFilter;
-import org.ctoolkit.services.identity.IdentityToolkitLoginTroubleHandler;
+import org.ctoolkit.services.identity.IdentityCheckSessionFilter;
 import org.ctoolkit.turnonline.origin.frontend.identity.Logout;
 
 import java.util.HashMap;
@@ -22,16 +21,15 @@ public class FrontendServletModule
         String ignorePaths = "/styles,/scripts,/images,/favicon.ico,/appstats,/wicket/resource";
 
         Map<String, String> params = new HashMap<>();
-        params.put( IdentityToolkitCheckSessionFilter.LOGIN_PATH, FrontendApplication.LOGIN );
-        params.put( IdentityToolkitCheckSessionFilter.SIGN_UP_PATH, FrontendApplication.SIGNUP );
-        params.put( IdentityToolkitCheckSessionFilter.SESSION_AUTH_USER_ATTRIBUTE, FrontendSession.AUTH_USER_ATTRIBUTE );
-        params.put( IdentityToolkitCheckSessionFilter.REDIRECT_PATH, FrontendApplication.MY_ACCOUNT );
-        params.put( IdentityToolkitCheckSessionFilter.IGNORE_PATHS, ignorePaths );
+        params.put( IdentityCheckSessionFilter.LOGIN_PATH, FrontendApplication.LOGIN );
+        params.put( IdentityCheckSessionFilter.SIGN_UP_PATH, FrontendApplication.SIGNUP );
+        params.put( IdentityCheckSessionFilter.SESSION_AUTH_USER_ATTRIBUTE, FrontendSession.AUTH_USER_ATTRIBUTE );
+        params.put( IdentityCheckSessionFilter.REDIRECT_PATH, FrontendApplication.MY_ACCOUNT );
+        params.put( IdentityCheckSessionFilter.IGNORE_PATHS, ignorePaths );
 
-        filter( "/*" ).through( IdentityToolkitCheckSessionFilter.class, params );
+        filter( "/*" ).through( IdentityCheckSessionFilter.class, params );
 
         // configure logout path to the servlet to invalidate active session
         serve( FrontendApplication.LOGOUT ).with( Logout.class );
-        serve( FrontendApplication.LOGIN_TROUBLE_HANDLER ).with( IdentityToolkitLoginTroubleHandler.class, params );
     }
 }
