@@ -8,15 +8,24 @@
     </system-properties>
 
     <sessions-enabled>true</sessions-enabled>
-
     <threadsafe>true</threadsafe>
     <instance-class>F2</instance-class>
+    <automatic-scaling>
+        <max-idle-instances>2</max-idle-instances>
+        <min-pending-latency>4000ms</min-pending-latency>
+        <max-pending-latency>8000ms</max-pending-latency>
+    </automatic-scaling>
 
     <static-files>
-        <include path="/*.js" expiration="30d"/>
-        <include path="/*.css" expiration="30d"/>
-        <include path="/*.png" expiration="30d"/>
-        <include path="/favicon.ico" expiration="30d"/>
+        <include expiration="30d" path="/scripts/*.js"/>
+        <include expiration="30d" path="/images/*.png"/>
+        <include expiration="30d" path="/images/*.gif"/>
+        <include expiration="30d" path="/styles/*.css"/>
+        <include expiration="30d" path="/*.js"/>
+        <include expiration="30d" path="/*.css"/>
+        <include expiration="30d" path="/*.png"/>
+        <include expiration="30d" path="/favicon.ico"/>
+        <include expiration="30d" path="/styles/fonts/icomoon.ttf"/>
     </static-files>
 
 </appengine-web-app>

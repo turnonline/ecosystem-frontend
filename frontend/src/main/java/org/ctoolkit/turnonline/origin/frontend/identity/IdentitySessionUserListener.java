@@ -1,11 +1,11 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
 import biz.turnonline.api.turnonline.Turnonline;
+import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.restapi.client.NotFoundException;
 import org.ctoolkit.restapi.client.PayloadRequest;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.restapi.client.UnauthorizedException;
-import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.services.identity.IdentityLoginListener;
 import org.ctoolkit.turnonline.origin.frontend.FrontendApplication;
 import org.ctoolkit.turnonline.shared.resource.User;
@@ -66,8 +66,8 @@ public class IdentitySessionUserListener
             PayloadRequest<User> query = resources.insert( user );
 
             Turnonline.Account.Insert insert = query.underlying( Turnonline.Account.Insert.class );
-            insert.setDisplayName( identity.getDisplayName() );
-            insert.setProviderId( identity.getProviderId() );
+            insert.setDisplayName( identity.getName() );
+            insert.setProviderId( identity.getIssuer() );
 
             user = query.finish();
             user = new AuthenticatedUser( user );
