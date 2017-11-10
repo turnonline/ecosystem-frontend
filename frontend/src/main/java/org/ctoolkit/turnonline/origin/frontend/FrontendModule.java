@@ -96,7 +96,7 @@ public class FrontendModule
         options.setProjectId( appId );
         options.setDatabaseName( appId );
         options.setBucketName( appId );
-        options.setSenderId( "437939156832" );
+        options.setSenderId( "" );
 
         return options;
     }

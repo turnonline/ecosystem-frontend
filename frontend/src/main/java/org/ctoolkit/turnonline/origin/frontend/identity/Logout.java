@@ -38,6 +38,6 @@ public class Logout
         request.getSession().invalidate();
 
         // mode select is being required by identity toolkit widget as configuration parameter
-        response.sendRedirect( FrontendApplication.LOGIN + "?mode=select" );
+        response.sendRedirect( FrontendApplication.LOGIN );
     }
 }
