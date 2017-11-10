@@ -5,7 +5,7 @@ import org.ctoolkit.restapi.client.NotFoundException;
 import org.ctoolkit.restapi.client.PayloadRequest;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.restapi.client.UnauthorizedException;
-import org.ctoolkit.restapi.client.identity.Identity;
+import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.services.identity.IdentityLoginListener;
 import org.ctoolkit.turnonline.origin.frontend.FrontendApplication;
 import org.ctoolkit.turnonline.shared.resource.User;
@@ -43,7 +43,7 @@ public class IdentitySessionUserListener
     @Override
     public void processIdentity( @Nonnull HttpServletRequest request,
                                  @Nonnull HttpServletResponse response,
-                                 @Nonnull Identity identity,
+                                 @Nonnull FirebaseToken identity,
                                  @Nonnull String sessionAttribute )
             throws IOException
     {

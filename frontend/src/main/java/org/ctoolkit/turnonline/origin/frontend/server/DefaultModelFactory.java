@@ -231,6 +231,12 @@ class DefaultModelFactory
         return alwaysTrueModel;
     }
 
+    @Override
+    public IModel<Boolean> getSearchBoxVisibilityModel()
+    {
+        return alwaysTrueModel;
+    }
+
     /**
      * In development returns not optimized css for faster development.
      */

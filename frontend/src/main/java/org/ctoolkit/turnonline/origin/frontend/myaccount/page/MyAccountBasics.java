@@ -33,9 +33,11 @@ import org.ctoolkit.turnonline.origin.frontend.myaccount.model.PostalAddressCoun
 import org.ctoolkit.turnonline.shared.resource.Country;
 import org.ctoolkit.turnonline.shared.resource.LegalForm;
 import org.ctoolkit.turnonline.shared.resource.User;
+import org.ctoolkit.wicket.standard.identity.behavior.FirebaseAppInit;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxButton;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxDropDown;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
+import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
 import org.ctoolkit.wicket.turnonline.markup.html.page.DecoratedPage;
 import org.ctoolkit.wicket.turnonline.model.IModelFactory;
 import org.ctoolkit.wicket.turnonline.myaccount.event.ToggleCompanyPersonChangeEvent;
@@ -73,8 +75,13 @@ public class MyAccountBasics
 
     private I18NResourceModel titleModel = new I18NResourceModel( "title.my-account" );
 
+    @Inject
+    private IdentityOptions identityOptions;
+
     public MyAccountBasics()
     {
+        add( new FirebaseAppInit( identityOptions ) );
+
         final AuthenticatedMyAccountContent model = new AuthenticatedMyAccountContent();
         final IModel<Map<String, Country>> countriesModel = new CountriesModel();
         final IModel<User> accountModel = new PropertyModel<>( model, "account" );
