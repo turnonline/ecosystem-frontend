@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * The listener implementation handling logged in identity user instance as
@@ -70,7 +71,15 @@ public class IdentitySessionUserListener
             user = query.finish();
             user = new AuthenticatedUser( user );
             request.getSession().setAttribute( sessionAttribute, user );
-            response.sendRedirect( FrontendApplication.MY_ACCOUNT );
+
+            try
+            {
+                response.sendRedirect( FrontendApplication.MY_ACCOUNT );
+            }
+            catch ( IOException ioe )
+            {
+                logger.error( "An error has occurred while user redirect", e );
+            }
         }
         catch ( UnauthorizedException e )
         {
