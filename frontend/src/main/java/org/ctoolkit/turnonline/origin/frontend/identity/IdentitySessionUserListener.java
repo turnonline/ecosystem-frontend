@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * The listener implementation handling logged in identity user instance as
@@ -25,7 +24,6 @@ public class IdentitySessionUserListener
                                  @Nonnull HttpServletResponse response,
                                  @Nonnull FirebaseToken identity,
                                  @Nonnull String sessionAttribute )
-            throws IOException
     {
         String signedEmail = identity.getEmail();
 
