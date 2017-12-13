@@ -7,14 +7,11 @@ import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import org.ctoolkit.restapi.client.ApiCredential;
 import org.ctoolkit.services.common.CtoolkitCommonServicesModule;
-import org.ctoolkit.services.common.PropertyConfig;
-import org.ctoolkit.services.common.PropertyService;
 import org.ctoolkit.services.guice.CtoolkitServicesAppEngineModule;
 import org.ctoolkit.services.identity.CtoolkitServicesIdentityModule;
 import org.ctoolkit.services.identity.IdentityLoginListener;
 import org.ctoolkit.turnonline.client.appengine.TurnOnlineRestApiClientModule;
 import org.ctoolkit.turnonline.origin.frontend.identity.IdentitySessionUserListener;
-import org.ctoolkit.turnonline.origin.frontend.model.NoContent;
 import org.ctoolkit.turnonline.origin.frontend.server.ServerModule;
 import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
 
@@ -31,10 +28,6 @@ import java.io.InputStream;
 public class FrontendModule
         extends AbstractModule
 {
-    public static final String JOKER_DOMAIN = "turnonline.biz";
-
-    private static String TESTING_JOKER_DOMAIN = "ctoolkit.org";
-
     @Override
     protected void configure()
     {
@@ -46,11 +39,6 @@ public class FrontendModule
 
         // TurnOnline REST API modules
         install( new TurnOnlineRestApiClientModule() );
-
-        PropertyConfig config = new PropertyConfig();
-        config.setProductionAppI( "turn-online" );
-        config.setTestAppI( "turn-online" );
-        Names.bindProperties( binder(), config );
 
         Multibinder<IdentityLoginListener> identityListener;
         identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
@@ -68,22 +56,6 @@ public class FrontendModule
         }
 
         Names.bindProperties( binder(), credential );
-    }
-
-    @Provides
-    @Singleton
-    @Named( "JokerDomain" )
-    String provideJokerDomain( PropertyService propertyService )
-    {
-        return propertyService.isProductionEnvironment() ? JOKER_DOMAIN : TESTING_JOKER_DOMAIN;
-    }
-
-    @Provides
-    @Singleton
-    public NoContent provideNoContent()
-    {
-        // Note: this works for production only
-        return new NoContent( "", FrontendModule.JOKER_DOMAIN );
     }
 
     @Provides
