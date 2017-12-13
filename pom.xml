@@ -3,13 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.ctoolkit.turnonline</groupId>
-        <artifactId>turnonline-parent</artifactId>
-        <version>4</version>
+        <groupId>biz.turnonline.ecosystem</groupId>
+        <artifactId>turnonline-ecosystem</artifactId>
+        <version>1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.ctoolkit.turnonline.archetype</groupId>
     <artifactId>turnonline-frontend-identity-parent</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
