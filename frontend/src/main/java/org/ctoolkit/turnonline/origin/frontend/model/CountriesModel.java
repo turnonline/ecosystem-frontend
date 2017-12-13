@@ -5,10 +5,10 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
 import org.ctoolkit.turnonline.shared.resource.Country;
-import org.ctoolkit.turnonline.shared.resource.Locale;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -37,11 +37,9 @@ public class CountriesModel
     protected Map<String, Country> load()
     {
         Map<String, Country> countries = new HashMap<>();
+        Locale locale = FrontendSession.get().getLocale();
 
-        Locale locale = FrontendSession.get().getSellerLocale();
-
-        java.util.Locale utilLocale = new java.util.Locale( locale.getLanguage(), locale.getCountry() );
-        for ( Country item : resources.list( Country.class ).finish( utilLocale ) )
+        for ( Country item : resources.list( Country.class ).finish( locale ) )
         {
             countries.put( item.getCode(), item );
         }

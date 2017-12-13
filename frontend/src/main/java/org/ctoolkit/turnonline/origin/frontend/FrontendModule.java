@@ -17,11 +17,11 @@ import org.ctoolkit.turnonline.origin.frontend.identity.IdentitySessionUserListe
 import org.ctoolkit.turnonline.origin.frontend.model.NoContent;
 import org.ctoolkit.turnonline.origin.frontend.server.ServerModule;
 import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Frontend application high level guice module.
@@ -32,8 +32,6 @@ public class FrontendModule
         extends AbstractModule
 {
     public static final String JOKER_DOMAIN = "turnonline.biz";
-
-    private static final Logger log = LoggerFactory.getLogger( FrontendModule.class );
 
     private static String TESTING_JOKER_DOMAIN = "ctoolkit.org";
 
@@ -58,8 +56,16 @@ public class FrontendModule
         identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
         identityListener.addBinding().to( IdentitySessionUserListener.class );
 
+        InputStream stream = FrontendModule.class.getResourceAsStream( "/identity.properties" );
         ApiCredential credential = new ApiCredential();
-        credential.setEndpointUrl( "http://localhost:8990/_ah/api/" );
+        try
+        {
+            credential.load( stream );
+        }
+        catch ( IOException e )
+        {
+            throw new IllegalArgumentException( "identity.properties not found.", e );
+        }
 
         Names.bindProperties( binder(), credential );
     }
@@ -82,7 +88,8 @@ public class FrontendModule
 
     @Provides
     @Singleton
-    public IdentityOptions provideIdentityOptions()
+    public IdentityOptions provideIdentityOptions( @Named( "credential.identity.apiKey" ) String apiKey,
+                                                   @Named( "credential.identity.senderId" ) String senderId )
     {
         String appId = SystemProperty.applicationId.get();
         IdentityOptions options = new IdentityOptions();
@@ -92,11 +99,11 @@ public class FrontendModule
         options.getSignInOptions().add( "firebase.auth.GoogleAuthProvider.PROVIDER_ID" );
         options.getSignInOptions().add( "firebase.auth.EmailAuthProvider.PROVIDER_ID" );
         options.getSignInOptions().add( "firebase.auth.FacebookAuthProvider.PROVIDER_ID" );
-        options.setApiKey( "" );
+        options.setApiKey( apiKey );
         options.setProjectId( appId );
         options.setDatabaseName( appId );
         options.setBucketName( appId );
-        options.setSenderId( "" );
+        options.setSenderId( senderId );
 
         return options;
     }

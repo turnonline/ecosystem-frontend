@@ -6,7 +6,6 @@ import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 import org.ctoolkit.turnonline.origin.frontend.identity.AuthenticatedUser;
 import org.ctoolkit.turnonline.shared.resource.Domicile;
-import org.ctoolkit.turnonline.shared.resource.Locale;
 import org.ctoolkit.turnonline.shared.resource.User;
 import org.ctoolkit.wicket.standard.util.WicketUtil;
 
@@ -15,12 +14,14 @@ import javax.servlet.http.HttpSession;
 /**
  * TODO look at {@link AuthenticatedWebSession#isSignedIn()} and try to employ.
  *
- * @author <a href="mailto:jozef.pohorelec@ctoolkit.org>Jozef Pohorelec</a>"
+ * @author <a href="mailto:jozef.pohorelec@ctoolkit.org">Jozef Pohorelec</a>
  */
 public class FrontendSession
         extends AuthenticatedWebSession
 {
     static final String AUTH_USER_ATTRIBUTE = "__session_auth_user_attribute";
+
+    static final java.util.Locale DEFAULT_SESSION_LOCALE = java.util.Locale.ENGLISH;
 
     private static final long serialVersionUID = -5908999362458425557L;
 
@@ -30,8 +31,7 @@ public class FrontendSession
     {
         super( request );
 
-        //FIXME fix hardcoded values Session.sellerLocale and setSellerDomicile, initial values should come from IPageProperties
-        setSellerLocale( Domicile.SK.getLocale() );
+        setLocale( DEFAULT_SESSION_LOCALE );
         setSellerDomicile( Domicile.SK );
     }
 
@@ -74,16 +74,6 @@ public class FrontendSession
     public void setItemsCount( Long itemsCount )
     {
         setAttribute( "itemsCount", itemsCount );
-    }
-
-    public Locale getSellerLocale()
-    {
-        return ( Locale ) getAttribute( "sellerLocale" );
-    }
-
-    public void setSellerLocale( Locale sellerLocale )
-    {
-        setAttribute( "sellerLocale", sellerLocale );
     }
 
     public Domicile getSellerDomicile()

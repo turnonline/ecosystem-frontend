@@ -6,11 +6,11 @@ import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
 import org.ctoolkit.turnonline.shared.resource.BaseCodeBook;
 import org.ctoolkit.turnonline.shared.resource.Domicile;
-import org.ctoolkit.turnonline.shared.resource.Locale;
 
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Abstract list model dedicated for all {@link BaseCodeBook}. It retrieves code book list via {@link RestFacade}.
@@ -38,13 +38,12 @@ public abstract class CodeBookListModel<T extends BaseCodeBook>
     @Override
     protected List<T> load()
     {
-        Locale l = FrontendSession.get().getSellerLocale();
         Domicile domicile = FrontendSession.get().getSellerDomicile();
 
         HashMap<String, Object> criteria = new HashMap<>();
         criteria.put( "domicile", domicile );
 
-        java.util.Locale locale = new java.util.Locale( l.getLanguage(), l.getCountry() );
+        Locale locale = FrontendSession.get().getLocale();
         return resources.list( type() ).finish( criteria, locale );
     }
 }

@@ -41,6 +41,7 @@ public class FrontendApplication
 
     {
         include.add( "org/ctoolkit/turnonline/origin/frontend/FrontendApplication" );
+        include.add( "org/ctoolkit/turnonline/origin/frontend/FrontendApplication_sk" );
         include.add( "org/apache/wicket/Application" );
         include.add( "com/googlecode/wicket/jquery/ui/Initializer" );
         include.add( "org/apache/wicket/extensions/Initializer" );
