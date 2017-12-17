@@ -1,10 +1,10 @@
 package org.ctoolkit.turnonline.origin.frontend.model;
 
+import biz.turnonline.ecosystem.account.client.model.Country;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
-import org.ctoolkit.turnonline.shared.resource.Country;
 
 import javax.inject.Inject;
 import java.util.HashMap;

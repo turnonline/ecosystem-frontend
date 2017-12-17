@@ -1,16 +1,18 @@
 package org.ctoolkit.turnonline.origin.frontend;
 
+import biz.turnonline.ecosystem.account.client.AccountManagementAdapterModule;
+import biz.turnonline.ecosystem.account.client.AccountManagementApiModule;
 import com.google.appengine.api.utils.SystemProperty;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import org.ctoolkit.restapi.client.ApiCredential;
+import org.ctoolkit.restapi.client.appengine.FacadeAppEngineModule;
 import org.ctoolkit.services.common.CtoolkitCommonServicesModule;
 import org.ctoolkit.services.guice.CtoolkitServicesAppEngineModule;
 import org.ctoolkit.services.identity.CtoolkitServicesIdentityModule;
 import org.ctoolkit.services.identity.IdentityLoginListener;
-import org.ctoolkit.turnonline.client.appengine.TurnOnlineRestApiClientModule;
 import org.ctoolkit.turnonline.origin.frontend.identity.IdentitySessionUserListener;
 import org.ctoolkit.turnonline.origin.frontend.server.ServerModule;
 import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
@@ -36,9 +38,11 @@ public class FrontendModule
         install( new CtoolkitCommonServicesModule() );
         install( new CtoolkitServicesAppEngineModule() );
         install( new CtoolkitServicesIdentityModule() );
+        install( new FacadeAppEngineModule() );
 
-        // TurnOnline REST API modules
-        install( new TurnOnlineRestApiClientModule() );
+        // Account and Contact management client modules
+        install( new AccountManagementApiModule() );
+        install( new AccountManagementAdapterModule() );
 
         Multibinder<IdentityLoginListener> identityListener;
         identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );

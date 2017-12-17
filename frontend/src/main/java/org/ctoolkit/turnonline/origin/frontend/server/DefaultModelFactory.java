@@ -1,5 +1,6 @@
 package org.ctoolkit.turnonline.origin.frontend.server;
 
+import biz.turnonline.ecosystem.account.client.model.Account;
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
@@ -12,14 +13,10 @@ import org.apache.wicket.request.resource.UrlResourceReference;
 import org.apache.wicket.util.string.Strings;
 import org.ctoolkit.turnonline.origin.frontend.FrontendApplication;
 import org.ctoolkit.turnonline.origin.frontend.FrontendSession;
-import org.ctoolkit.turnonline.origin.frontend.identity.AuthenticatedUser;
+import org.ctoolkit.turnonline.origin.frontend.identity.Role;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.page.AccountSettings;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.page.MyAccountBasics;
 import org.ctoolkit.turnonline.origin.frontend.page.ShoppingCart;
-import org.ctoolkit.turnonline.shared.content.Public;
-import org.ctoolkit.turnonline.shared.content.PublicContent;
-import org.ctoolkit.turnonline.shared.content.Seller;
-import org.ctoolkit.turnonline.shared.resource.User;
 import org.ctoolkit.wicket.turnonline.identity.page.IdentityLogin;
 import org.ctoolkit.wicket.turnonline.identity.page.SignUp;
 import org.ctoolkit.wicket.turnonline.menu.DefaultSchema;
@@ -90,9 +87,9 @@ class DefaultModelFactory
         {
             if ( loggedInModel.getObject() )
             {
-                AuthenticatedUser loggedInUser = FrontendSession.get().getLoggedInUser();
+                Account loggedInUser = FrontendSession.get().getLoggedInUser();
                 String formattedName = loggedInUser.getEmail();
-                if ( loggedInUser.isCompany() )
+                if ( loggedInUser.getCompany() )
                 {
                     if ( !Strings.isEmpty( loggedInUser.getBusinessName() ) )
                     {
@@ -101,9 +98,9 @@ class DefaultModelFactory
                 }
                 else
                 {
-                    if ( !Strings.isEmpty( loggedInUser.getName() ) && !Strings.isEmpty( loggedInUser.getSurname() ) )
+                    if ( !Strings.isEmpty( loggedInUser.getFirstName() ) && !Strings.isEmpty( loggedInUser.getLastName() ) )
                     {
-                        formattedName = loggedInUser.getName() + " " + loggedInUser.getSurname();
+                        formattedName = loggedInUser.getFirstName() + " " + loggedInUser.getLastName();
                     }
                 }
 
@@ -158,16 +155,7 @@ class DefaultModelFactory
     @Override
     public IModel<String> getTermsUrlModel( @Nullable IModel<?> pageModel )
     {
-        String termsUrl = null;
-        Object modelObject = pageModel == null ? null : pageModel.getObject();
-
-        if ( modelObject instanceof Public && ( ( Public ) modelObject ).getSeller() != null )
-        {
-            Seller seller = ( ( Public ) modelObject ).getSeller();
-            termsUrl = seller.getTermsUrl();
-        }
-
-        return termsUrl == null ? null : new Model<>( termsUrl );
+        return null;
     }
 
     /**
@@ -176,23 +164,7 @@ class DefaultModelFactory
     @Override
     public IModel<String> getLogoUrlModel( @Nullable IModel<?> pageModel )
     {
-        IModel<String> logoModel = null;
-        Object modelObject = pageModel == null ? null : pageModel.getObject();
-
-        if ( modelObject instanceof Public
-                && ( ( Public ) modelObject ).getSeller() != null
-                && ( ( Public ) modelObject ).getSeller().getLogoUrl() != null )
-        {
-            Seller seller = ( ( Public ) modelObject ).getSeller();
-            logoModel = new Model<>( seller.getLogoUrl() );
-        }
-
-        if ( logoModel == null )
-        {
-            logoModel = defaultLogoModel;
-        }
-
-        return logoModel;
+        return defaultLogoModel;
     }
 
     @Override
@@ -261,16 +233,7 @@ class DefaultModelFactory
     @Override
     public String getGoogleAnalyticsTrackingId( @Nullable IModel<?> pageModel )
     {
-        String trackingId = null;
-        Object modelObject = pageModel == null ? null : pageModel.getObject();
-
-        if ( modelObject instanceof PublicContent )
-        {
-            PublicContent properties = ( PublicContent ) modelObject;
-            trackingId = properties.getAnalyticsAccount();
-        }
-
-        return trackingId;
+        return null;
     }
 
     @Override
@@ -288,7 +251,7 @@ class DefaultModelFactory
     @Override
     public String getAccountRole()
     {
-        return User.Role.ACCOUNT.name();
+        return Role.SELLER;
     }
 
     @Override

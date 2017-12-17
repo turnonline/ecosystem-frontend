@@ -1,8 +1,9 @@
 package org.ctoolkit.turnonline.origin.frontend.myaccount.model;
 
+import biz.turnonline.ecosystem.account.client.model.Account;
+import biz.turnonline.ecosystem.account.client.model.AccountPersonalAddress;
+import biz.turnonline.ecosystem.account.client.model.Country;
 import org.apache.wicket.model.IModel;
-import org.ctoolkit.turnonline.shared.resource.Country;
-import org.ctoolkit.turnonline.shared.resource.User;
 import org.ctoolkit.wicket.standard.model.DropDownBridgeModel;
 
 import javax.annotation.Nonnull;
@@ -10,29 +11,34 @@ import java.util.Map;
 
 /**
  * The model to get {@link Country} and set related code to
- * {@link User#setPersonalAddressState(String)} taken from the countries map.
+ * {@link AccountPersonalAddress#setCountry(String)} taken from the countries map.
  *
  * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
  */
 public class PersonalAddressCountryModel
-        extends DropDownBridgeModel<Country, User>
+        extends DropDownBridgeModel<Country, Account>
 {
     private static final long serialVersionUID = 938155036445630296L;
 
-    public PersonalAddressCountryModel( IModel<User> model, IModel<Map<String, Country>> countriesModel )
+    public PersonalAddressCountryModel( IModel<Account> model, IModel<Map<String, Country>> countriesModel )
     {
         super( model, countriesModel );
     }
 
     @Override
-    public String getCode( @Nonnull User target )
+    public String getCode( @Nonnull Account target )
     {
-        return target.getPersonalAddressState();
+        AccountPersonalAddress address = target.getPersonalAddress();
+        return address == null ? null : address.getCountry();
     }
 
     @Override
-    public void updateCode( Country country, @Nonnull User target )
+    public void updateCode( Country country, @Nonnull Account target )
     {
-        target.setPersonalAddressState( country == null ? null : country.getCode() );
+        AccountPersonalAddress address = target.getPersonalAddress();
+        if ( address != null )
+        {
+            address.setCountry( country == null ? null : country.getCode() );
+        }
     }
 }

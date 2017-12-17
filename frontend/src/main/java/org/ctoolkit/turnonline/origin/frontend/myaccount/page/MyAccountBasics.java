@@ -1,5 +1,9 @@
 package org.ctoolkit.turnonline.origin.frontend.myaccount.page;
 
+import biz.turnonline.ecosystem.account.client.model.Account;
+import biz.turnonline.ecosystem.account.client.model.AccountPostalAddress;
+import biz.turnonline.ecosystem.account.client.model.Country;
+import biz.turnonline.ecosystem.account.client.model.LegalForm;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormSubmitBehavior;
@@ -17,19 +21,16 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.string.Strings;
 import org.ctoolkit.turnonline.origin.frontend.identity.Role;
-import org.ctoolkit.turnonline.origin.frontend.model.AuthenticatedMyAccountContent;
-import org.ctoolkit.turnonline.origin.frontend.model.CodeBookRenderer;
 import org.ctoolkit.turnonline.origin.frontend.model.CountriesModel;
+import org.ctoolkit.turnonline.origin.frontend.model.CountryRenderer;
+import org.ctoolkit.turnonline.origin.frontend.model.LegalFormCodeModel;
 import org.ctoolkit.turnonline.origin.frontend.model.LegalFormListModel;
-import org.ctoolkit.turnonline.origin.frontend.model.MyAccountContent;
-import org.ctoolkit.turnonline.origin.frontend.model.StringCodeBookModel;
+import org.ctoolkit.turnonline.origin.frontend.model.LegalFormRenderer;
+import org.ctoolkit.turnonline.origin.frontend.model.MyAccountModel;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.event.AccountUpdateEvent;
-import org.ctoolkit.turnonline.origin.frontend.myaccount.model.CompanyAddressCountryModel;
+import org.ctoolkit.turnonline.origin.frontend.myaccount.model.CompanyDomicileModel;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.model.PersonalAddressCountryModel;
 import org.ctoolkit.turnonline.origin.frontend.myaccount.model.PostalAddressCountryModel;
-import org.ctoolkit.turnonline.shared.resource.Country;
-import org.ctoolkit.turnonline.shared.resource.LegalForm;
-import org.ctoolkit.turnonline.shared.resource.User;
 import org.ctoolkit.wicket.standard.identity.behavior.FirebaseAppInit;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxButton;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxDropDown;
@@ -53,9 +54,9 @@ import java.util.Map;
  *
  * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
  */
-@AuthorizeInstantiation( {Role.USER, Role.ACCOUNT} )
+@AuthorizeInstantiation( {Role.STANDARD} )
 public class MyAccountBasics
-        extends DecoratedPage<MyAccountContent>
+        extends DecoratedPage<Account>
 {
     private static final long serialVersionUID = -1303189991396080065L;
 
@@ -68,21 +69,20 @@ public class MyAccountBasics
     {
         add( new FirebaseAppInit( identityOptions ) );
 
-        final AuthenticatedMyAccountContent model = new AuthenticatedMyAccountContent();
+        final MyAccountModel accountModel = new MyAccountModel();
         final IModel<Map<String, Country>> countriesModel = new CountriesModel();
-        final IModel<User> accountModel = new PropertyModel<>( model, "account" );
 
-        setModel( model );
+        setModel( accountModel );
 
         // form
-        Form<User> form = new Form<User>( "form", accountModel )
+        Form<Account> form = new Form<Account>( "form", accountModel )
         {
             private static final long serialVersionUID = -938924956863034465L;
 
             @Override
             protected void onSubmit()
             {
-                User account = getModelObject();
+                Account account = getModelObject();
                 send( getPage(), Broadcast.BREADTH, new AccountUpdateEvent( account ) );
             }
         };
@@ -95,7 +95,7 @@ public class MyAccountBasics
         form.add( new Label( "email", new PropertyModel<>( accountModel, "email" ) ) );
 
         // company basic info
-        final CompanyBasicInfo<User> basicInfo = new CompanyBasicInfo<User>( "companyData", accountModel )
+        final CompanyBasicInfo<Account> basicInfo = new CompanyBasicInfo<Account>( "companyData", accountModel )
         {
             private static final long serialVersionUID = -2992960490517951459L;
 
@@ -104,16 +104,16 @@ public class MyAccountBasics
             {
                 LegalFormListModel choices = new LegalFormListModel();
                 return new IndicatingAjaxDropDown<>( componentId,
-                        new StringCodeBookModel<>( accountModel, "legalForm", choices ),
-                        choices, new CodeBookRenderer<>() );
+                        new LegalFormCodeModel( accountModel, "legalForm", choices ),
+                        choices, new LegalFormRenderer() );
             }
 
             @Override
             protected void onConfigure()
             {
                 super.onConfigure();
-                User user = getModelObject();
-                this.setVisible( user.isCompany() );
+                Account account = getModelObject();
+                this.setVisible( account.getCompany() );
             }
         };
         form.add( basicInfo );
@@ -137,8 +137,8 @@ public class MyAccountBasics
             public void onConfigure( Component component )
             {
                 super.onConfigure( component );
-                User user = basicInfo.getModelObject();
-                boolean visible = user == null || user.isVatPayer();
+                Account account = basicInfo.getModelObject();
+                boolean visible = account == null || account.getVatPayer();
                 component.setVisible( visible );
             }
         } );
@@ -154,20 +154,20 @@ public class MyAccountBasics
             @Override
             protected void onSubmit( AjaxRequestTarget target )
             {
-                User user = ( User ) basicInfo.getDefaultModelObject();
+                Account account = ( Account ) basicInfo.getDefaultModelObject();
                 String rawTaxIdValue = taxId.getRawInput();
 
-                if ( rawTaxIdValue != null && Strings.isEmpty( user.getVatId() ) )
+                if ( rawTaxIdValue != null && Strings.isEmpty( account.getVatId() ) )
                 {
                     // VAT state prefix proposal
-                    String state = user.getState();
+                    String state = account.getDomicile();
                     state = state == null ? "" : state.toUpperCase();
                     //noinspection unchecked
                     vatId.getModel().setObject( state + rawTaxIdValue );
                 }
 
                 // must be set manually as getDefaultProcessing() returns false
-                vatPayer.setModelObject( !user.isVatPayer() );
+                vatPayer.setModelObject( !account.getVatPayer() );
 
                 if ( target != null )
                 {
@@ -183,7 +183,7 @@ public class MyAccountBasics
         } );
 
         // personal data panel
-        PersonalDataPanel<User> personalData = new PersonalDataPanel<User>( "personalData", accountModel )
+        PersonalDataPanel<Account> personalData = new PersonalDataPanel<Account>( "personalData", accountModel )
         {
             private static final long serialVersionUID = -2808922906891760016L;
 
@@ -191,14 +191,14 @@ public class MyAccountBasics
             protected void onConfigure()
             {
                 super.onConfigure();
-                User user = getModelObject();
-                this.setVisible( !user.isCompany() );
+                Account account = getModelObject();
+                this.setVisible( !account.getCompany() );
             }
         };
         form.add( personalData );
 
         // personal address panel
-        PersonalAddressPanel<User> address = new PersonalAddressPanel<User>( "personalAddress", accountModel )
+        PersonalAddressPanel<Account> address = new PersonalAddressPanel<Account>( "personalAddress", accountModel )
         {
             private static final long serialVersionUID = 3481146248010938807L;
 
@@ -207,7 +207,7 @@ public class MyAccountBasics
             {
                 return new IndicatingAjaxDropDown<>( componentId,
                         new PersonalAddressCountryModel( accountModel, countriesModel ),
-                        new CodeBookRenderer<>(),
+                        new CountryRenderer(),
                         countriesModel );
             }
 
@@ -215,13 +215,13 @@ public class MyAccountBasics
             protected void onConfigure()
             {
                 super.onConfigure();
-                User user = getModelObject();
-                this.setVisible( !user.isCompany() );
+                Account account = getModelObject();
+                this.setVisible( !account.getCompany() );
             }
         };
         form.add( address );
 
-        address.addPersonalAddressState( new OnChangeAjaxBehavior()
+        address.addCountry( new OnChangeAjaxBehavior()
         {
             private static final long serialVersionUID = -1016447969591778948L;
 
@@ -232,8 +232,8 @@ public class MyAccountBasics
         } );
 
         // company address panel
-        CompanyAddressPanel<User> companyAddress;
-        companyAddress = new CompanyAddressPanel<User>( "companyAddress", accountModel, false, false )
+        CompanyAddressPanel<Account> companyAddress;
+        companyAddress = new CompanyAddressPanel<Account>( "companyAddress", accountModel, false, false )
         {
             private static final long serialVersionUID = -6760545061622186549L;
 
@@ -241,8 +241,8 @@ public class MyAccountBasics
             protected DropDownChoice<Country> provideCountry( String componentId )
             {
                 return new IndicatingAjaxDropDown<>( componentId,
-                        new CompanyAddressCountryModel( accountModel, countriesModel ),
-                        new CodeBookRenderer<>(),
+                        new CompanyDomicileModel( accountModel, countriesModel ),
+                        new CountryRenderer(),
                         countriesModel );
             }
 
@@ -250,13 +250,13 @@ public class MyAccountBasics
             protected void onConfigure()
             {
                 super.onConfigure();
-                User user = getModelObject();
-                this.setVisible( user.isCompany() );
+                Account account = getModelObject();
+                this.setVisible( account.getCompany() );
             }
         };
         form.add( companyAddress );
 
-        companyAddress.addCompanyAddressState( new OnChangeAjaxBehavior()
+        companyAddress.addCountry( new OnChangeAjaxBehavior()
         {
             private static final long serialVersionUID = -5476413125490349124L;
 
@@ -266,7 +266,10 @@ public class MyAccountBasics
             }
         } );
 
-        PostalAddressPanel<User> postalAddress = new PostalAddressPanel<User>( "postal-address", accountModel )
+        IModel<AccountPostalAddress> postalAddressModel = new PropertyModel<>( accountModel, "postalAddress" );
+        IModel<Boolean> hasAddress = new PropertyModel<>( accountModel, "hasPostalAddress" );
+        PostalAddressPanel<AccountPostalAddress> postalAddress;
+        postalAddress = new PostalAddressPanel<AccountPostalAddress>( "postal-address", postalAddressModel, hasAddress )
         {
             private static final long serialVersionUID = -930960688138308527L;
 
@@ -275,13 +278,13 @@ public class MyAccountBasics
             {
                 return new IndicatingAjaxDropDown<>( componentId,
                         new PostalAddressCountryModel( accountModel, countriesModel ),
-                        new CodeBookRenderer<>(),
+                        new CountryRenderer(),
                         countriesModel );
             }
         };
         form.add( postalAddress );
 
-        postalAddress.addPostalAddressStreet( new OnChangeAjaxBehavior()
+        postalAddress.addStreet( new OnChangeAjaxBehavior()
         {
             private static final long serialVersionUID = 4050800366443676166L;
 
@@ -291,7 +294,8 @@ public class MyAccountBasics
             }
         } );
 
-        form.add( new SimplifiedContactFieldSet<>( "contact", accountModel ) );
+        PropertyModel<Object> billingContactModel = PropertyModel.of( accountModel, "billingContact" );
+        form.add( new SimplifiedContactFieldSet<>( "contact", billingContactModel ) );
         // save button
         form.add( new IndicatingAjaxButton( "save", new I18NResourceModel( "button.save" ), form ) );
     }

@@ -1,7 +1,5 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
-import org.ctoolkit.turnonline.shared.resource.User;
-
 /**
  * The application role constants.
  *
@@ -10,17 +8,12 @@ import org.ctoolkit.turnonline.shared.resource.User;
 public class Role
 {
     /**
-     * Constant of the user role {@link User.Role#USER}
+     * Constant of the standard user role
      */
-    public static final String USER = "USER";
+    public static final String STANDARD = "STANDARD";
 
     /**
-     * Constant of the user role {@link User.Role#ACCOUNT}
+     * Constant of the seller account user role.
      */
-    public static final String ACCOUNT = "ACCOUNT";
-
-    /**
-     * Constant of the user role {@link User.Role#CUSTOMER}
-     */
-    public static final String CUSTOMER = "CUSTOMER";
+    public static final String SELLER = "SELLER";
 }

@@ -1,15 +1,14 @@
 package org.ctoolkit.turnonline.origin.frontend;
 
+import biz.turnonline.ecosystem.account.client.model.Account;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
-import org.ctoolkit.turnonline.origin.frontend.identity.AuthenticatedUser;
-import org.ctoolkit.turnonline.shared.resource.Domicile;
-import org.ctoolkit.turnonline.shared.resource.User;
 import org.ctoolkit.wicket.standard.util.WicketUtil;
 
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 
 /**
  * TODO look at {@link AuthenticatedWebSession#isSignedIn()} and try to employ.
@@ -21,7 +20,7 @@ public class FrontendSession
 {
     static final String AUTH_USER_ATTRIBUTE = "__session_auth_user_attribute";
 
-    static final java.util.Locale DEFAULT_SESSION_LOCALE = java.util.Locale.ENGLISH;
+    static final Locale DEFAULT_SESSION_LOCALE = Locale.ENGLISH;
 
     private static final long serialVersionUID = -5908999362458425557L;
 
@@ -32,7 +31,6 @@ public class FrontendSession
         super( request );
 
         setLocale( DEFAULT_SESSION_LOCALE );
-        setSellerDomicile( Domicile.SK );
     }
 
     public static FrontendSession get()
@@ -53,7 +51,7 @@ public class FrontendSession
 
         if ( isLoggedIn() )
         {
-            roles.add( getLoggedInUser().getRole().name() );
+            roles.add( getLoggedInUser().getRole() );
         }
 
         return roles;
@@ -76,12 +74,12 @@ public class FrontendSession
         setAttribute( "itemsCount", itemsCount );
     }
 
-    public Domicile getSellerDomicile()
+    public String getSellerDomicile()
     {
-        return ( Domicile ) getAttribute( "sellerDomicile" );
+        return ( String ) getAttribute( "sellerDomicile" );
     }
 
-    public void setSellerDomicile( Domicile sellerDomicile )
+    public void setSellerDomicile( String sellerDomicile )
     {
         setAttribute( "sellerDomicile", sellerDomicile );
     }
@@ -96,9 +94,9 @@ public class FrontendSession
         return getLoggedInUser() != null;
     }
 
-    public boolean isLoggedIn( User account )
+    public boolean isLoggedIn( Account account )
     {
-        User loggedInUser = getLoggedInUser();
+        Account loggedInUser = getLoggedInUser();
         return loggedInUser != null && loggedInUser.equals( account );
     }
 
@@ -111,15 +109,15 @@ public class FrontendSession
         return loggedInUserId;
     }
 
-    public AuthenticatedUser getLoggedInUser()
+    public Account getLoggedInUser()
     {
         HttpSession session = WicketUtil.getHttpServletRequest().getSession();
-        return ( AuthenticatedUser ) session.getAttribute( AUTH_USER_ATTRIBUTE );
+        return ( Account ) session.getAttribute( AUTH_USER_ATTRIBUTE );
     }
 
-    public void updateLoggedInUser( User user )
+    public void updateLoggedInUser( Account account )
     {
         HttpSession session = WicketUtil.getHttpServletRequest().getSession();
-        session.setAttribute( AUTH_USER_ATTRIBUTE, new AuthenticatedUser( user ) );
+        session.setAttribute( AUTH_USER_ATTRIBUTE, account );
     }
 }

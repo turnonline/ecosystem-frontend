@@ -9,6 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
+    <groupId>org.ctoolkit.turnonline.archetype</groupId>
     <artifactId>turnonline-frontend-identity-parent</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>

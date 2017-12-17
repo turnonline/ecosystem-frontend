@@ -15,7 +15,7 @@ import javax.inject.Inject;
  *
  * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
  */
-@AuthorizeInstantiation( Role.ACCOUNT )
+@AuthorizeInstantiation( Role.SELLER )
 public class AccountSettings<T>
         extends DecoratedPage<T>
 {

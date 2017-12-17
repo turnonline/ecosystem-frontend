@@ -1,8 +1,8 @@
 package org.ctoolkit.turnonline.origin.frontend.identity;
 
+import biz.turnonline.ecosystem.account.client.model.Account;
 import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.services.identity.IdentityLoginListener;
-import org.ctoolkit.turnonline.shared.resource.Account;
 
 import javax.annotation.Nonnull;
 import javax.inject.Singleton;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * The listener implementation handling logged in identity user instance as
- * {@link AuthenticatedUser} stored in the session.
+ * {@link Account} stored in the session.
  *
  * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
  */
@@ -27,10 +27,10 @@ public class IdentitySessionUserListener
     {
         String signedEmail = identity.getEmail();
 
-        Account user = new Account();
-        user.setEmail( signedEmail );
-        user.setCompany( false );
+        Account account = new Account();
+        account.setEmail( signedEmail );
+        account.setCompany( false );
 
-        request.getSession().setAttribute( sessionAttribute, new AuthenticatedUser( user ) );
+        request.getSession().setAttribute( sessionAttribute, account );
     }
 }
