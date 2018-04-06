@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.ctoolkit.turnonline.archetype</groupId>
+    <groupId>biz.turnonline.ecosystem.archetype</groupId>
     <artifactId>turnonline-frontend-identity-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
@@ -37,7 +37,7 @@
         <developer>
             <id>medvegy</id>
             <name>Aurel Medvegy</name>
-            <email>aurel.medvegy@ctoolkit.org</email>
+            <email>medvegy@turnonline.biz</email>
         </developer>
     </developers>
 
