@@ -50,9 +50,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:[fetch=]git@github.com:turnonline/turnonline-archetype.git</connection>
-        <developerConnection>scm:git:[push=]git@github.com:turnonline/turnonline-archetype.git</developerConnection>
-        <url>https://github.com/turnonline/turnonline-archetype</url>
+        <connection>scm:git:[fetch=]git@github.com:turnonline/frontend-archetype.git</connection>
+        <developerConnection>scm:git:[push=]git@github.com:turnonline/frontend-archetype.git</developerConnection>
+        <url>https://github.com/turnonline/frontend-archetype</url>
     </scm>
 
     <distributionManagement>
