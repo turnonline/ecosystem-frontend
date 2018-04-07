@@ -40,8 +40,8 @@ public class FrontendApplication
     private Set<String> include = new HashSet<>();
 
     {
-        include.add( "org/ctoolkit/turnonline/origin/frontend/FrontendApplication" );
-        include.add( "org/ctoolkit/turnonline/origin/frontend/FrontendApplication_sk" );
+        include.add( "biz/turnonline/ecosystem/origin/frontend/FrontendApplication" );
+        include.add( "biz/turnonline/ecosystem/origin/frontend/FrontendApplication_sk" );
         include.add( "org/apache/wicket/Application" );
         include.add( "com/googlecode/wicket/jquery/ui/Initializer" );
         include.add( "org/apache/wicket/extensions/Initializer" );
