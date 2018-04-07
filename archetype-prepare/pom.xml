@@ -28,7 +28,7 @@
     <artifactId>turnonline-frontend-app-archetype-prepare</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>TurnOnline.biz Prepare Archetype Resources</name>
+    <name>Prepare Archetype Resources</name>
 
     <build>
         <plugins>
