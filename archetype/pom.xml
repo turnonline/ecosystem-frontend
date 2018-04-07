@@ -51,9 +51,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:[fetch=]git@github.com:turnonline/frontend-firebase-auth-archetype.git</connection>
-        <developerConnection>scm:git:[push=]git@github.com:turnonline/frontend-firebase-auth-archetype.git</developerConnection>
-        <url>https://github.com/turnonline/frontend-firebase-auth-archetype</url>
+        <connection>scm:git:[fetch=]git@github.com:turnonline/frontend-firebase-auth.git</connection>
+        <developerConnection>scm:git:[push=]git@github.com:turnonline/frontend-firebase-auth.git</developerConnection>
+        <url>https://github.com/turnonline/frontend-firebase-auth</url>
     </scm>
 
     <distributionManagement>
