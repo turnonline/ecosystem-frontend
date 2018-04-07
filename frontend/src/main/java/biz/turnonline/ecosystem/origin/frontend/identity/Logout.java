@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Single purpose servlet to invalidate session and redirect to the login page.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 @Singleton
 public class Logout

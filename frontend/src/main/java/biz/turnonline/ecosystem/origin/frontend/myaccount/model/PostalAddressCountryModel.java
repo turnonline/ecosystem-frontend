@@ -14,7 +14,7 @@ import java.util.Map;
  * The model to get {@link Country} and set related code to
  * {@link AccountPostalAddress#setCountry(String)} (String)} taken from the countries map.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class PostalAddressCountryModel
         extends DropDownBridgeModel<Country, Account>

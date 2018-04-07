@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * The listener implementation handling logged in identity user instance as
  * {@link Account} stored in the session.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 @Singleton
 public class IdentitySessionUserListener

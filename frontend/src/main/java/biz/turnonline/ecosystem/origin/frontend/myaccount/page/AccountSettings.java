@@ -13,7 +13,7 @@ import javax.inject.Inject;
 /**
  * The page dedicated for advanced account settings.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 @AuthorizeInstantiation( Role.SELLER )
 public class AccountSettings<T>
