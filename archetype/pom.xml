@@ -4,12 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>biz.turnonline.ecosystem.archetype</groupId>
-    <artifactId>turnonline-frontend-identity-archetype</artifactId>
+    <artifactId>turnonline-frontend-firebase-auth-archetype</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
-    <name>TurnOnline.biz Frontend Identity Archetype Build</name>
+    <name>Frontend App skeleton with Firebase Auth Archetype</name>
     <description>
-        TurnOnline.biz Ecosystem: Frontend Identity Archetype with built-in Google Identity Toolkit
+        TurnOnline.biz Ecosystem Frontend App skeleton with Firebase Authentication
+        built from scratch for Google App Engine Java standard environment
     </description>
     <url>https://www.turnonline.biz</url>
 
@@ -50,9 +51,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:[fetch=]git@github.com:turnonline/frontend-archetype.git</connection>
-        <developerConnection>scm:git:[push=]git@github.com:turnonline/frontend-archetype.git</developerConnection>
-        <url>https://github.com/turnonline/frontend-archetype</url>
+        <connection>scm:git:[fetch=]git@github.com:turnonline/frontend-firebase-auth-archetype.git</connection>
+        <developerConnection>scm:git:[push=]git@github.com:turnonline/frontend-firebase-auth-archetype.git</developerConnection>
+        <url>https://github.com/turnonline/frontend-firebase-auth-archetype</url>
     </scm>
 
     <distributionManagement>

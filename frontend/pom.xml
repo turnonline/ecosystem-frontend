@@ -4,16 +4,19 @@
 
     <parent>
         <groupId>biz.turnonline.ecosystem.archetype</groupId>
-        <artifactId>turnonline-frontend-identity-parent</artifactId>
+        <artifactId>turnonline-frontend-firebase-auth-parent</artifactId>
         <version>0.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>turnonline-frontend-identity</artifactId>
+    <artifactId>turnonline-frontend-firebase-auth</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>TurnOnline.biz Frontend Identity</name>
-    <description>TurnOnline.biz Ecosystem: Frontend Identity with built-in Google Identity Toolkit</description>
+    <name>Frontend App skeleton with Firebase Auth</name>
+    <description>
+        TurnOnline.biz Ecosystem Frontend App skeleton with Firebase Authentication
+        built from scratch for Google App Engine Java standard environment
+    </description>
     <url>https://www.turnonline.biz</url>
 
     <build>
