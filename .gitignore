@@ -1,5 +1,8 @@
+# Google App Engine generated folder
+appengine-generated/
+
 # IntelliJ IDEA Files #
-.idea
+.idea/
 *.iml
 *.ipr
 *.iws
