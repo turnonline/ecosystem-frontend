@@ -5,7 +5,7 @@ import biz.turnonline.ecosystem.account.client.model.Account;
 /**
  * The account update event with {@link Account} payload.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class AccountUpdateEvent
 {

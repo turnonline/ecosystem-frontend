@@ -11,7 +11,7 @@ import javax.inject.Inject;
 /**
  * The default shopping cart page.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class ShoppingCart<T>
         extends DecoratedPage<T>

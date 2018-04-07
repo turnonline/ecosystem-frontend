@@ -30,7 +30,7 @@ import java.util.Set;
 /**
  * The application entry point and its configuration.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class FrontendApplication
         extends AppEngineApplication

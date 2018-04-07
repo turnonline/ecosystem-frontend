@@ -22,7 +22,7 @@ import java.io.IOException;
  * {@link Account} stored in the session.
  * In case that no user has found for authenticated email, user account will be created (sign up).
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 @Singleton
 public class IdentitySessionUserListener

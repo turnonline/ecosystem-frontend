@@ -25,7 +25,7 @@ import java.io.InputStream;
 /**
  * Frontend application high level guice module.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class FrontendModule
         extends AbstractModule

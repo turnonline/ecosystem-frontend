@@ -58,7 +58,7 @@ import java.util.Map;
 /**
  * The page dedicated for basic account settings.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 @AuthorizeInstantiation( {Role.STANDARD} )
 public class MyAccountBasics

@@ -15,7 +15,7 @@ import java.util.Map;
  * Dedicated stateless model that retrieves map of countries as <code>Map<String, Country></code> code->country.
  * Locale based on the seller's locale.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class CountriesModel
         extends LoadableDetachableModel<Map<String, Country>>

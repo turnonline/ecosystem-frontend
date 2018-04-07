@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * The frontend servlet module to configure Guice to serve requests at custom defined servlet path.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class FrontendServletModule
         extends ServletModule

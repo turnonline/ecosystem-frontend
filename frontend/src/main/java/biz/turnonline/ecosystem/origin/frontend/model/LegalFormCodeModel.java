@@ -12,7 +12,7 @@ import java.util.List;
  * The wicket model to convert code books' code string value of the target model into {@link LegalForm}
  * instance and vise versa.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class LegalFormCodeModel
         extends DropDownListBridgeModel<LegalForm, String>

@@ -6,7 +6,7 @@ import org.ctoolkit.wicket.turnonline.model.IModelFactory;
 /**
  * The frontend server module to configure Guice.
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class ServerModule
         extends AbstractModule
