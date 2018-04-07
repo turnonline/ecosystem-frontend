@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.ctoolkit.turnonline</groupId>
-        <artifactId>turnonline-parent</artifactId>
-        <version>4</version>
+        <groupId>biz.turnonline.ecosystem</groupId>
+        <artifactId>turnonline-ecosystem</artifactId>
+        <version>1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.ctoolkit.turnonline.archetype</groupId>
+    <groupId>biz.turnonline.ecosystem.archetype</groupId>
     <artifactId>turnonline-frontend-app-parent</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -18,21 +18,21 @@
     <url>https://www.turnonline.biz</url>
 
     <scm>
-        <connection>scm:git:[fetch=]git@github.com:turnonline/turnonline-archetype.git</connection>
-        <developerConnection>scm:git:[push=]git@github.com:turnonline/turnonline-archetype.git</developerConnection>
-        <url>https://github.com/turnonline/turnonline-archetype</url>
+        <connection>scm:git:[fetch=]git@github.com:turnonline/frontend-archetype.git</connection>
+        <developerConnection>scm:git:[push=]git@github.com:turnonline/frontend-archetype.git</developerConnection>
+        <url>https://github.com/turnonline/frontend-archetype</url>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
-        <url>https://github.com/turnonline/turnonline-archetype/issues</url>
+        <url>https://github.com/turnonline/frontend-archetype/issues</url>
     </issueManagement>
 
     <developers>
         <developer>
             <name>Aurel Medvegy</name>
             <id>medvegy</id>
-            <email>aurel.medvegy@ctoolkit.org</email>
+            <email>medvegy@turnonline.biz</email>
         </developer>
     </developers>
 

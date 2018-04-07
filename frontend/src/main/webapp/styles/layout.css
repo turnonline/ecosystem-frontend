@@ -1037,9 +1037,9 @@ footer ul li a:hover {
 }
 
 footer .copyright {
-    padding: 0 0 120px 0;
+    padding: 0 0 20px 0;
     font-size: 0.8em;
-    background: url("../images/logo-footer.png") #252424 50% 60px no-repeat;
+    background-color: #252424;
 }
 
 footer .copyright strong {
@@ -1069,8 +1069,8 @@ section {
 }
 
 .thumbnail {
-    height: 100px;
-    width: 240px;
+    height: 60px;
+    width: 60px;
 }
 
 /*
