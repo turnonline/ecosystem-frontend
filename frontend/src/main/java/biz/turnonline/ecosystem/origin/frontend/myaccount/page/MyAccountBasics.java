@@ -328,11 +328,11 @@ public class MyAccountBasics
         else if ( event.getPayload() instanceof AccountUpdateEvent )
         {
             AccountUpdateEvent payload = ( AccountUpdateEvent ) event.getPayload();
-            User account = payload.getAccount();
+            Account account = payload.getAccount();
 
             if ( FrontendSession.get().isLoggedIn( account ) )
             {
-                User updated = resources.update( new User( account ) )
+                Account updated = resources.update( account )
                         .identifiedBy( new Identifier( account.getId() ) ).finish();
 
                 FrontendSession.get().updateLoggedInUser( updated );

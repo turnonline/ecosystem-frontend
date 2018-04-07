@@ -1,15 +1,12 @@
 package biz.turnonline.ecosystem.origin.frontend.identity;
 
 import biz.turnonline.ecosystem.account.client.model.Account;
-import biz.turnonline.api.turnonline.Turnonline;
+import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
 import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.restapi.client.NotFoundException;
-import org.ctoolkit.restapi.client.PayloadRequest;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.restapi.client.UnauthorizedException;
 import org.ctoolkit.services.identity.IdentityLoginListener;
-import org.ctoolkit.turnonline.origin.frontend.FrontendApplication;
-import org.ctoolkit.turnonline.shared.resource.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +44,6 @@ public class IdentitySessionUserListener
                                  @Nonnull FirebaseToken identity,
                                  @Nonnull String sessionAttribute )
     {
-        User authUser;
         String signedEmail = identity.getEmail();
 
         try
@@ -65,7 +61,7 @@ public class IdentitySessionUserListener
             account.setFirstName( identity.getName() );
             account.setIdentityId( identity.getIssuer() );
 
-            account = resources.insert( user ).finish();
+            account = resources.insert( account ).finish();
             request.getSession().setAttribute( sessionAttribute, account );
 
             try

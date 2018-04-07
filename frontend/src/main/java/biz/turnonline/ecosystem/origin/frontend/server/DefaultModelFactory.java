@@ -155,16 +155,7 @@ class DefaultModelFactory
     @Override
     public IModel<String> getTermsUrlModel( @Nullable IModel<?> pageModel )
     {
-        String termsUrl = null;
-        Object modelObject = pageModel == null ? null : pageModel.getObject();
-
-        if ( modelObject instanceof Public && ( ( Public ) modelObject ).getSeller() != null )
-        {
-            Seller seller = ( ( Public ) modelObject ).getSeller();
-            termsUrl = seller.getTermsUrl();
-        }
-
-        return termsUrl == null ? null : new Model<>( termsUrl );
+        return null;
     }
 
     /**
