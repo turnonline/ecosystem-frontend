@@ -77,11 +77,11 @@ public class MyAccountBasics
     private I18NResourceModel titleModel = new I18NResourceModel( "title.my-account" );
 
     @Inject
-    private FirebaseConfig identityOptions;
+    private FirebaseConfig firebaseConfig;
 
     public MyAccountBasics()
     {
-        add( new FirebaseAppInit( identityOptions ) );
+        add( new FirebaseAppInit( firebaseConfig ) );
 
         final MyAccountModel accountModel = new MyAccountModel();
         final IModel<Map<String, Country>> countriesModel = new CountriesModel();

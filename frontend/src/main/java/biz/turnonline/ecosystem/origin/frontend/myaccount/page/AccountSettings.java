@@ -24,11 +24,11 @@ public class AccountSettings<T>
     private I18NResourceModel titleModel = new I18NResourceModel( "title.my-account" );
 
     @Inject
-    private FirebaseConfig identityOptions;
+    private FirebaseConfig firebaseConfig;
 
     public AccountSettings()
     {
-        add( new FirebaseAppInit( identityOptions ) );
+        add( new FirebaseAppInit( firebaseConfig ) );
     }
 
     @Override

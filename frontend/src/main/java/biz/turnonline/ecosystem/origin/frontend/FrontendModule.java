@@ -63,17 +63,17 @@ public class FrontendModule
                                                  @Named( "credential.identity.clientId" ) String clientId )
     {
         String appId = SystemProperty.applicationId.get();
-        FirebaseConfig options = new FirebaseConfig();
+        FirebaseConfig config = new FirebaseConfig();
 
-        options.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
-        options.setTermsUrl( "terms" );
-        options.google().email().facebook().oneTapSignUp( clientId );
-        options.setApiKey( apiKey );
-        options.setProjectId( appId );
-        options.setDatabaseName( appId );
-        options.setBucketName( appId );
-        options.setSenderId( senderId );
+        config.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
+        config.setTermsUrl( "terms" );
+        config.google().email().facebook().oneTapSignUp( clientId );
+        config.setApiKey( apiKey );
+        config.setProjectId( appId );
+        config.setDatabaseName( appId );
+        config.setBucketName( appId );
+        config.setSenderId( senderId );
 
-        return options;
+        return config;
     }
 }

@@ -21,11 +21,11 @@ public class ShoppingCart<T>
     private I18NResourceModel titleModel = new I18NResourceModel( "title.shopping-cart" );
 
     @Inject
-    private FirebaseConfig identityOptions;
+    private FirebaseConfig firebaseConfig;
 
     public ShoppingCart()
     {
-        add( new FirebaseAppInit( identityOptions ) );
+        add( new FirebaseAppInit( firebaseConfig ) );
     }
 
     @Override
