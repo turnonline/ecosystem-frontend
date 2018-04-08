@@ -1,6 +1,6 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
+import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
@@ -23,8 +23,6 @@ public class FrontendSession
     static final Locale DEFAULT_SESSION_LOCALE = Locale.ENGLISH;
 
     private static final long serialVersionUID = -5908999362458425557L;
-
-    private Long loggedInUserId;
 
     public FrontendSession( Request request )
     {
@@ -74,16 +72,6 @@ public class FrontendSession
         setAttribute( "itemsCount", itemsCount );
     }
 
-    public String getSellerDomicile()
-    {
-        return ( String ) getAttribute( "sellerDomicile" );
-    }
-
-    public void setSellerDomicile( String sellerDomicile )
-    {
-        setAttribute( "sellerDomicile", sellerDomicile );
-    }
-
     public void resetItemsCount()
     {
         setAttribute( "itemsCount", null );
@@ -94,28 +82,19 @@ public class FrontendSession
         return getLoggedInUser() != null;
     }
 
-    public boolean isLoggedIn( Account account )
+    public boolean isLoggedIn( AccountProfile account )
     {
-        Account loggedInUser = getLoggedInUser();
+        AccountProfile loggedInUser = getLoggedInUser();
         return loggedInUser != null && loggedInUser.equals( account );
     }
 
-    public Long getLoggedInUserId()
-    {
-        if ( loggedInUserId == null )
-        {
-            loggedInUserId = getLoggedInUser().getId();
-        }
-        return loggedInUserId;
-    }
-
-    public Account getLoggedInUser()
+    public AccountProfile getLoggedInUser()
     {
         HttpSession session = WicketUtil.getHttpServletRequest().getSession();
-        return ( Account ) session.getAttribute( AUTH_USER_ATTRIBUTE );
+        return ( AccountProfile ) session.getAttribute( AUTH_USER_ATTRIBUTE );
     }
 
-    public void updateLoggedInUser( Account account )
+    public void updateLoggedInUser( AccountProfile account )
     {
         HttpSession session = WicketUtil.getHttpServletRequest().getSession();
         session.setAttribute( AUTH_USER_ATTRIBUTE, account );

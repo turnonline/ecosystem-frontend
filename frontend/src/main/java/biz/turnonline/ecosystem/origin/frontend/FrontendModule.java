@@ -1,7 +1,5 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.account.client.AccountManagementAdapterModule;
-import biz.turnonline.ecosystem.account.client.AccountManagementApiModule;
 import biz.turnonline.ecosystem.origin.frontend.identity.IdentitySessionUserListener;
 import biz.turnonline.ecosystem.origin.frontend.server.ServerModule;
 import com.google.appengine.api.utils.SystemProperty;
@@ -12,6 +10,7 @@ import com.google.inject.name.Names;
 import net.sf.jsr107cache.Cache;
 import org.ctoolkit.restapi.client.ApiCredential;
 import org.ctoolkit.restapi.client.appengine.CtoolkitRestFacadeAppEngineModule;
+import org.ctoolkit.restapi.client.appengine.DefaultOrikaMapperFactoryModule;
 import org.ctoolkit.restapi.client.appengine.JCacheProvider;
 import org.ctoolkit.restapi.client.firebase.GoogleApiFirebaseModule;
 import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
@@ -39,10 +38,7 @@ public class FrontendModule
         install( new CtoolkitServicesAppEngineModule() );
         install( new CtoolkitRestFacadeAppEngineModule() );
         install( new GoogleApiFirebaseModule() );
-
-        // Account and Contact management client modules
-        install( new AccountManagementApiModule() );
-        install( new AccountManagementAdapterModule() );
+        install( new DefaultOrikaMapperFactoryModule() );
 
         bind( Cache.class ).toProvider( JCacheProvider.class ).in( Singleton.class );
 
@@ -63,17 +59,17 @@ public class FrontendModule
                                                  @Named( "credential.identity.clientId" ) String clientId )
     {
         String appId = SystemProperty.applicationId.get();
-        FirebaseConfig options = new FirebaseConfig();
+        FirebaseConfig config = new FirebaseConfig();
 
-        options.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
-        options.setTermsUrl( "terms" );
-        options.google().email().facebook().oneTapSignUp( clientId );
-        options.setApiKey( apiKey );
-        options.setProjectId( appId );
-        options.setDatabaseName( appId );
-        options.setBucketName( appId );
-        options.setSenderId( senderId );
+        config.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
+        config.setTermsUrl( "terms" );
+        config.google().email().facebook().oneTapSignUp( clientId );
+        config.setApiKey( apiKey );
+        config.setProjectId( appId );
+        config.setDatabaseName( appId );
+        config.setBucketName( appId );
+        config.setSenderId( senderId );
 
-        return options;
+        return config;
     }
 }

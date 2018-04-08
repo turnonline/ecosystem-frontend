@@ -1,6 +1,5 @@
 package biz.turnonline.ecosystem.origin.frontend.identity;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
 import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
 
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * The listener implementation handling logged in identity user instance as
- * {@link Account} stored in the session.
+ * {@link AccountProfile} stored in the session.
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
@@ -25,15 +24,7 @@ public class IdentitySessionUserListener
                                  @Nonnull FirebaseToken identity,
                                  @Nonnull String sessionAttribute )
     {
-        String signedEmail = identity.getEmail();
-
-        Account account = new Account();
-        account.setEmail( signedEmail );
-        account.setCompany( false );
-
         AccountProfile profile = new AccountProfile( identity );
-
-        request.getSession().setAttribute( AccountProfile.class.getName(), profile );
-        request.getSession().setAttribute( sessionAttribute, account );
+        request.getSession().setAttribute( sessionAttribute, profile );
     }
 }

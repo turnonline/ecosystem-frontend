@@ -1,6 +1,5 @@
 package biz.turnonline.ecosystem.origin.frontend.server;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
 import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
@@ -16,8 +15,6 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.util.string.Strings;
-import org.ctoolkit.wicket.standard.util.WicketUtil;
 import org.ctoolkit.wicket.turnonline.identity.page.IdentityLogin;
 import org.ctoolkit.wicket.turnonline.identity.page.SignUp;
 import org.ctoolkit.wicket.turnonline.menu.DefaultSchema;
@@ -29,7 +26,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,46 +62,6 @@ class DefaultModelFactory
 
     private static final IModel<String> defaultLogoModel = new Model<>( "/images/logo.png" );
 
-    private static final AbstractReadOnlyModel<String> myAccountLabelModel = new AbstractReadOnlyModel<String>()
-    {
-        private static final long serialVersionUID = 3199373435214925025L;
-
-        private static final int LABEL_LENGTH = 28;
-
-        @Override
-        public String getObject()
-        {
-            if ( loggedInModel.getObject() )
-            {
-                Account loggedInUser = FrontendSession.get().getLoggedInUser();
-                String formattedName = loggedInUser.getEmail();
-                if ( loggedInUser.getCompany() )
-                {
-                    if ( !Strings.isEmpty( loggedInUser.getBusinessName() ) )
-                    {
-                        formattedName = loggedInUser.getBusinessName();
-                    }
-                }
-                else
-                {
-                    if ( !Strings.isEmpty( loggedInUser.getFirstName() ) && !Strings.isEmpty( loggedInUser.getLastName() ) )
-                    {
-                        formattedName = loggedInUser.getFirstName() + " " + loggedInUser.getLastName();
-                    }
-                }
-
-                if ( !Strings.isEmpty( formattedName ) && formattedName.length() > LABEL_LENGTH )
-                {
-                    formattedName = formattedName.substring( 0, LABEL_LENGTH - 1 ) + "src/main";
-                }
-
-                return formattedName;
-            }
-
-            return null;
-        }
-    };
-
     private static final AbstractReadOnlyModel<AccountProfile> inModel = new AbstractReadOnlyModel<AccountProfile>()
     {
         private static final long serialVersionUID = 1041959923174236623L;
@@ -113,8 +69,7 @@ class DefaultModelFactory
         @Override
         public AccountProfile getObject()
         {
-            HttpSession session = WicketUtil.getHttpServletRequest().getSession();
-            return ( AccountProfile ) session.getAttribute( AccountProfile.class.getName() );
+            return FrontendSession.get().getLoggedInUser();
         }
     };
 
@@ -226,7 +181,7 @@ class DefaultModelFactory
     @Override
     public String getAccountRole()
     {
-        return Role.SELLER;
+        return Role.STANDARD;
     }
 
     @Override

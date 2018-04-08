@@ -1,22 +1,22 @@
 package biz.turnonline.ecosystem.origin.frontend.myaccount.event;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
+import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 
 /**
- * The account update event with {@link Account} payload.
+ * The account update event with {@link AccountProfile} payload.
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class AccountUpdateEvent
 {
-    private final Account account;
+    private final AccountProfile account;
 
-    public AccountUpdateEvent( Account account )
+    public AccountUpdateEvent( AccountProfile account )
     {
         this.account = account;
     }
 
-    public Account getAccount()
+    public AccountProfile getAccount()
     {
         return account;
     }
