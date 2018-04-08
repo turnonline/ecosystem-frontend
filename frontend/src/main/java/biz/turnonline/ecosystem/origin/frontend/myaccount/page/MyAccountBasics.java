@@ -31,11 +31,11 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.string.Strings;
+import org.ctoolkit.wicket.standard.identity.FirebaseConfig;
 import org.ctoolkit.wicket.standard.identity.behavior.FirebaseAppInit;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxButton;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxDropDown;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
-import org.ctoolkit.wicket.turnonline.identity.IdentityOptions;
 import org.ctoolkit.wicket.turnonline.markup.html.page.DecoratedPage;
 import org.ctoolkit.wicket.turnonline.myaccount.event.ToggleCompanyPersonChangeEvent;
 import org.ctoolkit.wicket.turnonline.myaccount.panel.CompanyAddressPanel;
@@ -63,7 +63,7 @@ public class MyAccountBasics
     private I18NResourceModel titleModel = new I18NResourceModel( "title.my-account" );
 
     @Inject
-    private IdentityOptions identityOptions;
+    private FirebaseConfig identityOptions;
 
     public MyAccountBasics()
     {

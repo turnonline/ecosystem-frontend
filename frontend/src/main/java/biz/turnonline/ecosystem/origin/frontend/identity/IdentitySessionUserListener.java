@@ -2,7 +2,7 @@ package biz.turnonline.ecosystem.origin.frontend.identity;
 
 import biz.turnonline.ecosystem.account.client.model.Account;
 import com.google.firebase.auth.FirebaseToken;
-import org.ctoolkit.services.identity.IdentityLoginListener;
+import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
 
 import javax.annotation.Nonnull;
 import javax.inject.Singleton;
@@ -31,6 +31,9 @@ public class IdentitySessionUserListener
         account.setEmail( signedEmail );
         account.setCompany( false );
 
+        AccountProfile profile = new AccountProfile( identity );
+
+        request.getSession().setAttribute( AccountProfile.class.getName(), profile );
         request.getSession().setAttribute( sessionAttribute, account );
     }
 }

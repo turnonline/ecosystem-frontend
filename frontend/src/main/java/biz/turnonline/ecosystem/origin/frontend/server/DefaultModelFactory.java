@@ -1,34 +1,35 @@
 package biz.turnonline.ecosystem.origin.frontend.server;
 
 import biz.turnonline.ecosystem.account.client.model.Account;
-import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
+import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.page.AccountSettings;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccountBasics;
 import biz.turnonline.ecosystem.origin.frontend.page.ShoppingCart;
+import org.apache.wicket.Component;
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
+import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.request.Url;
-import org.apache.wicket.request.resource.ResourceReference;
-import org.apache.wicket.request.resource.UrlResourceReference;
 import org.apache.wicket.util.string.Strings;
+import org.ctoolkit.wicket.standard.util.WicketUtil;
 import org.ctoolkit.wicket.turnonline.identity.page.IdentityLogin;
 import org.ctoolkit.wicket.turnonline.identity.page.SignUp;
 import org.ctoolkit.wicket.turnonline.menu.DefaultSchema;
 import org.ctoolkit.wicket.turnonline.menu.MenuSchema;
 import org.ctoolkit.wicket.turnonline.menu.SearchResponse;
 import org.ctoolkit.wicket.turnonline.model.AppEngineModelFactory;
-import org.ctoolkit.wicket.turnonline.theme.TurnOnlineThemeSettings;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,17 +61,6 @@ class DefaultModelFactory
         public Long getObject()
         {
             return FrontendSession.get().getItemsCount();
-        }
-    };
-
-    private static final AbstractReadOnlyModel<Boolean> alwaysTrueModel = new AbstractReadOnlyModel<Boolean>()
-    {
-        private static final long serialVersionUID = 1041959923174236623L;
-
-        @Override
-        public Boolean getObject()
-        {
-            return Boolean.TRUE;
         }
     };
 
@@ -116,7 +106,25 @@ class DefaultModelFactory
         }
     };
 
-    private static String[] styles = new String[]{"grid", "layout", "form", "main"};
+    private static final AbstractReadOnlyModel<AccountProfile> inModel = new AbstractReadOnlyModel<AccountProfile>()
+    {
+        private static final long serialVersionUID = 1041959923174236623L;
+
+        @Override
+        public AccountProfile getObject()
+        {
+            HttpSession session = WicketUtil.getHttpServletRequest().getSession();
+            return ( AccountProfile ) session.getAttribute( AccountProfile.class.getName() );
+        }
+    };
+
+    private final static Behavior[] behaviors;
+
+    static
+    {
+        behaviors = new Behavior[1];
+        behaviors[0] = new ConcatenatedResourceBundleBehavior();
+    }
 
     public DefaultModelFactory()
     {
@@ -186,48 +194,15 @@ class DefaultModelFactory
     }
 
     @Override
-    public IModel<String> getMyAccountLabelModel()
+    public IModel getLoggedInAccountModel()
     {
-        return myAccountLabelModel;
+        return inModel;
     }
 
     @Override
-    public IModel<Boolean> getShoppingCartVisibilityModel()
+    public Behavior[] getBehaviors( @Nonnull RuntimeConfigurationType type, @Nullable IModel<?> pageModel )
     {
-        return alwaysTrueModel;
-    }
-
-    @Override
-    public IModel<Boolean> getSearchBoxVisibilityModel()
-    {
-        return alwaysTrueModel;
-    }
-
-    /**
-     * In development returns not optimized css for faster development.
-     */
-    @Override
-    public ResourceReference[] getStylesheetReference( @Nullable IModel<?> pageModel,
-                                                       @Nonnull RuntimeConfigurationType type )
-    {
-        ResourceReference[] refs;
-        Object modelObject = pageModel == null ? null : pageModel.getObject();
-
-        if ( FrontendApplication.get().getConfigurationType() == RuntimeConfigurationType.DEVELOPMENT )
-        {
-            // in development use not optimized css for faster development
-            refs = new ResourceReference[styles.length];
-            for ( int index = 0; index < styles.length; index++ )
-            {
-                refs[index] = new UrlResourceReference( Url.parse( "/styles/" + styles[index] + ".css" ) );
-            }
-        }
-        else
-        {
-            refs = new ResourceReference[1];
-            refs[0] = TurnOnlineThemeSettings.get().getDefaultStylesheetReference();
-        }
-        return refs;
+        return behaviors;
     }
 
     @Override
@@ -258,5 +233,17 @@ class DefaultModelFactory
     public List<SearchResponse> getSearchResponseList( String input )
     {
         return new ArrayList<>();
+    }
+
+    static class ConcatenatedResourceBundleBehavior
+            extends Behavior
+    {
+        private static final long serialVersionUID = -7837342607348821294L;
+
+        @Override
+        public void renderHead( Component component, IHeaderResponse response )
+        {
+            //response.render( JavaScriptHeaderItem.forReference( ScriptBundle.get() ) );
+        }
     }
 }
