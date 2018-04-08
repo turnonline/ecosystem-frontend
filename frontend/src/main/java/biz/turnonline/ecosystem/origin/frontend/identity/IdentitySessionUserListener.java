@@ -6,7 +6,7 @@ import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.restapi.client.NotFoundException;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.restapi.client.UnauthorizedException;
-import org.ctoolkit.services.identity.IdentityLoginListener;
+import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,6 +62,10 @@ public class IdentitySessionUserListener
             account.setIdentityId( identity.getIssuer() );
 
             account = resources.insert( account ).finish();
+
+            AccountProfile profile = new AccountProfile( identity );
+
+            request.getSession().setAttribute( AccountProfile.class.getName(), profile );
             request.getSession().setAttribute( sessionAttribute, account );
 
             try

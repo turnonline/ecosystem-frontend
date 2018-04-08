@@ -81,12 +81,6 @@ public class FrontendApplication
         mountPage( SHOPPING_CART, ShoppingCart.class );
     }
 
-    @Override
-    public Set<String> getThemeNames()
-    {
-        return new HashSet<>();
-    }
-
     private Injector getInjector()
     {
         return ( Injector ) getServletContext().getAttribute( Injector.class.getName() );

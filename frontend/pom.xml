@@ -110,7 +110,7 @@
         <dependency>
             <groupId>org.ctoolkit.wicket</groupId>
             <artifactId>ctoolkit-wicket</artifactId>
-            <version>0.5-20171217.080732-17</version>
+            <version>0.5</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
@@ -131,8 +131,9 @@
         </dependency>
         <!-- Remove javassist and paranamer here once fixed in rest-client-facade -->
         <dependency>
-            <groupId>org.ctoolkit.services</groupId>
-            <artifactId>ctoolkit-services-identity</artifactId>
+            <groupId>org.ctoolkit.restapi</groupId>
+            <artifactId>ctoolkit-client-firebase</artifactId>
+            <version>0.26</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.services</groupId>
@@ -255,14 +256,13 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.57-20171211.052617-22</ctoolkit-microservice-bom.version>
-        <ctoolkit-library-bom.version>7-20171216.014609-3</ctoolkit-library-bom.version>
-        <wicket-bom.version>6.19.0</wicket-bom.version>
-        <appengine.maven.plugin.version>1.3.1</appengine.maven.plugin.version>
+        <ctoolkit-microservice-bom.version>1.9.63</ctoolkit-microservice-bom.version>
+        <ctoolkit-library-bom.version>7</ctoolkit-library-bom.version>
+        <wicket-bom.version>6.28.0</wicket-bom.version>
+        <appengine.maven.plugin.version>1.3.2</appengine.maven.plugin.version>
         <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
-        <ctoolkit-rest-facade-adapter.version>0.25-20171127.060347-3</ctoolkit-rest-facade-adapter.version>
-        <testng.version>6.9.10</testng.version>
-        <jmockit.version>1.37</jmockit.version>
+        <testng.version>6.11</testng.version>
+        <jmockit.version>1.39</jmockit.version>
         <!-- jmockit settings for OpenJDK otherwise throws 'IllegalStateException: To run on OpenJDK 64-Bit Server VM use -javaagent..' -->
         <jmockit.setting>
             -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar

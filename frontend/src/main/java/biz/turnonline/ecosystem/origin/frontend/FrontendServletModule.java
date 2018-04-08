@@ -2,7 +2,7 @@ package biz.turnonline.ecosystem.origin.frontend;
 
 import biz.turnonline.ecosystem.origin.frontend.identity.Logout;
 import com.google.inject.servlet.ServletModule;
-import org.ctoolkit.services.identity.IdentityCheckSessionFilter;
+import org.ctoolkit.restapi.client.firebase.IdentityCheckSessionFilter;
 
 import java.util.HashMap;
 import java.util.Map;

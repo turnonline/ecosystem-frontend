@@ -1,7 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.identity;
 
 import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
-import org.ctoolkit.services.identity.IdentityHandler;
+import org.ctoolkit.restapi.client.firebase.IdentityHandler;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
