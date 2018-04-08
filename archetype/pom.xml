@@ -57,6 +57,11 @@
     </scm>
 
     <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <name>Central Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
         <snapshotRepository>
             <id>comvai-snapshots</id>
             <name>Comvai TurnOnline.biz private snapshots repository</name>
@@ -66,11 +71,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
     </properties>
 
     <profiles>
         <profile>
-            <id>for-release</id>
+            <id>release-sign-artifacts</id>
             <activation>
                 <property>
                     <name>performRelease</name>
@@ -80,6 +86,24 @@
             <properties>
                 <maven.deploy.skip>false</maven.deploy.skip>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 

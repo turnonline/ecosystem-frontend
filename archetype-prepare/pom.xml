@@ -94,6 +94,9 @@
                                         /pom:project/pom:build/pom:plugins/pom:plugin[pom:artifactId='maven-archetype-plugin']
                                     </name>
                                 </remove>
+                                <remove>
+                                    <name>/pom:project/pom:properties/pom:maven.deploy.skip</name>
+                                </remove>
                                 <add>
                                     <before>/pom:project/pom:modelVersion</before>
                                     <value>
