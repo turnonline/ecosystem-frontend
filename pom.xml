@@ -56,27 +56,6 @@
                     <argLine>-Xmx256m ${jmockit.setting}</argLine>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.ctoolkit.maven.plugins</groupId>
-                <artifactId>maven-optimizer-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>optimize</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <cssPathToXml>${project.basedir}/src/main/resources/css-config.xml</cssPathToXml>
-                    <jsPathToXml>${project.basedir}/src/main/resources/js-config.xml</jsPathToXml>
-                    <cssOutputPath>${project.build.directory}/classes/org/ctoolkit/wicket/turnonline/theme/
-                    </cssOutputPath>
-                    <jsOutputPath>${project.build.directory}/classes/org/ctoolkit/wicket/turnonline/theme/
-                    </jsOutputPath>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
