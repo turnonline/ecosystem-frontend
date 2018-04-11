@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://www.w3.org/1999/xhtml">
+<body>
+
+<!--navbar-->
+<header>
+    <nav wicket:id="navbar"></nav>
+</header>
+
+<!--content-->
+<div class="container">
+
+    <!--notifications-->
+    <div wicket:id="notifications"></div>
+
+    <!--header-->
+    <h1 wicket:id="header"></h1>
+
+    <!--children content per page-->
+    <wicket:child/>
+</div>
+
+<!--footer-->
+<footer
+        style="border-top: 1px solid #3f51b5;margin-top: 20px;padding: 20px 0 10px 0;background: #fff;"
+        wicket:id="footer">
+    <div class="container">
+        <p>&copy; 2018 Turnonline.biz</p>
+    </div>
+</footer>
+
+</body>
+</html>

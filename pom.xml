@@ -211,6 +211,20 @@
             <groupId>net.sf.jsr107cache</groupId>
             <artifactId>jsr107cache</artifactId>
         </dependency>
+
+        <!-- Wicket bootstrap -->
+        <dependency>
+            <groupId>de.agilecoders.wicket</groupId>
+            <artifactId>wicket-bootstrap-core</artifactId>
+            <version>${wicket-bootstrap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.agilecoders.wicket</groupId>
+            <artifactId>wicket-bootstrap-themes</artifactId> <!--TODO: pick only one theme-->
+            <version>${wicket-bootstrap.version}</version>
+        </dependency>
+
+        <!-- Testing -->
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-testing</artifactId>
@@ -243,6 +257,7 @@
         <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
         <testng.version>6.11</testng.version>
         <jmockit.version>1.39</jmockit.version>
+        <wicket-bootstrap.version>0.9.22</wicket-bootstrap.version>
         <!-- jmockit settings for OpenJDK otherwise throws 'IllegalStateException: To run on OpenJDK 64-Bit Server VM use -javaagent..' -->
         <jmockit.setting>
             -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
