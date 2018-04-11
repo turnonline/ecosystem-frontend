@@ -1,6 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.page;
 
 import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
+import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationPanel;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
@@ -8,14 +9,16 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarExternalLink;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
-import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
+import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
+import org.ctoolkit.wicket.turnonline.markup.html.page.Skeleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +28,35 @@ import java.util.List;
  *
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
-public class BasePage
-        extends WebPage
+public class BasePage<T>
+        extends Skeleton<T>
 {
+    public static final String HTML_BOTTOM_FILTER_NAME = "html-bottom-container";
+
     public BasePage()
     {
+        initialize();
+    }
+
+    public BasePage( IModel<T> model )
+    {
+        super( model );
+        initialize();
+    }
+
+    public BasePage( PageParameters parameters )
+    {
+        super( parameters );
+        initialize();
+    }
+
+    // initialize
+
+    protected void initialize()
+    {
+        // initialize page title
+        add( newPageTitle( "title" ) );
+
         // initialize navbar
         add( newNavbar( "navbar" ) );
 
@@ -61,9 +88,10 @@ public class BasePage
     {
         List<Component> navbarComponents = new ArrayList<>();
 
-        if ( AuthenticatedWebSession.get().isSignedIn() )
+        if ( FrontendSession.get().isLoggedIn() )
         {
-            // TODO: add my account and logout items
+            navbarComponents.add( newMyAccountNavbarItem() );
+            navbarComponents.add( newLogoutNavbarItem() );
         }
         else
         {
@@ -88,6 +116,23 @@ public class BasePage
                 .setLabel( new I18NResourceModel( "label.signup" ) );
     }
 
+    protected Component newMyAccountNavbarItem()
+    {
+        return new NavbarExternalLink( Model.of( urlFor( MyAccount.class, new PageParameters() ).toString() ) )
+                .setIconType( GlyphIconType.th )
+                .setLabel( new I18NResourceModel( "label.myAccount" ) );
+    }
+
+    protected Component newLogoutNavbarItem()
+    {
+        String script = "firebase.auth().signOut().then(function(){window.location.href='" + FrontendApplication.LOGOUT + "'});";
+
+        return new NavbarExternalLink( Model.of( urlFor( Logout.class, new PageParameters() ).toString() ) )
+                .setIconType( GlyphIconType.off )
+                .setLabel( new I18NResourceModel( "label.logout" ) )
+                .add( new AttributeAppender( "onclick", script, ";" ) );
+    }
+
     // -- notifications
 
     protected Component newNotifications( String componentId )
@@ -100,6 +145,14 @@ public class BasePage
         return get( "notifications" );
     }
 
+
+    // -- page title
+
+    protected Component newPageTitle( String componentId )
+    {
+        return new Label( componentId, new I18NResourceModel( "title" ) );
+    }
+
     // -- header
 
     protected Component newHeader( String componentId )
@@ -109,8 +162,21 @@ public class BasePage
         return header;
     }
 
+    // -- footer
+
     protected Component newFooter( String componentId )
     {
-        return new WebMarkupContainer( "footer" );
+        return new WebMarkupContainer( componentId );
+    }
+
+    // -- initialize
+
+    @Override
+    protected void onInitialize()
+    {
+        super.onInitialize();
+
+        // container for firebase javascripts - must be located in html at the bottom
+        add( new HeaderResponseContainer( "html-bottom-container", HTML_BOTTOM_FILTER_NAME ) );
     }
 }

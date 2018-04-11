@@ -10,6 +10,11 @@ public class Role
     /**
      * Constant of the standard user role
      */
+    public static final String USER = "USER";
+
+    /**
+     * Constant of the standard user role
+     */
     public static final String STANDARD = "STANDARD";
 
     /**

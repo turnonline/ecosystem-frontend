@@ -42,8 +42,7 @@ public class FrontendModule
 
         bind( Cache.class ).toProvider( JCacheProvider.class ).in( Singleton.class );
 
-        Multibinder<IdentityLoginListener> identityListener;
-        identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
+        Multibinder<IdentityLoginListener> identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
         identityListener.addBinding().to( IdentitySessionUserListener.class );
 
         ApiCredential credential = new ApiCredential();

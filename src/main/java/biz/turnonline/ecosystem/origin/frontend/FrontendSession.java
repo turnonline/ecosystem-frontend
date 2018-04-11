@@ -1,6 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
 import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
+import biz.turnonline.ecosystem.origin.frontend.identity.Role;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
@@ -49,7 +50,7 @@ public class FrontendSession
 
         if ( isLoggedIn() )
         {
-            roles.add( getLoggedInUser().getRole() );
+            roles.add( Role.USER );
         }
 
         return roles;

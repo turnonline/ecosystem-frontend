@@ -2,6 +2,8 @@ package biz.turnonline.ecosystem.origin.frontend;
 
 import biz.turnonline.ecosystem.origin.frontend.page.Home;
 import biz.turnonline.ecosystem.origin.frontend.page.Login;
+import biz.turnonline.ecosystem.origin.frontend.page.Logout;
+import biz.turnonline.ecosystem.origin.frontend.page.MyAccount;
 import biz.turnonline.ecosystem.origin.frontend.page.Robots;
 import biz.turnonline.ecosystem.origin.frontend.page.Signup;
 import biz.turnonline.ecosystem.origin.frontend.page.SiteMap;
@@ -35,12 +37,19 @@ import java.util.Set;
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 // TODO: IdentityServiceAccount as a part of archetype configuration (location of identity-service-account.json)
-// TODO: pages - Login, Logout, MyAccount, BasePage, PrivatePage, PublicPage,
-// TODO: components - feedback, header, footer, nav, sidebar, breadcrumb
+// TODO: explanation of every property in identity.properties
+
+// TODO: components - breadcrumb
 public class FrontendApplication
         extends AppEngineApplication
 {
-    public static final String SETTINGS = MY_ACCOUNT + "/settings";
+    public static final String SIGNUP = "/sign-up";
+
+    public static final String LOGIN = "/login";
+
+    public static final String LOGOUT = "/logout";
+
+    public static final String MY_ACCOUNT = "/my-account";
 
     private Set<String> include = new HashSet<>();
 
@@ -80,7 +89,9 @@ public class FrontendApplication
         resourceSettings.setPropertiesFactory( new MemcachePropertiesFactory( resourceSettings, memcache, include ) );
 
         mountPage( LOGIN, Login.class );
+        mountPage( LOGOUT, Logout.class );
         mountPage( SIGNUP, Signup.class );
+        mountPage( MY_ACCOUNT, MyAccount.class );
 
         // init wicket bootstrap
         BootstrapSettings bootstrapSettings = new BootstrapSettings();
