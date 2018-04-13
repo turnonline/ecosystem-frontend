@@ -11,7 +11,7 @@ import javax.inject.Inject;
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
 public class Signup
-        extends BasePage
+        extends DecoratedPage
 {
     @Inject
     private FirebaseConfig firebaseConfig;

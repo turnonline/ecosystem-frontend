@@ -10,7 +10,7 @@ import javax.inject.Inject;
  *
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
-public class Login extends BasePage
+public class Login extends DecoratedPage
 {
     @Inject
     private FirebaseConfig firebaseConfig;

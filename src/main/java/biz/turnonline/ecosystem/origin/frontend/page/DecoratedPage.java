@@ -2,6 +2,7 @@ package biz.turnonline.ecosystem.origin.frontend.page;
 
 import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
+import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccount;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationPanel;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
@@ -13,6 +14,7 @@ import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -24,27 +26,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Base page
+ * Decorated page used as a base page for other pages
  *
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
-public class BasePage<T>
+public class DecoratedPage<T>
         extends Skeleton<T>
 {
     public static final String HTML_BOTTOM_FILTER_NAME = "html-bottom-container";
 
-    public BasePage()
+    public DecoratedPage()
     {
         initialize();
     }
 
-    public BasePage( IModel<T> model )
+    public DecoratedPage( IModel<T> model )
     {
         super( model );
         initialize();
     }
 
-    public BasePage( PageParameters parameters )
+    public DecoratedPage( PageParameters parameters )
     {
         super( parameters );
         initialize();
@@ -64,7 +66,7 @@ public class BasePage<T>
         add( newHeader( "header" ) );
 
         // initialize notifications
-        add( newNotifications( "notifications" ) );
+        add( newFeedbackPanel( ) );
 
         // initialize footer
         add( newFooter( "footer" ) );
@@ -127,7 +129,7 @@ public class BasePage<T>
     {
         String script = "firebase.auth().signOut().then(function(){window.location.href='" + FrontendApplication.LOGOUT + "'});";
 
-        return new NavbarExternalLink( Model.of( urlFor( Logout.class, new PageParameters() ).toString() ) )
+        return new NavbarExternalLink( Model.of( FrontendApplication.LOGOUT) )
                 .setIconType( GlyphIconType.off )
                 .setLabel( new I18NResourceModel( "label.logout" ) )
                 .add( new AttributeAppender( "onclick", script, ";" ) );
@@ -135,16 +137,16 @@ public class BasePage<T>
 
     // -- notifications
 
-    protected Component newNotifications( String componentId )
+    @Override
+    protected FeedbackPanel newFeedbackPanel( String componentId )
     {
         return new NotificationPanel( componentId );
     }
 
-    protected Component getNotifications()
+    protected Component getFeedbackPanel()
     {
-        return get( "notifications" );
+        return get( FEEDBACK_MARKUP_ID );
     }
-
 
     // -- page title
 

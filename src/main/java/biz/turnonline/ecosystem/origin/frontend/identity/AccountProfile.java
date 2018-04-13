@@ -68,7 +68,7 @@ public class AccountProfile
     {
         if ( role == null )
         {
-            return Role.STANDARD;
+            return Role.USER;
         }
         return role;
     }

@@ -1,15 +1,15 @@
-package biz.turnonline.ecosystem.origin.frontend.page;
+package biz.turnonline.ecosystem.origin.frontend.myaccount.page;
 
-import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
 import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
+import biz.turnonline.ecosystem.origin.frontend.model.MyAccountModel;
+import biz.turnonline.ecosystem.origin.frontend.page.DecoratedPage;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormBehavior;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormGroup;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormType;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
 
@@ -20,11 +20,11 @@ import org.ctoolkit.wicket.standard.model.I18NResourceModel;
  */
 @AuthorizeInstantiation( Role.USER )
 public class MyAccount
-        extends BasePage<AccountProfile>
+        extends DecoratedPage<AccountProfile>
 {
     public MyAccount()
     {
-        super( Model.of( FrontendSession.get().getLoggedInUser() ) );
+        super( new MyAccountModel() );
 
         WebMarkupContainer userDetail = new WebMarkupContainer( "user-detail" );
         userDetail.add( new FormBehavior( FormType.Horizontal ) );
@@ -39,5 +39,10 @@ public class MyAccount
         emailGroup.add( new TextField<>( "email", new PropertyModel<>( getModel(), "email" ) ).setEnabled( false ) );
         emailGroup.useFormComponentLabel( false );
         userDetail.add( emailGroup );
+
+        FormGroup roleGroup = new FormGroup( "role-group", new I18NResourceModel( "label.role" ) );
+        roleGroup.add( new TextField<>( "role", new PropertyModel<>( getModel(), "role" ) ).setEnabled( false ) );
+        roleGroup.useFormComponentLabel( false );
+        userDetail.add( roleGroup );
     }
 }

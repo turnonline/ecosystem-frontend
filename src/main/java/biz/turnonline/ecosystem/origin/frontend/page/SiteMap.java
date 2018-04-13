@@ -1,5 +1,6 @@
 package biz.turnonline.ecosystem.origin.frontend.page;
 
+import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 import org.ctoolkit.wicket.turnonline.markup.html.page.BaseSiteMap;
 import org.ctoolkit.wicket.turnonline.markup.html.page.SiteMapItem;
@@ -20,13 +21,13 @@ public class SiteMap
     protected List<SiteMapItem> getItems()
     {
         HttpServletRequest request = ( ( ServletWebRequest ) getRequest() ).getContainerRequest();
-        String website = request.getRequestURL().toString().replaceAll( request.getRequestURI(), "" ) + "/";
+        String website = request.getRequestURL().toString().replaceAll( request.getRequestURI(), "" );
 
         List<SiteMapItem> items = new ArrayList<>();
 
         items.add( new SiteMapItem( website ) );
-        items.add( new SiteMapItem( website + "sign-up" ) );
-        items.add( new SiteMapItem( website + "login" ) );
+        items.add( new SiteMapItem( website + FrontendApplication.SIGNUP ) );
+        items.add( new SiteMapItem( website + FrontendApplication.LOGIN ) );
 
         return items;
     }

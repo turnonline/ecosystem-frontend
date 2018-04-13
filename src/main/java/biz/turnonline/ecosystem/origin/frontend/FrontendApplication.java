@@ -1,9 +1,8 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
+import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccount;
 import biz.turnonline.ecosystem.origin.frontend.page.Home;
 import biz.turnonline.ecosystem.origin.frontend.page.Login;
-import biz.turnonline.ecosystem.origin.frontend.page.Logout;
-import biz.turnonline.ecosystem.origin.frontend.page.MyAccount;
 import biz.turnonline.ecosystem.origin.frontend.page.Robots;
 import biz.turnonline.ecosystem.origin.frontend.page.Signup;
 import biz.turnonline.ecosystem.origin.frontend.page.SiteMap;
@@ -36,10 +35,6 @@ import java.util.Set;
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
-// TODO: IdentityServiceAccount as a part of archetype configuration (location of identity-service-account.json)
-// TODO: explanation of every property in identity.properties
-
-// TODO: components - breadcrumb
 public class FrontendApplication
         extends AppEngineApplication
 {
@@ -55,7 +50,6 @@ public class FrontendApplication
 
     {
         include.add( "biz/turnonline/ecosystem/origin/frontend/FrontendApplication" );
-        include.add( "biz/turnonline/ecosystem/origin/frontend/FrontendApplication_sk" );
         include.add( "org/apache/wicket/Application" );
         include.add( "com/googlecode/wicket/jquery/ui/Initializer" );
         include.add( "org/apache/wicket/extensions/Initializer" );
@@ -89,7 +83,6 @@ public class FrontendApplication
         resourceSettings.setPropertiesFactory( new MemcachePropertiesFactory( resourceSettings, memcache, include ) );
 
         mountPage( LOGIN, Login.class );
-        mountPage( LOGOUT, Logout.class );
         mountPage( SIGNUP, Signup.class );
         mountPage( MY_ACCOUNT, MyAccount.class );
 
