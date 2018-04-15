@@ -1,8 +1,0 @@
-<groups>
-    <group name="turnonline-ui.min.css">
-        <css>/src/main/webapp/styles/grid.css</css>
-        <css>/src/main/webapp/styles/layout.css</css>
-        <css>/src/main/webapp/styles/form.css</css>
-        <css>/src/main/webapp/styles/main.css</css>
-    </group>
-</groups>
