@@ -9,22 +9,24 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>turnonline-frontend-app</artifactId>
+    <artifactId>turnonline-ecosystem-frontend</artifactId>
     <version>0.5-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>TurnOnline.biz Frontend App</name>
-    <description>TurnOnline.biz Ecosystem Frontend App</description>
+    <name>TurnOnline.biz Ecosystem Frontend App</name>
+    <description>
+        TurnOnline.biz Ecosystem Frontend full featured App built from scratch for Google App Engine Java standard environment
+    </description>
     <url>https://www.turnonline.biz</url>
 
     <scm>
-        <connection>scm:git:[fetch=]git@github.com:turnonline/frontend-archetype.git</connection>
-        <developerConnection>scm:git:[push=]git@github.com:turnonline/frontend-archetype.git</developerConnection>
-        <url>https://github.com/turnonline/frontend-archetype</url>
+        <connection>scm:git:[fetch=]git@github.com:turnonline/ecosystem-frontend.git</connection>
+        <developerConnection>scm:git:[push=]git@github.com:turnonline/ecosystem-frontend.git</developerConnection>
+        <url>https://github.com/turnonline/ecosystem-frontend</url>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
-        <url>https://github.com/turnonline/frontend-archetype/issues</url>
+        <url>https://github.com/turnonline/ecosystem-frontend/issues</url>
     </issueManagement>
 
     <developers>
