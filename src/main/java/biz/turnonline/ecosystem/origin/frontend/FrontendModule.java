@@ -64,9 +64,9 @@ public class FrontendModule
 
     @Provides
     @Singleton
-    public FirebaseConfig provideFirebaseConfig( @Named( "credential.identity.apiKey" ) String apiKey,
-                                                 @Named( "credential.identity.senderId" ) String senderId,
-                                                 @Named( "credential.identity.clientId" ) String clientId )
+    public FirebaseConfig provideFirebaseConfig( @Named( "credential.firebase.apiKey" ) String apiKey,
+                                                 @Named( "credential.firebase.senderId" ) String senderId,
+                                                 @Named( "credential.firebase.clientId" ) String clientId )
     {
         String appId = SystemProperty.applicationId.get();
         FirebaseConfig config = new FirebaseConfig();
