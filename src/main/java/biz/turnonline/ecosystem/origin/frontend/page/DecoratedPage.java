@@ -14,11 +14,12 @@ import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
 import org.ctoolkit.wicket.turnonline.markup.html.page.Skeleton;
 
@@ -66,7 +67,7 @@ public class DecoratedPage<T>
         add( newHeader( "header" ) );
 
         // initialize notifications
-        add( newFeedbackPanel( ) );
+        add( newFeedbackPanel() );
 
         // initialize footer
         add( newFooter( "footer" ) );
@@ -76,10 +77,21 @@ public class DecoratedPage<T>
 
     protected Navbar newNavbar( String componentId )
     {
-        Navbar navbar = new Navbar( componentId );
+        Navbar navbar = new Navbar( componentId )
+        {
+            @Override
+            protected Image newBrandImage( String markupId )
+            {
+                Image image = super.newBrandImage( markupId );
+
+                image.setImageResource( new ContextRelativeResource( "logo.png" ) );
+
+                return image;
+            }
+        };
 
         navbar.addComponents( NavbarComponents.transform( Navbar.ComponentPosition.RIGHT, newNavbarComponents() ) );
-        navbar.setBrandImage( new PackageResourceReference( FrontendApplication.class, "logo.png" ), Model.of( "" ) );
+//        navbar.setBrandImage( new PackageResourceReference( FrontendApplication.class, "logo.png" ), Model.of( "" ) );
         navbar.get( "brandName" ).get( "brandImage" ).add( AttributeModifier.append( "style", "max-height:32px;" ) );
         navbar.setInverted( true );
 
@@ -129,7 +141,7 @@ public class DecoratedPage<T>
     {
         String script = "firebase.auth().signOut().then(function(){window.location.href='" + FrontendApplication.LOGOUT + "'});";
 
-        return new NavbarExternalLink( Model.of( FrontendApplication.LOGOUT) )
+        return new NavbarExternalLink( Model.of( FrontendApplication.LOGOUT ) )
                 .setIconType( GlyphIconType.off )
                 .setLabel( new I18NResourceModel( "label.logout" ) )
                 .add( new AttributeAppender( "onclick", script, ";" ) );
