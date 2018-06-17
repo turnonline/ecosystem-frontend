@@ -2,6 +2,7 @@ package biz.turnonline.ecosystem.origin.frontend;
 
 import biz.turnonline.ecosystem.origin.frontend.identity.IdentitySessionUserListener;
 import com.google.appengine.api.utils.SystemProperty;
+import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
@@ -59,16 +60,20 @@ public class FrontendModule
         Names.bindProperties( binder(), credential );
 
         // TODO: remove
-        bind( IModelFactory.class ).to(FakeModelFactory.class);
+        bind( IModelFactory.class ).to( FakeModelFactory.class );
     }
 
     @Provides
     @Singleton
     public FirebaseConfig provideFirebaseConfig( @Named( "credential.firebase.apiKey" ) String apiKey,
                                                  @Named( "credential.firebase.senderId" ) String senderId,
+                                                 @Named( "credential.firebase.projectId" ) String appId,
                                                  @Named( "credential.firebase.clientId" ) String clientId )
     {
-        String appId = SystemProperty.applicationId.get();
+        if ( Strings.isNullOrEmpty( appId ) )
+        {
+            appId = SystemProperty.applicationId.get();
+        }
         FirebaseConfig config = new FirebaseConfig();
 
         config.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
@@ -79,6 +84,8 @@ public class FrontendModule
         config.setDatabaseName( appId );
         config.setBucketName( appId );
         config.setSenderId( senderId );
+        config.setFirebaseVersion( "5.0.4" );
+        config.setUiWidgetVersion( "3.0.0" );
 
         return config;
     }

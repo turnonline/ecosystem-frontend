@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application>active-cooking</application>
     <service>default</service>
+    <runtime>java8</runtime>
+
+    <!--
+        https://stackoverflow.com/questions/40708265/gae-whats-the-difference-between-min-pending-latency-and-max-pending-latenc
+        App Engine can choose to create an instance at any time between min-pending-latency and max-pending-latency
+    -->
+    <automatic-scaling>
+        <max-idle-instances>automatic</max-idle-instances>
+        <min-pending-latency>automatic</min-pending-latency>
+        <max-pending-latency>automatic</max-pending-latency>
+    </automatic-scaling>
+    <instance-class>F2</instance-class>
 
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/classes/logging.properties"/>
     </system-properties>
 
     <sessions-enabled>true</sessions-enabled>
-
     <threadsafe>true</threadsafe>
-    <instance-class>F2</instance-class>
 
     <static-files>
         <include path="/*.js" expiration="30d"/>
