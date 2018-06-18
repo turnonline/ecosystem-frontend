@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<body>
+<wicket:extend>
+    <h3>Introduction</h3>
+    <p>Turnonline firebase archtype is used to handle 4 basic authentication use cases:</p>
+    <ul>
+        <li>Login (by firebase platform) - you can configure login providers and other firebase features by <code>FrontendModule.provideFirebaseConfig()</code>
+        </li>
+        <li>Logout (by firebase platform)</li>
+        <li>Signup (by firebase platform)</li>
+        <li>My account - simple authorized page which shows basic info about logged in user</li>
+    </ul>
+    <p></p>
+
+    <h3>Firebase identity.properties current configuration</h3>
+    <pre><code wicket:id="identity-properties"></code></pre>
+
+    <h3>Wicket bootstrap</h3>
+    <p>
+        Turnonline firebase archetype uses <a href="https://github.com/l0rdn1kk0n/wicket-bootstrap">Wicket Bootsrap library</a>.
+        Click <a href="https://github.com/l0rdn1kk0n/wicket-bootstrap/tree/wicket-7.x/bootstrap-samples/src/main/java/de/agilecoders/wicket/samples">here</a>
+        to see wicket bootstrap examples or <a href="https://getbootstrap.com/docs/3.3/components/">here</a> to see more info about bootstrap project.
+    </p>
+    <p>
+        As a default, archetype uses <a href="https://material.io/guidelines/">Material design theme</a>.
+    </p>
+
+    <h3>Useful links</h3>
+    <p>Google cloud administration can be found here:<br/><a wicket:id="link-gcloud" target="_blank"></a></p>
+
+    <p>Firebase authentication administration can be found here:<br/><a wicket:id="link-firebase" target="_blank"></a>
+    </p>
+</wicket:extend>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" style="height: 100%;">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title wicket:id="title"></title>
+    <link rel="icon" type="image/ico" href="/favicon.ico"/>
+</head>
+<body style="height:100%;">
+
+<div style="min-height:100%;position:relative;">
+    <!--navbar-->
+    <header>
+        <nav wicket:id="navbar"></nav>
+    </header>
+
+    <!--content-->
+    <div class="container" style="padding-bottom:80px;">
+
+        <!--notifications-->
+        <div wicket:id="feedback"></div>
+
+        <!--header-->
+        <h1 wicket:id="header"></h1>
+
+        <!--children content per page-->
+        <wicket:child/>
+    </div>
+
+    <!--footer-->
+    <footer style="border-top: 1px solid #3f51b5;margin-top: 20px;height:60px;padding: 20px 0 10px 0;background: #fff;width:100%;bottom:0;position: absolute;"
+            wicket:id="footer">
+        <div class="container">
+            <p>&copy; 2018 Turnonline.biz</p>
+        </div>
+    </footer>
+</div>
+
+<!--Must be the last body element-->
+<wicket:container wicket:id="html-bottom-container"/>
+</body>
+</html>

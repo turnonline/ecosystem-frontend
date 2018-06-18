@@ -1,11 +1,16 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.origin.frontend.myaccount.page.AccountSettings;
-import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccountBasics;
+import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccount;
+import biz.turnonline.ecosystem.origin.frontend.page.Home;
+import biz.turnonline.ecosystem.origin.frontend.page.Login;
 import biz.turnonline.ecosystem.origin.frontend.page.Robots;
-import biz.turnonline.ecosystem.origin.frontend.page.ShoppingCart;
+import biz.turnonline.ecosystem.origin.frontend.page.Signup;
 import biz.turnonline.ecosystem.origin.frontend.page.SiteMap;
 import com.google.inject.Injector;
+import de.agilecoders.wicket.core.Bootstrap;
+import de.agilecoders.wicket.core.settings.BootstrapSettings;
+import de.agilecoders.wicket.core.settings.SingleThemeProvider;
+import de.agilecoders.wicket.themes.markup.html.material_design.MaterialDesignTheme;
 import net.sf.jsr107cache.Cache;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
@@ -20,8 +25,6 @@ import org.apache.wicket.util.lang.Bytes;
 import org.ctoolkit.wicket.standard.cache.MemcachePropertiesFactory;
 import org.ctoolkit.wicket.standard.cache.MemcacheResourceLocator;
 import org.ctoolkit.wicket.turnonline.AppEngineApplication;
-import org.ctoolkit.wicket.turnonline.identity.page.IdentityLogin;
-import org.ctoolkit.wicket.turnonline.identity.page.SignUp;
 
 import java.util.HashSet;
 import java.util.List;
@@ -35,13 +38,18 @@ import java.util.Set;
 public class FrontendApplication
         extends AppEngineApplication
 {
-    public static final String SETTINGS = MY_ACCOUNT + "/settings";
+    public static final String SIGNUP = "/sign-up";
+
+    public static final String LOGIN = "/login";
+
+    public static final String LOGOUT = "/logout";
+
+    public static final String MY_ACCOUNT = "/my-account";
 
     private Set<String> include = new HashSet<>();
 
     {
         include.add( "biz/turnonline/ecosystem/origin/frontend/FrontendApplication" );
-        include.add( "biz/turnonline/ecosystem/origin/frontend/FrontendApplication_sk" );
         include.add( "org/apache/wicket/Application" );
         include.add( "com/googlecode/wicket/jquery/ui/Initializer" );
         include.add( "org/apache/wicket/extensions/Initializer" );
@@ -74,11 +82,15 @@ public class FrontendApplication
         // set custom properties factory
         resourceSettings.setPropertiesFactory( new MemcachePropertiesFactory( resourceSettings, memcache, include ) );
 
-        mountPage( LOGIN, IdentityLogin.class );
-        mountPage( SIGNUP, SignUp.class );
-        mountPage( MY_ACCOUNT, MyAccountBasics.class );
-        mountPage( SETTINGS, AccountSettings.class );
-        mountPage( SHOPPING_CART, ShoppingCart.class );
+        mountPage( LOGIN, Login.class );
+        mountPage( SIGNUP, Signup.class );
+        mountPage( MY_ACCOUNT, MyAccount.class );
+
+        // init wicket bootstrap
+        BootstrapSettings bootstrapSettings = new BootstrapSettings();
+        bootstrapSettings.setThemeProvider( new SingleThemeProvider( new MaterialDesignTheme() ) );
+        bootstrapSettings.useCdnResources( true );
+        Bootstrap.install( this, bootstrapSettings );
     }
 
     private Injector getInjector()
@@ -113,12 +125,12 @@ public class FrontendApplication
     @Override
     protected Class<? extends WebPage> getSignInPageClass()
     {
-        return IdentityLogin.class;
+        return Login.class;
     }
 
     @Override
     public Class<? extends Page> getHomePage()
     {
-        return ShoppingCart.class;
+        return Home.class;
     }
 }
