@@ -52,7 +52,7 @@ public class FrontendSession
 
         if ( isLoggedIn() )
         {
-            roles.add( Role.USER );
+            roles.add( Role.STANDARD );
         }
 
         return roles;

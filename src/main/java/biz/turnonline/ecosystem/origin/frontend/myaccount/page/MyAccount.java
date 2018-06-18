@@ -1,5 +1,6 @@
 package biz.turnonline.ecosystem.origin.frontend.myaccount.page;
 
+import biz.turnonline.ecosystem.account.client.model.Account;
 import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
 import biz.turnonline.ecosystem.origin.frontend.model.MyAccountModel;
@@ -18,9 +19,9 @@ import org.ctoolkit.wicket.standard.model.I18NResourceModel;
  *
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
-@AuthorizeInstantiation( Role.USER )
+@AuthorizeInstantiation( Role.STANDARD )
 public class MyAccount
-        extends DecoratedPage<AccountProfile>
+        extends DecoratedPage<Account>
 {
     public MyAccount()
     {
