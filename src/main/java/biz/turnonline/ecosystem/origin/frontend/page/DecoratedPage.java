@@ -36,8 +36,6 @@ import java.util.List;
 public class DecoratedPage<T>
         extends Skeleton<T>
 {
-    public static final String HTML_BOTTOM_FILTER_NAME = "html-bottom-container";
-
     public DecoratedPage()
     {
         initialize();

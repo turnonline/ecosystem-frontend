@@ -90,7 +90,7 @@
         <dependency>
             <groupId>org.ctoolkit.wicket</groupId>
             <artifactId>ctoolkit-wicket</artifactId>
-            <version>0.5</version>
+            <version>0.7</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
