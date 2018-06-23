@@ -113,7 +113,6 @@
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
             <artifactId>ctoolkit-client-firebase</artifactId>
-            <version>0.26</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.services</groupId>
@@ -246,7 +245,7 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.64</ctoolkit-microservice-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.64.1</ctoolkit-microservice-bom.version>
         <ctoolkit-library-bom.version>8</ctoolkit-library-bom.version>
         <wicket-bom.version>6.29.0</wicket-bom.version>
         <appengine.maven.plugin.version>1.3.2</appengine.maven.plugin.version>
