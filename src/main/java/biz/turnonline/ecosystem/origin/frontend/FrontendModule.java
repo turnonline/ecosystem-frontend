@@ -1,7 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.account.client.AccountManagementAdapterModule;
-import biz.turnonline.ecosystem.account.client.AccountManagementApiModule;
+import biz.turnonline.ecosystem.account.client.AccountStewardAdapterModule;
+import biz.turnonline.ecosystem.account.client.AccountStewardApiModule;
 import biz.turnonline.ecosystem.origin.frontend.identity.IdentitySessionUserListener;
 import com.google.appengine.api.utils.SystemProperty;
 import com.google.common.base.Strings;
@@ -12,6 +12,7 @@ import com.google.inject.name.Names;
 import net.sf.jsr107cache.Cache;
 import org.ctoolkit.restapi.client.ApiCredential;
 import org.ctoolkit.restapi.client.appengine.CtoolkitRestFacadeAppEngineModule;
+import org.ctoolkit.restapi.client.appengine.DefaultOrikaMapperFactoryModule;
 import org.ctoolkit.restapi.client.appengine.JCacheProvider;
 import org.ctoolkit.restapi.client.firebase.GoogleApiFirebaseModule;
 import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
@@ -36,10 +37,11 @@ public class FrontendModule
         install( new CtoolkitServicesAppEngineModule() );
         install( new CtoolkitRestFacadeAppEngineModule() );
         install( new GoogleApiFirebaseModule() );
+        install( new DefaultOrikaMapperFactoryModule() );
 
         // Account and Contact management client modules
-        install( new AccountManagementApiModule() );
-        install( new AccountManagementAdapterModule() );
+        install( new AccountStewardApiModule() );
+        install( new AccountStewardAdapterModule() );
 
         bind( Cache.class ).toProvider( JCacheProvider.class ).in( Singleton.class );
 

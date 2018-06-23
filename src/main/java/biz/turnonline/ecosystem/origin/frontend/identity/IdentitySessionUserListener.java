@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.restapi.client.NotFoundException;
 import org.ctoolkit.restapi.client.RestFacade;
 import org.ctoolkit.restapi.client.UnauthorizedException;
+import org.ctoolkit.restapi.client.firebase.IdentityHandler;
 import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,12 +31,16 @@ public class IdentitySessionUserListener
 {
     private static final Logger logger = LoggerFactory.getLogger( IdentitySessionUserListener.class );
 
-    private final RestFacade resources;
+    private final RestFacade facade;
+
+    private final IdentityHandler handler;
 
     @Inject
-    public IdentitySessionUserListener( RestFacade resources )
+    public IdentitySessionUserListener( RestFacade facade,
+                                        IdentityHandler handler )
     {
-        this.resources = resources;
+        this.facade = facade;
+        this.handler = handler;
     }
 
     @Override
@@ -46,9 +51,16 @@ public class IdentitySessionUserListener
     {
         String signedEmail = identity.getEmail();
 
+        // JWT token of logged in user to be forwarded
+        String jwtToken = handler.getToken( request );
+        if ( jwtToken == null )
+        {
+            throw new IllegalArgumentException( "Missing JWT token!" );
+        }
+
         try
         {
-            Account account = resources.get( Account.class ).identifiedBy( signedEmail ).finish();
+            Account account = facade.get( Account.class ).identifiedBy( signedEmail ).authBy( jwtToken ).bearer().finish();
             account.setCompany( false );
             request.getSession().setAttribute( sessionAttribute, account );
         }
@@ -61,7 +73,7 @@ public class IdentitySessionUserListener
             account.setFirstName( identity.getName() );
             account.setIdentityId( identity.getIssuer() );
 
-            account = resources.insert( account ).finish();
+            account = facade.insert( account ).authBy( jwtToken ).bearer().finish();
 
             AccountProfile profile = new AccountProfile( identity );
 

@@ -1,10 +1,8 @@
 package biz.turnonline.ecosystem.origin.frontend.page;
 
-import org.apache.wicket.model.IModel;
 import org.ctoolkit.wicket.standard.identity.FirebaseConfig;
 import org.ctoolkit.wicket.standard.identity.behavior.FirebaseAppInit;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
-import org.ctoolkit.wicket.turnonline.markup.html.page.DecoratedPage;
 
 import javax.inject.Inject;
 
@@ -26,11 +24,5 @@ public class ShoppingCart<T>
     public ShoppingCart()
     {
         add( new FirebaseAppInit( firebaseConfig ) );
-    }
-
-    @Override
-    public IModel<String> getPageTitle()
-    {
-        return titleModel;
     }
 }

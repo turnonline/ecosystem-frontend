@@ -1,6 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.myaccount.model;
 
 import biz.turnonline.ecosystem.account.client.model.Account;
+import biz.turnonline.ecosystem.account.client.model.AccountBusiness;
 import biz.turnonline.ecosystem.account.client.model.Country;
 import org.apache.wicket.model.IModel;
 import org.ctoolkit.wicket.standard.model.DropDownBridgeModel;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 /**
  * The model to get {@link Country} and set related code to
- * {@link Account#setDomicile(String)} (String)} taken from the countries map.
+ * {@link Account#getBusiness()} setDomicile(String)} (String)} taken from the countries map.
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
@@ -27,13 +28,20 @@ public class CompanyDomicileModel
     @Override
     public String getCode( @Nonnull Account target )
     {
-        return target.getDomicile();
+        AccountBusiness business = target.getBusiness();
+        return business == null ? null : business.getDomicile();
     }
 
     @Override
     public void updateCode( Country choice, @Nonnull Account target )
     {
-        target.setDomicile( choice == null ? null : choice.getCode() );
+        AccountBusiness business = target.getBusiness();
+        if ( business == null )
+        {
+            business = new AccountBusiness();
+            target.setBusiness( business );
+        }
+        business.setDomicile( choice == null ? null : choice.getCode() );
     }
 }
 

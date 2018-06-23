@@ -25,7 +25,7 @@ public class FrontendSession
 
     private static final long serialVersionUID = -5908999362458425557L;
 
-    private Long loggedInUserId;
+    private String loggedInUserId;
 
     public FrontendSession( Request request )
     {
@@ -101,11 +101,11 @@ public class FrontendSession
         return loggedInUser != null && loggedInUser.equals( account );
     }
 
-    public Long getLoggedInUserId()
+    public String getLoggedInUserId()
     {
         if ( loggedInUserId == null )
         {
-            loggedInUserId = getLoggedInUser().getId();
+            loggedInUserId = getLoggedInUser().getEmail();
         }
         return loggedInUserId;
     }

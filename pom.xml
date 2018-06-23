@@ -88,8 +88,8 @@
     <dependencies>
         <dependency>
             <groupId>biz.turnonline.ecosystem</groupId>
-            <artifactId>turnonline-account-management-client</artifactId>
-            <version>1.0-20171217.081706-1</version>
+            <artifactId>turnonline-account-steward-client</artifactId>
+            <version>1.0-20180608.132655-5</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.wicket</groupId>

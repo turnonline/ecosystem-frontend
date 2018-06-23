@@ -1,6 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.myaccount.page;
 
 import biz.turnonline.ecosystem.account.client.model.Account;
+import biz.turnonline.ecosystem.account.client.model.AccountBusiness;
 import biz.turnonline.ecosystem.account.client.model.AccountPostalAddress;
 import biz.turnonline.ecosystem.account.client.model.Country;
 import biz.turnonline.ecosystem.account.client.model.LegalForm;
@@ -16,6 +17,7 @@ import biz.turnonline.ecosystem.origin.frontend.myaccount.event.AccountUpdateEve
 import biz.turnonline.ecosystem.origin.frontend.myaccount.model.CompanyDomicileModel;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.model.PersonalAddressCountryModel;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.model.PostalAddressCountryModel;
+import biz.turnonline.ecosystem.origin.frontend.page.DecoratedPage;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormSubmitBehavior;
@@ -39,8 +41,6 @@ import org.ctoolkit.wicket.standard.identity.behavior.FirebaseAppInit;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxButton;
 import org.ctoolkit.wicket.standard.markup.html.form.ajax.IndicatingAjaxDropDown;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
-import org.ctoolkit.wicket.turnonline.markup.html.page.DecoratedPage;
-import org.ctoolkit.wicket.turnonline.model.IModelFactory;
 import org.ctoolkit.wicket.turnonline.myaccount.event.ToggleCompanyPersonChangeEvent;
 import org.ctoolkit.wicket.turnonline.myaccount.panel.CompanyAddressPanel;
 import org.ctoolkit.wicket.turnonline.myaccount.panel.CompanyBasicInfo;
@@ -70,9 +70,6 @@ public class MyAccountBasics
 
     @Inject
     private RestFacade resources;
-
-    @Inject
-    private IModelFactory factory;
 
     private I18NResourceModel titleModel = new I18NResourceModel( "title.my-account" );
 
@@ -152,7 +149,17 @@ public class MyAccountBasics
             {
                 super.onConfigure( component );
                 Account account = basicInfo.getModelObject();
-                boolean visible = account == null || account.getVatPayer();
+                boolean visible;
+                if ( account == null || account.getBusiness() == null )
+                {
+                    visible = true;
+                }
+                else
+                {
+                    Boolean vatPayer = account.getBusiness().getVatPayer();
+                    visible = vatPayer == null ? Boolean.FALSE : vatPayer;
+                }
+
                 component.setVisible( visible );
             }
         } );
@@ -170,18 +177,19 @@ public class MyAccountBasics
             {
                 Account account = ( Account ) basicInfo.getDefaultModelObject();
                 String rawTaxIdValue = taxId.getRawInput();
+                AccountBusiness business = account.getBusiness();
 
-                if ( rawTaxIdValue != null && Strings.isEmpty( account.getVatId() ) )
+                if ( rawTaxIdValue != null && Strings.isEmpty( business == null ? null : business.getVatId() ) )
                 {
-                    // VAT state prefix proposal
-                    String state = account.getDomicile();
-                    state = state == null ? "" : state.toUpperCase();
+                    // VAT country prefix proposal
+                    String country = business == null ? "" : business.getDomicile();
+                    country = country.toUpperCase();
                     //noinspection unchecked
-                    vatId.getModel().setObject( state + rawTaxIdValue );
+                    vatId.getModel().setObject( country + rawTaxIdValue );
                 }
 
                 // must be set manually as getDefaultProcessing() returns false
-                vatPayer.setModelObject( !account.getVatPayer() );
+                vatPayer.setModelObject( !( business == null ? Boolean.FALSE : business.getVatPayer() ) );
 
                 if ( target != null )
                 {
@@ -333,7 +341,7 @@ public class MyAccountBasics
             if ( FrontendSession.get().isLoggedIn( account ) )
             {
                 Account updated = resources.update( account )
-                        .identifiedBy( new Identifier( account.getId() ) ).finish();
+                        .identifiedBy( new Identifier( account.getEmail() ) ).finish();
 
                 FrontendSession.get().updateLoggedInUser( updated );
 // FIXME        factory.updateMallCustomerFromSession( WicketUtil.getHttpServletRequest() );
@@ -346,11 +354,5 @@ public class MyAccountBasics
             }
         }
 
-    }
-
-    @Override
-    public IModel<String> getPageTitle()
-    {
-        return titleModel;
     }
 }

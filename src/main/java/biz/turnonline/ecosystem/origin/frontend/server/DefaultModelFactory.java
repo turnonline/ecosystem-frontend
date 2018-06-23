@@ -1,12 +1,15 @@
 package biz.turnonline.ecosystem.origin.frontend.server;
 
 import biz.turnonline.ecosystem.account.client.model.Account;
+import biz.turnonline.ecosystem.account.client.model.AccountBusiness;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
 import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.page.AccountSettings;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccountBasics;
+import biz.turnonline.ecosystem.origin.frontend.page.Login;
 import biz.turnonline.ecosystem.origin.frontend.page.ShoppingCart;
+import biz.turnonline.ecosystem.origin.frontend.page.Signup;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
@@ -18,12 +21,9 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.string.Strings;
 import org.ctoolkit.wicket.standard.util.WicketUtil;
-import org.ctoolkit.wicket.turnonline.identity.page.IdentityLogin;
-import org.ctoolkit.wicket.turnonline.identity.page.SignUp;
 import org.ctoolkit.wicket.turnonline.menu.DefaultSchema;
 import org.ctoolkit.wicket.turnonline.menu.MenuSchema;
 import org.ctoolkit.wicket.turnonline.menu.SearchResponse;
-import org.ctoolkit.wicket.turnonline.model.AppEngineModelFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -39,8 +39,8 @@ import java.util.List;
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 @Singleton
+@Deprecated
 class DefaultModelFactory
-        extends AppEngineModelFactory
 {
     private static final AbstractReadOnlyModel<Boolean> loggedInModel = new AbstractReadOnlyModel<Boolean>()
     {
@@ -79,11 +79,17 @@ class DefaultModelFactory
             {
                 Account loggedInUser = FrontendSession.get().getLoggedInUser();
                 String formattedName = loggedInUser.getEmail();
-                if ( loggedInUser.getCompany() )
+                Boolean company = loggedInUser.getCompany() == null ? Boolean.FALSE : loggedInUser.getCompany();
+                if ( company )
                 {
-                    if ( !Strings.isEmpty( loggedInUser.getBusinessName() ) )
+                    AccountBusiness business = loggedInUser.getBusiness();
+                    if ( business == null )
                     {
-                        formattedName = loggedInUser.getBusinessName();
+                        throw new IllegalArgumentException( "Account is being marked as company but business is null" );
+                    }
+                    if ( !Strings.isEmpty( business.getBusinessName() ) )
+                    {
+                        formattedName = business.getBusinessName();
                     }
                 }
                 else
@@ -130,37 +136,31 @@ class DefaultModelFactory
     {
     }
 
-    @Override
     public Class<? extends Page> getShoppingCartPage()
     {
         return ShoppingCart.class;
     }
 
-    @Override
     public Class<? extends Page> getLoginPage()
     {
-        return IdentityLogin.class;
+        return Login.class;
     }
 
-    @Override
     public Class<? extends Page> getSignUpPage()
     {
-        return SignUp.class;
+        return Signup.class;
     }
 
-    @Override
     public Class<? extends Page> getMyAccountPage()
     {
         return MyAccountBasics.class;
     }
 
-    @Override
     public Class<? extends Page> getAccountSettingsPage()
     {
         return AccountSettings.class;
     }
 
-    @Override
     public IModel<String> getTermsUrlModel( @Nullable IModel<?> pageModel )
     {
         return null;
@@ -169,67 +169,56 @@ class DefaultModelFactory
     /**
      * If no custom logo specified returns a default model rendering '/images/logo.png'.
      */
-    @Override
     public IModel<String> getLogoUrlModel( @Nullable IModel<?> pageModel )
     {
         return defaultLogoModel;
     }
 
-    @Override
     public IModel<Boolean> isLoggedInModel()
     {
         return loggedInModel;
     }
 
-    @Override
     public IModel<Long> getCartItemsCountModel()
     {
         return cartItemsCountModel;
     }
 
-    @Override
     public Roles getRoles()
     {
         return FrontendSession.get().getRoles();
     }
 
-    @Override
     public IModel getLoggedInAccountModel()
     {
         return inModel;
     }
 
-    @Override
     public Behavior[] getBehaviors( @Nonnull RuntimeConfigurationType type, @Nullable IModel<?> pageModel )
     {
         return behaviors;
     }
 
-    @Override
     public String getGoogleAnalyticsTrackingId( @Nullable IModel<?> pageModel )
     {
         return null;
     }
 
-    @Override
     public MenuSchema provideMenuSchema( @Nonnull Page context, @Nullable Roles roles )
     {
         return new DefaultSchema( roles );
     }
 
-    @Override
     public IModel<?> getShoppingMallModel( @Nonnull HttpServletRequest request )
     {
         return null;
     }
 
-    @Override
     public String getAccountRole()
     {
         return Role.SELLER;
     }
 
-    @Override
     public List<SearchResponse> getSearchResponseList( String input )
     {
         return new ArrayList<>();
