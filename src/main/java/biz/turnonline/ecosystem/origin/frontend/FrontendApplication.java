@@ -93,7 +93,7 @@ public class FrontendApplication
         Bootstrap.install( this, bootstrapSettings );
     }
 
-    private Injector getInjector()
+    public Injector getInjector()
     {
         return ( Injector ) getServletContext().getAttribute( Injector.class.getName() );
     }

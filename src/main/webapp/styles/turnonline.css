@@ -1,0 +1,40 @@
+.search-box-panel {
+    margin-top: 20px;
+}
+
+.search-box-panel .autocomplete {
+    width: 250px;
+    display: inline-block;
+    margin-left: -15px;
+    padding-left: 25px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.search-box-panel .search-box-panel-icon {
+    position: relative;
+    top: -10px;
+    left: 5px;
+}
+
+.search-box-panel .multiValueSuggestBox-list {
+    border-color: #fff;
+}
+
+.gwt-SuggestBoxPopup .item {
+    padding: 5px 10px 15px !important;
+}
+
+.gwt-SuggestBoxPopup table {
+    width: 100%;
+}
+
+.gwt-SuggestBoxPopupItemIcon {
+    position: relative;
+    top: 6px;
+    right: 5px;
+    color: #fff;
+    background: #03dac6;
+    border-radius: 20px;
+    padding: 5px;
+}

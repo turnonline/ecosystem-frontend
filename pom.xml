@@ -55,6 +55,32 @@
                     <argLine>-Xmx256m ${jmockit.setting}</argLine>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.ctoolkit.turnonline</groupId>
+                                    <artifactId>turnonline-widgets</artifactId>
+                                    <version>${turnonline-widgets.version}</version>
+                                    <classifier>javascript</classifier>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>target/${project.build.finalName}</outputDirectory>
+                                    <type>zip</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -251,6 +277,7 @@
     <properties>
         <ctoolkit-microservice-bom.version>1.9.64.1</ctoolkit-microservice-bom.version>
         <ctoolkit-library-bom.version>8</ctoolkit-library-bom.version>
+        <turnonline-widgets.version>0.5-20180628.200246-5</turnonline-widgets.version>
         <wicket-bom.version>6.29.0</wicket-bom.version>
         <appengine.maven.plugin.version>1.3.2</appengine.maven.plugin.version>
         <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>

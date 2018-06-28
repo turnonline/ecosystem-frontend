@@ -2,6 +2,7 @@ package biz.turnonline.ecosystem.origin.frontend.page;
 
 import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
+import biz.turnonline.ecosystem.origin.frontend.component.SearchPanel;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccount;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationPanel;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;
@@ -11,6 +12,9 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarExternalLin
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -18,7 +22,6 @@ import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.protocol.https.RequireHttps;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.ctoolkit.wicket.standard.model.I18NResourceModel;
@@ -32,7 +35,7 @@ import java.util.List;
  *
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
-@RequireHttps
+//@RequireHttps
 public class DecoratedPage<T>
         extends Skeleton<T>
 {
@@ -91,7 +94,6 @@ public class DecoratedPage<T>
         };
 
         navbar.addComponents( NavbarComponents.transform( Navbar.ComponentPosition.RIGHT, newNavbarComponents() ) );
-//        navbar.setBrandImage( new PackageResourceReference( FrontendApplication.class, "logo.png" ), Model.of( "" ) );
         navbar.get( "brandName" ).get( "brandImage" ).add( AttributeModifier.append( "style", "max-height:32px;" ) );
         navbar.setInverted( true );
 
@@ -102,6 +104,7 @@ public class DecoratedPage<T>
     {
         List<Component> navbarComponents = new ArrayList<>();
 
+        navbarComponents.add( newSearchPanel() );
         if ( FrontendSession.get().isLoggedIn() )
         {
             navbarComponents.add( newMyAccountNavbarItem() );
@@ -145,6 +148,11 @@ public class DecoratedPage<T>
                 .setIconType( GlyphIconType.off )
                 .setLabel( new I18NResourceModel( "label.logout" ) )
                 .add( new AttributeAppender( "onclick", script, ";" ) );
+    }
+
+    protected Component newSearchPanel()
+    {
+        return new SearchPanel( Navbar.componentId() );
     }
 
     // -- notifications
@@ -192,5 +200,15 @@ public class DecoratedPage<T>
 
         // container for firebase javascripts - must be located in html at the bottom
         add( new HeaderResponseContainer( "html-bottom-container", HTML_BOTTOM_FILTER_NAME ) );
+
+        add( new Behavior()
+        {
+            @Override
+            public void renderHead( Component component, IHeaderResponse response )
+            {
+                response.render( CssHeaderItem.forUrl( "https://fonts.googleapis.com/icon?family=Material+Icons" ) );
+                response.render( CssHeaderItem.forUrl( "/styles/turnonline.css" ) );
+            }
+        } );
     }
 }
