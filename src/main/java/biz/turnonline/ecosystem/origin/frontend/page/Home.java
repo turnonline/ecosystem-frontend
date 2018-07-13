@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static biz.turnonline.ecosystem.origin.frontend.FrontendModule.API_CREDENTIAL_LOADER;
+
 /**
  * Home page
  *
@@ -52,8 +54,8 @@ public class Home
             }
         } );
 
-        InputStream identityPropertiesContentStream = Home.class.getResourceAsStream( "/identity.properties" );
-        String identityPropertiesContent = null;
+        InputStream identityPropertiesContentStream = Home.class.getResourceAsStream( API_CREDENTIAL_LOADER.getConfigurationFilePath() );
+        String identityPropertiesContent;
         try
         {
             identityPropertiesContent = CharStreams.toString(new InputStreamReader(identityPropertiesContentStream, Charsets.UTF_8));
@@ -61,7 +63,7 @@ public class Home
         catch ( IOException e )
         {
             e.printStackTrace();
-            identityPropertiesContent = "Error unable to load /identity.properties";
+            identityPropertiesContent = "Error unable to load /api.properties";
         }
         add( new Label( "identity-properties", identityPropertiesContent ) );
     }

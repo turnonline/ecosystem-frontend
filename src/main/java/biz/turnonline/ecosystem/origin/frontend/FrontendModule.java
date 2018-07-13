@@ -10,7 +10,6 @@ import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import net.sf.jsr107cache.Cache;
-import org.ctoolkit.restapi.client.ApiCredential;
 import org.ctoolkit.restapi.client.appengine.CtoolkitRestFacadeAppEngineModule;
 import org.ctoolkit.restapi.client.appengine.DefaultOrikaMapperFactoryModule;
 import org.ctoolkit.restapi.client.appengine.JCacheProvider;
@@ -30,6 +29,8 @@ import javax.inject.Singleton;
 public class FrontendModule
         extends AbstractModule
 {
+    public static ApiCredentialLoader API_CREDENTIAL_LOADER = new ApiCredentialLoader();
+
     @Override
     protected void configure()
     {
@@ -48,10 +49,8 @@ public class FrontendModule
         Multibinder<IdentityLoginListener> identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
         identityListener.addBinding().to( IdentitySessionUserListener.class );
 
-        ApiCredential credential = new ApiCredential();
-        credential.load( "/identity.properties" );
-
-        Names.bindProperties( binder(), credential );
+        API_CREDENTIAL_LOADER.configure();
+        Names.bindProperties( binder(), API_CREDENTIAL_LOADER.getApiCredential() );
     }
 
     @Provides
