@@ -49,7 +49,7 @@ public class SearchPanel
             @Override
             public void renderHead( Component component, IHeaderResponse response )
             {
-                String script = " var RestServiceProfile = {CTOOLKIT_SERVICE_ROOT: '" + searchApiEndpointUrl + "'}";
+                String script = " var RestServiceProfile = {SEARCH_API_SERVICE_ROOT: '" + searchApiEndpointUrl + "'}";
                 response.render( JavaScriptContentHeaderItem.forScript( script, "SearchWidgetRestServiceProfile" ) );
             }
         } );
