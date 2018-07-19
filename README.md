@@ -17,7 +17,7 @@ Prior to create archetype you need to create new project (or use already created
 https://console.cloud.google.com/projectcreate
 ```
 
-> Store you project id (not project name!) - you will need it to setup Firebase and also for running of archetype.
+> Store your project id (not project name!) - you will need it to setup Firebase and also for running of archetype.
 
 ## Create Firebase project
 If you have successfully created Google App engine project use project id to configure firebase. Go to `https://console.firebase.google.com`
