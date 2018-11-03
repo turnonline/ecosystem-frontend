@@ -1,7 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.identity;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
 import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
+import biz.turnonline.ecosystem.steward.model.Account;
 import com.google.firebase.auth.FirebaseToken;
 import org.ctoolkit.restapi.client.NotFoundException;
 import org.ctoolkit.restapi.client.RestFacade;

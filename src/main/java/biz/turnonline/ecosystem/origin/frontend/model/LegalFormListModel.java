@@ -1,7 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
-import biz.turnonline.ecosystem.account.client.model.LegalForm;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
+import biz.turnonline.ecosystem.steward.model.LegalForm;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.ctoolkit.restapi.client.RestFacade;

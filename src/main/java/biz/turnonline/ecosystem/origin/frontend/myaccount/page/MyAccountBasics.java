@@ -1,10 +1,5 @@
 package biz.turnonline.ecosystem.origin.frontend.myaccount.page;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
-import biz.turnonline.ecosystem.account.client.model.AccountBusiness;
-import biz.turnonline.ecosystem.account.client.model.AccountPostalAddress;
-import biz.turnonline.ecosystem.account.client.model.Country;
-import biz.turnonline.ecosystem.account.client.model.LegalForm;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
 import biz.turnonline.ecosystem.origin.frontend.model.CountriesModel;
@@ -18,6 +13,11 @@ import biz.turnonline.ecosystem.origin.frontend.myaccount.model.CompanyDomicileM
 import biz.turnonline.ecosystem.origin.frontend.myaccount.model.PersonalAddressCountryModel;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.model.PostalAddressCountryModel;
 import biz.turnonline.ecosystem.origin.frontend.page.DecoratedPage;
+import biz.turnonline.ecosystem.steward.model.Account;
+import biz.turnonline.ecosystem.steward.model.AccountBusiness;
+import biz.turnonline.ecosystem.steward.model.AccountPostalAddress;
+import biz.turnonline.ecosystem.steward.model.Country;
+import biz.turnonline.ecosystem.steward.model.LegalForm;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormSubmitBehavior;

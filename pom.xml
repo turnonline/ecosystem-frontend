@@ -127,7 +127,7 @@
         <dependency>
             <groupId>biz.turnonline.ecosystem</groupId>
             <artifactId>turnonline-account-steward-client</artifactId>
-            <version>1.0-20180608.132655-5</version>
+            <version>1.0-20181026.171251-11</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.wicket</groupId>

@@ -1,7 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
+import biz.turnonline.ecosystem.steward.model.Account;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;

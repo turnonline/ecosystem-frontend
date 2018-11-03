@@ -1,7 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
+import biz.turnonline.ecosystem.steward.model.Account;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 /**

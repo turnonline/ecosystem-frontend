@@ -1,6 +1,6 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
-import biz.turnonline.ecosystem.account.client.model.LegalForm;
+import biz.turnonline.ecosystem.steward.model.LegalForm;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 
 /**

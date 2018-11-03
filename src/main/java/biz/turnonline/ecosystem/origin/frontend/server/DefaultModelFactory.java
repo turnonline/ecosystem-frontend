@@ -1,7 +1,5 @@
 package biz.turnonline.ecosystem.origin.frontend.server;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
-import biz.turnonline.ecosystem.account.client.model.AccountBusiness;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
 import biz.turnonline.ecosystem.origin.frontend.identity.AccountProfile;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
@@ -10,6 +8,8 @@ import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccountBasics;
 import biz.turnonline.ecosystem.origin.frontend.page.Login;
 import biz.turnonline.ecosystem.origin.frontend.page.ShoppingCart;
 import biz.turnonline.ecosystem.origin.frontend.page.Signup;
+import biz.turnonline.ecosystem.steward.model.Account;
+import biz.turnonline.ecosystem.steward.model.AccountBusiness;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;

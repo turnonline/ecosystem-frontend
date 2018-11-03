@@ -1,9 +1,9 @@
 package biz.turnonline.ecosystem.origin.frontend.myaccount.page;
 
-import biz.turnonline.ecosystem.account.client.model.Account;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
 import biz.turnonline.ecosystem.origin.frontend.model.MyAccountModel;
 import biz.turnonline.ecosystem.origin.frontend.page.DecoratedPage;
+import biz.turnonline.ecosystem.steward.model.Account;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormBehavior;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormGroup;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormType;

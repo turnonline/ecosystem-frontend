@@ -1,8 +1,8 @@
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.account.client.AccountStewardAdapterModule;
-import biz.turnonline.ecosystem.account.client.AccountStewardApiModule;
 import biz.turnonline.ecosystem.origin.frontend.identity.IdentitySessionUserListener;
+import biz.turnonline.ecosystem.steward.facade.AccountStewardAdapterModule;
+import biz.turnonline.ecosystem.steward.facade.AccountStewardApiModule;
 import com.google.appengine.api.utils.SystemProperty;
 import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
