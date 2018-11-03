@@ -287,8 +287,8 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.64.1</ctoolkit-microservice-bom.version>
-        <ctoolkit-library-bom.version>8</ctoolkit-library-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.66</ctoolkit-microservice-bom.version>
+        <ctoolkit-library-bom.version>9</ctoolkit-library-bom.version>
         <turnonline-widgets.version>0.5-20180716.122750-7</turnonline-widgets.version>
         <wicket-bom.version>6.29.0</wicket-bom.version>
         <appengine.maven.plugin.version>1.3.2</appengine.maven.plugin.version>

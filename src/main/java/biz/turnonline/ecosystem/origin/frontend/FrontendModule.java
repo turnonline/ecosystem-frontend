@@ -65,6 +65,8 @@ public class FrontendModule
             appId = SystemProperty.applicationId.get();
         }
         FirebaseConfig config = new FirebaseConfig();
+        config.setUiWidgetVersion( "3.4.1" );
+        config.setFirebaseVersion( "5.5.7" );
 
         config.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
         config.setTermsUrl( "terms" );
