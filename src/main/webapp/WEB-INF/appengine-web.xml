@@ -23,6 +23,9 @@
     <threadsafe>true</threadsafe>
 
     <static-files>
+        <include expiration="30d" path="/search.widget/**.*"/>
+        <include expiration="0s" path="/search.widget/search.widget.nocache.js"/>
+
         <include expiration="30d" path="/scripts/*.js"/>
         <include expiration="30d" path="/images/*.png"/>
         <include expiration="30d" path="/images/*.gif"/>

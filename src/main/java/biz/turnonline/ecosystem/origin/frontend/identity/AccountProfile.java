@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class AccountProfile
         implements Serializable
 {
-    private static final long serialVersionUID = 8965549603743224988L;
+    private static final long serialVersionUID = 32061868949999028L;
 
     private String email;
 

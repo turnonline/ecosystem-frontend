@@ -11,14 +11,14 @@ import java.util.Map;
 
 /**
  * The model to get {@link Country} and set related code to
- * {@link Account#getBusiness()} setDomicile(String)} (String)} taken from the countries map.
+ * {@link AccountBusiness#setDomicile(String)} taken from the countries map.
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 public class CompanyDomicileModel
         extends DropDownBridgeModel<Country, Account>
 {
-    private static final long serialVersionUID = 4208312533949004564L;
+    private static final long serialVersionUID = 1216844044792601998L;
 
     public CompanyDomicileModel( IModel<Account> model, IModel<Map<String, Country>> countriesModel )
     {

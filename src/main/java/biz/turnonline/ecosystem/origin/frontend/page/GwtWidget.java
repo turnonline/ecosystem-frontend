@@ -10,7 +10,7 @@ import org.ctoolkit.wicket.standard.gwt.GwtScriptAppender;
  * <p>
  * {@code <div id="gwt-content">}
  *
- * @author <a href="mailto:aurel.medvegy@ctoolkit.org">Aurel Medvegy</a>
+ * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 @RequireHttps
 public class GwtWidget
