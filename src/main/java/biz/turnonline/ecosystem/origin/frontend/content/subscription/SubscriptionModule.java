@@ -76,15 +76,14 @@ public class SubscriptionModule
     {
         install( new SubscriptionsListenerModule() );
 
-        String busName = "content.subscription";
+        String busName = "turnon.content.subscription";
         bind( EventBus.class ).annotatedWith( ContentSubscription.class ).toInstance( new EventBus( busName ) );
         bind( Locale.class ).annotatedWith( ContentSubscription.class ).toInstance( defaultLocale );
         bind( ContentNaming.class ).in( Singleton.class );
 
         MapBinder<String, PubsubMessageListener> map;
         map = MapBinder.newMapBinder( binder(), String.class, PubsubMessageListener.class );
-        map.addBinding( "content" ).to( biz.turnonline.ecosystem.origin.frontend.content.subscription.ContentSubscription.class );
-        map.addBinding( "content.delete" ).to( ContentDeleteSubscription.class );
+        map.addBinding( "turnon.content" ).to( TurnOnContentSubscription.class );
 
         // caching
         bind( new TypeLiteral<LocalResourceProvider<CommonContent>>()

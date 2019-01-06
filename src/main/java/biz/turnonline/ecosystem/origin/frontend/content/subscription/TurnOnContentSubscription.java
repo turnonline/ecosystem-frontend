@@ -16,6 +16,7 @@
 
 package biz.turnonline.ecosystem.origin.frontend.content.subscription;
 
+import biz.turnonline.ecosystem.origin.frontend.content.ContentSubscription;
 import biz.turnonline.ecosystem.origin.frontend.content.subscription.event.CommonContentUpdateEvent;
 import biz.turnonline.ecosystem.origin.frontend.content.subscription.event.EventContentUpdateEvent;
 import biz.turnonline.ecosystem.origin.frontend.content.subscription.event.MallArticleUpdateEvent;
@@ -26,54 +27,81 @@ import com.google.api.services.pubsub.model.PubsubMessage;
 import com.google.common.base.Strings;
 import com.google.common.eventbus.EventBus;
 import org.apache.commons.codec.binary.Base64;
+import org.ctoolkit.restapi.client.pubsub.PubsubCommand;
+import org.ctoolkit.restapi.client.pubsub.PubsubMessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.nio.charset.Charset;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
+import static org.ctoolkit.restapi.client.pubsub.PubsubCommand.DATA_TYPE;
+import static org.ctoolkit.restapi.client.pubsub.PubsubCommand.ENTITY_ID;
 
 /**
- * Content subscription listener processing and persisting incoming content of known type.
+ * The subscription 'turnon.content' listener implementation
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
-@Singleton
-class ContentSubscription
-        extends AbstractContentSubscription
+class TurnOnContentSubscription
+        implements PubsubMessageListener
 {
-    static final String DATA_TYPE = "DataType";
+    private static final Logger logger = LoggerFactory.getLogger( TurnOnContentSubscription.class );
 
-    static final String CONTENT_UNIQUE_NAME = "ContentUniqueName";
+    private static final long serialVersionUID = -5738883108697749503L;
 
-    static final String CONTENT_LOCALE = "ContentLocale";
-
-    private static final long serialVersionUID = -7399244661971846809L;
-
-    private static final Logger logger = LoggerFactory.getLogger( ContentSubscription.class );
-
+    @SuppressWarnings( "UnstableApiUsage" )
     private final EventBus bus;
 
+    private final ContentNaming naming;
+
+    /**
+     * The constructor.
+     *
+     * @param naming the naming rules class instance
+     */
+    @SuppressWarnings( "UnstableApiUsage" )
     @Inject
-    ContentSubscription( @biz.turnonline.ecosystem.origin.frontend.content.ContentSubscription EventBus bus,
-                         ContentNaming naming )
+    TurnOnContentSubscription( @Nonnull ContentNaming naming,
+                               @ContentSubscription EventBus bus )
     {
-        super( naming );
+        this.naming = checkNotNull( naming );
         this.bus = bus;
     }
 
     @Override
-    public void onMessage( @Nonnull String dataType,
-                           @Nonnull String contentName,
-                           @Nonnull String data,
-                           @Nonnull String subscription,
-                           @Nonnull String receivedContentName,
-                           @Nullable String receivedLocale )
-            throws Exception
+    public void onMessage( @Nonnull PubsubMessage message, @Nonnull String subscription )
+    {
+        PubsubCommand command = new PubsubCommand( message );
+        command.validate( DATA_TYPE, ENTITY_ID );
+
+        String dataType = command.getDataType();
+        String receivedContentName = command.getEntityId();
+        String receivedLocale = command.getAcceptLanguage();
+        String data = message.getData();
+        boolean deletion = command.isDelete();
+
+        String name = naming.prefixName( receivedContentName, receivedLocale );
+        if ( deletion )
+        {
+            onDeletion( dataType, name, data, subscription, receivedContentName, receivedLocale );
+        }
+        else
+        {
+            onMessage( dataType, name, data, subscription, receivedContentName, receivedLocale );
+        }
+    }
+
+    private void onMessage( @Nonnull String dataType,
+                            @Nonnull String contentName,
+                            @Nonnull String data,
+                            @Nonnull String subscription,
+                            @Nonnull String receivedContentName,
+                            @Nullable String receivedLocale )
     {
         String msgLocale = Strings.isNullOrEmpty( receivedLocale ) ? "" : " [" + receivedLocale + "]";
         logger.info( "[" + subscription + "] The message type '" + dataType + "' has been received with length: "
@@ -177,6 +205,62 @@ class ContentSubscription
         }
     }
 
+    private void onDeletion( @Nonnull String dataType,
+                             @Nonnull String contentName,
+                             @Nonnull String data,
+                             @Nonnull String subscription,
+                             @Nonnull String receivedContentName,
+                             @Nullable String receivedLocale )
+    {
+        String msgLocale = Strings.isNullOrEmpty( receivedLocale ) ? "" : " [" + receivedLocale + "]";
+        logger.info( "[" + subscription + "] The request to delete content of type '" + dataType + "' with name: '"
+                + receivedContentName + "'" + msgLocale + " has been received." );
+
+        switch ( dataType )
+        {
+            case "CommonContent":
+            {
+                delete( RawCommonContent.class, contentName );
+                bus.post( new CommonContentUpdateEvent( contentName ) );
+                break;
+            }
+            case "MallArticle":
+            {
+                delete( RawMallArticle.class, contentName );
+                bus.post( new MallArticleUpdateEvent( contentName ) );
+                break;
+            }
+            case "ProductContent":
+            {
+                delete( RawProductContent.class, contentName );
+                bus.post( new ProductContentUpdateEvent( contentName ) );
+                break;
+            }
+            case "EventContent":
+            {
+                delete( RawEventContent.class, contentName );
+                bus.post( new EventContentUpdateEvent( contentName ) );
+                break;
+            }
+            case "PayInvoiceContent":
+            {
+                delete( RawPayInvoiceContent.class, contentName );
+                bus.post( new PayInvoiceContentUpdateEvent( contentName ) );
+                break;
+            }
+            case "TermsContent":
+            {
+                delete( RawTermsContent.class, contentName );
+                bus.post( new TermsContentUpdateEvent( contentName ) );
+                break;
+            }
+            default:
+            {
+                logger.error( "Unknown type '" + dataType + "' with name: '" + contentName + "' has been received." );
+            }
+        }
+    }
+
     void save( BaseRawContent content )
     {
         ofy().save().entity( content ).now();
@@ -185,5 +269,10 @@ class ContentSubscription
     <T> T load( Class<T> type, String contentName )
     {
         return ofy().load().type( type ).id( contentName ).now();
+    }
+
+    void delete( Class type, String contentName )
+    {
+        ofy().delete().type( type ).id( contentName );
     }
 }
