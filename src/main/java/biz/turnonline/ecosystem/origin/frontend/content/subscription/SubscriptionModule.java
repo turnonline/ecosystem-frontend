@@ -17,6 +17,7 @@
 package biz.turnonline.ecosystem.origin.frontend.content.subscription;
 
 import biz.turnonline.ecosystem.origin.frontend.content.ContentSubscription;
+import biz.turnonline.ecosystem.origin.frontend.content.TurnOnlineClient;
 import biz.turnonline.ecosystem.origin.frontend.content.model.CommonContent;
 import biz.turnonline.ecosystem.origin.frontend.content.model.EventContent;
 import biz.turnonline.ecosystem.origin.frontend.content.model.MallContent;
@@ -41,7 +42,9 @@ import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 import com.googlecode.objectify.ObjectifyService;
+import net.sf.jsr107cache.Cache;
 import org.ctoolkit.restapi.client.adaptee.GetExecutorAdaptee;
+import org.ctoolkit.restapi.client.appengine.JCacheProvider;
 import org.ctoolkit.restapi.client.provider.LocalResourceProvider;
 import org.ctoolkit.restapi.client.pubsub.PubsubMessageListener;
 import org.ctoolkit.restapi.client.pubsub.SubscriptionsListenerModule;
@@ -80,6 +83,10 @@ public class SubscriptionModule
         bind( EventBus.class ).annotatedWith( ContentSubscription.class ).toInstance( new EventBus( busName ) );
         bind( Locale.class ).annotatedWith( ContentSubscription.class ).toInstance( defaultLocale );
         bind( ContentNaming.class ).in( Singleton.class );
+        bind( Cache.class )
+                .annotatedWith( TurnOnlineClient.class )
+                .toProvider( JCacheProvider.class )
+                .in( Singleton.class );
 
         MapBinder<String, PubsubMessageListener> map;
         map = MapBinder.newMapBinder( binder(), String.class, PubsubMessageListener.class );

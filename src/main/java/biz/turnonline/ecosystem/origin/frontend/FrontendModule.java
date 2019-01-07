@@ -16,6 +16,7 @@
 
 package biz.turnonline.ecosystem.origin.frontend;
 
+import biz.turnonline.ecosystem.origin.frontend.content.subscription.SubscriptionModule;
 import biz.turnonline.ecosystem.origin.frontend.identity.IdentitySessionUserListener;
 import biz.turnonline.ecosystem.steward.facade.AccountStewardAdapterModule;
 import biz.turnonline.ecosystem.steward.facade.AccountStewardApiModule;
@@ -37,6 +38,8 @@ import org.ctoolkit.wicket.standard.identity.FirebaseConfig;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_SESSION_LOCALE;
+
 /**
  * Frontend application high level guice module.
  *
@@ -55,6 +58,7 @@ public class FrontendModule
         install( new CtoolkitRestFacadeAppEngineModule() );
         install( new GoogleApiFirebaseModule() );
         install( new DefaultOrikaMapperFactoryModule() );
+        install( new SubscriptionModule( DEFAULT_SESSION_LOCALE ) );
 
         // Account and Contact management client modules
         install( new AccountStewardApiModule() );

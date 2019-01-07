@@ -18,8 +18,10 @@ package biz.turnonline.ecosystem.origin.frontend;
 
 import biz.turnonline.ecosystem.origin.frontend.identity.Logout;
 import com.google.inject.servlet.ServletModule;
+import com.googlecode.objectify.ObjectifyFilter;
 import org.ctoolkit.restapi.client.firebase.IdentityCheckSessionFilter;
 
+import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +36,9 @@ public class FrontendServletModule
     @Override
     protected void configureServlets()
     {
+        bind( ObjectifyFilter.class ).in( Singleton.class );
+        filter( "/*" ).through( ObjectifyFilter.class );
+
         String ignorePaths = "/styles,/scripts,/images,/favicon.ico,/appstats,/wicket/resource";
 
         Map<String, String> params = new HashMap<>();
