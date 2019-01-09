@@ -307,7 +307,7 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.67</ctoolkit-microservice-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.68-20190108.063558-6</ctoolkit-microservice-bom.version>
         <ctoolkit-library-bom.version>9</ctoolkit-library-bom.version>
         <turnonline-widgets.version>0.5-20180716.122750-7</turnonline-widgets.version>
         <wicket-bom.version>6.29.0</wicket-bom.version>

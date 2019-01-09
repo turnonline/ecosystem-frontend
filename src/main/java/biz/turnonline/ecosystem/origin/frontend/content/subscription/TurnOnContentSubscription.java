@@ -26,7 +26,6 @@ import biz.turnonline.ecosystem.origin.frontend.content.subscription.event.Terms
 import com.google.api.services.pubsub.model.PubsubMessage;
 import com.google.common.base.Strings;
 import com.google.common.eventbus.EventBus;
-import org.apache.commons.codec.binary.Base64;
 import org.ctoolkit.restapi.client.pubsub.PubsubCommand;
 import org.ctoolkit.restapi.client.pubsub.PubsubMessageListener;
 import org.slf4j.Logger;
@@ -35,7 +34,6 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
-import java.nio.charset.Charset;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -107,16 +105,7 @@ class TurnOnContentSubscription
         logger.info( "[" + subscription + "] The message type '" + dataType + "' has been received with length: "
                 + data.length() + " and name: '" + receivedContentName + "'" + msgLocale + "." );
 
-        String decoded;
-        if ( Base64.isBase64( data.getBytes() ) )
-        {
-            decoded = new String( new PubsubMessage().setData( data ).decodeData(), Charset.forName( "UTF-8" ) );
-        }
-        else
-        {
-            decoded = data;
-        }
-        logger.info( decoded );
+        logger.debug( decode( data ) );
 
         switch ( dataType )
         {
