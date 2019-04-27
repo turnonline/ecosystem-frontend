@@ -21,12 +21,14 @@ import com.google.appengine.api.utils.SystemProperty;
 import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import net.sf.jsr107cache.Cache;
 import org.ctoolkit.restapi.client.ApiCredential;
+import org.ctoolkit.restapi.client.adapter.ClientApi;
 import org.ctoolkit.restapi.client.appengine.CtoolkitRestFacadeAppEngineModule;
-import org.ctoolkit.restapi.client.appengine.DefaultOrikaMapperFactoryModule;
+import org.ctoolkit.restapi.client.appengine.CtoolkitRestFacadeDefaultOrikaModule;
 import org.ctoolkit.restapi.client.appengine.JCacheProvider;
 import org.ctoolkit.restapi.client.firebase.GoogleApiFirebaseModule;
 import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
@@ -50,13 +52,15 @@ public class FrontendModule
         // ctoolkit services module
         install( new CtoolkitServicesAppEngineModule() );
         install( new CtoolkitRestFacadeAppEngineModule() );
+        install( new CtoolkitRestFacadeDefaultOrikaModule() );
         install( new GoogleApiFirebaseModule() );
-        install( new DefaultOrikaMapperFactoryModule() );
 
         bind( Cache.class ).toProvider( JCacheProvider.class ).in( Singleton.class );
 
         Multibinder<IdentityLoginListener> identityListener = Multibinder.newSetBinder( binder(), IdentityLoginListener.class );
         identityListener.addBinding().to( IdentitySessionUserListener.class );
+
+        MapBinder.newMapBinder( binder(), String.class, ClientApi.class );
 
         ApiCredential credential = new ApiCredential();
         credential.load( "/identity.properties" );
@@ -76,8 +80,8 @@ public class FrontendModule
             appId = SystemProperty.applicationId.get();
         }
         FirebaseConfig config = new FirebaseConfig();
-        config.setUiWidgetVersion( "3.4.1" );
-        config.setFirebaseVersion( "5.5.7" );
+        config.setUiWidgetVersion( "3.6.0" );
+        config.setFirebaseVersion( "5.10.1" );
 
         config.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
         config.setTermsUrl( "terms" );
