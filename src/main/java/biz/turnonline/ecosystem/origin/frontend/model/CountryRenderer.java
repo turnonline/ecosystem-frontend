@@ -16,7 +16,7 @@
 
 package biz.turnonline.ecosystem.origin.frontend.model;
 
-import biz.turnonline.ecosystem.steward.model.Country;
+import biz.turnonline.ecosystem.origin.frontend.steward.Country;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 
 /**

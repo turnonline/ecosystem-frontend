@@ -16,7 +16,7 @@
 
 package biz.turnonline.ecosystem.origin.frontend.myaccount.event;
 
-import biz.turnonline.ecosystem.steward.model.Account;
+import biz.turnonline.ecosystem.origin.frontend.steward.Account;
 
 /**
  * The account update event with {@link Account} payload.

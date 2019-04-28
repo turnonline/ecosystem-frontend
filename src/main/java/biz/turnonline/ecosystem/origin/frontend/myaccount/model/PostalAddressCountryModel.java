@@ -16,9 +16,9 @@
 
 package biz.turnonline.ecosystem.origin.frontend.myaccount.model;
 
-import biz.turnonline.ecosystem.steward.model.Account;
-import biz.turnonline.ecosystem.steward.model.AccountPostalAddress;
-import biz.turnonline.ecosystem.steward.model.Country;
+import biz.turnonline.ecosystem.origin.frontend.steward.Account;
+import biz.turnonline.ecosystem.origin.frontend.steward.AccountPostalAddress;
+import biz.turnonline.ecosystem.origin.frontend.steward.Country;
 import org.apache.wicket.model.IModel;
 import org.ctoolkit.wicket.standard.model.DropDownBridgeModel;
 

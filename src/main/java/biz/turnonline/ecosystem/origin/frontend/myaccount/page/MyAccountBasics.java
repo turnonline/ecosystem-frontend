@@ -29,11 +29,11 @@ import biz.turnonline.ecosystem.origin.frontend.myaccount.model.CompanyDomicileM
 import biz.turnonline.ecosystem.origin.frontend.myaccount.model.PersonalAddressCountryModel;
 import biz.turnonline.ecosystem.origin.frontend.myaccount.model.PostalAddressCountryModel;
 import biz.turnonline.ecosystem.origin.frontend.page.DecoratedPage;
-import biz.turnonline.ecosystem.steward.model.Account;
-import biz.turnonline.ecosystem.steward.model.AccountBusiness;
-import biz.turnonline.ecosystem.steward.model.AccountPostalAddress;
-import biz.turnonline.ecosystem.steward.model.Country;
-import biz.turnonline.ecosystem.steward.model.LegalForm;
+import biz.turnonline.ecosystem.origin.frontend.steward.Account;
+import biz.turnonline.ecosystem.origin.frontend.steward.AccountBusiness;
+import biz.turnonline.ecosystem.origin.frontend.steward.AccountPostalAddress;
+import biz.turnonline.ecosystem.origin.frontend.steward.Country;
+import biz.turnonline.ecosystem.origin.frontend.steward.LegalForm;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormSubmitBehavior;

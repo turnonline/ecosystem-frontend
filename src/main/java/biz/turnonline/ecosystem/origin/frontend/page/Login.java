@@ -28,6 +28,8 @@ import javax.inject.Inject;
  */
 public class Login extends DecoratedPage
 {
+    private static final long serialVersionUID = -3684454538706021946L;
+
     @Inject
     private FirebaseConfig firebaseConfig;
 

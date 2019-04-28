@@ -17,7 +17,7 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
-import biz.turnonline.ecosystem.steward.model.Country;
+import biz.turnonline.ecosystem.origin.frontend.steward.Country;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.ctoolkit.restapi.client.RestFacade;

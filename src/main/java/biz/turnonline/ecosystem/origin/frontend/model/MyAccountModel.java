@@ -17,7 +17,7 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
-import biz.turnonline.ecosystem.steward.model.Account;
+import biz.turnonline.ecosystem.origin.frontend.steward.Account;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 /**
