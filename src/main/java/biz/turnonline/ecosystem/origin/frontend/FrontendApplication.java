@@ -24,18 +24,26 @@ import biz.turnonline.ecosystem.origin.frontend.page.Signup;
 import biz.turnonline.ecosystem.origin.frontend.page.SiteMap;
 import com.google.inject.Injector;
 import de.agilecoders.wicket.core.Bootstrap;
+import de.agilecoders.wicket.core.markup.html.RenderJavaScriptToFooterHeaderResponseDecorator;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
+import de.agilecoders.wicket.core.settings.CookieThemeProvider;
 import de.agilecoders.wicket.core.settings.SingleThemeProvider;
+import de.agilecoders.wicket.core.settings.ThemeProvider;
+import de.agilecoders.wicket.themes.markup.html.material_design.MaterialDesignCssReference;
 import de.agilecoders.wicket.themes.markup.html.material_design.MaterialDesignTheme;
 import net.sf.jsr107cache.Cache;
 import org.apache.wicket.Page;
+import org.apache.wicket.ResourceBundles;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.guice.GuiceComponentInjector;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.pageStore.memory.IDataStoreEvictionStrategy;
 import org.apache.wicket.pageStore.memory.MemorySizeEvictionStrategy;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.settings.IResourceSettings;
+import org.apache.wicket.request.resource.CssResourceReference;
+import org.apache.wicket.settings.ResourceSettings;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.lang.Bytes;
 import org.ctoolkit.wicket.standard.cache.MemcachePropertiesFactory;
@@ -90,7 +98,7 @@ public class FrontendApplication
         getComponentInstantiationListeners().add( new GuiceComponentInjector( this, injector ) );
 
         // set custom resource locator
-        IResourceSettings resourceSettings = getResourceSettings();
+        ResourceSettings resourceSettings = getResourceSettings();
         List<IResourceFinder> finders = resourceSettings.getResourceFinders();
         Cache memcache = injector.getInstance( Cache.class );
         resourceSettings.setResourceStreamLocator( new MemcacheResourceLocator( finders, memcache ) );
@@ -102,11 +110,39 @@ public class FrontendApplication
         mountPage( SIGNUP, Signup.class );
         mountPage( MY_ACCOUNT, MyAccount.class );
 
-        // init wicket bootstrap
-        BootstrapSettings bootstrapSettings = new BootstrapSettings();
-        bootstrapSettings.setThemeProvider( new SingleThemeProvider( new MaterialDesignTheme() ) );
-        bootstrapSettings.useCdnResources( true );
-        Bootstrap.install( this, bootstrapSettings );
+        // Bootstrap configuration
+        BootstrapSettings settings = new BootstrapSettings();
+        Bootstrap.builder().withBootstrapSettings( settings ).install( this );
+
+        ThemeProvider themeProvider = new SingleThemeProvider( new MaterialDesignTheme() );
+
+        settings.setJsResourceFilterName( "footer-container" )
+                .setThemeProvider( themeProvider )
+                .useCdnResources( true )
+                .setActiveThemeProvider( new CookieThemeProvider() );
+
+        Bootstrap.install( this );
+
+        // resource bundle configuration
+        ResourceBundles bundles = getResourceBundles();
+
+        CoreWicketScriptBundle coreBundle = new CoreWicketScriptBundle();
+        mountResource( "/" + CoreWicketScriptBundle.NAME, coreBundle );
+        bundles.addBundle( JavaScriptHeaderItem.forReference( coreBundle ) );
+
+        BootstrapScriptBundle bootstrapBundle = new BootstrapScriptBundle();
+        mountResource( "/" + BootstrapScriptBundle.NAME, bootstrapBundle );
+        bundles.addBundle( JavaScriptHeaderItem.forReference( bootstrapBundle ) );
+
+        MaterialDesignCssReference materialCssReference = new MaterialDesignCssReference();
+        mountResource( "/bootstrap-material-design.css", materialCssReference );
+        bundles.addBundle( CssHeaderItem.forReference( materialCssReference ) );
+
+        CssResourceReference ripplesCss = new CssResourceReference( MaterialDesignCssReference.class, "css/ripples.css" );
+        mountResource( "/bootstrap-material-design-ripples.css", ripplesCss );
+        bundles.addBundle( CssHeaderItem.forReference( ripplesCss ) );
+
+        setHeaderResponseDecorator( new RenderJavaScriptToFooterHeaderResponseDecorator() );
     }
 
     private Injector getInjector()
