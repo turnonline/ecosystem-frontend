@@ -18,6 +18,9 @@ package biz.turnonline.ecosystem.origin.frontend.model;
 
 import biz.turnonline.ecosystem.origin.frontend.steward.Country;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
+import org.apache.wicket.model.IModel;
+
+import java.util.List;
 
 /**
  * Code book type {@link Country} specific renderer.
@@ -39,5 +42,11 @@ public class CountryRenderer
     public String getIdValue( Country object, int index )
     {
         return object.getCode();
+    }
+
+    @Override
+    public Country getObject( String id, IModel<? extends List<? extends Country>> choices )
+    {
+        return null;
     }
 }

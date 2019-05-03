@@ -113,7 +113,7 @@ public class DecoratedPage<T>
         };
 
         navbar.addComponents( NavbarComponents.transform( Navbar.ComponentPosition.RIGHT, newNavbarComponents() ) );
-        navbar.get( "brandName" ).get( "brandImage" ).add( AttributeModifier.append( "style", "max-height:32px;" ) );
+        navbar.get( "container:brandName" ).get( "brandImage" ).add( AttributeModifier.append( "style", "max-height:32px;" ) );
         navbar.setInverted( true );
 
         return navbar;

@@ -18,6 +18,9 @@ package biz.turnonline.ecosystem.origin.frontend.model;
 
 import biz.turnonline.ecosystem.origin.frontend.steward.LegalForm;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
+import org.apache.wicket.model.IModel;
+
+import java.util.List;
 
 /**
  * Code book type {@link LegalForm} specific renderer.
@@ -39,5 +42,11 @@ public class LegalFormRenderer
     public String getIdValue( LegalForm object, int index )
     {
         return object.getCode();
+    }
+
+    @Override
+    public LegalForm getObject( String id, IModel<? extends List<? extends LegalForm>> choices )
+    {
+        return null;
     }
 }
