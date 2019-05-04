@@ -39,7 +39,19 @@
     <threadsafe>true</threadsafe>
 
     <static-files>
-        <include expiration="30d" path="/search.widget/**.*"/>
+        <include expiration="365d" path="/contact.widget/**.*"/>
+        <include expiration="0s" path="/contact.widget/contact.widget.nocache.js"/>
+
+        <include expiration="365d" path="/invoice.widget/**.*"/>
+        <include expiration="0s" path="/invoice.widget/invoice.widget.nocache.js"/>
+
+        <include expiration="365d" path="/order.widget/**.*"/>
+        <include expiration="0s" path="/order.widget/order.widget.nocache.js"/>
+
+        <include expiration="365d" path="/product.widget/**.*"/>
+        <include expiration="0s" path="/product.widget/product.widget.nocache.js"/>
+
+        <include expiration="365d" path="/search.widget/**.*"/>
         <include expiration="0s" path="/search.widget/search.widget.nocache.js"/>
 
         <include expiration="30d" path="/scripts/*.js"/>
@@ -51,6 +63,9 @@
         <include expiration="30d" path="/*.png"/>
         <include expiration="30d" path="/favicon.ico"/>
         <include expiration="30d" path="/styles/fonts/icomoon.ttf"/>
+        <include expiration="30d" path="/splash/splash.*"/>
+        <include expiration="30d" path="/splash/font/**.*"/>
+        <include expiration="30d" path="/launcher-icons/*.png"/>
     </static-files>
 
 </appengine-web-app>

@@ -16,6 +16,7 @@
 
 package biz.turnonline.ecosystem.origin.frontend.page;
 
+import biz.turnonline.ecosystem.origin.frontend.steward.Account;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import org.apache.wicket.markup.html.basic.Label;
@@ -36,8 +37,10 @@ import static biz.turnonline.ecosystem.origin.frontend.FrontendModule.API_CREDEN
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
 public class Home
-        extends DecoratedPage
+        extends DecoratedPage<Account>
 {
+    private static final long serialVersionUID = 6273666842603504497L;
+
     @Inject
     @Named( "credential.firebase.projectId" )
     private String projectId;
@@ -46,6 +49,8 @@ public class Home
     {
         add( new ExternalLink( "link-gcloud", "" )
         {
+            private static final long serialVersionUID = 1L;
+
             @Override
             protected void onInitialize()
             {
@@ -59,6 +64,8 @@ public class Home
 
         add( new ExternalLink( "link-firebase", "" )
         {
+            private static final long serialVersionUID = 1L;
+
             @Override
             protected void onInitialize()
             {
@@ -74,7 +81,7 @@ public class Home
         String identityPropertiesContent;
         try
         {
-            identityPropertiesContent = CharStreams.toString(new InputStreamReader(identityPropertiesContentStream, Charsets.UTF_8));
+            identityPropertiesContent = CharStreams.toString( new InputStreamReader( identityPropertiesContentStream, Charsets.UTF_8 ) );
         }
         catch ( IOException e )
         {

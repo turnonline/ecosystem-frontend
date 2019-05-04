@@ -35,6 +35,10 @@ import java.util.Locale;
 public class FrontendSession
         extends AuthenticatedWebSession
 {
+    public static final String DEFAULT_SESSION_DOMICILE = "SK";
+
+    public static final String DEFAULT_SESSION_CURRENCY = "EUR";
+
     static final String AUTH_USER_ATTRIBUTE = "__session_auth_user_attribute";
 
     static final Locale DEFAULT_SESSION_LOCALE = Locale.ENGLISH;

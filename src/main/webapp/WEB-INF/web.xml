@@ -47,7 +47,7 @@
         </init-param>
         <init-param>
             <param-name>ignorePaths</param-name>
-            <param-value>/styles,/scripts,/images,/favicon.ico</param-value>
+            <param-value>/styles,/scripts,/images,/favicon.ico,/launcher-icons,/splash</param-value>
         </init-param>
     </filter>
 
