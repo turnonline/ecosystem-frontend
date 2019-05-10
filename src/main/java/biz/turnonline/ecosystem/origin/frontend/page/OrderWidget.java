@@ -28,6 +28,6 @@ public class OrderWidget
 
     public OrderWidget()
     {
-        super( Builder.builder().source( "order.widget/order.widget.nocache.js" ) );
+        super( "order.widget/order.widget.nocache.js" );
     }
 }

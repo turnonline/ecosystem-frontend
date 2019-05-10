@@ -28,6 +28,6 @@ public class ContactWidget
 
     public ContactWidget()
     {
-        super( Builder.builder().source( "contact.widget/contact.widget.nocache.js" ) );
+        super( "contact.widget/contact.widget.nocache.js" );
     }
 }

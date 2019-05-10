@@ -28,6 +28,6 @@ public class ProductWidget
 
     public ProductWidget()
     {
-        super( Builder.builder().source( "product.widget/product.widget.nocache.js" ) );
+        super( "product.widget/product.widget.nocache.js" );
     }
 }

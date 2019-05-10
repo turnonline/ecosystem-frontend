@@ -97,7 +97,7 @@ public class FrontendModule
         config.setUiWidgetVersion( "3.6.0" );
         config.setFirebaseVersion( "5.10.1" );
 
-        config.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
+        config.setSignInSuccessUrl( FrontendApplication.PRODUCT );
         config.setTermsUrl( "terms" );
         config.google().email().facebook().oneTapSignUp( clientId );
         config.setApiKey( apiKey );

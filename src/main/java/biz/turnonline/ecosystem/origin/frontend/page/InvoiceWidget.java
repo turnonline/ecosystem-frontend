@@ -28,6 +28,6 @@ public class InvoiceWidget
 
     public InvoiceWidget()
     {
-        super( Builder.builder().source( "invoice.widget/invoice.widget.nocache.js" ) );
+        super( "invoice.widget/invoice.widget.nocache.js" );
     }
 }

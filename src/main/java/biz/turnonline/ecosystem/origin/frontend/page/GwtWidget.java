@@ -21,23 +21,25 @@ import biz.turnonline.ecosystem.origin.frontend.model.MyAccountModel;
 import biz.turnonline.ecosystem.origin.frontend.steward.Account;
 import biz.turnonline.ecosystem.origin.frontend.steward.AccountBusiness;
 import biz.turnonline.ecosystem.origin.frontend.steward.InvoicingConfig;
+import org.apache.wicket.Component;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.MetaDataHeaderItem;
 import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.repeater.RepeatingView;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.protocol.https.RequireHttps;
 import org.ctoolkit.wicket.standard.gwt.BootConfiguration;
 import org.ctoolkit.wicket.standard.gwt.GwtLocaleModel;
-import org.ctoolkit.wicket.standard.gwt.GwtScriptAppender;
 import org.ctoolkit.wicket.standard.identity.FirebaseConfig;
 import org.ctoolkit.wicket.standard.identity.behavior.FirebaseAppInit;
 import org.ctoolkit.wicket.turnonline.markup.html.page.Skeleton;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_SESSION_CURRENCY;
 import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_SESSION_DOMICILE;
@@ -57,52 +59,50 @@ import static org.apache.http.util.Args.notNull;
 class GwtWidget
         extends Skeleton<Account>
 {
-    private static final long serialVersionUID = 1L;
-
-    private final Builder builder;
+    private static final long serialVersionUID = 7379811684290913964L;
 
     @Inject
     private FirebaseConfig firebaseConfig;
 
-    GwtWidget( @Nonnull Builder builder )
+    /**
+     * The array of the GWT widget source paths, relative to the webapp folder.
+     *
+     * @param source the array of GWT source paths
+     */
+    GwtWidget( @Nonnull String source )
     {
         super( new MyAccountModel() );
-        this.builder = notNull( builder, "builder" );
-        add( new FirebaseAppInit( firebaseConfig, false ) );
 
-        BootConfiguration configuration = new BootConfiguration( GwtWidget.class )
-        {
-            private static final long serialVersionUID = -1438242135395325801L;
+        BootConfiguration configuration = new BootConfiguration( GwtWidget.class );
+        configuration.arguments( ( BootConfiguration.Arguments ) arguments -> {
+            Account account = getModelObject();
 
-            @Override
-            protected Map<String, Object> getArgs()
+            String domicile = null;
+            AccountBusiness business = account.getBusiness();
+            if ( business != null )
             {
-                Account account = getModelObject();
-
-                String domicile = null;
-                AccountBusiness business = account.getBusiness();
-                if ( business != null )
-                {
-                    domicile = business.getDomicile();
-                }
-
-                String currency = null;
-                InvoicingConfig invoicing = account.getInvoicing();
-                if ( invoicing != null )
-                {
-                    currency = invoicing.getCurrency();
-                }
-
-                Map<String, Object> args = new HashMap<>();
-                args.put( "LOGIN_ID", notNull( account.getId(), "Signed up Account.ID" ) );
-                args.put( "DOMICILE", isNullOrEmpty( domicile ) ? DEFAULT_SESSION_DOMICILE : domicile );
-                args.put( "CURRENCY", isNullOrEmpty( currency ) ? DEFAULT_SESSION_CURRENCY : currency );
-
-                return args;
+                domicile = business.getDomicile();
             }
-        };
+
+            String currency = null;
+            InvoicingConfig invoicing = account.getInvoicing();
+            if ( invoicing != null )
+            {
+                currency = invoicing.getCurrency();
+            }
+
+            arguments.put( "LOGIN_ID", notNull( account.getId(), "Signed up Account.ID" ) );
+            arguments.put( "DOMICILE", isNullOrEmpty( domicile ) ? DEFAULT_SESSION_DOMICILE : domicile );
+            arguments.put( "CURRENCY", isNullOrEmpty( currency ) ? DEFAULT_SESSION_CURRENCY : currency );
+        } );
 
         add( configuration );
+
+        FirebaseAppInit firebaseInit = new FirebaseAppInit( firebaseConfig )
+                .fileName( GwtWidget.class, "GwtInit.js" )
+                .fileNameArguments( arg -> arg.put( "gwt.src", source ) );
+
+        add( firebaseInit );
     }
 
     @Override
@@ -127,11 +127,7 @@ class GwtWidget
         add( modules );
         modules.setRenderBodyOnly( true );
 
-        // GWT source attribute rendering
-        GwtScriptAppender appender = new GwtScriptAppender( new GwtLocaleModel( this ), builder.source );
-        appender.setWebComponentsImportPrefix( builder.prefix );
-
-        add( appender );
+        add( new GwtLocale() );
     }
 
     /**
@@ -155,48 +151,28 @@ class GwtWidget
         return new String[0];
     }
 
-    public static class Builder
-            implements Serializable
+    private class GwtLocale
+            extends Behavior
     {
-        private static final long serialVersionUID = 8038119840215782939L;
+        private static final long serialVersionUID = 1L;
 
-        private String prefix;
+        private IModel<String> localeModel = new GwtLocaleModel( GwtWidget.this );
 
-        private String[] source;
-
-        private Builder()
+        @Override
+        public void renderHead( Component component, IHeaderResponse response )
         {
+            final IModel<?> model = component.getDefaultModel();
+
+            if ( model != null )
+            {
+                response.render( MetaDataHeaderItem.forMetaTag( new Model<>( "gwt:property" ), localeModel ) );
+            }
         }
 
-        public static Builder builder()
+        @Override
+        public boolean isTemporary( Component component )
         {
-            return new Builder();
-        }
-
-        /**
-         * Sets the javascript GWT app path prefix.
-         * If set, the standard GWT generated path to the web components javascript
-         * will be appended to be added as a head scrip tag.
-         *
-         * @param prefix the GWT app path prefix to be set
-         * @return the builder to chain
-         */
-        public Builder prefix( String prefix )
-        {
-            this.prefix = prefix;
-            return this;
-        }
-
-        /**
-         * The array of the GWT widget source paths, relative to the webapp folder.
-         *
-         * @param source the array of GWT source paths
-         * @return the builder to chain
-         */
-        public Builder source( String... source )
-        {
-            this.source = source;
-            return this;
+            return true;
         }
     }
 }
