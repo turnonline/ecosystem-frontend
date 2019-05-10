@@ -128,7 +128,7 @@ public class FrontendApplication
 
         // Bootstrap configuration
         BootstrapSettings settings = new BootstrapSettings();
-        Bootstrap.builder().withBootstrapSettings( settings ).install( this );
+        Bootstrap.builder().withBootstrapSettings( settings.setAutoAppendResources( false ) ).install( this );
 
         ThemeProvider themeProvider = new SingleThemeProvider( new MaterialDesignTheme() );
 
