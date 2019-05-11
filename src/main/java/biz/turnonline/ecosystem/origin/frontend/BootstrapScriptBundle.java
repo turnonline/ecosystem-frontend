@@ -16,8 +16,6 @@
 
 package biz.turnonline.ecosystem.origin.frontend;
 
-import de.agilecoders.wicket.core.Bootstrap;
-import de.agilecoders.wicket.core.markup.html.references.ModernizrJavaScriptReference;
 import de.agilecoders.wicket.themes.markup.html.material_design.MaterialDesignTheme;
 import org.apache.wicket.Application;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -29,14 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Bootstrap JavaScript resource reference bundle.
+ * Bootstrap material design related JavaScript resource reference bundle.
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
 class BootstrapScriptBundle
         extends ConcatResourceBundleReference<JavaScriptReferenceHeaderItem>
 {
-    static final String NAME = "bootstrap-bundle.js";
+    static final String NAME = "bootstrap-material-bundle.js";
 
     private static final long serialVersionUID = 1L;
 
@@ -54,10 +52,8 @@ class BootstrapScriptBundle
     {
         List<JavaScriptReferenceHeaderItem> references = new ArrayList<>();
 
-        references.add( JavaScriptHeaderItem.forReference( ModernizrJavaScriptReference.instance() ) );
         references.add( JavaScriptHeaderItem.forReference( new JQueryPluginResourceReference( MaterialDesignTheme.class, "js/ripples.js" ) ) );
         references.add( JavaScriptHeaderItem.forReference( new JQueryPluginResourceReference( MaterialDesignTheme.class, "js/material.js" ) ) );
-        references.add( JavaScriptHeaderItem.forReference( Bootstrap.getSettings().getJsResourceReference() ) );
 
         return references;
     }

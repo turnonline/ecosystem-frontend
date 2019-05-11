@@ -28,7 +28,6 @@ import biz.turnonline.ecosystem.origin.frontend.page.Signup;
 import biz.turnonline.ecosystem.origin.frontend.page.SiteMap;
 import com.google.inject.Injector;
 import de.agilecoders.wicket.core.Bootstrap;
-import de.agilecoders.wicket.core.markup.html.RenderJavaScriptToFooterHeaderResponseDecorator;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import de.agilecoders.wicket.core.settings.CookieThemeProvider;
 import de.agilecoders.wicket.core.settings.SingleThemeProvider;
@@ -132,8 +131,7 @@ public class FrontendApplication
 
         ThemeProvider themeProvider = new SingleThemeProvider( new MaterialDesignTheme() );
 
-        settings.setJsResourceFilterName( "footer-container" )
-                .setThemeProvider( themeProvider )
+        settings.setThemeProvider( themeProvider )
                 .useCdnResources( true )
                 .setActiveThemeProvider( new CookieThemeProvider() );
 
@@ -157,11 +155,9 @@ public class FrontendApplication
         CssResourceReference ripplesCss = new CssResourceReference( MaterialDesignCssReference.class, "css/ripples.css" );
         mountResource( "/bootstrap-material-design-ripples.css", ripplesCss );
         bundles.addBundle( CssHeaderItem.forReference( ripplesCss ) );
-
-        setHeaderResponseDecorator( new RenderJavaScriptToFooterHeaderResponseDecorator() );
     }
 
-    public Injector getInjector()
+    protected Injector getInjector()
     {
         return ( Injector ) getServletContext().getAttribute( Injector.class.getName() );
     }
