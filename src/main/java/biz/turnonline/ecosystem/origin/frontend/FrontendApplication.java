@@ -157,7 +157,7 @@ public class FrontendApplication
         bundles.addBundle( CssHeaderItem.forReference( ripplesCss ) );
     }
 
-    protected Injector getInjector()
+    public Injector getInjector()
     {
         return ( Injector ) getServletContext().getAttribute( Injector.class.getName() );
     }
