@@ -106,7 +106,7 @@
         <dependency>
             <groupId>org.ctoolkit.wicket</groupId>
             <artifactId>ctoolkit-wicket</artifactId>
-            <version>0.8-20190501.042604-3</version>
+            <version>0.8-20190511.093317-6</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
