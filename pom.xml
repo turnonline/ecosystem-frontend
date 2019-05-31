@@ -307,9 +307,9 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.73</ctoolkit-microservice-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.74-20190518.070000-3</ctoolkit-microservice-bom.version>
         <ctoolkit-library-bom.version>10</ctoolkit-library-bom.version>
-        <turnonline-widgets.version>0.1-20190507.042744-4</turnonline-widgets.version>
+        <turnonline-widgets.version>0.1-20190531.055027-10</turnonline-widgets.version>
         <wicket-bom.version>8.4.0</wicket-bom.version>
         <appengine.maven.plugin.version>1.3.2</appengine.maven.plugin.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>

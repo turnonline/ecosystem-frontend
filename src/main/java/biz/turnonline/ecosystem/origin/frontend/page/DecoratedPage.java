@@ -19,7 +19,6 @@ package biz.turnonline.ecosystem.origin.frontend.page;
 import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
 import biz.turnonline.ecosystem.origin.frontend.component.SearchPanel;
-import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccount;
 import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.BootstrapResourcesBehavior;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationPanel;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;

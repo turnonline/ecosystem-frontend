@@ -16,11 +16,11 @@
 
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.origin.frontend.myaccount.page.MyAccount;
 import biz.turnonline.ecosystem.origin.frontend.page.ContactWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Home;
 import biz.turnonline.ecosystem.origin.frontend.page.InvoiceWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Login;
+import biz.turnonline.ecosystem.origin.frontend.page.MyAccount;
 import biz.turnonline.ecosystem.origin.frontend.page.OrderWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.ProductWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Robots;

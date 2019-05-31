@@ -39,6 +39,9 @@
     <threadsafe>true</threadsafe>
 
     <static-files>
+        <include expiration="365d" path="/my.account.widget/**.*"/>
+        <include expiration="0s" path="/my.account.widget/my.account.widget.nocache.js"/>
+
         <include expiration="365d" path="/contact.widget/**.*"/>
         <include expiration="0s" path="/contact.widget/contact.widget.nocache.js"/>
 
