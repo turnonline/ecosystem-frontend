@@ -16,12 +16,11 @@
 
 package biz.turnonline.ecosystem.origin.frontend;
 
+import biz.turnonline.ecosystem.origin.frontend.page.BillingWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.ContactWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Home;
-import biz.turnonline.ecosystem.origin.frontend.page.InvoiceWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Login;
 import biz.turnonline.ecosystem.origin.frontend.page.MyAccount;
-import biz.turnonline.ecosystem.origin.frontend.page.OrderWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.ProductWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Robots;
 import biz.turnonline.ecosystem.origin.frontend.page.Signup;
@@ -75,9 +74,7 @@ public class FrontendApplication
 
     public static final String CONTACT = "/contacts";
 
-    public static final String INVOICE = "/invoices";
-
-    public static final String ORDER = "/orders";
+    public static final String BILLING = "/billing";
 
     public static final String PRODUCT = "/products";
 
@@ -121,8 +118,7 @@ public class FrontendApplication
         mountPage( SIGNUP, Signup.class );
         mountPage( MY_ACCOUNT, MyAccount.class );
         mountPage( CONTACT, ContactWidget.class );
-        mountPage( INVOICE, InvoiceWidget.class );
-        mountPage( ORDER, OrderWidget.class );
+        mountPage( BILLING, BillingWidget.class );
         mountPage( PRODUCT, ProductWidget.class );
 
         // Bootstrap configuration

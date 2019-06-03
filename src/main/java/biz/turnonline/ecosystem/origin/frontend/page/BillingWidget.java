@@ -17,17 +17,17 @@
 package biz.turnonline.ecosystem.origin.frontend.page;
 
 /**
- * The product billing (orders) widget (GWT application).
+ * The product billing widget (GWT application).
  *
  * @author <a href="mailto:medvegy@turnonline.biz">Aurel Medvegy</a>
  */
-public class OrderWidget
+public class BillingWidget
         extends GwtWidget
 {
     private static final long serialVersionUID = 4269415330581006344L;
 
-    public OrderWidget()
+    public BillingWidget()
     {
-        super( "order.widget/order.widget.nocache.js" );
+        super( "billing.widget/billing.widget.nocache.js" );
     }
 }
