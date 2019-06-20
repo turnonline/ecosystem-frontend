@@ -16,6 +16,7 @@
 
 package biz.turnonline.ecosystem.origin.frontend.page;
 
+import biz.turnonline.ecosystem.origin.frontend.component.SplashScreen;
 import biz.turnonline.ecosystem.origin.frontend.identity.Role;
 import biz.turnonline.ecosystem.origin.frontend.model.MyAccountModel;
 import biz.turnonline.ecosystem.origin.frontend.steward.Account;
@@ -103,6 +104,8 @@ class GwtWidget
                 .fileNameArguments( arg -> arg.put( "gwt.src", source ) );
 
         add( firebaseInit );
+
+        add( new SplashScreen( "splash-screen" ) );
     }
 
     @Override

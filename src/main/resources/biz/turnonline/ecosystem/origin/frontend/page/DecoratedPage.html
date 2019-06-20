@@ -22,7 +22,7 @@
     <title wicket:id="title"></title>
     <link rel="icon" type="image/ico" href="/favicon.ico"/>
 </head>
-<body style="height:100%;">
+<body style="height:100%;background: #fff;">
 
 <div style="min-height:100%;position:relative;">
     <!--navbar-->
@@ -31,7 +31,7 @@
     </header>
 
     <!--content-->
-    <div class="container" style="padding-bottom:80px;">
+    <div class="container-fluid" style="padding-bottom:80px;">
 
         <!--notifications-->
         <div wicket:id="feedback"></div>
@@ -42,14 +42,6 @@
         <!--children content per page-->
         <wicket:child/>
     </div>
-
-    <!--footer-->
-    <footer style="border-top: 1px solid #3f51b5;margin-top: 20px;height:60px;padding: 20px 0 10px 0;background: #fff;width:100%;bottom:0;position: absolute;"
-            wicket:id="footer">
-        <div class="container">
-            <p>&copy; 2019 TurnOnline.biz Ecosystem</p>
-        </div>
-    </footer>
 </div>
 
 <!--Must be the last body element-->

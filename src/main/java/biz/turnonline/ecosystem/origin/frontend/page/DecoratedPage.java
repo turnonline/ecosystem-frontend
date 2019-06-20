@@ -18,10 +18,10 @@ package biz.turnonline.ecosystem.origin.frontend.page;
 
 import biz.turnonline.ecosystem.origin.frontend.FrontendApplication;
 import biz.turnonline.ecosystem.origin.frontend.FrontendSession;
+import biz.turnonline.ecosystem.origin.frontend.component.MaterialIconType;
 import biz.turnonline.ecosystem.origin.frontend.component.SearchPanel;
 import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.BootstrapResourcesBehavior;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationPanel;
-import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarExternalLink;
@@ -32,7 +32,6 @@ import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
-import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -93,9 +92,6 @@ public class DecoratedPage<T>
 
         // initialize notifications
         add( newFeedbackPanel() );
-
-        // initialize footer
-        add( newFooter( "footer" ) );
     }
 
     // -- navbar
@@ -113,11 +109,17 @@ public class DecoratedPage<T>
 
                 return image;
             }
+
+            @Override
+            protected Label newBrandLabel( String markupId )
+            {
+                return new Label( markupId, new I18NResourceModel( "brand" ) );
+            }
         };
 
+        navbar.fluid();
         navbar.addComponents( NavbarComponents.transform( Navbar.ComponentPosition.RIGHT, newNavbarComponents() ) );
         navbar.get( "container:brandName" ).get( "brandImage" ).add( AttributeModifier.append( "style", "max-height:32px;" ) );
-        navbar.setInverted( true );
 
         return navbar;
     }
@@ -144,21 +146,21 @@ public class DecoratedPage<T>
     protected Component newLoginNavbarItem()
     {
         return new NavbarExternalLink( Model.of( urlFor( Login.class, new PageParameters() ).toString() ) )
-                .setIconType( GlyphIconType.user )
+                .setIconType( MaterialIconType.lockOpen )
                 .setLabel( new I18NResourceModel( "label.login" ) );
     }
 
     protected Component newSignupNavbarItem()
     {
         return new NavbarExternalLink( Model.of( urlFor( Signup.class, new PageParameters() ).toString() ) )
-                .setIconType( GlyphIconType.pencil )
+                .setIconType( MaterialIconType.edit )
                 .setLabel( new I18NResourceModel( "label.signup" ) );
     }
 
     protected Component newMyAccountNavbarItem()
     {
         return new NavbarExternalLink( Model.of( urlFor( MyAccount.class, new PageParameters() ).toString() ) )
-                .setIconType( GlyphIconType.th )
+                .setIconType( MaterialIconType.person )
                 .setLabel( new I18NResourceModel( "label.myAccount" ) );
     }
 
@@ -167,7 +169,7 @@ public class DecoratedPage<T>
         String script = "firebase.auth().signOut().then(function(){window.location.href='" + FrontendApplication.LOGOUT + "'});";
 
         return new NavbarExternalLink( Model.of( FrontendApplication.LOGOUT ) )
-                .setIconType( GlyphIconType.off )
+                .setIconType( MaterialIconType.powerSettingsNew )
                 .setLabel( new I18NResourceModel( "label.logout" ) )
                 .add( new AttributeAppender( "onclick", script, ";" ) );
     }
@@ -204,13 +206,6 @@ public class DecoratedPage<T>
         Label header = new Label( componentId, new I18NResourceModel( "header." + getClass().getSimpleName() ) );
         header.setEscapeModelStrings( false );
         return header;
-    }
-
-    // -- footer
-
-    protected Component newFooter( String componentId )
-    {
-        return new WebMarkupContainer( componentId );
     }
 
     // -- initialize
