@@ -60,7 +60,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>${appengine.maven.plugin.version}</version>
                 <configuration>
-                    <enableJarClasses>true</enableJarClasses>
+                    <stage.enableJarClasses>true</stage.enableJarClasses>
                 </configuration>
             </plugin>
             <plugin>
@@ -307,10 +307,10 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.74</ctoolkit-microservice-bom.version>
-        <ctoolkit-library-bom.version>10</ctoolkit-library-bom.version>
-        <turnonline-widgets.version>0.1-20190629.064451-15</turnonline-widgets.version>
-        <wicket-bom.version>8.4.1-20190607.044208-1</wicket-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.75</ctoolkit-microservice-bom.version>
+        <ctoolkit-library-bom.version>11</ctoolkit-library-bom.version>
+        <turnonline-widgets.version>0.1-20190817.062451-16</turnonline-widgets.version>
+        <wicket-bom.version>8.5.0</wicket-bom.version>
         <appengine.maven.plugin.version>1.3.2</appengine.maven.plugin.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
