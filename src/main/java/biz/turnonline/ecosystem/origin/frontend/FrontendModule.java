@@ -87,6 +87,7 @@ public class FrontendModule
     public FirebaseConfig provideFirebaseConfig( @Named( "credential.firebase.apiKey" ) String apiKey,
                                                  @Named( "credential.firebase.senderId" ) String senderId,
                                                  @Named( "credential.firebase.projectId" ) String appId,
+                                                 @Named( "credential.firebase.authDomain" ) String authDomain,
                                                  @Named( "credential.firebase.clientId" ) String clientId )
     {
         if ( Strings.isNullOrEmpty( appId ) )
@@ -95,7 +96,7 @@ public class FrontendModule
         }
         FirebaseConfig config = new FirebaseConfig();
         config.setUiWidgetVersion( "4.1.0" );
-        config.setFirebaseVersion( "6.4.0" );
+        config.setFirebaseVersion( "6.6.0" );
 
         config.setSignInSuccessUrl( FrontendApplication.PRODUCT );
         config.setTermsUrl( "terms" );
@@ -105,6 +106,11 @@ public class FrontendModule
         config.setDatabaseName( appId );
         config.setBucketName( appId );
         config.setSenderId( senderId );
+
+        if ( !Strings.isNullOrEmpty( authDomain ) )
+        {
+            config.setAuthDomain( authDomain );
+        }
 
         return config;
     }

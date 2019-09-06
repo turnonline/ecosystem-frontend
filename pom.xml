@@ -143,12 +143,12 @@
         <dependency>
             <groupId>biz.turnonline.ecosystem</groupId>
             <artifactId>turnonline-account-steward-client</artifactId>
-            <version>0.13</version>
+            <version>0.17</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.wicket</groupId>
             <artifactId>ctoolkit-wicket</artifactId>
-            <version>0.8-20190511.093317-6</version>
+            <version>0.9</version>
         </dependency>
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
@@ -162,16 +162,6 @@
             <groupId>org.ctoolkit.restapi</groupId>
             <artifactId>ctoolkit-client-pubsub</artifactId>
         </dependency>
-        <!-- In order to make orika work on AppEngine javassist and paranamer has been downgraded. -->
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.thoughtworks.paranamer</groupId>
-            <artifactId>paranamer</artifactId>
-        </dependency>
-        <!-- In order to make orika work on AppEngine javassist and paranamer has been downgraded. -->
         <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
             <artifactId>ctoolkit-client-firebase</artifactId>
@@ -307,7 +297,7 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.75</ctoolkit-microservice-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.76</ctoolkit-microservice-bom.version>
         <ctoolkit-library-bom.version>11</ctoolkit-library-bom.version>
         <turnonline-widgets.version>0.1-20190817.062451-16</turnonline-widgets.version>
         <wicket-bom.version>8.5.0</wicket-bom.version>
