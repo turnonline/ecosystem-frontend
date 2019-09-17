@@ -95,12 +95,12 @@ public class FrontendModule
             appId = SystemProperty.applicationId.get();
         }
         FirebaseConfig config = new FirebaseConfig();
-        config.setUiWidgetVersion( "4.1.0" );
-        config.setFirebaseVersion( "6.6.0" );
+        config.setUiWidgetVersion( "4.2.0" );
+        config.setFirebaseVersion( "6.6.1" );
 
         config.setSignInSuccessUrl( FrontendApplication.PRODUCT );
         config.setTermsUrl( "terms" );
-        config.google().email().facebook().oneTapSignUp( clientId );
+        config.google().email().oneTapSignUp( clientId );
         config.setApiKey( apiKey );
         config.setProjectId( appId );
         config.setDatabaseName( appId );
