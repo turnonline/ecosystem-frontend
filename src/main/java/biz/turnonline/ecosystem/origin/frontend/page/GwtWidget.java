@@ -95,6 +95,13 @@ class GwtWidget
             arguments.put( "LOGIN_ID", notNull( account.getId(), "Signed up Account.ID" ) );
             arguments.put( "DOMICILE", isNullOrEmpty( domicile ) ? DEFAULT_SESSION_DOMICILE : domicile );
             arguments.put( "CURRENCY", isNullOrEmpty( currency ) ? DEFAULT_SESSION_CURRENCY : currency );
+
+            if ( account.getBusiness() != null &&
+                    account.getBusiness().getLogo() != null &&
+                    account.getBusiness().getLogo().getServingUrl() != null )
+            {
+                arguments.put( "LOGO", account.getBusiness().getLogo().getServingUrl() );
+            }
         } );
 
         add( configuration );
