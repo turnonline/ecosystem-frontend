@@ -1,6 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.steward;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * The set of account default invoicing rules. These values might be overriden.
@@ -8,13 +9,21 @@ import java.io.Serializable;
 public class InvoicingConfig
         implements Serializable
 {
-    private static final long serialVersionUID = 8951306266688882807L;
+    private static final long serialVersionUID = -7674543367531601539L;
 
     private String currency;
+
+    private String introductoryText;
+
+    private String finalText;
+
+    private Date modificationDate;
 
     private Integer numberOfDays;
 
     private Boolean hasBillingAddress;
+
+    private Image stamp;
 
     private InvoicingConfigBillingAddress billingAddress;
 
@@ -37,6 +46,63 @@ public class InvoicingConfig
     public void setCurrency( String currency )
     {
         this.currency = currency;
+    }
+
+    /**
+     * A default introductory text to be placed at invoice usually at top of the billing items. Use this to communicate a message to the invoice recipient.
+     **/
+    public InvoicingConfig introductoryText( String introductoryText )
+    {
+        this.introductoryText = introductoryText;
+        return this;
+    }
+
+    public String getIntroductoryText()
+    {
+        return introductoryText;
+    }
+
+    public void setIntroductoryText( String introductoryText )
+    {
+        this.introductoryText = introductoryText;
+    }
+
+    /**
+     * A default final text to be placed at invoice usually at the bottom. Use this to communicate a message to the invoice recipient.
+     **/
+    public InvoicingConfig finalText( String finalText )
+    {
+        this.finalText = finalText;
+        return this;
+    }
+
+    public String getFinalText()
+    {
+        return finalText;
+    }
+
+    public void setFinalText( String finalText )
+    {
+        this.finalText = finalText;
+    }
+
+    /**
+     * The date and time of the last modification of invoicing configuration values. Populated by the service.
+     **/
+    public InvoicingConfig modificationDate( Date modificationDate )
+    {
+        this.modificationDate = modificationDate;
+        return this;
+    }
+
+    public Date getModificationDate()
+    {
+        return modificationDate;
+    }
+
+    public void setModificationDate( Date modificationDate )
+    {
+        this.modificationDate = modificationDate;
     }
 
     /**
@@ -75,6 +141,25 @@ public class InvoicingConfig
     public void setHasBillingAddress( Boolean hasBillingAddress )
     {
         this.hasBillingAddress = hasBillingAddress;
+    }
+
+    /**
+     * An optional image used to be placed at invoice as a stamp or sign.
+     **/
+    public InvoicingConfig stamp( Image stamp )
+    {
+        this.stamp = stamp;
+        return this;
+    }
+
+    public Image getStamp()
+    {
+        return stamp;
+    }
+
+    public void setStamp( Image stamp )
+    {
+        this.stamp = stamp;
     }
 
     /**

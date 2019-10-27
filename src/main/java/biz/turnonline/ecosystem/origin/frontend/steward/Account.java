@@ -6,13 +6,15 @@ import java.util.Date;
 public class Account
         implements Serializable
 {
-    private static final long serialVersionUID = -8689839666628956879L;
+    private static final long serialVersionUID = -8805523577711619216L;
 
     private Long id;
 
     private String email;
 
     private String identityId;
+
+    private String audience;
 
     private String contactEmail;
 
@@ -103,6 +105,25 @@ public class Account
     public void setIdentityId( String identityId )
     {
         this.identityId = identityId;
+    }
+
+    /**
+     * The Seller audience unique identification.  Users of Seller's audience are separated from each other. The user identified by login email address within one audience is a different user within another audience even with the same login email. Those users have different Account.IDs.  Taken from the JWT token, encoded as 'aud'.
+     **/
+    public Account audience( String audience )
+    {
+        this.audience = audience;
+        return this;
+    }
+
+    public String getAudience()
+    {
+        return audience;
+    }
+
+    public void setAudience( String audience )
+    {
+        this.audience = audience;
     }
 
     /**

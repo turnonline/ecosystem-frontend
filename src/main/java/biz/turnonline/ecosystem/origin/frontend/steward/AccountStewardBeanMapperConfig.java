@@ -28,7 +28,7 @@ public class AccountStewardBeanMapperConfig
         factory.classMap( biz.turnonline.ecosystem.steward.model.InvoicingConfigBillingAddress.class, InvoicingConfigBillingAddress.class ).byDefault().register();
         factory.classMap( biz.turnonline.ecosystem.steward.model.InvoicingConfigBillingContact.class, InvoicingConfigBillingContact.class ).byDefault().register();
         factory.classMap( biz.turnonline.ecosystem.steward.model.LegalForm.class, LegalForm.class ).byDefault().register();
-        factory.classMap( biz.turnonline.ecosystem.steward.model.Image.class, Logo.class ).byDefault().register();
+        factory.classMap( biz.turnonline.ecosystem.steward.model.Image.class, Image.class ).byDefault().register();
         factory.classMap( biz.turnonline.ecosystem.steward.model.NewsletterSubscription.class, NewsletterSubscription.class ).byDefault().register();
         factory.classMap( biz.turnonline.ecosystem.steward.model.NewsletterResponse.class, NewsletterResponse.class ).byDefault().register();
     }

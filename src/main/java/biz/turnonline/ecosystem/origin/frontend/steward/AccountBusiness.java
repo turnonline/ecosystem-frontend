@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class AccountBusiness
         implements Serializable
 {
-    private static final long serialVersionUID = -2686857187812670610L;
+    private static final long serialVersionUID = -5806418627717421694L;
 
     private String businessName;
 
@@ -31,9 +31,9 @@ public class AccountBusiness
 
     private String vatId;
 
-    private String domain;
+    private Domain domain;
 
-    private Logo logo;
+    private Image logo;
 
     /**
      * The company business name. It's mandatory for business account sign-up.
@@ -264,20 +264,20 @@ public class AccountBusiness
     }
 
     /**
-     * The account default domain name, the name that represents an unique domain specification. It might be selected only from existing list of domains, otherwise validation error will be thrown. Read only property.
+     * The account default domain. It might be selected only from existing list of domains and it must be a NAKED domain or SUBDOMAIN , otherwise validation error will be thrown.  In order to set an account default domain (POST), provide a domain unique name from an existing list (Domain.name property).
      **/
-    public AccountBusiness domain( String domain )
+    public AccountBusiness domain( Domain domain )
     {
         this.domain = domain;
         return this;
     }
 
-    public String getDomain()
+    public Domain getDomain()
     {
         return domain;
     }
 
-    public void setDomain( String domain )
+    public void setDomain( Domain domain )
     {
         this.domain = domain;
     }
@@ -285,18 +285,18 @@ public class AccountBusiness
     /**
      * The company logo.
      **/
-    public AccountBusiness logo( Logo logo )
+    public AccountBusiness logo( Image logo )
     {
         this.logo = logo;
         return this;
     }
 
-    public Logo getLogo()
+    public Image getLogo()
     {
         return logo;
     }
 
-    public void setLogo( Logo logo )
+    public void setLogo( Image logo )
     {
         this.logo = logo;
     }

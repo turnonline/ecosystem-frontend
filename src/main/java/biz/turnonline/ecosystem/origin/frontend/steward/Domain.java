@@ -23,6 +23,8 @@ public class Domain
 
     private String url;
 
+    private Boolean verified;
+
     /**
      * The name that represents an unique domain specification. Only this is the value required to be present. The rest of the domain properties will be populated by the service.
      **/
@@ -135,6 +137,25 @@ public class Domain
     public void setUrl( String url )
     {
         this.url = url;
+    }
+
+    /**
+     * The boolean indicating whether this domain has the verified ownership.
+     **/
+    public Domain verified( Boolean verified )
+    {
+        this.verified = verified;
+        return this;
+    }
+
+    public Boolean getVerified()
+    {
+        return verified;
+    }
+
+    public void setVerified( Boolean verified )
+    {
+        this.verified = verified;
     }
 }
 
