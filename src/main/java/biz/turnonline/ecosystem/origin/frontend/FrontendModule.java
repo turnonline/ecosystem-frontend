@@ -73,6 +73,7 @@ public class FrontendModule
     public FirebaseConfig provideFirebaseConfig( @Named( "credential.firebase.apiKey" ) String apiKey,
                                                  @Named( "credential.firebase.senderId" ) String senderId,
                                                  @Named( "credential.firebase.projectId" ) String appId,
+                                                 @Named( "credential.firebase.authDomain" ) String authDomain,
                                                  @Named( "credential.firebase.clientId" ) String clientId )
     {
         if ( Strings.isNullOrEmpty( appId ) )
@@ -80,17 +81,22 @@ public class FrontendModule
             appId = SystemProperty.applicationId.get();
         }
         FirebaseConfig config = new FirebaseConfig();
-        config.setUiWidgetVersion( "3.6.0" );
-        config.setFirebaseVersion( "5.10.1" );
+        config.setUiWidgetVersion( "4.2.0" );
+        config.setFirebaseVersion( "7.2.2" );
 
         config.setSignInSuccessUrl( FrontendApplication.MY_ACCOUNT );
         config.setTermsUrl( "terms" );
-        config.google().email().facebook().oneTapSignUp( clientId );
+        config.google().email().oneTapSignUp( clientId );
         config.setApiKey( apiKey );
         config.setProjectId( appId );
         config.setDatabaseName( appId );
         config.setBucketName( appId );
         config.setSenderId( senderId );
+
+        if ( !Strings.isNullOrEmpty( authDomain ) )
+        {
+            config.setAuthDomain( authDomain );
+        }
 
         return config;
     }

@@ -34,7 +34,7 @@ import java.io.InputStreamReader;
  * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
  */
 public class Home
-        extends DecoratedPage
+        extends DecoratedPage<Object>
 {
     @Inject
     @Named( "credential.firebase.projectId" )
