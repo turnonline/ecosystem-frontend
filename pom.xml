@@ -312,19 +312,4 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <deployment.profile/>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>test</id>
-            <properties>
-                <deployment.profile>test</deployment.profile>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <deployment.profile>prod</deployment.profile>
-            </properties>
-        </profile>
-    </profiles>
 </project>
