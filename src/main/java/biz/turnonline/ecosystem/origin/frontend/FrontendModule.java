@@ -29,6 +29,7 @@ import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import net.sf.jsr107cache.Cache;
+import org.ctoolkit.restapi.client.ApiCredential;
 import org.ctoolkit.restapi.client.adapter.BeanMapperConfig;
 import org.ctoolkit.restapi.client.adapter.ClientApi;
 import org.ctoolkit.restapi.client.appengine.CtoolkitRestFacadeAppEngineModule;
@@ -77,6 +78,10 @@ public class FrontendModule
 
         Multibinder<BeanMapperConfig> multi = Multibinder.newSetBinder( binder(), BeanMapperConfig.class );
         multi.addBinding().to( AccountStewardBeanMapperConfig.class );
+
+        ApiCredential credential = new ApiCredential();
+        credential.load( "/credential.properties" );
+        Names.bindProperties( binder(), credential );
 
         API_CREDENTIAL_LOADER.configure();
         Names.bindProperties( binder(), API_CREDENTIAL_LOADER.getApiCredential() );
