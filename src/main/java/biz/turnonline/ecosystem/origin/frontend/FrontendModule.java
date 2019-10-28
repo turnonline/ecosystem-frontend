@@ -63,7 +63,7 @@ public class FrontendModule
         MapBinder.newMapBinder( binder(), String.class, ClientApi.class );
 
         ApiCredential credential = new ApiCredential();
-        credential.load( "/identity.properties" );
+        credential.load( "/credential.properties" );
 
         Names.bindProperties( binder(), credential );
     }
