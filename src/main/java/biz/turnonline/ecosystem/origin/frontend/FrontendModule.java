@@ -53,8 +53,6 @@ import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_S
 public class FrontendModule
         extends AbstractModule
 {
-    public static ApiCredentialLoader API_CREDENTIAL_LOADER = new ApiCredentialLoader();
-
     @Override
     protected void configure()
     {
@@ -82,9 +80,6 @@ public class FrontendModule
         ApiCredential credential = new ApiCredential();
         credential.load( "/credential.properties" );
         Names.bindProperties( binder(), credential );
-
-        API_CREDENTIAL_LOADER.configure();
-        Names.bindProperties( binder(), API_CREDENTIAL_LOADER.getApiCredential() );
     }
 
     @Provides
