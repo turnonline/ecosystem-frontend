@@ -24,11 +24,11 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Locale;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * There is a limit on the unindexed content, data cannot exceed size 1,048,487 bytes.
@@ -88,7 +88,7 @@ abstract class BaseRawContent<T>
         String decoded;
         if ( Base64.isBase64( content.getBytes() ) )
         {
-            decoded = new String( new PubsubMessage().setData( content ).decodeData(), Charset.forName( "UTF-8" ) );
+            decoded = new String( new PubsubMessage().setData( content ).decodeData(), UTF_8 );
         }
         else
         {
