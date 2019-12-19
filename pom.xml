@@ -170,6 +170,10 @@
             <groupId>org.ctoolkit.services</groupId>
             <artifactId>ctoolkit-services-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.ctoolkit.services</groupId>
+            <artifactId>ctoolkit-services-storage</artifactId>
+        </dependency>
         <!-- Guice dependencies -->
         <dependency>
             <groupId>com.google.inject</groupId>

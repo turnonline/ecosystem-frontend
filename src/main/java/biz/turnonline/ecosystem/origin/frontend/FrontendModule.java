@@ -61,6 +61,7 @@ public class FrontendModule
         install( new CtoolkitRestFacadeAppEngineModule() );
         install( new CtoolkitRestFacadeDefaultOrikaModule() );
         install( new GoogleApiFirebaseModule() );
+        install( new EntityRegistrarModule() );
         install( new SubscriptionModule( DEFAULT_SESSION_LOCALE ) );
 
         // Account and Contact management client modules

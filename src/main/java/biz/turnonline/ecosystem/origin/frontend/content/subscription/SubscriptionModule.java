@@ -45,7 +45,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
-import com.googlecode.objectify.ObjectifyService;
 import net.sf.jsr107cache.Cache;
 import org.ctoolkit.restapi.client.adaptee.GetExecutorAdaptee;
 import org.ctoolkit.restapi.client.appengine.JCacheProvider;
@@ -148,12 +147,6 @@ public class SubscriptionModule
         {
         } ).to( MallContentLocalAdaptee.class );
 
-        ObjectifyService.register( RawCommonContent.class );
-        ObjectifyService.register( RawMallArticle.class );
-        ObjectifyService.register( RawPayInvoiceContent.class );
-        ObjectifyService.register( RawProductContent.class );
-        ObjectifyService.register( RawEventContent.class );
-        ObjectifyService.register( RawTermsContent.class );
         requestStaticInjection( RemoveContentCacheTask.class );
     }
 

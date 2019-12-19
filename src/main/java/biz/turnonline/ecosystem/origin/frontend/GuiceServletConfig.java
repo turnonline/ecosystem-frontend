@@ -32,7 +32,8 @@ public class GuiceServletConfig
     @Override
     protected Injector getDevelopmentInjector()
     {
-        return Guice.createInjector( new FrontendModule(),
+        return Guice.createInjector( new StorageModule(),
+                new FrontendModule(),
                 new FrontendServletModule() );
     }
 
@@ -40,6 +41,7 @@ public class GuiceServletConfig
     protected Injector getProductionInjector()
     {
         return Guice.createInjector( Stage.PRODUCTION,
+                new StorageModule(),
                 new FrontendModule(),
                 new FrontendServletModule() );
     }
