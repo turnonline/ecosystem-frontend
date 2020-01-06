@@ -22,6 +22,7 @@ import biz.turnonline.ecosystem.origin.frontend.page.Home;
 import biz.turnonline.ecosystem.origin.frontend.page.Login;
 import biz.turnonline.ecosystem.origin.frontend.page.MyAccount;
 import biz.turnonline.ecosystem.origin.frontend.page.ProductWidget;
+import biz.turnonline.ecosystem.origin.frontend.page.PurchaseWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Robots;
 import biz.turnonline.ecosystem.origin.frontend.page.Signup;
 import biz.turnonline.ecosystem.origin.frontend.page.SiteMap;
@@ -78,6 +79,8 @@ public class FrontendApplication
 
     public static final String PRODUCT = "/products";
 
+    public static final String PURCHASES = "/purchases";
+
     private Set<String> include = new HashSet<>();
 
     {
@@ -120,6 +123,7 @@ public class FrontendApplication
         mountPage( CONTACT, ContactWidget.class );
         mountPage( BILLING, BillingWidget.class );
         mountPage( PRODUCT, ProductWidget.class );
+        mountPage( PURCHASES, PurchaseWidget.class );
 
         // Bootstrap configuration
         BootstrapSettings settings = new BootstrapSettings();

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * The set of account default invoicing rules. These values might be overriden.
+ * The set of account default invoicing rules. These values might be overridden.
  **/
 public class InvoicingConfig
         implements Serializable

@@ -51,6 +51,9 @@
         <include expiration="365d" path="/product.widget/**.*"/>
         <include expiration="0s" path="/product.widget/product.widget.nocache.js"/>
 
+        <include expiration="365d" path="/purchase.widget/**.*"/>
+        <include expiration="0s" path="/purchase.widget/purchase.widget.nocache.js"/>
+
         <include expiration="365d" path="/search.widget/**.*"/>
         <include expiration="0s" path="/search.widget/search.widget.nocache.js"/>
 
