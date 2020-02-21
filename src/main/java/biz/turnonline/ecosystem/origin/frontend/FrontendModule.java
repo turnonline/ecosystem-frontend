@@ -22,6 +22,11 @@ import biz.turnonline.ecosystem.origin.frontend.steward.AccountStewardBeanMapper
 import biz.turnonline.ecosystem.steward.facade.AccountStewardAdapterModule;
 import biz.turnonline.ecosystem.steward.facade.AccountStewardClientModule;
 import com.google.appengine.api.utils.SystemProperty;
+import com.google.cloud.secretmanager.v1beta1.AccessSecretVersionRequest;
+import com.google.cloud.secretmanager.v1beta1.AccessSecretVersionResponse;
+import com.google.cloud.secretmanager.v1beta1.SecretManagerServiceClient;
+import com.google.cloud.secretmanager.v1beta1.SecretVersionName;
+import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -39,9 +44,13 @@ import org.ctoolkit.restapi.client.firebase.GoogleApiFirebaseModule;
 import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
 import org.ctoolkit.services.guice.CtoolkitServicesAppEngineModule;
 import org.ctoolkit.wicket.standard.identity.FirebaseConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_SESSION_LOCALE;
 
@@ -53,6 +62,21 @@ import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_S
 public class FrontendModule
         extends AbstractModule
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger( FrontendModule.class );
+
+    private static final String CREDENTIAL_NAME = "ecosystem-frontend-credential";
+
+    /**
+     * The GCP identification. It must be the project where the microservice is running
+     * in order to connect to the Secret Manager within the same project.
+     */
+    private final String PROJECT_ID;
+
+    public FrontendModule()
+    {
+        PROJECT_ID = SystemProperty.applicationId.get();
+    }
+
     @Override
     protected void configure()
     {
@@ -78,9 +102,43 @@ public class FrontendModule
         Multibinder<BeanMapperConfig> multi = Multibinder.newSetBinder( binder(), BeanMapperConfig.class );
         multi.addBinding().to( AccountStewardBeanMapperConfig.class );
 
-        ApiCredential credential = new ApiCredential();
-        credential.load( "/credential.properties" );
+        ApiCredential credential = new ApiCredential( "firebase" );
+        credential.setProjectId( PROJECT_ID );
+        credential.setProperty( "credential.search.endpointUrl", "https://search-engine-dot-turn-online.appspot.com/api/search/v1/global" );
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        try
+        {
+            InputStream stream = readCredential();
+            credential.load( stream );
+        }
+        catch ( IOException e )
+        {
+            LOGGER.error( "Reading credential has failed ", e );
+        }
+        finally
+        {
+            LOGGER.info( "Reading credential lasted " + stopwatch.stop() );
+        }
+
         Names.bindProperties( binder(), credential );
+    }
+
+    private InputStream readCredential() throws IOException
+    {
+        SecretVersionName name = SecretVersionName.of( PROJECT_ID, CREDENTIAL_NAME, "latest" );
+
+        try ( SecretManagerServiceClient client = SecretManagerServiceClient.create() )
+        {
+            AccessSecretVersionRequest request;
+            request = AccessSecretVersionRequest.newBuilder()
+                    .setName( name.toString() )
+                    .build();
+
+            // calling the remote secret manager service
+            AccessSecretVersionResponse response = client.accessSecretVersion( request );
+            return response.getPayload().getData().newInput();
+        }
     }
 
     @Provides
@@ -88,7 +146,6 @@ public class FrontendModule
     public FirebaseConfig provideFirebaseConfig( @Named( "credential.firebase.apiKey" ) String apiKey,
                                                  @Named( "credential.firebase.senderId" ) String senderId,
                                                  @Named( "credential.firebase.projectId" ) String appId,
-                                                 @Named( "credential.firebase.authDomain" ) String authDomain,
                                                  @Named( "credential.firebase.clientId" ) String clientId )
     {
         if ( Strings.isNullOrEmpty( appId ) )
@@ -97,7 +154,7 @@ public class FrontendModule
         }
         FirebaseConfig config = new FirebaseConfig();
         config.setUiWidgetVersion( "4.4.0" );
-        config.setFirebaseVersion( "7.6.1" );
+        config.setFirebaseVersion( "7.9.0" );
 
         config.setSignInSuccessUrl( FrontendApplication.PRODUCT );
         config.setTermsUrl( "terms" );
@@ -107,11 +164,6 @@ public class FrontendModule
         config.setDatabaseName( appId );
         config.setBucketName( appId );
         config.setSenderId( senderId );
-
-        if ( !Strings.isNullOrEmpty( authDomain ) )
-        {
-            config.setAuthDomain( authDomain );
-        }
 
         return config;
     }

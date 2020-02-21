@@ -151,6 +151,11 @@
             <version>0.9</version>
         </dependency>
         <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-secretmanager</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.ctoolkit.restapi</groupId>
             <artifactId>ctoolkit-rest-facade-api</artifactId>
         </dependency>
@@ -300,7 +305,7 @@
     </dependencies>
 
     <properties>
-        <ctoolkit-microservice-bom.version>1.9.76.3</ctoolkit-microservice-bom.version>
+        <ctoolkit-microservice-bom.version>1.9.77</ctoolkit-microservice-bom.version>
         <ctoolkit-library-bom.version>12</ctoolkit-library-bom.version>
         <turnonline-widgets.version>0.1-20200111.121121-21</turnonline-widgets.version>
         <wicket-bom.version>8.6.1</wicket-bom.version>
