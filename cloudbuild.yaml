@@ -1,0 +1,13 @@
+steps:
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp','-n','gs://${PROJECT_ID}_cloudbuild/*/**-${COMMIT_SHA}.tar.gz','.']
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['mv','*-${COMMIT_SHA}.tar.gz','artifact.tar.gz']
+  - name: gcr.io/$PROJECT_ID/tar
+    args: ['xzvf', 'artifact.tar.gz']
+  - name: gcr.io/cloud-builders/gcloud
+    args: ['secrets', 'versions','access','latest','--secret=ecosystem-frontend-config']
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp','-','turnonline-ecosystem-frontend/WEB-INF/classes/ecosystem-frontend-config.properties']
+  - name: gcr.io/cloud-builders/gcloud
+    args: ['app', 'deploy','turnonline-ecosystem-frontend']

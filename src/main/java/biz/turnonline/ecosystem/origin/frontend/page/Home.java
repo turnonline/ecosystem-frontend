@@ -40,7 +40,7 @@ public class Home
     private static final long serialVersionUID = 6273666842603504497L;
 
     @Inject
-    @Named( "credential.firebase.projectId" )
+    @Named( "credential.default.projectId" )
     private String projectId;
 
     public Home()
