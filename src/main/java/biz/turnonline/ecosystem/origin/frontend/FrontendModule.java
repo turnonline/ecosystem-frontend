@@ -38,8 +38,6 @@ import org.ctoolkit.restapi.client.firebase.GoogleApiFirebaseModule;
 import org.ctoolkit.restapi.client.firebase.IdentityLoginListener;
 import org.ctoolkit.services.guice.CtoolkitServicesAppEngineModule;
 import org.ctoolkit.wicket.standard.identity.FirebaseConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -54,10 +52,6 @@ import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_S
 public class FrontendModule
         extends AbstractModule
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger( FrontendModule.class );
-
-    private static final String CREDENTIAL_NAME = "ecosystem-frontend-credential";
-
     /**
      * The GCP identification. It must be the project where the microservice is running
      * in order to connect to the Secret Manager within the same project.
