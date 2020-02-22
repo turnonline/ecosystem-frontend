@@ -1,6 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: ['cp','-n','gs://turn-online-eu_cloudbuild/*/**-${COMMIT_SHA}.tar.gz','.']
+    args: ['cp','-n','gs://turn-online-eu_cloudbuild/*/${TAG_NAME}/**.tar.gz','.']
   - name: gcr.io/cloud-builders/gsutil
     args: ['mv','*-${COMMIT_SHA}.tar.gz','artifact.tar.gz']
   - name: gcr.io/$PROJECT_ID/tar
