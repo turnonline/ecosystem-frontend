@@ -52,17 +52,6 @@ import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_S
 public class FrontendModule
         extends AbstractModule
 {
-    /**
-     * The GCP identification. It must be the project where the microservice is running
-     * in order to connect to the Secret Manager within the same project.
-     */
-    private final String PROJECT_ID;
-
-    public FrontendModule()
-    {
-        PROJECT_ID = SystemProperty.applicationId.get();
-    }
-
     @Override
     protected void configure()
     {
@@ -89,7 +78,8 @@ public class FrontendModule
         multi.addBinding().to( AccountStewardBeanMapperConfig.class );
 
         ApiCredential credential = new ApiCredential();
-        credential.setProjectId( PROJECT_ID );
+        // The Firebase used from the same project where the service is running
+        credential.setProjectId( SystemProperty.applicationId.get() );
         credential.load( "/ecosystem-frontend-config.properties" );
         Names.bindProperties( binder(), credential );
     }
