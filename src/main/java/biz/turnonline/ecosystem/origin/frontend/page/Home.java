@@ -17,17 +17,12 @@
 package biz.turnonline.ecosystem.origin.frontend.page;
 
 import biz.turnonline.ecosystem.origin.frontend.steward.Account;
-import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.model.Model;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Home page
@@ -75,17 +70,7 @@ public class Home
             }
         } );
 
-        InputStream identityPropertiesContentStream = Home.class.getResourceAsStream( "/credential.properties" );
-        String identityPropertiesContent;
-        try
-        {
-            identityPropertiesContent = CharStreams.toString( new InputStreamReader( identityPropertiesContentStream, Charsets.UTF_8 ) );
-        }
-        catch ( IOException e )
-        {
-            e.printStackTrace();
-            identityPropertiesContent = "Error unable to load /api.properties";
-        }
+        String identityPropertiesContent = "None";
         add( new Label( "credential-properties", identityPropertiesContent ) );
     }
 }
