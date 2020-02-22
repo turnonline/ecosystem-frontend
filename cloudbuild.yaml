@@ -6,8 +6,9 @@ steps:
   - name: gcr.io/$PROJECT_ID/tar
     args: ['xzvf', 'artifact.tar.gz']
   - name: gcr.io/cloud-builders/gcloud
-    args: ['beta','secrets', 'versions','access','latest','--secret=ecosystem-frontend-config']
+    entrypoint: /bin/bash
+    args: ['-c', 'gcloud beta secrets versions access latest --secret=ecosystem-frontend-config > config.properties']
   - name: gcr.io/cloud-builders/gsutil
-    args: ['cp','-','turnonline-ecosystem-frontend/WEB-INF/classes/ecosystem-frontend-config.properties']
+    args: ['mv','config.properties','turnonline-ecosystem-frontend/WEB-INF/classes/ecosystem-frontend-config.properties']
   - name: gcr.io/cloud-builders/gcloud
     args: ['app', 'deploy','turnonline-ecosystem-frontend']
