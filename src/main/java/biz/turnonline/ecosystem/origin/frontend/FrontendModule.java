@@ -22,6 +22,7 @@ import biz.turnonline.ecosystem.origin.frontend.steward.AccountStewardBeanMapper
 import biz.turnonline.ecosystem.steward.facade.AccountStewardAdapterModule;
 import biz.turnonline.ecosystem.steward.facade.AccountStewardClientModule;
 import com.google.appengine.api.utils.SystemProperty;
+import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.multibindings.MapBinder;
@@ -89,6 +90,7 @@ public class FrontendModule
     public FirebaseConfig provideFirebaseConfig( @Named( "credential.default.projectId" ) String appId,
                                                  @Named( "credential.firebase.apiKey" ) String apiKey,
                                                  @Named( "credential.firebase.senderId" ) String senderId,
+                                                 @Named( "credential.firebase.authDomain" ) String authDomain,
                                                  @Named( "credential.firebase.clientId" ) String clientId )
     {
         FirebaseConfig config = new FirebaseConfig();
@@ -103,6 +105,11 @@ public class FrontendModule
         config.setDatabaseName( appId );
         config.setBucketName( appId );
         config.setSenderId( senderId );
+
+        if ( !Strings.isNullOrEmpty( authDomain ) )
+        {
+            config.setAuthDomain( authDomain );
+        }
 
         return config;
     }
