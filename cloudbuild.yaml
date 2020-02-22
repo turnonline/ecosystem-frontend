@@ -1,10 +1,9 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: ['cp','-n','gs://turn-online-eu_cloudbuild/**/${TAG_NAME}/*.tar.gz','.']
-  - name: gcr.io/cloud-builders/gsutil
-    args: ['mv','*.tar.gz','artifact.tar.gz']
-  - name: gcr.io/$PROJECT_ID/tar
-    args: ['xzvf', 'artifact.tar.gz']
+    args: ['cp','-n','gs://turn-online-eu_cloudbuild/**/${TAG_NAME}/*.tar.gz','artifact.tar.gz']
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
+    args: ['-c','tar xzvf artifact.tar.gz']
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
     args: ['-c', 'gcloud beta secrets versions access latest --secret=ecosystem-frontend-config > config.properties']
