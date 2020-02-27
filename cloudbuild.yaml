@@ -8,8 +8,8 @@ steps:
     args: ['-c','tar xzvf artifact.tar.gz']
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
-    args: ['-c', 'gcloud beta secrets versions access latest --secret=ecosystem-frontend-config > config.properties']
+    args: ['-c', 'gcloud beta secrets versions access latest --secret=${REPO_NAME}-config > config.properties']
   - name: gcr.io/cloud-builders/gsutil
-    args: ['mv','config.properties','turnonline-ecosystem-frontend/WEB-INF/classes/ecosystem-frontend-config.properties']
+    args: ['mv','config.properties','turnonline-${REPO_NAME}/WEB-INF/classes/config.properties']
   - name: gcr.io/cloud-builders/gcloud
-    args: ['app', 'deploy','turnonline-ecosystem-frontend']
+    args: ['app', 'deploy','turnonline-${REPO_NAME}']

@@ -81,7 +81,7 @@ public class FrontendModule
         ApiCredential credential = new ApiCredential();
         // The Firebase used from the same project where the service is running
         credential.setProjectId( SystemProperty.applicationId.get() );
-        credential.load( "/ecosystem-frontend-config.properties" );
+        credential.load( "/config.properties" );
         Names.bindProperties( binder(), credential );
     }
 

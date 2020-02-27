@@ -4,10 +4,10 @@ var Configuration = {
     CURRENCY: '${CURRENCY}',
     VAT: 'STANDARD',
     LOGO: "",
-    ACCOUNT_STEWARD_STORAGE: "https://account.turnon.cloud/storage/steward/v1",
-    PRODUCT_BILLING_STORAGE: "https://billing.turnon.cloud/storage/billing/v1",
-    ACCOUNT_STEWARD_API_ROOT: 'https://account.turnon.cloud/api/steward/v1',
-    PRODUCT_BILLING_API_ROOT: 'https://billing.turnon.cloud/api/billing/v1',
-    SEARCH_API_ROOT: 'https://search.turnon.cloud/api/search/v1',
-    MAPS_API_KEY: 'AIzaSyBcFynhFn5xRAXBDshvHMJqn3BNF2ypEOs'
+    ACCOUNT_STEWARD_STORAGE: '${ACCOUNT_STEWARD_STORAGE}',
+    PRODUCT_BILLING_STORAGE: '${PRODUCT_BILLING_STORAGE}',
+    ACCOUNT_STEWARD_API_ROOT: '${ACCOUNT_STEWARD_API_ROOT}',
+    PRODUCT_BILLING_API_ROOT: '${PRODUCT_BILLING_API_ROOT}',
+    SEARCH_API_ROOT: '${SEARCH_API_ROOT}',
+    MAPS_API_KEY: '${MAPS_API_KEY}'
 };

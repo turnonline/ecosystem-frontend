@@ -41,6 +41,7 @@ import org.ctoolkit.wicket.turnonline.markup.html.page.Skeleton;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_SESSION_CURRENCY;
 import static biz.turnonline.ecosystem.origin.frontend.FrontendSession.DEFAULT_SESSION_DOMICILE;
@@ -64,6 +65,30 @@ class GwtWidget
 
     @Inject
     private FirebaseConfig firebaseConfig;
+
+    @Inject
+    @Named( "account.steward.storage" )
+    private String accountStewardStorage;
+
+    @Inject
+    @Named( "product.billing.storage" )
+    private String productBillingStorage;
+
+    @Inject
+    @Named( "account.steward.api.root" )
+    private String accountStewardApi;
+
+    @Inject
+    @Named( "product.billing.api.root" )
+    private String productBillingApi;
+
+    @Inject
+    @Named( "search.api.root" )
+    private String searchApi;
+
+    @Inject
+    @Named( "maps.api.key" )
+    private String mapsApiKey;
 
     /**
      * The array of the GWT widget source paths, relative to the webapp folder.
@@ -95,6 +120,12 @@ class GwtWidget
             arguments.put( "LOGIN_ID", notNull( account.getId(), "Signed up Account.ID" ) );
             arguments.put( "DOMICILE", isNullOrEmpty( domicile ) ? DEFAULT_SESSION_DOMICILE : domicile );
             arguments.put( "CURRENCY", isNullOrEmpty( currency ) ? DEFAULT_SESSION_CURRENCY : currency );
+            arguments.put( "ACCOUNT_STEWARD_STORAGE", accountStewardStorage );
+            arguments.put( "PRODUCT_BILLING_STORAGE", productBillingStorage );
+            arguments.put( "ACCOUNT_STEWARD_API_ROOT", accountStewardApi );
+            arguments.put( "PRODUCT_BILLING_API_ROOT", productBillingApi );
+            arguments.put( "SEARCH_API_ROOT", searchApi );
+            arguments.put( "MAPS_API_KEY", mapsApiKey );
 
             if ( account.getBusiness() != null &&
                     account.getBusiness().getLogo() != null &&
