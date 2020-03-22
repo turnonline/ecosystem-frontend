@@ -45,6 +45,9 @@
         <include expiration="365d" path="/contact.widget/**.*"/>
         <include expiration="0s" path="/contact.widget/contact.widget.nocache.js"/>
 
+        <include expiration="365d" path="/bill.widget/**.*"/>
+        <include expiration="0s" path="/bill.widget/bill.widget.nocache.js"/>
+
         <include expiration="365d" path="/billing.widget/**.*"/>
         <include expiration="0s" path="/billing.widget/billing.widget.nocache.js"/>
 
