@@ -61,7 +61,7 @@ import static org.apache.http.util.Args.notNull;
 class GwtWidget
         extends Skeleton<Account>
 {
-    private static final long serialVersionUID = 7379811684290913964L;
+    private static final long serialVersionUID = 2774707310499563827L;
 
     @Inject
     private FirebaseConfig firebaseConfig;
@@ -75,12 +75,20 @@ class GwtWidget
     private String productBillingStorage;
 
     @Inject
+    @Named( "billing.processor.storage" )
+    private String billingProcessorStorage;
+
+    @Inject
     @Named( "account.steward.api.root" )
     private String accountStewardApi;
 
     @Inject
     @Named( "product.billing.api.root" )
     private String productBillingApi;
+
+    @Inject
+    @Named( "billing.processor.api.root" )
+    private String billingProcessorApi;
 
     @Inject
     @Named( "search.api.root" )
@@ -122,8 +130,10 @@ class GwtWidget
             arguments.put( "CURRENCY", isNullOrEmpty( currency ) ? DEFAULT_SESSION_CURRENCY : currency );
             arguments.put( "ACCOUNT_STEWARD_STORAGE", accountStewardStorage );
             arguments.put( "PRODUCT_BILLING_STORAGE", productBillingStorage );
+            arguments.put( "BILLING_PROCESSOR_STORAGE", billingProcessorStorage );
             arguments.put( "ACCOUNT_STEWARD_API_ROOT", accountStewardApi );
             arguments.put( "PRODUCT_BILLING_API_ROOT", productBillingApi );
+            arguments.put( "BILLING_PROCESSOR_API_ROOT", billingProcessorApi );
             arguments.put( "SEARCH_API_ROOT", searchApi );
             arguments.put( "MAPS_API_KEY", mapsApiKey );
 

@@ -21,7 +21,7 @@ import biz.turnonline.ecosystem.origin.frontend.identity.IdentitySessionUserList
 import biz.turnonline.ecosystem.origin.frontend.steward.AccountStewardBeanMapperConfig;
 import biz.turnonline.ecosystem.steward.facade.AccountStewardAdapterModule;
 import biz.turnonline.ecosystem.steward.facade.AccountStewardClientModule;
-import com.google.appengine.api.utils.SystemProperty;
+import com.google.cloud.ServiceOptions;
 import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -80,7 +80,7 @@ public class FrontendModule
 
         ApiCredential credential = new ApiCredential();
         // The Firebase used from the same project where the service is running
-        credential.setProjectId( SystemProperty.applicationId.get() );
+        credential.setProjectId( ServiceOptions.getDefaultProjectId() );
         credential.load( "/config.properties" );
         Names.bindProperties( binder(), credential );
     }
