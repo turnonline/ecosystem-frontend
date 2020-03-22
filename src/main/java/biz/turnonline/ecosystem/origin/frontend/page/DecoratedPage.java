@@ -49,7 +49,7 @@ import java.util.List;
 /**
  * Decorated page used as a base page for other pages
  *
- * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
+ * @author <a href="mailto:pohorelec@turnonline.biz">Jozef Pohorelec</a>
  */
 @RequireHttps
 public class DecoratedPage<T>

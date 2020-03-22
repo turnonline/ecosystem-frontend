@@ -27,7 +27,7 @@ import javax.inject.Named;
 /**
  * Home page
  *
- * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
+ * @author <a href="mailto:pohorelec@turnonline.biz">Jozef Pohorelec</a>
  */
 public class Home
         extends DecoratedPage<Account>

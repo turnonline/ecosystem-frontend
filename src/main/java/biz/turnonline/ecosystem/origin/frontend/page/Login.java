@@ -24,7 +24,7 @@ import javax.inject.Inject;
 /**
  * Login
  *
- * @author <a href="mailto:pohorelec@comvai.com">Jozef Pohorelec</a>
+ * @author <a href="mailto:pohorelec@turnonline.biz">Jozef Pohorelec</a>
  */
 public class Login extends DecoratedPage
 {
