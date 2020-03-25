@@ -94,8 +94,8 @@ public class FrontendModule
                                                  @Named( "credential.firebase.clientId" ) String clientId )
     {
         FirebaseConfig config = new FirebaseConfig();
-        config.setUiWidgetVersion( "4.4.0" );
-        config.setFirebaseVersion( "7.9.0" );
+        config.setUiWidgetVersion( "4.5.0" );
+        config.setFirebaseVersion( "7.12.0" );
 
         config.setSignInSuccessUrl( FrontendApplication.PRODUCT );
         config.setTermsUrl( "terms" );

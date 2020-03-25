@@ -49,6 +49,7 @@ import net.sf.jsr107cache.Cache;
 import org.ctoolkit.restapi.client.adaptee.GetExecutorAdaptee;
 import org.ctoolkit.restapi.client.appengine.JCacheProvider;
 import org.ctoolkit.restapi.client.provider.LocalResourceProvider;
+import org.ctoolkit.restapi.client.pubsub.PubsubCommand;
 import org.ctoolkit.restapi.client.pubsub.PubsubMessageListener;
 import org.ctoolkit.restapi.client.pubsub.SubscriptionsListenerModule;
 
@@ -165,7 +166,7 @@ public class SubscriptionModule
         mapper.setSerializationInclusion( JsonInclude.Include.NON_NULL );
         mapper.configure( DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false );
         mapper.registerModule( module );
-        mapper.setDateFormat( new SimpleDateFormat( PubsubMessageListener.PUB_SUB_DATE_FORMAT ) );
+        mapper.setDateFormat( new SimpleDateFormat( PubsubCommand.PUB_SUB_DATE_FORMAT ) );
 
         return mapper;
     }

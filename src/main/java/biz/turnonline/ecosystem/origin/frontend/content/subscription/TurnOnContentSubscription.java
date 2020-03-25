@@ -105,7 +105,7 @@ class TurnOnContentSubscription
         logger.info( "[" + subscription + "] The message type '" + dataType + "' has been received with length: "
                 + data.length() + " and name: '" + receivedContentName + "'" + msgLocale + "." );
 
-        logger.debug( decode( data ) );
+        logger.debug( PubsubCommand.decode( data ) );
 
         switch ( dataType )
         {
