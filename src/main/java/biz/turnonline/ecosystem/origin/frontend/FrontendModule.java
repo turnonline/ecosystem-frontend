@@ -95,7 +95,7 @@ public class FrontendModule
     {
         FirebaseConfig config = new FirebaseConfig();
         config.setUiWidgetVersion( "4.5.0" );
-        config.setFirebaseVersion( "7.14.1" );
+        config.setFirebaseVersion( "7.14.2" );
 
         config.setSignInSuccessUrl( FrontendApplication.PRODUCT );
         config.setTermsUrl( "terms" );

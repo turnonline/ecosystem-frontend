@@ -87,6 +87,10 @@ class GwtWidget
     private String productBillingApi;
 
     @Inject
+    @Named( "payment.processor.api.root" )
+    private String paymentProcessorApi;
+
+    @Inject
     @Named( "billing.processor.api.root" )
     private String billingProcessorApi;
 
@@ -134,6 +138,7 @@ class GwtWidget
             arguments.put( "ACCOUNT_STEWARD_API_ROOT", accountStewardApi );
             arguments.put( "PRODUCT_BILLING_API_ROOT", productBillingApi );
             arguments.put( "BILLING_PROCESSOR_API_ROOT", billingProcessorApi );
+            arguments.put( "PAYMENT_PROCESSOR_API_ROOT", paymentProcessorApi );
             arguments.put( "SEARCH_API_ROOT", searchApi );
             arguments.put( "MAPS_API_KEY", mapsApiKey );
 
