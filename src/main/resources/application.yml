@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: turnonline-ecosystem-frontend
+
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: "/**"
+        paths: "classpath:public"
