@@ -24,7 +24,7 @@
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
         <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -89,6 +89,25 @@
               integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX"
               crossorigin="anonymous">
 
+        <style type="text/css">
+            @keyframes spinner-border {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .spinner-border {
+                display: inline-block;
+                width: 2rem;
+                height: 2rem;
+                vertical-align: text-bottom;
+                border: 0.25em solid #2196f3;
+                border-right-color: transparent;
+                border-radius: 50%;
+                animation: spinner-border .75s linear infinite;
+            }
+        </style>
+
         <nav class="navbar"
              style="background-color: #2196f3;height: 64px;padding-left:15px;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)">
             <a class="navbar-brand text-white" href="/">
@@ -96,16 +115,8 @@
             </a>
         </nav>
 
-        <div class="spinner-layer spinner-green">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
+        <div class="mt-5 text-center">
+            <div class="spinner-border"></div>
         </div>
     </div>
 
