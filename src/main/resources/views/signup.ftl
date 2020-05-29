@@ -7,10 +7,10 @@
 
 <@skeleton.body>
     <div style="margin: 100px 0 0 20px;">
-        <div class="card col-md-6 m-auto" style="padding-bottom: 50px;">
+        <div class="card col-md-6 m-auto">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 border-right border-secondary">
                         <h5 class="card-title text-info">
                             <i class="material-icons">lock</i>
                             <span style="position:relative;top: -3px;">Sign up</span>
@@ -28,7 +28,7 @@
         <@components.script url="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"/>
         <@components.script url="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"/>
 
-        <@components.firebase_init_script/>
-        <@components.firebase_ui_init_script/>
+        <@components.firebase_init_script config=firebaseConfig/>
+        <@components.firebase_ui_init_script config=firebaseConfig/>
     </div>
 </@skeleton.body>

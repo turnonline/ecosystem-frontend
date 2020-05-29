@@ -3,6 +3,7 @@ package biz.turnonline.ecosystem.origin.frontend.controller;
 import biz.turnonline.ecosystem.origin.frontend.model.ControllerModel;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Error;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
 
@@ -10,24 +11,25 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Sign up page
+ * Internal server error
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller("/sign-up")
-public class SignUpController
+@Controller("/internal-server-error")
+public class InternalServerErrorController
 {
     private Provider<ControllerModel> model;
 
     @Inject
-    public SignUpController( Provider<ControllerModel> model )
+    public InternalServerErrorController( Provider<ControllerModel> model )
     {
         this.model = model;
     }
 
-    @View( "signup" )
+    @Error(global = true)
+    @View( "internal-server-error" )
     @Get
-    public HttpResponse<ControllerModel> hello()
+    public HttpResponse<ControllerModel> internalServerError()
     {
         return HttpResponse.ok( model.get() );
     }

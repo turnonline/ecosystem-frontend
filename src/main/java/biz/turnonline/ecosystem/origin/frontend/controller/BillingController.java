@@ -6,18 +6,29 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 /**
  * Billing page
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller("/billing")
+@Controller( "/billing" )
 public class BillingController
 {
+    private Provider<ControllerModel> model;
+
+    @Inject
+    public BillingController( Provider<ControllerModel> model )
+    {
+        this.model = model;
+    }
+
     @View( "billing" )
     @Get
     public HttpResponse<ControllerModel> get()
     {
-        return HttpResponse.ok( new ControllerModel( ) );
+        return HttpResponse.ok( model.get() );
     }
 }

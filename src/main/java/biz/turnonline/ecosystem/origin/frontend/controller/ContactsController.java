@@ -6,6 +6,9 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 /**
  * Contacts page
  *
@@ -14,10 +17,18 @@ import io.micronaut.views.View;
 @Controller("/contacts")
 public class ContactsController
 {
+    private Provider<ControllerModel> model;
+
+    @Inject
+    public ContactsController( Provider<ControllerModel> model )
+    {
+        this.model = model;
+    }
+
     @View( "contacts" )
     @Get
     public HttpResponse<ControllerModel> get()
     {
-        return HttpResponse.ok( new ControllerModel( ) );
+        return HttpResponse.ok( model.get() );
     }
 }

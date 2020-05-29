@@ -1,7 +1,9 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
+import com.google.cloud.ServiceOptions;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.MultimapBuilder;
+import io.micronaut.context.annotation.ConfigurationProperties;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
@@ -12,12 +14,21 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
+ * Firebase configuration from application.yml for 'firebase' prefix
+ *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
+@ConfigurationProperties("firebase")
 public class FirebaseConfig
         implements Serializable
 {
     private static final long serialVersionUID = 649739600329865627L;
+
+    boolean credentialOn;
+
+    private String fileName;
+
+    private String serviceAccountEmail;
 
     private String signInSuccessUrl;
 
@@ -29,7 +40,7 @@ public class FirebaseConfig
 
     private String apiKey;
 
-    private String projectId;
+    private String projectId = ServiceOptions.getDefaultProjectId();
 
     private String authDomain;
 
@@ -58,6 +69,47 @@ public class FirebaseConfig
     {
         scopes = MultimapBuilder.ListMultimapBuilder.enumKeys( Provider.class ).arrayListValues().build();
         customParameters = MultimapBuilder.ListMultimapBuilder.enumKeys( Provider.class ).arrayListValues().build();
+    }
+
+    public String getServiceAccountEmail()
+    {
+        return serviceAccountEmail;
+    }
+
+    public void setServiceAccountEmail( String serviceAccountEmail )
+    {
+        this.serviceAccountEmail = serviceAccountEmail;
+    }
+
+    /**
+     * If <code>false</code> credential will be created via GoogleCredentials.getApplicationDefault(), otherwise create
+     * credentials via GoogleCredentials.fromStream( serviceAccount )
+     *
+     * @return credential flag
+     */
+    public boolean isCredentialOn()
+    {
+        return credentialOn;
+    }
+
+    public void setCredentialOn( boolean credentialOn )
+    {
+        this.credentialOn = credentialOn;
+    }
+
+    /**
+     * File name of identity service account json file relative to project resources path
+     *
+     * @return file name of json configuration
+     */
+    public String getFileName()
+    {
+        return fileName;
+    }
+
+    public void setFileName( String fileName )
+    {
+        this.fileName = fileName;
     }
 
     /**
@@ -210,6 +262,11 @@ public class FirebaseConfig
         return options;
     }
 
+    public void setProviders( List<Provider> providers )
+    {
+        this.providers = providers;
+    }
+
     /**
      * Adds OAuth login provider to the sign in options.
      * <p>
@@ -352,6 +409,16 @@ public class FirebaseConfig
         }
         scopes.put( provider, scope );
         return this;
+    }
+
+    public void setClientId( String clientId )
+    {
+        this.clientId = clientId;
+    }
+
+    public void setRequireDisplayName( boolean requireDisplayName )
+    {
+        this.requireDisplayName = requireDisplayName;
     }
 
     /**

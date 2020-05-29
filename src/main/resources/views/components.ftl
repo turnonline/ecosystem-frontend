@@ -10,8 +10,13 @@
 
         <#if !loggedIn>
             <a class="nav-link text-white float-right" href="/sign-up">
-                <i class="material-icons">edit</i>
+                <i class="material-icons">lock_open</i>
                 <span style="position: relative;top: -5px;text-transform: none;">Signup</span>
+            </a>
+        <#else>
+            <a class="nav-link text-white float-right" href="/logout">
+                <i class="material-icons">power_settings_new</i>
+                <span style="position: relative;top: -5px;text-transform: none;">Logout</span>
             </a>
         </#if>
     </nav>
@@ -25,27 +30,23 @@
     <link href="${url}" rel="stylesheet" type="text/css">
 </#macro>
 
-<#macro firebase_init_script>
+<#macro firebase_init_script config>
     <script type="text/javascript" id="firebase_init">
-        // FIXME: configure via model
-
         // Initialize Firebase
         var config = {
-            apiKey: 'AIzaSyC5GaQdU3T2rnnhxMdPRht5EUDttzim55Q',
-            authDomain: 'turnon-t1.firebaseapp.com',
-            databaseURL: 'https://turnon-t1.firebaseio.com',
-            projectId: 'turnon-t1',
-            storageBucket: 'turnon-t1.appspot.com',
-            messagingSenderId: '620698461320'
+            apiKey: '${config.apiKey}',
+            authDomain: '${config.projectId}.firebaseapp.com',
+            databaseURL: 'https://${config.projectId}.firebaseio.com',
+            projectId: '${config.projectId}',
+            storageBucket: '${config.projectId}.appspot.com',
+            messagingSenderId: '${config.senderId}'
         };
         firebase.initializeApp( config );
     </script>
 </#macro>
 
-<#macro firebase_ui_init_script>
+<#macro firebase_ui_init_script config>
     <script type="text/javascript" id="firebase_ui_init">
-        // FIXME: configure via model
-
        // FirebaseUI config.
         var uiConfig = {
             callbacks: {
@@ -60,22 +61,14 @@
                     return true;
                 }
             },
-            credentialHelper: [firebaseui.auth.CredentialHelper.GOOGLE_YOLO],
-            signInFlow: 'redirect',
-            signInSuccessUrl: '/products',
+            credentialHelper: [${config.credentialHelper}],
+            signInFlow: '${config.signInFlow}',
+            signInSuccessUrl: '${config.signInSuccessUrl}',
             signInOptions: [
-                {
-                    provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    authMethod: 'https://accounts.google.com',
-                    clientId: '620698461320-r8gec3ds1o3sjpk37jrhppg8jgtvu5cg.apps.googleusercontent.com'
-                },
-                {
-                    provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    requireDisplayName: true
-                }
+                ${config.signInOptionsAsString}
             ],
             // Terms of service url.
-            tosUrl: 'terms'
+            tosUrl: '${config.termsUrl}'
         };
 
         // Initialize the FirebaseUI Widget using Firebase.
@@ -93,25 +86,23 @@
     </script>
 </#macro>
 
-<#macro gwt_init_script>
+<#macro gwt_init_script config>
     <script type="text/javascript" id="gwt_init">
-        // FIXME: configure via model
-
         var Configuration = {
-            LOGIN_ID: '5723254324985856',
-            DOMICILE: 'SK',
-            CURRENCY: 'EUR',
+            LOGIN_ID: '${config.loginId!}',
+            DOMICILE: '${config.domicile!}',
+            CURRENCY: '${config.currency!}',
             VAT: 'STANDARD',
-            LOGO: "",
-            ACCOUNT_STEWARD_STORAGE: 'https://account.turnonline.cloud/storage/steward/v1',
-            PRODUCT_BILLING_STORAGE: 'https://billing.turnonline.cloud/storage/billing/v1',
-            BILLING_PROCESSOR_STORAGE: 'https://bill.turnonline.cloud/storage/bill/v1',
-            ACCOUNT_STEWARD_API_ROOT: 'https://account.turnonline.cloud/api/steward/v1',
-            PRODUCT_BILLING_API_ROOT: 'https://billing.turnonline.cloud/api/billing/v1',
-            BILLING_PROCESSOR_API_ROOT: 'https://bill.turnonline.cloud/api/bill/v1',
-            PAYMENT_PROCESSOR_API_ROOT: 'https://payment.turnonline.cloud/api/payment/v1',
-            SEARCH_API_ROOT: 'https://search.turnonline.cloud/api/search/v1',
-            MAPS_API_KEY: 'AIzaSyBcFynhFn5xRAXBDshvHMJqn3BNF2ypEOs'
+            LOGO: "${config.logo!}",
+            ACCOUNT_STEWARD_STORAGE: '${config.accountStewardStorage}',
+            PRODUCT_BILLING_STORAGE: '${config.productBillingStorage}',
+            BILLING_PROCESSOR_STORAGE: '${config.billingProcessorStorage}',
+            ACCOUNT_STEWARD_API_ROOT: '${config.accountStewardApiRoot}',
+            PRODUCT_BILLING_API_ROOT: '${config.productBillingApiRoot}',
+            BILLING_PROCESSOR_API_ROOT: '${config.billingProcessorApiRoot}',
+            PAYMENT_PROCESSOR_API_ROOT: '${config.paymentProcessorApiRoot}',
+            SEARCH_API_ROOT: '${config.searchApiRoot}',
+            MAPS_API_KEY: '${config.mapsApiKey}'
         };
     </script>
 </#macro>
