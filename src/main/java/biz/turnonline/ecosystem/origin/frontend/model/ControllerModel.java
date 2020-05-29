@@ -1,5 +1,7 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
+import java.util.ResourceBundle;
+
 /**
  * @author <a href="mailto:pohorelec@turnonline.biz">Jozef Pohorelec</a>
  */
@@ -12,6 +14,8 @@ public class ControllerModel
     private FirebaseConfig firebaseConfig;
 
     private GwtConfig gwtConfig;
+
+    private ResourceBundle messages;
 
     public boolean isLoggedIn()
     {
@@ -51,5 +55,15 @@ public class ControllerModel
     public void setGwtConfig( GwtConfig gwtConfig )
     {
         this.gwtConfig = gwtConfig;
+    }
+
+    public ResourceBundle getMessages()
+    {
+        return messages;
+    }
+
+    public void setMessages( ResourceBundle messages )
+    {
+        this.messages = messages;
     }
 }

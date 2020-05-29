@@ -61,6 +61,9 @@ public class IdentityCheckSessionFilter
                 // if user is logged in redirect him for sign-in success url
                 return Flowable.fromCallable( () -> HttpResponse.redirect( URI.create( firebaseConfig.getSignInSuccessUrl() ) ) );
             }
+
+            // identity cookie is not needed now
+            return identityHandler.delete( request, chain.proceed( request ) );
         }
         else
         {

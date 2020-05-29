@@ -6,6 +6,7 @@ import biz.turnonline.ecosystem.origin.frontend.model.ControllerModel;
 import biz.turnonline.ecosystem.origin.frontend.model.FirebaseConfig;
 import biz.turnonline.ecosystem.origin.frontend.model.GwtConfig;
 import biz.turnonline.ecosystem.origin.frontend.model.InvoicingConfig;
+import biz.turnonline.ecosystem.origin.frontend.model.Messages;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micronaut.context.annotation.Factory;
@@ -13,6 +14,8 @@ import io.micronaut.context.annotation.Prototype;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.context.ServerRequestContext;
 import io.micronaut.http.cookie.Cookie;
+
+import java.util.Locale;
 
 import static biz.turnonline.ecosystem.origin.frontend.service.IdentityCheckSessionFilter.COOKIE_ACCOUNT_ATTRIBUTE;
 
@@ -34,8 +37,19 @@ public class ModelFactory
         model.setAccount( account );
         model.setFirebaseConfig( firebaseConfig );
         model.setGwtConfig( enrichGwtConfigWithAccountData( gwtConfig, account ) );
+        model.setMessages( Messages.getBundle( "messages", locale( account ) ) );
 
         return model;
+    }
+
+    private Locale locale( Account account )
+    {
+        if ( account != null && account.getLocale() != null)
+        {
+            return new Locale( account.getLocale(), account.getLocale() );
+        }
+
+        return new Locale( "en", "en" );
     }
 
     private Account getAccountFromCookie( ObjectMapper mapper )

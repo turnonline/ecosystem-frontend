@@ -17,6 +17,8 @@ public class Account
 
     private Boolean company;
 
+    private String locale;
+
     private AccountBusiness business;
 
     private InvoicingConfig invoicing;
@@ -26,14 +28,14 @@ public class Account
         return id;
     }
 
-    public AccountBusiness getBusiness()
+    public void setId( Long id )
     {
-        return business;
+        this.id = id;
     }
 
-    public InvoicingConfig getInvoicing()
+    public String getEmail()
     {
-        return invoicing;
+        return email;
     }
 
     public void setEmail( String email )
@@ -41,9 +43,19 @@ public class Account
         this.email = email;
     }
 
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
     public void setFirstName( String firstName )
     {
         this.firstName = firstName;
+    }
+
+    public String getIdentityId()
+    {
+        return identityId;
     }
 
     public void setIdentityId( String identityId )
@@ -51,8 +63,43 @@ public class Account
         this.identityId = identityId;
     }
 
+    public Boolean getCompany()
+    {
+        return company;
+    }
+
     public void setCompany( Boolean company )
     {
         this.company = company;
+    }
+
+    public String getLocale()
+    {
+        return locale;
+    }
+
+    public void setLocale( String locale )
+    {
+        this.locale = locale;
+    }
+
+    public AccountBusiness getBusiness()
+    {
+        return business;
+    }
+
+    public void setBusiness( AccountBusiness business )
+    {
+        this.business = business;
+    }
+
+    public InvoicingConfig getInvoicing()
+    {
+        return invoicing;
+    }
+
+    public void setInvoicing( InvoicingConfig invoicing )
+    {
+        this.invoicing = invoicing;
     }
 }

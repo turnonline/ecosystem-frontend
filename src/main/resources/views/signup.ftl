@@ -13,9 +13,9 @@
                     <div class="col-md-6 border-right border-secondary">
                         <h5 class="card-title text-info">
                             <i class="material-icons">lock</i>
-                            <span style="position:relative;top: -3px;">Sign up</span>
+                            <span style="position:relative;top: -3px;">${messages["label.signup"]}</span>
                         </h5>
-                        <p class="card-text">Sign up to TurnOnline.biz application via following sign up methods:</p>
+                        <p class="card-text">${messages["text.signup"]}</p>
                     </div>
                     <div class="col-md-6">
                         <div style="margin-bottom: 40px;" id="firebaseui-auth-container"></div>
@@ -28,7 +28,7 @@
         <@components.script url="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"/>
         <@components.script url="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"/>
 
-        <@components.firebase_init_script config=firebaseConfig/>
-        <@components.firebase_ui_init_script config=firebaseConfig/>
+        <@components.firebase_init_script/>
+        <@components.firebase_ui_init_script/>
     </div>
 </@skeleton.body>

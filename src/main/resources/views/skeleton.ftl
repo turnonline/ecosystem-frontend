@@ -2,7 +2,7 @@
 
 <#macro head>
     <head>
-        <title>Home</title>
+        <title>TurnOnline.biz Admin</title>
 
         <link href="/favicon.ico" rel="icon" type="image/ico"/>
 
@@ -49,7 +49,7 @@
     </html>
 </#macro>
 
-<#macro gwt_widget widgetSrc gwtConfig firebaseConfig>
+<#macro gwt_widget widgetSrc>
     <!DOCTYPE html>
     <html>
 
@@ -60,7 +60,7 @@
 
         <meta content="width=device-width, initial-scale=1.0,maximum-scale=1.0" name="viewport">
         <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-        <meta name="gwt:property" content="locale=en">
+        <meta name="gwt:property" content="locale=${account.locale}">
 
         <style>
             :focus {
@@ -115,8 +115,8 @@
     <@components.script url="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"/>
     <@components.script url="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"/>
 
-    <@components.firebase_init_script config=firebaseConfig/>
-    <@components.gwt_init_script config=gwtConfig/>
+    <@components.firebase_init_script/>
+    <@components.gwt_init_script/>
 
     <script type="text/javascript">
         firebase.auth().onAuthStateChanged( function ( user ) {

@@ -7,10 +7,10 @@
         <div class="col-md-6 card p-5">
             <h1 class="text-info">
                 <i class="material-icons text-info display-3">error_outline</i>
-                <span style="position: relative; top: -8px;">500 - Internal server error</span>
+                <span style="position: relative; top: -8px;">${messages["title.internalServerError"]}</span>
             </h1>
 
-            <p><b>Un unexpected error occurred during processing request. Try again later.</b></p>
+            <p><b>${messages["label.internalServerError"]}</b></p>
         </div>
     </div>
 </@skeleton.body>

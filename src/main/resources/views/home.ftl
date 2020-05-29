@@ -3,5 +3,5 @@
 <@skeleton.head/>
 
 <@skeleton.body>
-    Hello world
+    <h1>${messages["welcome"]}<h1>
 </@skeleton.body>

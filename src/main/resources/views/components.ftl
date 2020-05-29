@@ -11,12 +11,12 @@
         <#if !loggedIn>
             <a class="nav-link text-white float-right" href="/sign-up">
                 <i class="material-icons">lock_open</i>
-                <span style="position: relative;top: -5px;text-transform: none;">Signup</span>
+                <span style="position: relative;top: -5px;text-transform: none;">${messages["label.signup"]}</span>
             </a>
         <#else>
             <a class="nav-link text-white float-right" href="/logout">
                 <i class="material-icons">power_settings_new</i>
-                <span style="position: relative;top: -5px;text-transform: none;">Logout</span>
+                <span style="position: relative;top: -5px;text-transform: none;">${messages["label.logout"]}</span>
             </a>
         </#if>
     </nav>
@@ -30,22 +30,22 @@
     <link href="${url}" rel="stylesheet" type="text/css">
 </#macro>
 
-<#macro firebase_init_script config>
+<#macro firebase_init_script>
     <script type="text/javascript" id="firebase_init">
         // Initialize Firebase
         var config = {
-            apiKey: '${config.apiKey}',
-            authDomain: '${config.projectId}.firebaseapp.com',
-            databaseURL: 'https://${config.projectId}.firebaseio.com',
-            projectId: '${config.projectId}',
-            storageBucket: '${config.projectId}.appspot.com',
-            messagingSenderId: '${config.senderId}'
+            apiKey: '${firebaseConfig.apiKey}',
+            authDomain: '${firebaseConfig.projectId}.firebaseapp.com',
+            databaseURL: 'https://${firebaseConfig.projectId}.firebaseio.com',
+            projectId: '${firebaseConfig.projectId}',
+            storageBucket: '${firebaseConfig.projectId}.appspot.com',
+            messagingSenderId: '${firebaseConfig.senderId}'
         };
         firebase.initializeApp( config );
     </script>
 </#macro>
 
-<#macro firebase_ui_init_script config>
+<#macro firebase_ui_init_script>
     <script type="text/javascript" id="firebase_ui_init">
        // FirebaseUI config.
         var uiConfig = {
@@ -61,14 +61,14 @@
                     return true;
                 }
             },
-            credentialHelper: [${config.credentialHelper}],
-            signInFlow: '${config.signInFlow}',
-            signInSuccessUrl: '${config.signInSuccessUrl}',
+            credentialHelper: [${firebaseConfig.credentialHelper}],
+            signInFlow: '${firebaseConfig.signInFlow}',
+            signInSuccessUrl: '${firebaseConfig.signInSuccessUrl}',
             signInOptions: [
-                ${config.signInOptionsAsString}
+                ${firebaseConfig.signInOptionsAsString}
             ],
             // Terms of service url.
-            tosUrl: '${config.termsUrl}'
+            tosUrl: '${firebaseConfig.termsUrl}'
         };
 
         // Initialize the FirebaseUI Widget using Firebase.
@@ -86,23 +86,23 @@
     </script>
 </#macro>
 
-<#macro gwt_init_script config>
+<#macro gwt_init_script>
     <script type="text/javascript" id="gwt_init">
         var Configuration = {
-            LOGIN_ID: '${config.loginId!}',
-            DOMICILE: '${config.domicile!}',
-            CURRENCY: '${config.currency!}',
+            LOGIN_ID: '${gwtConfig.loginId!}',
+            DOMICILE: '${gwtConfig.domicile!}',
+            CURRENCY: '${gwtConfig.currency!}',
             VAT: 'STANDARD',
-            LOGO: "${config.logo!}",
-            ACCOUNT_STEWARD_STORAGE: '${config.accountStewardStorage}',
-            PRODUCT_BILLING_STORAGE: '${config.productBillingStorage}',
-            BILLING_PROCESSOR_STORAGE: '${config.billingProcessorStorage}',
-            ACCOUNT_STEWARD_API_ROOT: '${config.accountStewardApiRoot}',
-            PRODUCT_BILLING_API_ROOT: '${config.productBillingApiRoot}',
-            BILLING_PROCESSOR_API_ROOT: '${config.billingProcessorApiRoot}',
-            PAYMENT_PROCESSOR_API_ROOT: '${config.paymentProcessorApiRoot}',
-            SEARCH_API_ROOT: '${config.searchApiRoot}',
-            MAPS_API_KEY: '${config.mapsApiKey}'
+            LOGO: "${gwtConfig.logo!}",
+            ACCOUNT_STEWARD_STORAGE: '${gwtConfig.accountStewardStorage}',
+            PRODUCT_BILLING_STORAGE: '${gwtConfig.productBillingStorage}',
+            BILLING_PROCESSOR_STORAGE: '${gwtConfig.billingProcessorStorage}',
+            ACCOUNT_STEWARD_API_ROOT: '${gwtConfig.accountStewardApiRoot}',
+            PRODUCT_BILLING_API_ROOT: '${gwtConfig.productBillingApiRoot}',
+            BILLING_PROCESSOR_API_ROOT: '${gwtConfig.billingProcessorApiRoot}',
+            PAYMENT_PROCESSOR_API_ROOT: '${gwtConfig.paymentProcessorApiRoot}',
+            SEARCH_API_ROOT: '${gwtConfig.searchApiRoot}',
+            MAPS_API_KEY: '${gwtConfig.mapsApiKey}'
         };
     </script>
 </#macro>

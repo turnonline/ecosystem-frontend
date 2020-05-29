@@ -3,7 +3,9 @@ micronaut:
     name: turnonline-ecosystem-frontend
   session:
     http:
-
+  http:
+    client:
+      read-timeout: 30s
 
   router:
     static-resources:
