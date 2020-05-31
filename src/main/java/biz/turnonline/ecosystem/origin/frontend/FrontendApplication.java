@@ -16,7 +16,6 @@
 
 package biz.turnonline.ecosystem.origin.frontend;
 
-import biz.turnonline.ecosystem.origin.frontend.page.BillWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.BillingWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.ContactWidget;
 import biz.turnonline.ecosystem.origin.frontend.page.Home;
@@ -78,8 +77,6 @@ public class FrontendApplication
 
     public static final String BILLING = "/billing";
 
-    public static final String BILL = "/bills";
-
     public static final String PRODUCT = "/products";
 
     public static final String PURCHASES = "/purchases";
@@ -125,7 +122,6 @@ public class FrontendApplication
         mountPage( MY_ACCOUNT, MyAccount.class );
         mountPage( CONTACT, ContactWidget.class );
         mountPage( BILLING, BillingWidget.class );
-        mountPage( BILL, BillWidget.class );
         mountPage( PRODUCT, ProductWidget.class );
         mountPage( PURCHASES, PurchaseWidget.class );
 
