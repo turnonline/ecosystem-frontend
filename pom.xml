@@ -289,7 +289,7 @@
 
     <properties>
         <micronaut.version>1.3.5</micronaut.version>
-        <turnonline-widgets.version>0.6</turnonline-widgets.version>
+        <turnonline-widgets.version>0.7</turnonline-widgets.version>
         <jdk.version>11</jdk.version>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
