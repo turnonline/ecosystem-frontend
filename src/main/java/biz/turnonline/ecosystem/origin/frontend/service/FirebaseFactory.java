@@ -9,9 +9,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import io.micronaut.context.annotation.Factory;
 
 import javax.inject.Singleton;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 
 /**
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
@@ -50,10 +49,15 @@ public class FirebaseFactory
 
     private FirebaseOptions.Builder createFromFile( FirebaseConfig config ) throws IOException
     {
-        URL url = FirebaseFactory.class.getResource( config.getFileName() );
-        FileInputStream serviceAccount = new FileInputStream( url.getPath() );
+        String fileName = config.getFileName();
+        InputStream stream = FirebaseFactory.class.getResourceAsStream( fileName );
+        if ( stream == null )
+        {
+            String msg = "The file '" + fileName + "' has not been found";
+            throw new IllegalArgumentException( msg );
+        }
 
-        return new FirebaseOptions.Builder().setCredentials( GoogleCredentials.fromStream( serviceAccount ) );
+        return new FirebaseOptions.Builder().setCredentials( GoogleCredentials.fromStream( stream ) );
     }
 
     private FirebaseOptions.Builder createFromApplicationDefault( FirebaseConfig config ) throws IOException

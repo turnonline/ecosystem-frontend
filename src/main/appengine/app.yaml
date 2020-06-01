@@ -1,0 +1,4 @@
+runtime: java11
+service: ecosystem-frontend
+
+entrypoint: ./turnonline-ecosystem-frontend
