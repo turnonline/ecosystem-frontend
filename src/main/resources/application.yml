@@ -28,14 +28,13 @@ gwt:
   maps-api-key: "AIzaSyBcFynhFn5xRAXBDshvHMJqn3BNF2ypEOs"
 
 firebase:
-  credential-on: true
   api-key: "AIzaSyC5GaQdU3T2rnnhxMdPRht5EUDttzim55Q"
   client-id: "620698461320-r8gec3ds1o3sjpk37jrhppg8jgtvu5cg.apps.googleusercontent.com"
   sender-id: "620698461320"
-  file-name: "/identity-service-account.json"
   require-display-name: true
   sign-in-flow: "redirect"
   sign-in-success-url: "/products"
+  sign-in-url: "/sign-in"
   terms-url: "/terms"
   credential-helper: ONE_TAP
   providers:

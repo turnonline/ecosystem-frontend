@@ -14,18 +14,18 @@ import javax.inject.Provider;
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller("/sign-up")
-public class SignUpController
+@Controller("/sign-in")
+public class SignInController
 {
     private Provider<ControllerModel> model;
 
     @Inject
-    public SignUpController( Provider<ControllerModel> model )
+    public SignInController( Provider<ControllerModel> model )
     {
         this.model = model;
     }
 
-    @View( "signup" )
+    @View( "sign-in" )
     @Get
     public HttpResponse<ControllerModel> hello()
     {

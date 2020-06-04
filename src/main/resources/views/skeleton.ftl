@@ -60,7 +60,7 @@
 
         <meta content="width=device-width, initial-scale=1.0,maximum-scale=1.0" name="viewport">
         <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-        <meta name="gwt:property" content="locale=${account.locale}">
+        <meta name="gwt:property" content="locale=${locale}">
 
         <style>
             :focus {
@@ -124,7 +124,6 @@
 
     <@components.script url="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"/>
     <@components.script url="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"/>
-    <@components.script url="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"/>
 
     <@components.firebase_init_script/>
     <@components.gwt_init_script/>
@@ -133,12 +132,17 @@
         firebase.auth().onAuthStateChanged( function ( user ) {
             if ( user )
             {
-                link = document.createElement( 'script' );
-                link.type = 'text/javascript';
-                link.language = 'javascript';
-                link.setAttribute( 'language', 'javascript' );
-                link.src = '${widgetSrc}';
-                document.body.appendChild( link );
+                script = document.createElement( 'script' );
+                script.type = 'text/javascript';
+                script.language = 'javascript';
+                script.setAttribute( 'language', 'javascript' );
+                script.src = '${widgetSrc}';
+
+                document.body.appendChild( script );
+            }
+            else
+            {
+                window.location.href = "${firebaseConfig.signInUrl}";
             }
         } );
     </script>

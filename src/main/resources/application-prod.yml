@@ -8,6 +8,3 @@ gwt:
   billing-processor-api-root: "https://bill.turnon.cloud/api/bill/v1"
   payment-processor-api-root: "https://payment.turnon.cloud/api/payment/v1"
   search-api-root: "https://search.turnon.cloud/api/search/v1"
-
-firebase:
-  credential-on: false

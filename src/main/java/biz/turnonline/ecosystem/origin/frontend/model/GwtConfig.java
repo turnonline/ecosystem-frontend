@@ -10,12 +10,6 @@ import io.micronaut.context.annotation.ConfigurationProperties;
 @ConfigurationProperties("gwt")
 public class GwtConfig
 {
-    private String loginId;
-    private String domicile;
-    private String currency;
-    private String vat;
-    private String logo;
-
     private String accountStewardStorage;
     private String productBillingStorage;
     private String billingProcessorStorage;
@@ -27,56 +21,6 @@ public class GwtConfig
     private String searchApiRoot;
 
     private String mapsApiKey;
-
-    public String getLoginId()
-    {
-        return loginId;
-    }
-
-    public void setLoginId( String loginId )
-    {
-        this.loginId = loginId;
-    }
-
-    public String getDomicile()
-    {
-        return domicile;
-    }
-
-    public void setDomicile( String domicile )
-    {
-        this.domicile = domicile;
-    }
-
-    public String getCurrency()
-    {
-        return currency;
-    }
-
-    public void setCurrency( String currency )
-    {
-        this.currency = currency;
-    }
-
-    public String getVat()
-    {
-        return vat;
-    }
-
-    public void setVat( String vat )
-    {
-        this.vat = vat;
-    }
-
-    public String getLogo()
-    {
-        return logo;
-    }
-
-    public void setLogo( String logo )
-    {
-        this.logo = logo;
-    }
 
     public String getAccountStewardStorage()
     {

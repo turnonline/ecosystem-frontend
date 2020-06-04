@@ -24,13 +24,9 @@ public class FirebaseConfig
 {
     private static final long serialVersionUID = 649739600329865627L;
 
-    boolean credentialOn;
-
-    private String fileName;
-
-    private String serviceAccountEmail;
-
     private String signInSuccessUrl;
+
+    private String signInUrl;
 
     private SignInFlow signInFlow = SignInFlow.REDIRECT;
 
@@ -54,10 +50,6 @@ public class FirebaseConfig
 
     private List<Provider> providers = new ArrayList<>();
 
-    private String uiWidgetVersion = "4.1.0";
-
-    private String firebaseVersion = "6.5.0";
-
     private boolean requireDisplayName;
 
     private ListMultimap<Provider, String> scopes;
@@ -69,47 +61,6 @@ public class FirebaseConfig
     {
         scopes = MultimapBuilder.ListMultimapBuilder.enumKeys( Provider.class ).arrayListValues().build();
         customParameters = MultimapBuilder.ListMultimapBuilder.enumKeys( Provider.class ).arrayListValues().build();
-    }
-
-    public String getServiceAccountEmail()
-    {
-        return serviceAccountEmail;
-    }
-
-    public void setServiceAccountEmail( String serviceAccountEmail )
-    {
-        this.serviceAccountEmail = serviceAccountEmail;
-    }
-
-    /**
-     * If <code>false</code> credential will be created via GoogleCredentials.getApplicationDefault(), otherwise create
-     * credentials via GoogleCredentials.fromStream( serviceAccount )
-     *
-     * @return credential flag
-     */
-    public boolean isCredentialOn()
-    {
-        return credentialOn;
-    }
-
-    public void setCredentialOn( boolean credentialOn )
-    {
-        this.credentialOn = credentialOn;
-    }
-
-    /**
-     * File name of identity service account json file relative to project resources path
-     *
-     * @return file name of json configuration
-     */
-    public String getFileName()
-    {
-        return fileName;
-    }
-
-    public void setFileName( String fileName )
-    {
-        this.fileName = fileName;
     }
 
     /**
@@ -126,6 +77,21 @@ public class FirebaseConfig
     public void setSignInSuccessUrl( String signInSuccessUrl )
     {
         this.signInSuccessUrl = signInSuccessUrl;
+    }
+
+    /**
+     * The URL (relative) where to redirect after unsuccessful sign-in
+     *
+     *  @return the where to redirect URL
+     */
+    public String getSignInUrl()
+    {
+        return signInUrl;
+    }
+
+    public void setSignInUrl( String signInUrl )
+    {
+        this.signInUrl = signInUrl;
     }
 
     public String getSignInFlow()
@@ -685,53 +651,6 @@ public class FirebaseConfig
     public void setSenderId( String senderId )
     {
         this.senderId = senderId;
-    }
-
-    /**
-     * Returns the version of the FirebaseUI for Web - Auth to render URL for
-     * 'firebase-ui-auth__{LANGUAGE_CODE}.js' library.
-     *
-     * @return the Firebase UI widget version
-     */
-    public String getUiWidgetVersion()
-    {
-        return uiWidgetVersion;
-    }
-
-    /**
-     * Sets the version of the FirebaseUI for Web - Auth.
-     * Check GitHub: <a href="https://github.com/firebase/firebaseui-web/releases">latest release</a>
-     * <p>
-     * The default value '3.0.0' will be used if not set.
-     *
-     * @param version the Firebase UI widget version to be set
-     */
-    public void setUiWidgetVersion( String version )
-    {
-        this.uiWidgetVersion = version;
-    }
-
-    /**
-     * Returns the version of the Firebase to render URL for 'firebase.js' library.
-     *
-     * @return the Firebase version
-     */
-    public String getFirebaseVersion()
-    {
-        return firebaseVersion;
-    }
-
-    /**
-     * Sets the version of the Firebase.
-     * Check the initialization code snippet in the Firebase console to find current version.
-     * <p>
-     * The default value '5.0.4' will be used if not set.
-     *
-     * @param version the Firebase version to be set
-     */
-    public void setFirebaseVersion( String version )
-    {
-        this.firebaseVersion = version;
     }
 
     /**

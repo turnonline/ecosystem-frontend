@@ -7,9 +7,7 @@ import java.util.ResourceBundle;
  */
 public class ControllerModel
 {
-    private boolean loggedIn;
-
-    private Account account;
+    private String locale;
 
     private FirebaseConfig firebaseConfig;
 
@@ -17,24 +15,14 @@ public class ControllerModel
 
     private ResourceBundle messages;
 
-    public boolean isLoggedIn()
+    public String getLocale()
     {
-        return loggedIn;
+        return locale;
     }
 
-    public void setLoggedIn( boolean loggedIn )
+    public void setLocale( String locale )
     {
-        this.loggedIn = loggedIn;
-    }
-
-    public Account getAccount()
-    {
-        return account;
-    }
-
-    public void setAccount( Account account )
-    {
-        this.account = account;
+        this.locale = locale;
     }
 
     public FirebaseConfig getFirebaseConfig()

@@ -2,14 +2,12 @@ package biz.turnonline.ecosystem.origin.frontend.controller;
 
 import biz.turnonline.ecosystem.origin.frontend.model.ControllerModel;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
-import io.micronaut.http.netty.cookies.NettyCookie;
+import io.micronaut.views.View;
 
-import java.net.URI;
-
-import static biz.turnonline.ecosystem.origin.frontend.service.IdentityCheckSessionFilter.COOKIE_ACCOUNT_ATTRIBUTE;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * Logout page
@@ -19,18 +17,18 @@ import static biz.turnonline.ecosystem.origin.frontend.service.IdentityCheckSess
 @Controller( "/logout" )
 public class LogoutController
 {
-    private String signUpPath = "/sign-up";
+    private Provider<ControllerModel> model;
 
-    @Get
-    public HttpResponse<ControllerModel> get( )
+    @Inject
+    public LogoutController( Provider<ControllerModel> model )
     {
-        MutableHttpResponse<ControllerModel> response = HttpResponse.redirect( URI.create( signUpPath ) );
+        this.model = model;
+    }
 
-        NettyCookie accountCookie = new NettyCookie( COOKIE_ACCOUNT_ATTRIBUTE, "" );
-        accountCookie.maxAge( 0 );
-        accountCookie.path( "/" );
-        response.cookie( accountCookie );
-
-        return response;
+    @View( "logout" )
+    @Get
+    public HttpResponse<ControllerModel> get()
+    {
+        return HttpResponse.ok( model.get() );
     }
 }

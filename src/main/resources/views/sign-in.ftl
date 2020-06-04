@@ -6,6 +6,25 @@
 </@skeleton.head>
 
 <@skeleton.body>
+    <style type="text/css">
+        @keyframes spinner-border {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner-border {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            vertical-align: text-bottom;
+            border: 0.25em solid #2196f3;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+        }
+    </style>
+
     <div style="margin: 100px 0 0 20px;">
         <div class="card col-md-6 m-auto">
             <div class="card-body">
@@ -13,11 +32,15 @@
                     <div class="col-md-6 border-right border-secondary">
                         <h5 class="card-title text-info">
                             <i class="material-icons">lock</i>
-                            <span style="position:relative;top: -3px;">${messages["label.signup"]}</span>
+                            <span style="position:relative;top: -3px;">${messages["label.signin"]}</span>
                         </h5>
-                        <p class="card-text">${messages["text.signup"]}</p>
+                        <p class="card-text">${messages["text.signin"]}</p>
                     </div>
                     <div class="col-md-6">
+                        <div class="mt-5 text-center d-none" id="account-loader">
+                            <div class="spinner-border"></div>
+                        </div>
+
                         <div style="margin-bottom: 40px;" id="firebaseui-auth-container"></div>
                     </div>
                 </div>

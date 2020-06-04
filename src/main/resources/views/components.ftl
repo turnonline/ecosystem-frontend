@@ -8,17 +8,17 @@
             <span style="font-weight: 400; font-size: 1.1em; -webkit-font-smoothing: antialiased;">TurnOnline.biz</span>
         </a>
 
-        <#if !loggedIn>
-            <a class="nav-link text-white float-right" href="/sign-up">
-                <i class="material-icons">lock_open</i>
-                <span style="position: relative;top: -5px;text-transform: none;">${messages["label.signup"]}</span>
-            </a>
-        <#else>
-            <a class="nav-link text-white float-right" href="/logout">
-                <i class="material-icons">power_settings_new</i>
-                <span style="position: relative;top: -5px;text-transform: none;">${messages["label.logout"]}</span>
-            </a>
-        </#if>
+        <#--        <#if !loggedIn>-->
+        <a class="nav-link text-white float-right" href="${firebaseConfig.signInUrl}">
+            <i class="material-icons">lock_open</i>
+            <span style="position: relative;top: -5px;text-transform: none;">${messages["label.signin"]}</span>
+        </a>
+        <#--        <#else>-->
+        <#--            <a class="nav-link text-white float-right" href="/logout">-->
+        <#--                <i class="material-icons">power_settings_new</i>-->
+        <#--                <span style="position: relative;top: -5px;text-transform: none;">${messages["label.logout"]}</span>-->
+        <#--            </a>-->
+        <#--        </#if>-->
     </nav>
 </#macro>
 
@@ -47,18 +47,113 @@
 
 <#macro firebase_ui_init_script>
     <script type="text/javascript" id="firebase_ui_init">
-       // FirebaseUI config.
+        function setupAccount( resp )
+        {
+            let account = JSON.parse( resp.response );
+
+            let id = account.id;
+            let domicile = "SK";
+            let currency = "EUR";
+            let logo = "";
+            let vat = "STANDARD";
+            let locale = account.locale;
+
+            if ( account.business )
+            {
+                domicile = account.business.domicile;
+            }
+            if ( account.invoicing )
+            {
+                currency = account.invoicing.currency;
+            }
+            if ( account.business && account.business.logo && account.business.logo.servingUrl )
+            {
+                logo = account.business.logo.servingUrl;
+            }
+
+            window.localStorage.setItem( "turnonline::account::id", id );
+            window.localStorage.setItem( "turnonline::account::domicile", domicile );
+            window.localStorage.setItem( "turnonline::account::currency", currency );
+            window.localStorage.setItem( "turnonline::account::logo", logo );
+            window.localStorage.setItem( "turnonline::account::vat", vat );
+
+            document.cookie = "locale=" + locale + ";path=/";
+
+            window.location.href = "${firebaseConfig.signInSuccessUrl}";
+        }
+
+        function retrieveAccount( email, accessToken )
+        {
+            let request = new XMLHttpRequest();
+            request.addEventListener( "loadend", function ( data ) {
+                let resp = data.target;
+
+                if ( resp.status === 200 )
+                {
+                    setupAccount(resp);
+                }
+                else if ( resp.status === 404 )
+                {
+                    createAccount(email, accessToken);
+                }
+                else
+                {
+                    console.error( "Error occur during loading account: " + resp.statusText );
+                    window.location.href = "${firebaseConfig.signInUrl}";
+                }
+            } );
+
+            request.open( "GET", "${gwtConfig.accountStewardApiRoot}/accounts/" + email );
+            request.setRequestHeader( "Authorization", "Bearer " + accessToken );
+            request.send();
+        }
+
+        function createAccount( email, accessToken )
+        {
+            jwtObject = JSON.parse(atob(accessToken.split(".")[1]));
+
+            let account = {
+                email: email,
+                company: false,
+                firstName: jwtObject.name,
+                identityId: jwtObject.iss
+            };
+
+            let request = new XMLHttpRequest();
+            request.addEventListener( "loadend", function ( data ) {
+                let resp = data.target;
+
+                if ( resp.status === 200 )
+                {
+                    setupAccount(resp);
+                }
+                else
+                {
+                    console.error( "Error occur during creating account: " + resp.statusText );
+                    window.location.href = "${firebaseConfig.signInUrl}";
+                }
+            } );
+
+            request.open( "POST", "${gwtConfig.accountStewardApiRoot}/accounts" );
+            request.setRequestHeader( "Authorization", "Bearer " + accessToken );
+            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            request.send(JSON.stringify(account));
+        }
+
+        // FirebaseUI config.
         var uiConfig = {
             callbacks: {
                 // Called when the user has been successfully signed in.
                 signInSuccessWithAuthResult: function ( authResult, redirectUrl ) {
-                    var currentUser = authResult.user;
+                    document.getElementById("account-loader").classList.remove("d-none");
+
+                    let currentUser = authResult.user;
+
                     currentUser.getIdToken().then( function ( accessToken ) {
-                        // ftoken cookie at server will be used to validate signed in user
-                        setCookie( "ftoken", accessToken, 3600000 );
+                        retrieveAccount( currentUser.email, accessToken );
                     } );
-                    // true to continue the redirect automatically
-                    return true;
+
+                    return false;
                 }
             },
             credentialHelper: [${firebaseConfig.credentialHelper}],
@@ -75,25 +170,12 @@
         var ui = new firebaseui.auth.AuthUI( firebase.auth() );
         // The start method will wait until the DOM is loaded.
         ui.start( '#firebaseui-auth-container', uiConfig );
-
-        function setCookie( cname, cvalue, exdays )
-        {
-            var d = new Date();
-            d.setTime( d.getTime() + exdays );
-            var expires = "expires=" + d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
     </script>
 </#macro>
 
 <#macro gwt_init_script>
     <script type="text/javascript" id="gwt_init">
         var Configuration = {
-            LOGIN_ID: '${gwtConfig.loginId!}',
-            DOMICILE: '${gwtConfig.domicile!}',
-            CURRENCY: '${gwtConfig.currency!}',
-            VAT: 'STANDARD',
-            LOGO: "${gwtConfig.logo!}",
             ACCOUNT_STEWARD_STORAGE: '${gwtConfig.accountStewardStorage}',
             PRODUCT_BILLING_STORAGE: '${gwtConfig.productBillingStorage}',
             BILLING_PROCESSOR_STORAGE: '${gwtConfig.billingProcessorStorage}',
