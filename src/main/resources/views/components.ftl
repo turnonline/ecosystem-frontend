@@ -7,18 +7,6 @@
                  style="max-height:32px;">
             <span style="font-weight: 400; font-size: 1.1em; -webkit-font-smoothing: antialiased;">TurnOnline.biz</span>
         </a>
-
-        <#--        <#if !loggedIn>-->
-        <a class="nav-link text-white float-right" href="${firebaseConfig.signInUrl}">
-            <i class="material-icons">lock_open</i>
-            <span style="position: relative;top: -5px;text-transform: none;">${messages["label.signin"]}</span>
-        </a>
-        <#--        <#else>-->
-        <#--            <a class="nav-link text-white float-right" href="/logout">-->
-        <#--                <i class="material-icons">power_settings_new</i>-->
-        <#--                <span style="position: relative;top: -5px;text-transform: none;">${messages["label.logout"]}</span>-->
-        <#--            </a>-->
-        <#--        </#if>-->
     </nav>
 </#macro>
 

@@ -2,7 +2,7 @@
 <#import "components.ftl" as components>
 
 <@skeleton.head>
-    <@components.style url="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css"/>
+    <@components.style url="https://www.gstatic.com/firebasejs/ui/${firebaseConfig.uiVersion}/firebase-ui-auth.css"/>
 </@skeleton.head>
 
 <@skeleton.body>
@@ -47,9 +47,9 @@
             </div>
         </div>
 
-        <@components.script url="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"/>
-        <@components.script url="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"/>
-        <@components.script url="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"/>
+        <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-app.js"/>
+        <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-auth.js"/>
+        <@components.script url="https://www.gstatic.com/firebasejs/ui/${firebaseConfig.uiVersion}/firebase-ui-auth__en.js"/>
 
         <@components.firebase_init_script/>
         <@components.firebase_ui_init_script/>

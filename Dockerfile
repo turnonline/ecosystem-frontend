@@ -6,7 +6,7 @@ RUN gu install native-image
 COPY . /home/app/frontend
 WORKDIR /home/app/frontend
 
-RUN native-image --no-server --verbose -cp target/turnonline-ecosystem-frontend.jar
+RUN native-image --no-server --no-fallback --verbose -cp target/turnonline-ecosystem-frontend.jar
 
 FROM frolvlad/alpine-glibc
 RUN apk update && apk add libstdc++

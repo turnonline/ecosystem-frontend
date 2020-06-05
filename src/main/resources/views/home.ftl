@@ -3,5 +3,7 @@
 <@skeleton.head/>
 
 <@skeleton.body>
-    <h1>${messages["welcome"]}<h1>
+    <h1>${messages["welcome"]}</h1>
+
+    <a href="${firebaseConfig.signInUrl}">${messages["label.signin"]}</a>
 </@skeleton.body>

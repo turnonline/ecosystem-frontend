@@ -56,6 +56,10 @@ public class FirebaseConfig
 
     private ListMultimap<Provider, CustomParameter> customParameters;
 
+    private String version = "7.14.6";
+
+    private String uiVersion = "4.5.1";
+
     @SuppressWarnings( "UnstableApiUsage" )
     public FirebaseConfig()
     {
@@ -651,6 +655,26 @@ public class FirebaseConfig
     public void setSenderId( String senderId )
     {
         this.senderId = senderId;
+    }
+
+    public String getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion( String version )
+    {
+        this.version = version;
+    }
+
+    public String getUiVersion()
+    {
+        return uiVersion;
+    }
+
+    public void setUiVersion( String uiVersion )
+    {
+        this.uiVersion = uiVersion;
     }
 
     /**
