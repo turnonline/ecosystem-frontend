@@ -49,7 +49,7 @@
 
         <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-app.js"/>
         <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-auth.js"/>
-        <@components.script url="https://www.gstatic.com/firebasejs/ui/${firebaseConfig.uiVersion}/firebase-ui-auth__en.js"/>
+        <@components.script url="https://www.gstatic.com/firebasejs/ui/${firebaseConfig.uiVersion}/firebase-ui-auth__${locale}.js"/>
 
         <@components.firebase_init_script/>
         <@components.firebase_ui_init_script/>
