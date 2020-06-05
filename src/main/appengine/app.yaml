@@ -2,3 +2,110 @@ runtime: java11
 service: ecosystem-frontend
 
 entrypoint: ./turnonline-ecosystem-frontend
+
+handlers:
+  - url: (/billing\.widget/billing\.widget\.nocache\.js)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 0s
+  - url: (/billing\.widget/.*\..*)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/contact\.widget/contact\.widget\.nocache\.js)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 0s
+  - url: (/contact\.widget/.*\..*)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/my\.account\.widget/my\.account\.widget\.nocache\.js)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 0s
+  - url: (/my\.account\.widget/.*\..*\.css)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/my\.account\.widget/.*\..*\.png)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/my\.account\.widget/.*\..*\.js)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/my\.account\.widget/.*\..*)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/product\.widget/product\.widget\.nocache\.js)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 0s
+  - url: (/product\.widget/.*\..*)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/purchase\.widget/purchase\.widget\.nocache\.js)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 0s
+  - url: (/purchase\.widget/.*\..*)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/favicon\.ico)
+    static_files: public\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/public/.*\.png)
+    static_files: public\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 30d
