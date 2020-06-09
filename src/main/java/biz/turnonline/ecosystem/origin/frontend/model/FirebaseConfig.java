@@ -4,6 +4,7 @@ import com.google.cloud.ServiceOptions;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.MultimapBuilder;
 import io.micronaut.context.annotation.ConfigurationProperties;
+import io.micronaut.core.annotation.Introspected;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
+@Introspected
 @ConfigurationProperties("firebase")
 public class FirebaseConfig
         implements Serializable

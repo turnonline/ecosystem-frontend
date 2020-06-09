@@ -1,12 +1,14 @@
 package biz.turnonline.ecosystem.origin.frontend.model;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
+import io.micronaut.core.annotation.Introspected;
 
 /**
  * GWT configuration from application.yml for 'gwt' prefix
  *
  * @author <a href="mailto:pohorelec@turnonline.biz">Jozef Pohorelec</a>
  */
+@Introspected
 @ConfigurationProperties("gwt")
 public class GwtConfig
 {

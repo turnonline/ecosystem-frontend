@@ -40,6 +40,6 @@ public class ModelFactory
                 .flatMap( request -> request.getCookies().findCookie( "locale" ) )
                 .ifPresent( cookie -> locale.set( cookie.getValue() ) );
 
-        return new Locale( locale.get(), locale.get() );
+        return new Locale( locale.get() );
     }
 }
