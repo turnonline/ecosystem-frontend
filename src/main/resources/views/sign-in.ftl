@@ -34,7 +34,6 @@
                             <i class="material-icons">lock</i>
                             <span style="position:relative;top: -3px;">${messages["label.signin"]}</span>
                         </h5>
-                        <p class="card-text">${messages["text.signin"]}</p>
                     </div>
                     <div class="col-md-6">
                         <div class="mt-5 text-center d-none" id="account-loader">
