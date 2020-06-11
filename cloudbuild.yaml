@@ -1,6 +1,4 @@
 steps:
-  - name: gcr.io/cloud-builders/git
-    args: ['clone', 'https://github.com/turnonline/ecosystem-frontend.git']
   - name: gcr.io/cloud-builders/gsutil
     args: ['cp','gs://config.${_BUCKET_DOMAIN}/ecosystem-frontend-config.yml','src/main/resources/application.yml']
   - name: gcr.io/cloud-builders/gcloud
