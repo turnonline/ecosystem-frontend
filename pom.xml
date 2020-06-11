@@ -179,8 +179,8 @@
                                     <version>${turnonline-widgets.version}</version>
                                     <classifier>javascript</classifier>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>target/appengine-staging/__static__</outputDirectory>
-                                    <!-- Uncomment if you wish to try on localhost -->
+                                    <outputDirectory>${gwt.widgets.dir}</outputDirectory>
+                                    <!-- Uncomment if you wish to play with graalvm native image on localhost -->
                                     <!-- <outputDirectory>target/classes/public</outputDirectory> -->
                                     <type>zip</type>
                                 </artifactItem>
@@ -296,6 +296,9 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <gwt.widgets.dir>target/classes/public</gwt.widgets.dir>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -326,6 +329,9 @@
         </profile>
         <profile>
             <id>graalvm</id>
+            <properties>
+                <gwt.widgets.dir>target/appengine-staging/__static__</gwt.widgets.dir>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
