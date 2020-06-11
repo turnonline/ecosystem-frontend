@@ -1,7 +1,4 @@
 runtime: java11
-service: ecosystem-frontend
-
-entrypoint: ./turnonline-ecosystem-frontend
 
 handlers:
   - url: (/billing\.widget/billing\.widget\.nocache\.js)
