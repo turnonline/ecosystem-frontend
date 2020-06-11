@@ -25,3 +25,5 @@ buildNumber.properties
 
 *.DS_Store
 /src/main/resources/config.properties
+/src/main/resources/identity-service-account.json
+/src/main/resources/ecosystem-frontend-config.yml

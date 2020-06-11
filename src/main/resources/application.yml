@@ -1,0 +1,42 @@
+micronaut:
+  application:
+    name: turnonline-ecosystem-frontend
+  session:
+    http:
+  http:
+    client:
+      read-timeout: 30s
+
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: "/**"
+        paths: "classpath:public"
+
+gwt:
+  account-steward-storage: "https://account.turnonline.cloud/storage/steward/v1"
+  product-billing-storage: "https://billing.turnonline.cloud/storage/billing/v1"
+  billing-processor-storage: "https://bill.turnonline.cloud/storage/bill/v1"
+
+  account-steward-api-root: "https://account.turnonline.cloud/api/steward/v1"
+  product-billing-api-root: "https://billing.turnonline.cloud/api/billing/v1"
+  billing-processor-api-root: "https://bill.turnonline.cloud/api/bill/v1"
+  payment-processor-api-root: "https://payment.turnonline.cloud/api/payment/v1"
+  search-api-root: "https://search.turnonline.cloud/api/search/v1"
+
+  maps-api-key: "AIzaSyBcFynhFn5xRAXBDshvHMJqn3BNF2ypEOs"
+
+firebase:
+  api-key: "AIzaSyC5GaQdU3T2rnnhxMdPRht5EUDttzim55Q"
+  client-id: "620698461320-r8gec3ds1o3sjpk37jrhppg8jgtvu5cg.apps.googleusercontent.com"
+  sender-id: "620698461320"
+  require-display-name: true
+  sign-in-flow: "redirect"
+  sign-in-success-url: "/products"
+  sign-in-url: "/sign-in"
+  terms-url: "/terms"
+  credential-helper: ONE_TAP
+  providers:
+    - Google
+    - Email
