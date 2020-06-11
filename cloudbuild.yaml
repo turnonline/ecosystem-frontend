@@ -1,6 +1,6 @@
 steps:
-  - name: gcr.io/cloud-builders/gcloud
-    args: ['source', 'repos','clone','${REPO_NAME}']
+  - name: gcr.io/cloud-builders/git
+    args: ['clone', 'https://github.com/turnonline/billing-processor-client.git']
   - name: gcr.io/cloud-builders/gsutil
     args: ['cp','gs://config.${_BUCKET_DOMAIN}/ecosystem-frontend-config.yml','src/main/resources/application.yml']
   - name: gcr.io/cloud-builders/gcloud
