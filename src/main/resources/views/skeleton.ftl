@@ -2,7 +2,7 @@
 
 <#macro head>
     <head>
-        <title>TurnOnline.biz Admin</title>
+        <title>Ecosystem Admin</title>
 
         <link href="/favicon.ico" rel="icon" type="image/ico"/>
 
