@@ -5,7 +5,7 @@ steps:
     args: ['cp','gs://config.${_BUCKET_DOMAIN}/ecosystem-frontend-config.yml','src/main/resources/application.yml']
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
-    args: ['-c','cat src/main/resources/application-config.yml']
+    args: ['-c','cat src/main/resources/application.yml']
   - name: gcr.io/cloud-builders/mvn
     entrypoint: 'mvn'
     args: ['package','appengine:deploy']
