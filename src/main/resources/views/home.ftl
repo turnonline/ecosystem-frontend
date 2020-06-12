@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <h5 class="card-title" style="color: #ff5722">${messages["label.signin"]}</h5>
                     <div class="card-text" style="height: 100px;overflow: auto;">
-                        <@components.firebase_auth_container/>
+                        <a href="${firebaseConfig.signInUrl}">${messages["home.kickOff"]}</a>
                     </div>
                 </div>
             </div>
