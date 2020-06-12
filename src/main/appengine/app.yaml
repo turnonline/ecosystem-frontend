@@ -93,16 +93,9 @@ handlers:
     secure: always
     expiration: 365d
   - url: (/favicon\.ico)
-    static_files: public\1
+    static_files: __static__\1
     upload: __NOT_USED__
     require_matching_file: True
     login: optional
     secure: always
     expiration: 365d
-  - url: (/public/.*\.png)
-    static_files: public\1
-    upload: __NOT_USED__
-    require_matching_file: True
-    login: optional
-    secure: always
-    expiration: 30d
