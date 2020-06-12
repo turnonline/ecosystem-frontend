@@ -78,11 +78,11 @@
 
                 if ( resp.status === 200 )
                 {
-                    setupAccount(resp);
+                    setupAccount( resp );
                 }
                 else if ( resp.status === 404 )
                 {
-                    createAccount(email, accessToken);
+                    createAccount( email, accessToken );
                 }
                 else
                 {
@@ -98,7 +98,7 @@
 
         function createAccount( email, accessToken )
         {
-            jwtObject = JSON.parse(atob(accessToken.split(".")[1]));
+            jwtObject = JSON.parse( atob( accessToken.split( "." )[1] ) );
 
             let account = {
                 email: email,
@@ -113,7 +113,7 @@
 
                 if ( resp.status === 200 )
                 {
-                    setupAccount(resp);
+                    setupAccount( resp );
                 }
                 else
                 {
@@ -124,8 +124,8 @@
 
             request.open( "POST", "${gwtConfig.accountStewardApiRoot}/accounts" );
             request.setRequestHeader( "Authorization", "Bearer " + accessToken );
-            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            request.send(JSON.stringify(account));
+            request.setRequestHeader( "Content-Type", "application/json;charset=UTF-8" );
+            request.send( JSON.stringify( account ) );
         }
 
         // FirebaseUI config.
@@ -133,7 +133,7 @@
             callbacks: {
                 // Called when the user has been successfully signed in.
                 signInSuccessWithAuthResult: function ( authResult, redirectUrl ) {
-                    document.getElementById("account-loader").classList.remove("d-none");
+                    document.getElementById( "account-loader" ).classList.remove( "d-none" );
 
                     let currentUser = authResult.user;
 
@@ -175,4 +175,43 @@
             MAPS_API_KEY: '${gwtConfig.mapsApiKey}'
         };
     </script>
+</#macro>
+
+<#macro card title content icon color="#03a9f4">
+    <div class="card">
+        <div class="card-img-top text-white p-4 text-center" style="background-color: ${color}">
+            <i class="material-icons display-1">${icon}</i>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" style="color: ${color}">${title}</h5>
+            <p class="card-text" style="height: 100px;">${content}</p>
+        </div>
+    </div>
+</#macro>
+
+<#macro firebase_auth_container>
+    <style type="text/css">
+        @keyframes spinner-border {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner-border {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            vertical-align: text-bottom;
+            border: 0.25em solid #2196f3;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+        }
+    </style>
+
+    <div class="mt-5 text-center d-none" id="account-loader">
+        <div class="spinner-border"></div>
+    </div>
+
+    <div id="firebaseui-auth-container"></div>
 </#macro>
