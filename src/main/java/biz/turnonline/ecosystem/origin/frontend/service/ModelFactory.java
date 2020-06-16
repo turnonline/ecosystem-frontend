@@ -11,6 +11,9 @@ import io.micronaut.http.context.ServerRequestContext;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static biz.turnonline.ecosystem.origin.frontend.controller.LanguageSelectorFilter.DEFAULT_LANGUAGE;
+import static biz.turnonline.ecosystem.origin.frontend.controller.LanguageSelectorFilter.LANGUAGE_COOKIE;
+
 /**
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
@@ -34,10 +37,10 @@ public class ModelFactory
 
     private Locale locale()
     {
-        AtomicReference<String> locale = new AtomicReference<>( "en" );
+        AtomicReference<String> locale = new AtomicReference<>( DEFAULT_LANGUAGE );
 
         ServerRequestContext.currentRequest()
-                .flatMap( request -> request.getCookies().findCookie( "locale" ) )
+                .flatMap( request -> request.getCookies().findCookie( LANGUAGE_COOKIE ) )
                 .ifPresent( cookie -> locale.set( cookie.getValue() ) );
 
         return new Locale( locale.get() );
