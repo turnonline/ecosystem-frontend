@@ -31,7 +31,7 @@
 
     <footer class="page-footer font-small text-white" style="background-color: #2196f3">
         <div class="footer-copyright text-center pt-3 pb-1">
-            © 2020 TurnOnline.biz s.r.o., ${messages["footer"]}
+            © 2020 TurnOnline.biz s.r.o. ${messages["footer"]}
         </div>
         <div class="footer-copyright text-center pt-1 pb-3">
             <a style="color: inherit" href="?language=sk">SK</a> | <a style="color: inherit" href="?language=en">EN</a>
