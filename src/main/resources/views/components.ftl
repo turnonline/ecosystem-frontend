@@ -7,6 +7,22 @@
                  style="max-height:32px;">
             <span style="font-weight: 400; font-size: 1.1em; -webkit-font-smoothing: antialiased;">Connected Ecosystem</span>
         </a>
+
+        <div class="dropdown right">
+            <button class="btn btn-secondary dropdown-toggle text-white border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ${messages["language.${locale}"]}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="?language=EN">
+                    <span class="flag-icon flag-icon-gb mr-2"></span>
+                    ${messages["language.en"]}
+                </a>
+                <a class="dropdown-item" href="?language=SK">
+                    <span class="flag-icon flag-icon-sk mr-2"></span>
+                    ${messages["language.sk"]}
+                </a>
+            </div>
+        </div>
     </nav>
 </#macro>
 
