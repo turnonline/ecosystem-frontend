@@ -1,6 +1,10 @@
 runtime: java11
 
 handlers:
+  - url: /.*
+    script: auto
+    secure: always
+    redirect_http_response_code: 301
   - url: (/billing\.widget/billing\.widget\.nocache\.js)
     static_files: __static__\1
     upload: __NOT_USED__
