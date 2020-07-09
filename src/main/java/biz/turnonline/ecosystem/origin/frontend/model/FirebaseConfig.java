@@ -58,11 +58,10 @@ public class FirebaseConfig
 
     private ListMultimap<Provider, CustomParameter> customParameters;
 
-    private String version = "7.14.6";
+    private String version = "7.15.5";
 
     private String uiVersion = "4.5.1";
 
-    @SuppressWarnings( "UnstableApiUsage" )
     public FirebaseConfig()
     {
         scopes = MultimapBuilder.ListMultimapBuilder.enumKeys( Provider.class ).arrayListValues().build();
