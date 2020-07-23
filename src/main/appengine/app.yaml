@@ -103,3 +103,5 @@ handlers:
     script: auto
     secure: always
     redirect_http_response_code: 301
+automatic_scaling:
+  min_instances: 1
