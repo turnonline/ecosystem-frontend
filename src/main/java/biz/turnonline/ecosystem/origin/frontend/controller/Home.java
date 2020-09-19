@@ -19,7 +19,7 @@ public class Home
 {
     // https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/bootstrap-components/navbar/
 
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
     public Home( Provider<ControllerModel> model )

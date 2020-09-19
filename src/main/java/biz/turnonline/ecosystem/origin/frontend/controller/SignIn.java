@@ -17,7 +17,7 @@ import javax.inject.Provider;
 @Controller( "/sign-in" )
 public class SignIn
 {
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
     public SignIn( Provider<ControllerModel> model )

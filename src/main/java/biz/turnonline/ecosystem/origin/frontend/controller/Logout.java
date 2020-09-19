@@ -17,7 +17,7 @@ import javax.inject.Provider;
 @Controller( "/logout" )
 public class Logout
 {
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
     public Logout( Provider<ControllerModel> model )

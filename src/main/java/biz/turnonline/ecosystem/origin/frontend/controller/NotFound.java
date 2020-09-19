@@ -19,7 +19,7 @@ import javax.inject.Provider;
 @Controller( "/not-found" )
 public class NotFound
 {
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
     public NotFound( Provider<ControllerModel> model )

@@ -18,7 +18,7 @@ import javax.inject.Provider;
 @Controller( "/internal-server-error" )
 public class InternalServerError
 {
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
     public InternalServerError( Provider<ControllerModel> model )

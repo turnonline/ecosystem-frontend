@@ -17,7 +17,7 @@ import javax.inject.Provider;
 @Controller( "/purchases" )
 public class Purchases
 {
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
     public Purchases( Provider<ControllerModel> model )
