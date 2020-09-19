@@ -10,24 +10,24 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * My account page
+ * Sign up page
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller("/my-account")
-public class MyAccountController
+@Controller( "/sign-in" )
+public class SignIn
 {
     private Provider<ControllerModel> model;
 
     @Inject
-    public MyAccountController( Provider<ControllerModel> model )
+    public SignIn( Provider<ControllerModel> model )
     {
         this.model = model;
     }
 
-    @View( "my-account" )
+    @View( "sign-in" )
     @Get
-    public HttpResponse<ControllerModel> get()
+    public HttpResponse<ControllerModel> hello()
     {
         return HttpResponse.ok( model.get() );
     }

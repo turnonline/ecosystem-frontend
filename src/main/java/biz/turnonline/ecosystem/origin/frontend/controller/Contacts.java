@@ -10,24 +10,22 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Home page
+ * Contacts page
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller
-public class HomeController
+@Controller( "/contacts" )
+public class Contacts
 {
-    // https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/bootstrap-components/navbar/
-
     private Provider<ControllerModel> model;
 
     @Inject
-    public HomeController( Provider<ControllerModel> model )
+    public Contacts( Provider<ControllerModel> model )
     {
         this.model = model;
     }
 
-    @View( "home" )
+    @View( "contacts" )
     @Get
     public HttpResponse<ControllerModel> get()
     {

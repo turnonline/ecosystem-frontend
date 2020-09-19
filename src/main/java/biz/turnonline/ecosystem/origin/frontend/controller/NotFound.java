@@ -2,7 +2,9 @@ package biz.turnonline.ecosystem.origin.frontend.controller;
 
 import biz.turnonline.ecosystem.origin.frontend.model.ControllerModel;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Error;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
 
@@ -10,24 +12,25 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Contacts page
+ * Not found page - inspired by https://guides.micronaut.io/micronaut-error-handling/guide/index.html
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller("/contacts")
-public class ContactsController
+@Controller( "/not-found" )
+public class NotFound
 {
     private Provider<ControllerModel> model;
 
     @Inject
-    public ContactsController( Provider<ControllerModel> model )
+    public NotFound( Provider<ControllerModel> model )
     {
         this.model = model;
     }
 
-    @View( "contacts" )
+    @Error( status = HttpStatus.NOT_FOUND, global = true )
+    @View( "not-found" )
     @Get
-    public HttpResponse<ControllerModel> get()
+    public HttpResponse<ControllerModel> notFound()
     {
         return HttpResponse.ok( model.get() );
     }
