@@ -1,9 +1,8 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: ['cp','gs://config.${_BUCKET_DOMAIN}/ecosystem-frontend-config.yml','src/main/resources/application.yml']
+    args: [ 'cp','gs://config.${_BUCKET_DOMAIN}/ecosystem-frontend-config.yml','src/main/resources/application.yml' ]
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
-    args: ['-c','cat src/main/resources/application.yml']
-  - name: gcr.io/cloud-builders/mvn
-    entrypoint: 'mvn'
-    args: ['package','appengine:deploy']
+    args: [ '-c','cat src/main/resources/application.yml' ]
+  - name: gcr.io/cloud-builders/gcloud
+    args: [ 'app', 'deploy','pom.xml' ]
