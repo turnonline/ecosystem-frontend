@@ -10,26 +10,24 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Home page
+ * Sign up page
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller
-public class HomeController
+@Controller( "/sign-in" )
+public class SignIn
 {
-    // https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/bootstrap-components/navbar/
-
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
-    public HomeController( Provider<ControllerModel> model )
+    public SignIn( Provider<ControllerModel> model )
     {
         this.model = model;
     }
 
-    @View( "home" )
+    @View( "sign-in" )
     @Get
-    public HttpResponse<ControllerModel> get()
+    public HttpResponse<ControllerModel> hello()
     {
         return HttpResponse.ok( model.get() );
     }

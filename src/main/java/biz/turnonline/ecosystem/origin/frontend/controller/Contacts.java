@@ -10,22 +10,22 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Purchases page
+ * Contacts page
  *
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
-@Controller("/purchases")
-public class PurchasesController
+@Controller( "/contacts" )
+public class Contacts
 {
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
-    public PurchasesController( Provider<ControllerModel> model )
+    public Contacts( Provider<ControllerModel> model )
     {
         this.model = model;
     }
 
-    @View( "purchases" )
+    @View( "contacts" )
     @Get
     public HttpResponse<ControllerModel> get()
     {

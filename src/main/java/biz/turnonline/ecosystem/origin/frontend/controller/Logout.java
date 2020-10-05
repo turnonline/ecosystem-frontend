@@ -15,12 +15,12 @@ import javax.inject.Provider;
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
 @Controller( "/logout" )
-public class LogoutController
+public class Logout
 {
-    private Provider<ControllerModel> model;
+    private final Provider<ControllerModel> model;
 
     @Inject
-    public LogoutController( Provider<ControllerModel> model )
+    public Logout( Provider<ControllerModel> model )
     {
         this.model = model;
     }

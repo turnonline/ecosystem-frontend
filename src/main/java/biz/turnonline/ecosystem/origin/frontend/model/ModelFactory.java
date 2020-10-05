@@ -1,9 +1,6 @@
-package biz.turnonline.ecosystem.origin.frontend.service;
+package biz.turnonline.ecosystem.origin.frontend.model;
 
-import biz.turnonline.ecosystem.origin.frontend.model.ControllerModel;
-import biz.turnonline.ecosystem.origin.frontend.model.FirebaseConfig;
-import biz.turnonline.ecosystem.origin.frontend.model.GwtConfig;
-import biz.turnonline.ecosystem.origin.frontend.model.Messages;
+import com.google.common.base.Strings;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Prototype;
 import io.micronaut.http.context.ServerRequestContext;
@@ -41,7 +38,13 @@ public class ModelFactory
 
         ServerRequestContext.currentRequest()
                 .flatMap( request -> request.getCookies().findCookie( LANGUAGE_COOKIE ) )
-                .ifPresent( cookie -> locale.set( cookie.getValue() ) );
+                .ifPresent( cookie -> {
+                    String value = cookie.getValue();
+                    if ( !Strings.isNullOrEmpty( value ) )
+                    {
+                        locale.set( value );
+                    }
+                } );
 
         return new Locale( locale.get() );
     }
