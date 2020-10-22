@@ -20,11 +20,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author <a href="mailto:pohorelec@turnonlie.biz">Jozef Pohorelec</a>
  */
 @Introspected
-@ConfigurationProperties("firebase")
+@ConfigurationProperties( "firebase" )
 public class FirebaseConfig
         implements Serializable
 {
-    private static final long serialVersionUID = 649739600329865627L;
+    private static final long serialVersionUID = -2849165043089675699L;
 
     private String signInSuccessUrl;
 
@@ -33,6 +33,8 @@ public class FirebaseConfig
     private SignInFlow signInFlow = SignInFlow.REDIRECT;
 
     private String termsUrl;
+
+    private String privacyUrl;
 
     private CredentialHelper credentialHelper = CredentialHelper.NONE;
 
@@ -87,7 +89,7 @@ public class FirebaseConfig
     /**
      * The URL (relative) where to redirect after unsuccessful sign-in
      *
-     *  @return the where to redirect URL
+     * @return the where to redirect URL
      */
     public String getSignInUrl()
     {
@@ -140,6 +142,21 @@ public class FirebaseConfig
     public void setTermsUrl( String termsUrl )
     {
         this.termsUrl = termsUrl;
+    }
+
+    /**
+     * The relative privacy policy URL path.
+     *
+     * @return the privacy policy path
+     */
+    public String getPrivacyUrl()
+    {
+        return privacyUrl;
+    }
+
+    public void setPrivacyUrl( String privacyUrl )
+    {
+        this.privacyUrl = privacyUrl;
     }
 
     /**

@@ -36,6 +36,7 @@ firebase:
   sign-in-success-url: "/products"
   sign-in-url: "/sign-in"
   terms-url: "/terms"
+  privacy-url: "/privacy"
   credential-helper: ONE_TAP
   providers:
     - Google
