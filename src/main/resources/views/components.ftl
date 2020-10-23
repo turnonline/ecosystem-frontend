@@ -161,14 +161,14 @@
                     return false;
                 }
             },
-            credentialHelper: [${firebaseConfig.credentialHelper}],
+            credentialHelper: ${firebaseConfig.credentialHelper},
             signInFlow: '${firebaseConfig.signInFlow}',
             signInSuccessUrl: '${firebaseConfig.signInSuccessUrl}',
             signInOptions: [
                 ${firebaseConfig.signInOptionsAsString}
             ],
-            // Terms of service url.
-            tosUrl: '${firebaseConfig.termsUrl}'
+            tosUrl: '${firebaseConfig.termsUrl}',
+            privacyPolicyUrl: '${firebaseConfig.privacyUrl}'
         };
 
         // Initialize the FirebaseUI Widget using Firebase.
