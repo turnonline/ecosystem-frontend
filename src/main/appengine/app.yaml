@@ -99,6 +99,20 @@ handlers:
     login: optional
     secure: always
     expiration: 365d
+  - url: (/apple-touch-icon\.png)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
+  - url: (/apple-touch-icon-precomposed\.png)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 365d
   - url: /.*
     script: auto
     secure: always
