@@ -8,6 +8,10 @@
             <span style="font-weight: 400; font-size: 1.1em; -webkit-font-smoothing: antialiased;">ConnecSys</span>
         </a>
 
+        <a class="right text-white" style="margin-left: auto; padding-right: 20px;" href="${firebaseConfig.signInUrl}">
+            ${messages["label.signin"]}
+        </a>
+
         <div class="dropdown right">
             <button class="btn btn-secondary dropdown-toggle text-white border" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
