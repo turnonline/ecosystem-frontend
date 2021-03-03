@@ -60,9 +60,9 @@ public class FirebaseConfig
 
     private ListMultimap<Provider, CustomParameter> customParameters;
 
-    private String version = "8.1.2";
+    private String version = "8.2.9";
 
-    private String uiVersion = "4.7.1";
+    private String uiVersion = "4.7.3";
 
     public FirebaseConfig()
     {
