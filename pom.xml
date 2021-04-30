@@ -296,7 +296,7 @@
             </plugins>
         </pluginManagement>
     </build>
-
+    
     <properties>
         <micronaut.version>2.1.1</micronaut.version>
         <turnonline-widgets.version>0.21</turnonline-widgets.version>
