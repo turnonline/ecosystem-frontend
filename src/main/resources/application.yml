@@ -30,6 +30,8 @@ gwt:
 
   maps-api-key: "AIzaSyBcFynhFn5xRAXBDshvHMJqn3BNF2ypEOs"
 
+  feature-payment-processor-api-enabled: false
+
 firebase:
   api-key: "AIzaSyC5GaQdU3T2rnnhxMdPRht5EUDttzim55Q"
   client-id: "620698461320-r8gec3ds1o3sjpk37jrhppg8jgtvu5cg.apps.googleusercontent.com"

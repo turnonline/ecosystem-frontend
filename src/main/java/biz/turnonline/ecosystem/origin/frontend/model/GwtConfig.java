@@ -24,6 +24,8 @@ public class GwtConfig
 
     private String mapsApiKey;
 
+    private String featurePaymentProcessorApiEnabled;
+
     public String getAccountStewardStorage()
     {
         return accountStewardStorage;
@@ -112,5 +114,15 @@ public class GwtConfig
     public void setMapsApiKey( String mapsApiKey )
     {
         this.mapsApiKey = mapsApiKey;
+    }
+
+    public String getFeaturePaymentProcessorApiEnabled()
+    {
+        return featurePaymentProcessorApiEnabled;
+    }
+
+    public void setFeaturePaymentProcessorApiEnabled( String featurePaymentProcessorApiEnabled )
+    {
+        this.featurePaymentProcessorApiEnabled = featurePaymentProcessorApiEnabled;
     }
 }
