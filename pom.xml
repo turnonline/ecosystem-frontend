@@ -16,7 +16,7 @@
         TurnOnline.biz Ecosystem Frontend full featured App built from scratch for Google App Engine Java standard
         environment
     </description>
-    <url>https://www.turnonline.biz</url>
+    <url>https://turnonline.cloud</url>
 
     <scm>
         <connection>scm:git:[fetch=]git@github.com:turnonline/ecosystem-frontend.git</connection>
@@ -299,7 +299,7 @@
     
     <properties>
         <micronaut.version>2.4.2</micronaut.version>
-        <turnonline-widgets.version>0.24</turnonline-widgets.version>
+        <turnonline-widgets.version>0.25</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
         <jdk.version>11</jdk.version>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
