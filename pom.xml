@@ -298,7 +298,7 @@
     </build>
     
     <properties>
-        <micronaut.version>2.4.2</micronaut.version>
+        <micronaut.version>2.5.0</micronaut.version>
         <turnonline-widgets.version>0.25</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
         <jdk.version>11</jdk.version>
