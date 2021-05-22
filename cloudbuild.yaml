@@ -4,6 +4,12 @@ steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
     args: [ '-c','cat src/main/resources/application.yml' ]
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
+    # replaces the first occurrence of the 'default'
+    args: [ '-c','sed -i s/default/${_APP_ENGINE_TARGET_SERVICE}/ src/main/appengine/app.yaml' ]
   - name: gcr.io/cloud-builders/mvn:python
     entrypoint: 'mvn'
     args: [ 'package','appengine:deploy' ]
+substitutions:
+  _APP_ENGINE_TARGET_SERVICE: default # default App Engine service
