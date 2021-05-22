@@ -1,4 +1,5 @@
 runtime: java11
+service: default
 
 handlers:
   - url: (/billing\.widget/billing\.widget\.nocache\.js)
