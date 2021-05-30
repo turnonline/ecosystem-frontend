@@ -24,7 +24,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class FirebaseConfig
         implements Serializable
 {
-    private static final long serialVersionUID = -2849165043089675699L;
+    private static final long serialVersionUID = 1130501010614652381L;
+
+    private final ListMultimap<Provider, String> scopes;
+
+    private final ListMultimap<Provider, CustomParameter> customParameters;
 
     private String signInSuccessUrl;
 
@@ -56,11 +60,7 @@ public class FirebaseConfig
 
     private boolean requireDisplayName;
 
-    private ListMultimap<Provider, String> scopes;
-
-    private ListMultimap<Provider, CustomParameter> customParameters;
-
-    private String version = "8.6.2";
+    private String version = "8.6.3";
 
     private String uiVersion = "4.8.0";
 
