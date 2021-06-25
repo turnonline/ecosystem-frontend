@@ -191,7 +191,7 @@
             ACCOUNT_STEWARD_API_ROOT: '${gwtConfig.accountStewardApiRoot}',
             PRODUCT_BILLING_API_ROOT: '${gwtConfig.productBillingApiRoot}',
             BILLING_PROCESSOR_API_ROOT: '${gwtConfig.billingProcessorApiRoot}',
-            PAYMENT_PROCESSOR_API_ROOT: '${gwtConfig.paymentProcessorApiRoot}',
+            PAYMENT_PROCESSOR_API_ROOT: '${gwtConfig.paymentProcessorApiRoot!""}',
             SEARCH_API_ROOT: '${gwtConfig.searchApiRoot}',
             MAPS_API_KEY: '${gwtConfig.mapsApiKey}',
             FEATURE__PAYMENT_PROCESSOR_API_ENABLED: '${gwtConfig.featurePaymentProcessorApiEnabled}'
