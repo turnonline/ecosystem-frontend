@@ -6,10 +6,9 @@ import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.Filter;
 import io.micronaut.http.cookie.Cookie;
-import io.micronaut.http.filter.OncePerRequestHttpServerFilter;
+import io.micronaut.http.filter.HttpServerFilter;
 import io.micronaut.http.filter.ServerFilterChain;
 import io.micronaut.http.netty.cookies.NettyCookie;
-import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
 
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @Filter( "/**" )
 public class LanguageSelectorFilter
-        extends OncePerRequestHttpServerFilter
+        implements HttpServerFilter
 {
     public static final String LANGUAGE_PARAM = "language";
 
@@ -33,7 +32,7 @@ public class LanguageSelectorFilter
     private static final List<String> SUPPORTED_LANGUAGES = Lists.newArrayList( "en", "sk" );
 
     @Override
-    protected Publisher<MutableHttpResponse<?>> doFilterOnce( HttpRequest<?> request, ServerFilterChain chain )
+    public Publisher<MutableHttpResponse<?>> doFilter( HttpRequest<?> request, ServerFilterChain chain )
     {
         String language = request.getParameters().get( LANGUAGE_PARAM );
         Cookie cookie = request.getCookies()
@@ -51,7 +50,6 @@ public class LanguageSelectorFilter
             cookie.value( DEFAULT_LANGUAGE );
         }
 
-        return Flowable.fromPublisher( chain.proceed( request ) )
-                .doOnNext( response -> response.cookie( cookie ) );
+        return chain.proceed( request );
     }
 }
