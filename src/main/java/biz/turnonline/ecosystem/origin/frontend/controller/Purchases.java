@@ -5,9 +5,9 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 
 /**
  * Purchases page
