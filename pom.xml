@@ -298,8 +298,8 @@
     </build>
 
     <properties>
-        <micronaut.version>3.3.4</micronaut.version>
-        <turnonline-widgets.version>0.32</turnonline-widgets.version>
+        <micronaut.version>3.4.1</micronaut.version>
+        <turnonline-widgets.version>0.33</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
         <jdk.version>11</jdk.version>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
