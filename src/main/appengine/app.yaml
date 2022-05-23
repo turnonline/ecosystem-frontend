@@ -9,6 +9,13 @@ handlers:
     login: optional
     secure: always
     expiration: 0s
+  - url: (/robots\.txt)
+    static_files: __static__\1
+    upload: __NOT_USED__
+    require_matching_file: True
+    login: optional
+    secure: always
+    expiration: 1d
   - url: (/billing\.widget/.*\..*)
     static_files: __static__\1
     upload: __NOT_USED__
