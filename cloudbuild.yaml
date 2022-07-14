@@ -13,7 +13,7 @@ steps:
     args:
       - '-c'
       - sed -E -i 's|(min_instances:).[0-9]|\1 ${_APP_ENGINE_MIN_INSTANCES}|' src/main/appengine/app.yaml
-  - name: gcr.io/cloud-builders/mvn:python
+  - name: 'maven:3-jdk-11'
     entrypoint: 'mvn'
     args: [ 'package','appengine:deploy' ]
 substitutions:
