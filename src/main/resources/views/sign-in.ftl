@@ -4,8 +4,8 @@
 <@skeleton.head>
     <@components.style url="https://www.gstatic.com/firebasejs/ui/${firebaseConfig.uiVersion}/firebase-ui-auth.css"/>
 
-    <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-app.js"/>
-    <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-auth.js"/>
+    <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-app-compat.js"/>
+    <@components.script url="https://www.gstatic.com/firebasejs/${firebaseConfig.version}/firebase-auth-compat.js"/>
     <@components.script url="https://www.gstatic.com/firebasejs/ui/${firebaseConfig.uiVersion}/firebase-ui-auth__${locale}.js"/>
 
     <@components.firebase_init_script/>

@@ -1,6 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: [ 'cp','gs://config.${_BUCKET_DOMAIN}/ecosystem-frontend-config.yml','src/main/resources/application.yml' ]
+    args: [ 'cp','gs://config_${PROJECT_ID}/ecosystem-frontend-config.yml','src/main/resources/application.yml' ]
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
     args: [ '-c','cat src/main/resources/application.yml' ]
@@ -13,7 +13,7 @@ steps:
     args:
       - '-c'
       - sed -E -i 's|(min_instances:).[0-9]|\1 ${_APP_ENGINE_MIN_INSTANCES}|' src/main/appengine/app.yaml
-  - name: gcr.io/cloud-builders/mvn:python
+  - name: 'maven:3-jdk-11'
     entrypoint: 'mvn'
     args: [ 'package','appengine:deploy' ]
 substitutions:
