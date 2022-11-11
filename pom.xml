@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
     <name>TurnOnline.biz Ecosystem Frontend App</name>
     <description>
-        TurnOnline.biz Ecosystem Frontend full featured App built from scratch for Google App Engine Java standard
+        TurnOnline.biz Ecosystem Frontend full-featured App built from scratch for Google App Engine Java standard
         environment
     </description>
     <url>https://turnonline.cloud</url>
@@ -49,7 +49,7 @@
             <dependency>
                 <groupId>io.micronaut.views</groupId>
                 <artifactId>micronaut-views-bom</artifactId>
-                <version>3.6.0</version>
+                <version>3.7.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -296,7 +296,7 @@
     </build>
 
     <properties>
-        <micronaut.version>3.7.1</micronaut.version>
+        <micronaut.version>3.7.3</micronaut.version>
         <turnonline-widgets.version>0.33</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
         <jdk.version>11</jdk.version>
