@@ -13,7 +13,8 @@ steps:
     args:
       - '-c'
       - sed -E -i 's|(min_instances:).[0-9]|\1 ${_APP_ENGINE_MIN_INSTANCES}|' src/main/appengine/app.yaml
-  - name: 'maven:3-jdk-11'
+  # Deploy the built executable to App Engine (by App Engine compatible builder, shipped with python)
+  - name: 'gcr.io/cloud-builders/mvn:appengine'
     entrypoint: 'mvn'
     args: [ 'package','appengine:deploy' ]
 substitutions:
