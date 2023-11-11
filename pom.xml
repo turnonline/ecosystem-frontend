@@ -49,7 +49,7 @@
             <dependency>
                 <groupId>io.micronaut.views</groupId>
                 <artifactId>micronaut-views-bom</artifactId>
-                <version>3.8.0</version>
+                <version>3.8.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -296,7 +296,7 @@
     </build>
 
     <properties>
-        <micronaut.version>3.8.1</micronaut.version>
+        <micronaut.version>3.8.6</micronaut.version>
         <turnonline-widgets.version>0.35</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
         <jdk.version>11</jdk.version>
