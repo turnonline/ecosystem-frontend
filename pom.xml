@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.micronaut.platform</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>4.0.1</version>
+        <version>4.1.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -196,6 +196,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>unpack</id>
@@ -225,7 +226,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <!-- the phase to make sure directory is not overwritten -->
+                        <!-- the phase to make sure the directory is not overwritten -->
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -252,7 +253,7 @@
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
-                    <annotationProcessorPaths>
+                    <annotationProcessorPaths combine.children="append">
                         <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-graal</artifactId>
@@ -265,8 +266,14 @@
                         </path>
                         <path>
                             <groupId>io.micronaut.validation</groupId>
-                            <artifactId>micronaut-validation</artifactId>
-                            <version>${micronaut.version}</version>
+                            <artifactId>micronaut-validation-processor</artifactId>
+                            <version>4.0.3</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>io.micronaut</groupId>
+                                    <artifactId>micronaut-inject</artifactId>
+                                </exclusion>
+                            </exclusions>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -293,8 +300,14 @@
                                 </path>
                                 <path>
                                     <groupId>io.micronaut.validation</groupId>
-                                    <artifactId>micronaut-validation</artifactId>
-                                    <version>${micronaut.version}</version>
+                                    <artifactId>micronaut-validation-processor</artifactId>
+                                    <version>4.0.3</version>
+                                    <exclusions>
+                                        <exclusion>
+                                            <groupId>io.micronaut</groupId>
+                                            <artifactId>micronaut-inject</artifactId>
+                                        </exclusion>
+                                    </exclusions>
                                 </path>
                             </annotationProcessorPaths>
                         </configuration>
@@ -334,10 +347,10 @@
 
     <properties>
         <packaging>jar</packaging>
+        <micronaut.version>4.1.5</micronaut.version>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>biz.turnonline.ecosystem.origin.frontend.aot.generated</micronaut.aot.packageName>
         <micronaut.runtime>netty</micronaut.runtime>
-        <micronaut.version>4.0.1</micronaut.version>
         <turnonline-widgets.version>0.35</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
         <jdk.version>17</jdk.version>
