@@ -9,17 +9,23 @@ import io.micronaut.core.annotation.Introspected;
  * @author <a href="mailto:pohorelec@turnonline.biz">Jozef Pohorelec</a>
  */
 @Introspected
-@ConfigurationProperties("gwt")
+@ConfigurationProperties( "gwt" )
 public class GwtConfig
 {
     private String accountStewardStorage;
+
     private String productBillingStorage;
+
     private String billingProcessorStorage;
 
     private String accountStewardApiRoot;
+
     private String productBillingApiRoot;
+
     private String billingProcessorApiRoot;
+
     private String paymentProcessorApiRoot;
+
     private String searchApiRoot;
 
     private String mapsApiKey;

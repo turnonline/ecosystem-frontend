@@ -1,5 +1,6 @@
-runtime: java11
+runtime: java17
 service: default
+entrypoint: ./turnonline-ecosystem-frontend
 
 handlers:
   - url: (/billing\.widget/billing\.widget\.nocache\.js)

@@ -1,5 +1,6 @@
 steps:
-  - name: gcr.io/cloud-builders/gsutil
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gsutil
     args: [ 'cp','gs://config_${PROJECT_ID}/ecosystem-frontend-config.yml','src/main/resources/application.yml' ]
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
@@ -13,10 +14,15 @@ steps:
     args:
       - '-c'
       - sed -E -i 's|(min_instances:).[0-9]|\1 ${_APP_ENGINE_MIN_INSTANCES}|' src/main/appengine/app.yaml
+  - name: 'vegardit/graalvm-maven:17.0.7'
+    entrypoint: mvn
+    args:
+      - 'package'
+      - '-Dpackaging=native-image'
   # Deploy the built executable to App Engine (by App Engine compatible builder, shipped with python)
   - name: 'gcr.io/cloud-builders/mvn:appengine'
-    entrypoint: 'mvn'
-    args: [ 'package','appengine:deploy' ]
+    entrypoint: mvn
+    args: [ 'appengine:deploy','-Dapp.stage.artifact=target/turnonline-ecosystem-frontend' ]
 substitutions:
   _APP_ENGINE_TARGET_SERVICE: default # default App Engine service
   _APP_ENGINE_MIN_INSTANCES: '0'

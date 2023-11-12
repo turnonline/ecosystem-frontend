@@ -1,12 +1,14 @@
 package biz.turnonline.ecosystem.origin.frontend.controller;
 
 import biz.turnonline.ecosystem.origin.frontend.model.ControllerModel;
-import io.micronaut.http.HttpResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
+
+import java.util.Map;
 
 /**
  * Billing page
@@ -18,16 +20,19 @@ public class Billing
 {
     private final Provider<ControllerModel> model;
 
+    private final ObjectMapper mapper;
+
     @Inject
-    public Billing( Provider<ControllerModel> model )
+    public Billing( Provider<ControllerModel> model, ObjectMapper mapper )
     {
         this.model = model;
+        this.mapper = mapper;
     }
 
     @View( "billing" )
     @Get
-    public HttpResponse<ControllerModel> get()
+    public Map<String, Object> get()
     {
-        return HttpResponse.ok( model.get() );
+        return model.get().toFreemarkerMap( mapper );
     }
 }

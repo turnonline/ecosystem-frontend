@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>biz.turnonline.ecosystem</groupId>
-        <artifactId>turnonline-ecosystem</artifactId>
-        <version>2</version>
+        <groupId>io.micronaut.platform</groupId>
+        <artifactId>micronaut-parent</artifactId>
+        <version>4.1.6</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>turnonline-ecosystem-frontend</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>${packaging}</packaging>
     <name>TurnOnline.biz Ecosystem Frontend App</name>
     <description>
         TurnOnline.biz Ecosystem Frontend full-featured App built from scratch for Google App Engine Java standard
@@ -40,16 +40,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-bom</artifactId>
-                <version>${micronaut.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micronaut.views</groupId>
-                <artifactId>micronaut-views-bom</artifactId>
-                <version>3.8.0</version>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>26.27.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -60,27 +53,30 @@
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-client</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut</groupId>
+            <groupId>io.micronaut.validation</groupId>
             <artifactId>micronaut-validation</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-runtime</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-server-netty</artifactId>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-jackson-databind</artifactId>
         </dependency>
         <dependency>
             <groupId>io.micronaut.views</groupId>
@@ -91,13 +87,22 @@
             <artifactId>micronaut-views-freemarker</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.graalvm.nativeimage</groupId>
-            <artifactId>svm</artifactId>
-            <scope>provided</scope>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.16.0</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -115,12 +120,6 @@
             <artifactId>micronaut-test-junit5</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>google-cloud-core</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
@@ -132,26 +131,63 @@
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
+                <groupId>io.micronaut.maven</groupId>
+                <artifactId>micronaut-maven-plugin</artifactId>
+                <configuration>
+                    <baseImageRun>ubuntu:latest</baseImageRun>
+                    <nativeImageBuildArgs>
+                        <nativeImageBuildArg>--verbose</nativeImageBuildArg>
+                    </nativeImageBuildArgs>
+                    <configFile>aot-${packaging}.properties</configFile>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>2.4.2</version>
+                <version>2.4.4</version>
                 <configuration>
                     <projectId>GCLOUD_CONFIG</projectId>
                     <deploy.version>GCLOUD_CONFIG</deploy.version>
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${exec.mainClass}</mainClass>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
                 <configuration>
                     <executable>java</executable>
                     <arguments>
-                        <argument>-classpath</argument>
-                        <classpath/>
                         <argument>-noverify</argument>
                         <argument>-XX:TieredStopAtLevel=1</argument>
                         <argument>-Dcom.sun.management.jmxremote</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
                         <argument>${exec.mainClass}</argument>
                     </arguments>
                 </configuration>
@@ -160,7 +196,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>unpack</id>
@@ -187,11 +223,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <!-- the phase to make sure directory is not overwritten -->
+                        <!-- the phase to make sure the directory is not overwritten -->
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -210,12 +245,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
                 <configuration>
+                    <encoding>UTF-8</encoding>
+                    <excludes>
+                        <exclude>.google/</exclude>
+                    </excludes>
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
-                    <annotationProcessorPaths>
+                    <annotationProcessorPaths combine.children="append">
                         <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-graal</artifactId>
@@ -227,9 +265,15 @@
                             <version>${micronaut.version}</version>
                         </path>
                         <path>
-                            <groupId>io.micronaut</groupId>
-                            <artifactId>micronaut-validation</artifactId>
-                            <version>${micronaut.version}</version>
+                            <groupId>io.micronaut.validation</groupId>
+                            <artifactId>micronaut-validation-processor</artifactId>
+                            <version>4.1.0</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>io.micronaut</groupId>
+                                    <artifactId>micronaut-inject</artifactId>
+                                </exclusion>
+                            </exclusions>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -255,9 +299,15 @@
                                     <version>${micronaut.version}</version>
                                 </path>
                                 <path>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-validation</artifactId>
-                                    <version>${micronaut.version}</version>
+                                    <groupId>io.micronaut.validation</groupId>
+                                    <artifactId>micronaut-validation-processor</artifactId>
+                                    <version>4.1.0</version>
+                                    <exclusions>
+                                        <exclusion>
+                                            <groupId>io.micronaut</groupId>
+                                            <artifactId>micronaut-inject</artifactId>
+                                        </exclusion>
+                                    </exclusions>
                                 </path>
                             </annotationProcessorPaths>
                         </configuration>
@@ -296,83 +346,30 @@
     </build>
 
     <properties>
-        <micronaut.version>3.8.1</micronaut.version>
+        <packaging>jar</packaging>
+        <micronaut.version>4.1.12</micronaut.version>
+        <micronaut.aot.enabled>false</micronaut.aot.enabled>
+        <micronaut.aot.packageName>biz.turnonline.ecosystem.origin.frontend.aot.generated</micronaut.aot.packageName>
+        <micronaut.runtime>netty</micronaut.runtime>
         <turnonline-widgets.version>0.35</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
-        <jdk.version>11</jdk.version>
-        <maven.compiler.target>${jdk.version}</maven.compiler.target>
-        <maven.compiler.source>${jdk.version}</maven.compiler.source>
+        <jdk.version>17</jdk.version>
+        <release.version>17</release.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <exec.mainClass>biz.turnonline.ecosystem.origin.frontend.Application</exec.mainClass>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+        <maven.native.plugin.version>0.9.28</maven.native.plugin.version>
     </properties>
 
     <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-shade-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>shade</goal>
-                                </goals>
-                                <configuration>
-                                    <transformers>
-                                        <transformer
-                                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                            <mainClass>${exec.mainClass}</mainClass>
-                                        </transformer>
-                                        <transformer
-                                                implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                                    </transformers>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
         <profile>
             <!-- Intended for local development, works together with default profile -->
             <id>local</id>
             <properties>
                 <static.resources.directory>target/classes/public</static.resources.directory>
             </properties>
-        </profile>
-        <profile>
-            <id>graalvm</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.graalvm.nativeimage</groupId>
-                        <artifactId>native-image-maven-plugin</artifactId>
-                        <version>21.1.0</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>native-image</goal>
-                                </goals>
-                                <configuration>
-                                    <mainClass>${exec.mainClass}</mainClass>
-                                    <buildArgs>--no-server</buildArgs>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>
