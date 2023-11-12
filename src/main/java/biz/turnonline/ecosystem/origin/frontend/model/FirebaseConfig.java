@@ -250,6 +250,11 @@ public class FirebaseConfig
         return options;
     }
 
+    public List<Provider> getProviders()
+    {
+        return providers;
+    }
+
     public void setProviders( List<Provider> providers )
     {
         this.providers = providers;
@@ -399,9 +404,19 @@ public class FirebaseConfig
         return this;
     }
 
+    public String getClientId()
+    {
+        return clientId;
+    }
+
     public void setClientId( String clientId )
     {
         this.clientId = clientId;
+    }
+
+    public boolean isRequireDisplayName()
+    {
+        return requireDisplayName;
     }
 
     public void setRequireDisplayName( boolean requireDisplayName )
@@ -440,6 +455,11 @@ public class FirebaseConfig
         }
         customParameters.put( provider, new CustomParameter( property, value ) );
         return this;
+    }
+
+    public ListMultimap<Provider, CustomParameter> getCustomParameters()
+    {
+        return customParameters;
     }
 
     /**
@@ -706,7 +726,7 @@ public class FirebaseConfig
         Github( "firebase.auth.GithubAuthProvider.PROVIDER_ID" ),
         Email( "firebase.auth.EmailAuthProvider.PROVIDER_ID" );
 
-        private String value;
+        private final String value;
 
         Provider( String value )
         {
@@ -736,7 +756,7 @@ public class FirebaseConfig
         ONE_TAP( "firebaseui.auth.CredentialHelper.GOOGLE_YOLO" ),
         NONE( "firebaseui.auth.CredentialHelper.NONE" );
 
-        private String value;
+        private final String value;
 
         CredentialHelper( String value )
         {
@@ -762,7 +782,7 @@ public class FirebaseConfig
         REDIRECT( "redirect" ),
         POPUP( "popup" );
 
-        private String value;
+        private final String value;
 
         SignInFlow( String value )
         {
@@ -777,9 +797,9 @@ public class FirebaseConfig
 
     private static class CustomParameter
     {
-        private String property;
+        private final String property;
 
-        private String value;
+        private final String value;
 
         CustomParameter( String property, String value )
         {

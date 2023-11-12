@@ -1,5 +1,6 @@
 steps:
-  - name: gcr.io/cloud-builders/gsutil
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gsutil
     args: [ 'cp','gs://config_${PROJECT_ID}/ecosystem-frontend-config.yml','src/main/resources/application.yml' ]
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
