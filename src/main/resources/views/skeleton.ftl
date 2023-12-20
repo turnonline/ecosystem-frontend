@@ -3,6 +3,7 @@
 <#macro head>
     <head>
         <title>Ecosystem Admin</title>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
 
         <link href="/favicon.ico" rel="icon" type="image/ico"/>
 
