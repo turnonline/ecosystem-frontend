@@ -351,7 +351,7 @@
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>biz.turnonline.ecosystem.origin.frontend.aot.generated</micronaut.aot.packageName>
         <micronaut.runtime>netty</micronaut.runtime>
-        <turnonline-widgets.version>0.36</turnonline-widgets.version>
+        <turnonline-widgets.version>0.37</turnonline-widgets.version>
         <static.resources.directory>target/appengine-staging/__static__</static.resources.directory>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
