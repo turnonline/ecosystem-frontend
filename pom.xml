@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.micronaut.platform</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>4.2.2</version>
+        <version>4.2.3</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -347,7 +347,7 @@
 
     <properties>
         <packaging>jar</packaging>
-        <micronaut.version>4.2.2</micronaut.version>
+        <micronaut.version>4.2.3</micronaut.version>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>biz.turnonline.ecosystem.origin.frontend.aot.generated</micronaut.aot.packageName>
         <micronaut.runtime>netty</micronaut.runtime>
