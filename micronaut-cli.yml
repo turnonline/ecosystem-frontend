@@ -1,5 +1,0 @@
-profile: service
-defaultPackage: biz.turnonline.ecosystem.origin
----
-testFramework: junit
-sourceLanguage: java

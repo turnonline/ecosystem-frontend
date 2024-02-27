@@ -15,3 +15,6 @@ Disallow: /
 
 User-agent: dotbot
 Disallow: /
+
+User-agent: Amazonbot
+Disallow: /do-not-crawl/
