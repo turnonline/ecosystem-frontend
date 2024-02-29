@@ -60,7 +60,7 @@ public class FirebaseConfig
 
     private boolean requireDisplayName;
 
-    private String version = "10.6.0";
+    private String version = "10.8.0";
 
     private String uiVersion = "6.0.1";
 
